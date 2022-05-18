@@ -27,6 +27,14 @@
 .primary-button {
     -fx-font-family: Inconsolata;
     -fx-font-size: 14px;
-    -fx-border-radius: 0;
+    -fx-background-radius: 0;
     -fx-border-style: none;
+    -fx-border-width: 0;
+}
+.delete-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+}
+.table-column {
+    -fx-alignment: CENTER-LEFT;
 }

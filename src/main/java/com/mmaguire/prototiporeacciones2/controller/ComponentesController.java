@@ -1,9 +1,11 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
+import com.mmaguire.prototiporeacciones2.manager.ButtonCell;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.model.Factor;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,6 +48,8 @@ public class ComponentesController {
     private TableColumn<Reactivo, Integer> columnaCantidad;
     @FXML
     private TableColumn<Reactivo, Boolean> columnaActualizable;
+    @FXML
+    private TableColumn<Reactivo, Boolean> columnaEliminar;
 
     private Context contexto;
     private ObservableList<Factor> constantes;
@@ -56,6 +61,23 @@ public class ComponentesController {
         this.columnaNombre.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
         this.columnaCantidad.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
         this.columnaActualizable.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isActualizable()));
+        this.columnaEliminar.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<Reactivo, Boolean>,
+                                        ObservableValue<Boolean>>() {
+
+                    @Override
+                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Reactivo, Boolean> p) {
+                        return new SimpleBooleanProperty(p.getValue() != null);
+                    }
+                });
+        this.columnaEliminar.setCellFactory(
+                new Callback<TableColumn<Reactivo, Boolean>, TableCell<Reactivo, Boolean>>() {
+
+                    @Override
+                    public TableCell<Reactivo, Boolean>call(TableColumn<Reactivo, Boolean> p) {
+                        return new ButtonCell(tablaComponentes, contexto.getReactivos());
+                    }
+                });
 
         this.constantes = FXCollections.observableArrayList(new ArrayList<>());
         this.constanteAsociada.setItems(this.constantes);

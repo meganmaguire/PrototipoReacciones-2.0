@@ -1,5 +1,7 @@
-package com.mmaguire.prototiporeacciones2;
+package com.mmaguire.prototiporeacciones2.controller;
 
+import com.mmaguire.prototiporeacciones2.MainApp;
+import com.mmaguire.prototiporeacciones2.manager.Routes;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -23,19 +25,19 @@ public class PrincipalController {
     public void initialize() {
         FXMLLoader fxmlLoader;
         try {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Routes.componentes));
+            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.componentes));
             componentesPane = fxmlLoader.load();
 
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Routes.reacciones));
+            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.reacciones));
             reaccionesPane = fxmlLoader.load();
 
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Routes.experimentos));
+            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.experimentos));
             experimentosPane = fxmlLoader.load();
 
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Routes.simulaciones));
+            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.simulaciones));
             simulacionesPane = fxmlLoader.load();
 
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Routes.historial));
+            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.historial));
             historialPane = fxmlLoader.load();
 
         }

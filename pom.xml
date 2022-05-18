@@ -76,7 +76,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.prototiporeacciones2/com.mmaguire.prototiporeacciones2.HelloApplication
+                                com.example.prototiporeacciones2/com.mmaguire.prototiporeacciones2.MainApp
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

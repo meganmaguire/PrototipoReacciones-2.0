@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0">
@@ -83,7 +82,7 @@
                       <TableColumn prefWidth="226.0" text="Nombre" />
                       <TableColumn prefWidth="126.0" text="Cantidad" />
                         <TableColumn prefWidth="116.0" text="Actualizable" />
-                        <TableColumn prefWidth="51.0" resizable="false" />
+                        <TableColumn prefWidth="50.0" resizable="false" />
                     </columns>
                   </TableView>
                </children>

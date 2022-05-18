@@ -20,7 +20,6 @@ public class PrincipalController {
     private AnchorPane simulacionesPane;
     private AnchorPane historialPane;
 
-
     @FXML
     public void initialize() {
         FXMLLoader fxmlLoader;

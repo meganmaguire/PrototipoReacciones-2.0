@@ -4,12 +4,16 @@ public class Reactivo {
 
     private String nombre;
     private int cantidadInicial;
+    private boolean actualizable;
+    private Factor constanteAsociada;
 
     public Reactivo() {}
 
-    public Reactivo(String nombre, int cantidadInicial) {
+    public Reactivo(String nombre, int cantidadInicial, boolean actualizable, Factor constanteAsociada) {
         this.nombre = nombre;
         this.cantidadInicial = cantidadInicial;
+        this.actualizable = actualizable;
+        this.constanteAsociada = constanteAsociada;
     }
 
     public String getNombre() {
@@ -28,6 +32,14 @@ public class Reactivo {
         this.cantidadInicial = cantidadInicial;
     }
 
+    public boolean isActualizable() {
+        return actualizable;
+    }
+
+    public void setActualizable(boolean actualizable) {
+        this.actualizable = actualizable;
+    }
+
     @Override
     public String toString() {
         return this.nombre;
@@ -35,7 +47,12 @@ public class Reactivo {
 
     @Override
     public Reactivo clone() {
-        return new Reactivo(this.nombre, this.cantidadInicial);
+        return new Reactivo(
+                this.nombre,
+                this.cantidadInicial,
+                this.actualizable,
+                this.constanteAsociada
+        );
     }
 
     @Override

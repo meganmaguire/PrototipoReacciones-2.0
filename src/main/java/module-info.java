@@ -6,6 +6,8 @@ module com.example.prototiporeacciones2 {
 
     opens com.mmaguire.prototiporeacciones2 to javafx.fxml;
     exports com.mmaguire.prototiporeacciones2;
+    opens com.mmaguire.prototiporeacciones2.model to javafx.fxml;
+    exports com.mmaguire.prototiporeacciones2.model;
     exports com.mmaguire.prototiporeacciones2.manager;
     opens com.mmaguire.prototiporeacciones2.manager to javafx.fxml;
     exports com.mmaguire.prototiporeacciones2.controller;

@@ -9,12 +9,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.ComponentesController">
    <children>
       <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0">
          <padding>
@@ -54,18 +56,30 @@
                               <CheckBox fx:id="poseeConstante" mnemonicParsing="false" prefWidth="230.0" text="Para cáculo en tasa de reacción" textFill="#9e9e9e" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" spacing="24.0">
+                        <HBox alignment="CENTER_RIGHT" spacing="16.0">
                            <children>
                               <ComboBox fx:id="constanteAsociada" prefHeight="25.0" prefWidth="150.0">
                                  <HBox.margin>
-                                    <Insets right="80.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </ComboBox>
+                              <Button fx:id="botonAñadirConstante" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirConstante" prefHeight="25.0" prefWidth="26.0">
+                                 <graphic>
+                                    <ImageView fitHeight="17.0" fitWidth="18.0">
+                                       <image>
+                                          <Image url="@icons/baseline_add_black_24dp.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
                            </children>
+                           <VBox.margin>
+                              <Insets right="38.0" />
+                           </VBox.margin>
                         </HBox>
                         <HBox alignment="TOP_RIGHT" prefWidth="380.0">
                            <children>
-                              <Button fx:id="añadirComponente" mnemonicParsing="false" prefWidth="80.0" styleClass="primary-button" text="AÑADIR">
+                              <Button fx:id="botonAñadirComponente" mnemonicParsing="false" onAction="#añadirComponente" prefWidth="80.0" styleClass="primary-button" text="AÑADIR">
                                  <HBox.margin>
                                     <Insets top="38.0" />
                                  </HBox.margin>

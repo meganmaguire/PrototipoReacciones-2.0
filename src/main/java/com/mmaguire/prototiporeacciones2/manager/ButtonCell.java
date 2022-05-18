@@ -15,21 +15,16 @@ import javafx.scene.image.ImageView;
 public class ButtonCell extends TableCell<Reactivo, Boolean> {
     final Button cellButton = new Button();
 
-    public ButtonCell(final TableView tblView, ObservableList values) {
-        Image image = new Image(MainApp.class.getResourceAsStream("icons/baseline_delete_black_24dp.png"));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(18);
-        imageView.setFitWidth(18);
-        cellButton.setGraphic(imageView);
-        cellButton.getStyleClass().add("delete-button");
+    public ButtonCell(final TableView tableView, ObservableList values) {
+        styleButton();
         cellButton.setOnAction(new EventHandler<ActionEvent>(){
 
             @Override
-            public void handle(ActionEvent t) {
+            public void handle(ActionEvent event) {
                 int selectedIndex = getTableRow().getIndex();
-                Reactivo toRemove = (Reactivo) tblView.getItems().get(selectedIndex);
+                Object toRemove = tableView.getItems().get(selectedIndex);
                 values.remove(toRemove);
-                tblView.refresh();
+                tableView.refresh();
             }
         });
     }
@@ -41,5 +36,14 @@ public class ButtonCell extends TableCell<Reactivo, Boolean> {
         if(!empty){
             setGraphic(cellButton);
         }
+    }
+
+    private void styleButton() {
+        Image image = new Image(MainApp.class.getResourceAsStream("icons/baseline_delete_black_24dp.png"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(18);
+        imageView.setFitWidth(18);
+        cellButton.setGraphic(imageView);
+        cellButton.getStyleClass().add("delete-button");
     }
 }

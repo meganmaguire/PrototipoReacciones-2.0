@@ -64,7 +64,6 @@ public class ComponentesController {
         this.columnaEliminar.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Reactivo, Boolean>,
                                         ObservableValue<Boolean>>() {
-
                     @Override
                     public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Reactivo, Boolean> p) {
                         return new SimpleBooleanProperty(p.getValue() != null);
@@ -72,7 +71,6 @@ public class ComponentesController {
                 });
         this.columnaEliminar.setCellFactory(
                 new Callback<TableColumn<Reactivo, Boolean>, TableCell<Reactivo, Boolean>>() {
-
                     @Override
                     public TableCell<Reactivo, Boolean>call(TableColumn<Reactivo, Boolean> p) {
                         return new ButtonCell(tablaComponentes, contexto.getReactivos());
@@ -87,11 +85,9 @@ public class ComponentesController {
         this.actualizableComponente.setSelected(true);
         this.constanteAsociada.setDisable(true);
         this.botonAñadirConstante.setDisable(true);
-        this.poseeConstante.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override public void changed(ObservableValue ov, Boolean seleccionAnterior, Boolean seleccionActual) {
-                constanteAsociada.setDisable(!seleccionActual);
-                botonAñadirConstante.setDisable(!seleccionActual);
-            }
+        this.poseeConstante.selectedProperty().addListener((ov, seleccionAnterior, seleccionActual) -> {
+            constanteAsociada.setDisable(!seleccionActual);
+            botonAñadirConstante.setDisable(!seleccionActual);
         });
     }
 

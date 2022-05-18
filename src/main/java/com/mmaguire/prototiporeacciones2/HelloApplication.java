@@ -1,16 +1,12 @@
-package com.example.prototiporeacciones2;
+package com.mmaguire.prototiporeacciones2;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Collection;
 
 public class HelloApplication extends Application {
     @Override

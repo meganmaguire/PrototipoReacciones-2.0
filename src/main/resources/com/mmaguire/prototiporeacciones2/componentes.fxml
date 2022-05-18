@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0">
          <padding>
@@ -29,19 +29,19 @@
                         <HBox alignment="CENTER_RIGHT" spacing="24.0">
                            <children>
                               <Label styleClass="form-label" text="Nombre" />
-                              <TextField prefWidth="230.0" />
+                              <TextField fx:id="nombreComponente" prefWidth="230.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" spacing="24.0">
                            <children>
                               <Label styleClass="form-label" text="Cantidad" />
-                              <Spinner prefWidth="230.0" />
+                              <Spinner fx:id="cantidadComponente" prefWidth="230.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" spacing="24.0">
                            <children>
                               <Label styleClass="form-label" text="Actualizable" />
-                              <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="230.0" text="Si actualiza su valor en las reacciones" textFill="#a19b9b">
+                              <CheckBox fx:id="actualizableComponente" mnemonicParsing="false" prefHeight="18.0" prefWidth="230.0" text="Si actualiza su valor en las reacciones" textFill="#a19b9b">
                                  <font>
                                     <Font name="System Italic" size="13.0" />
                                  </font>
@@ -51,12 +51,12 @@
                         <HBox alignment="CENTER_RIGHT" spacing="24.0">
                            <children>
                               <Label styleClass="form-label" text="Constante asociada" />
-                              <CheckBox mnemonicParsing="false" prefWidth="230.0" text="Para cáculo en tasa de reacción" textFill="#9e9e9e" />
+                              <CheckBox fx:id="poseeConstante" mnemonicParsing="false" prefWidth="230.0" text="Para cáculo en tasa de reacción" textFill="#9e9e9e" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" spacing="24.0">
                            <children>
-                              <ComboBox prefHeight="25.0" prefWidth="150.0">
+                              <ComboBox fx:id="constanteAsociada" prefHeight="25.0" prefWidth="150.0">
                                  <HBox.margin>
                                     <Insets right="80.0" />
                                  </HBox.margin>
@@ -65,7 +65,7 @@
                         </HBox>
                         <HBox alignment="TOP_RIGHT" prefWidth="380.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="80.0" styleClass="primary-button" text="AÑADIR">
+                              <Button fx:id="añadirComponente" mnemonicParsing="false" prefWidth="80.0" styleClass="primary-button" text="AÑADIR">
                                  <HBox.margin>
                                     <Insets top="38.0" />
                                  </HBox.margin>
@@ -77,12 +77,12 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <TableView prefHeight="582.0" prefWidth="520.0">
+                  <TableView fx:id="tablaComponentes" prefHeight="582.0" prefWidth="520.0">
                     <columns>
-                      <TableColumn prefWidth="226.0" text="Nombre" />
-                      <TableColumn prefWidth="126.0" text="Cantidad" />
-                        <TableColumn prefWidth="116.0" text="Actualizable" />
-                        <TableColumn prefWidth="50.0" resizable="false" />
+                      <TableColumn fx:id="columnaNombre" prefWidth="226.0" text="Nombre" />
+                      <TableColumn fx:id="columnaCantidad" prefWidth="126.0" text="Cantidad" />
+                        <TableColumn fx:id="columnaActualizable" prefWidth="116.0" text="Actualizable" />
+                        <TableColumn fx:id="columnaEliminar" prefWidth="50.0" resizable="false" />
                     </columns>
                   </TableView>
                </children>

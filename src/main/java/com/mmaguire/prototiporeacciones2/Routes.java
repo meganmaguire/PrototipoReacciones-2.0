@@ -1,4 +1,4 @@
-package com.example.prototiporeacciones2;
+package com.mmaguire.prototiporeacciones2;
 
 public class Routes {
     public static String componentes = "componentes.fxml";

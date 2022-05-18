@@ -1,4 +1,4 @@
-package com.example.prototiporeacciones2;
+package com.mmaguire.prototiporeacciones2;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

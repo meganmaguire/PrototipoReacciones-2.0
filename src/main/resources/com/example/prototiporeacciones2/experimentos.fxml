@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0">
+         <padding>
+            <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
+         </padding>
+         <children>
+            <Label styleClass="title" text="Experimentos" />
+            <HBox prefHeight="618.0" prefWidth="971.0" spacing="72.0">
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="324.0" spacing="36.0">
+                     <children>
+                        <VBox prefHeight="210.0" prefWidth="324.0" spacing="18.0">
+                           <children>
+                              <Label styleClass="subtitle" text="Reactivos" />
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <ComboBox prefWidth="150.0" />
+                                    <Spinner prefWidth="110.0" />
+                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0">
+                                       <graphic>
+                                          <ImageView fitHeight="17.0" fitWidth="18.0">
+                                             <image>
+                                                <Image url="@icons/baseline_add_black_24dp.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <TableView prefHeight="217.0" prefWidth="372.0">
+                                 <columns>
+                                    <TableColumn prefWidth="163.0" text="Nombre" />
+                                    <TableColumn prefWidth="110.0" text="Cantidad" />
+                                    <TableColumn prefWidth="50.0" resizable="false" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="210.0" prefWidth="324.0" spacing="18.0">
+                           <children>
+                              <Label styleClass="subtitle" text="Factores de reacción" />
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <ComboBox prefWidth="150.0" />
+                                    <Spinner prefWidth="110.0" />
+                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0">
+                                       <graphic>
+                                          <ImageView fitHeight="17.0" fitWidth="18.0">
+                                             <image>
+                                                <Image url="@icons/baseline_add_black_24dp.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <TableView prefHeight="217.0" prefWidth="372.0">
+                                 <columns>
+                                    <TableColumn prefWidth="163.0" text="Factor" />
+                                    <TableColumn prefWidth="110.0" text="Valor" />
+                                    <TableColumn prefWidth="50.0" resizable="false" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="24.0">
+                           <children>
+                              <Label prefHeight="20.0" prefWidth="68.0" styleClass="subtitle" text="Tiempo" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="258.0" spacing="16.0">
+                                 <children>
+                                    <Spinner prefHeight="25.0" prefWidth="120.0" />
+                                    <Label text="segundos" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="324.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="primary-button" text="AÑADIR PASO" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <TableView prefHeight="200.0" prefWidth="576.0">
+                    <columns>
+                      <TableColumn prefWidth="100.0" text="Tiempo" />
+                      <TableColumn prefWidth="425.0" text="Modificaciones" />
+                        <TableColumn prefWidth="50.0" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

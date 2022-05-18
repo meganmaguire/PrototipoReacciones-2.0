@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0">
+         <padding>
+            <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
+         </padding>
+         <children>
+            <Label styleClass="title" text="Historial de simulaciones" />
+            <HBox prefHeight="618.0" prefWidth="971.0" spacing="46.0">
+               <children>
+                  <TableView prefHeight="582.0" prefWidth="973.0">
+                    <columns>
+                      <TableColumn prefWidth="71.0" text="Nro" />
+                      <TableColumn prefWidth="411.0" text="Tiempo" />
+                        <TableColumn prefWidth="139.0" text="Componentes" />
+                        <TableColumn minWidth="6.0" prefWidth="125.0" text="Reacciones" />
+                        <TableColumn prefWidth="154.0" text="Pasos en experimento" />
+                        <TableColumn prefWidth="70.0" text="Gráfico" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

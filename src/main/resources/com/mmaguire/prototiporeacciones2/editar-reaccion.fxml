@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarReaccionController">
+   <children>
+      <VBox prefWidth="1115.0" spacing="46.0">
+         <padding>
+            <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
+         </padding>
+         <children>
+            <Label styleClass="title" text="Editar reacción" />
+            <VBox prefWidth="971.0" spacing="32.0">
+               <children>
+                  <HBox prefHeight="200.0" prefWidth="971.0" spacing="80.0">
+                     <children>
+                        <VBox prefHeight="141.0" prefWidth="300.0" spacing="18.0">
+                           <children>
+                              <Label styleClass="subtitle" text="Reactivos" />
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <ComboBox fx:id="comboBoxReactivos" prefWidth="134.0" />
+                                    <Spinner fx:id="cantidadReactivos" prefWidth="96.0" />
+                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirReactivo" prefHeight="25.0" prefWidth="26.0">
+                                       <graphic>
+                                          <ImageView fitHeight="17.0" fitWidth="18.0">
+                                             <image>
+                                                <Image url="@icons/baseline_add_black_24dp.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <TableView fx:id="tablaReactivos" prefHeight="227.0" prefWidth="313.0">
+                                <columns>
+                                  <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" sortable="false" text="Nombre" />
+                                  <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="86.0" sortable="false" text="Cantidad" />
+                                    <TableColumn fx:id="columnaEliminarReactivo" editable="false" prefWidth="50.0" resizable="false" sortable="false" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="212.0" spacing="35.0">
+                           <children>
+                              <VBox prefWidth="100.0" spacing="20.0">
+                                 <children>
+                                    <Label styleClass="subtitle" text="Tipo de reacción" />
+                                    <Label fx:id="tipoReaccion">
+                                       <VBox.margin>
+                                          <Insets left="24.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0">
+                                 <children>
+                                    <Label styleClass="subtitle" text="Constantes" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" spacing="16.0">
+                                             <children>
+                                                <Label text="alpha" />
+                                                <TextField fx:id="constanteAlpha" alignment="TOP_LEFT" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_RIGHT" spacing="16.0">
+                                             <children>
+                                                <Label text="beta" />
+                                                <TextField fx:id="constanteBeta" alignment="TOP_LEFT" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="141.0" prefWidth="300.0" spacing="18.0">
+                           <children>
+                              <Label styleClass="subtitle" text="Productos" />
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <ComboBox fx:id="comboBoxProductos" prefWidth="134.0" />
+                                    <Spinner fx:id="cantidadProductos" prefWidth="96.0" />
+                                    <Button fx:id="botonAñadirProducto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirProducto" prefHeight="25.0" prefWidth="26.0">
+                                       <graphic>
+                                          <ImageView fitHeight="17.0" fitWidth="18.0">
+                                             <image>
+                                                <Image url="@icons/baseline_add_black_24dp.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <TableView fx:id="tablaProductos" prefHeight="227.0" prefWidth="313.0">
+                                 <columns>
+                                    <TableColumn fx:id="columnaNombreProductos" editable="false" prefWidth="163.0" sortable="false" text="Nombre" />
+                                    <TableColumn fx:id="columnaCantidadProductos" editable="false" prefWidth="86.0" sortable="false" text="Cantidad" />
+                                    <TableColumn fx:id="columnaEliminarProducto" editable="false" prefWidth="50.0" resizable="false" sortable="false" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="971.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="76.0" styleClass="subtitle" text="Reacción:" />
+                        <HBox alignment="CENTER" prefHeight="34.0" prefWidth="774.0" spacing="24.0">
+                           <children>
+                              <Label fx:id="labelReactivos" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="200.0" styleClass="subtitle" text="reactivos" />
+                              <Label fx:id="labelTipoReaccion" text="⇌">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelProductos" prefHeight="17.0" prefWidth="200.0" styleClass="subtitle" text="productos" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="16.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#descartarCambios" styleClass="primary-button" text="DESCARTAR CAMBIOS" />
+                        <Button mnemonicParsing="false" onAction="#guardarCambios" styleClass="primary-button" text="GUARDAR" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

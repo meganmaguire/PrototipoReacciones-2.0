@@ -2,9 +2,7 @@ package com.mmaguire.prototiporeacciones2.controller;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
-import com.mmaguire.prototiporeacciones2.model.Reaccion;
-import com.mmaguire.prototiporeacciones2.model.Reactivo;
-import com.mmaguire.prototiporeacciones2.model.TipoReaccion;
+import com.mmaguire.prototiporeacciones2.model.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -107,12 +105,12 @@ public class ReaccionesController {
                         botonAñadirProducto.setDisable(false);
                     }
                     case irreversible -> {
-                        labelTipoReaccion.setText("⟶");
+                        labelTipoReaccion.setText("→");
                         constanteBeta.setDisable(true);
                         botonAñadirProducto.setDisable(false);
                     }
                     case degradacion -> {
-                        labelTipoReaccion.setText("⟶");
+                        labelTipoReaccion.setText("→");
                         constanteBeta.setDisable(true);
                         botonAñadirProducto.setDisable(true);
                     }
@@ -121,7 +119,7 @@ public class ReaccionesController {
                 if(seleccionActual == TipoReaccion.reversible)
                     labelTipoReaccion.setText("⇌");
                 else
-                    labelTipoReaccion.setText("⟶");
+                    labelTipoReaccion.setText("→");
             }
         });
 
@@ -191,7 +189,7 @@ public class ReaccionesController {
                     setGraphic(null);
                     return;
                 }
-
+                styleButton(deleteButton);
                 setGraphic(deleteButton);
                 deleteButton.setOnAction(
                         event -> getTableView().getItems().remove(reaccion)
@@ -225,8 +223,57 @@ public class ReaccionesController {
     }
 
     @FXML
-    public void añadirReaccion() {}
+    public void añadirReaccion() {
+        Reaccion reaccion;
+        TipoReaccion tipo = this.comboBoxTipoReaccion.getValue();
+        if (!this.reactivosReaccion.isEmpty() && this.constanteAlpha != null) {
+            if (tipo != TipoReaccion.reversible) {
+                reaccion = new Reaccion(
+                        "r" + Reaccion.getContador(),
+                        new ArrayList<>(this.reactivosReaccion),
+                        new ArrayList<>(this.productosReaccion),
+                        tipo,
+                        new Factor(
+                                "alpha" + (Reaccion.getContador()),
+                                Double.parseDouble(this.constanteAlpha.getText())),
+                        new Factor(
+                                "f" + (Reaccion.getContador()),
+                                1.0)
+                );
+            } else {
+                reaccion = new ReaccionReversible(
+                        "r" + Reaccion.getContador(),
+                        new ArrayList<>(this.reactivosReaccion),
+                        new ArrayList<>(this.productosReaccion),
+                        tipo,
+                        new Factor(
+                                "alpha" + (Reaccion.getContador()),
+                                Double.parseDouble(this.constanteAlpha.getText())),
+                        new Factor(
+                                "f" + (Reaccion.getContador()),
+                                1.0),
+                        new Factor(
+                                "beta" + (Reaccion.getContador()),
+                                Double.parseDouble(this.constanteBeta.getText()))
+                );
+                contexto.getFactores().add(new Factor("f_" + Reaccion.getContador(), 1.0));
+            }
 
+            contexto.getReacciones().add(reaccion);
+            contexto.getFactores().add(reaccion.getFactor());
+            Reaccion.forwardContador();
+            clearFieldsReacciones();
+        }
+    }
+
+    private void clearFieldsReacciones(){
+        this.reactivosReaccion.clear();
+        this.productosReaccion.clear();
+
+        this.constanteAlpha.setText(null);
+        this.constanteBeta.setText(null);
+        actualizarReaccion();
+    }
 
     private void actualizarReaccion() {
         StringBuilder reactivos = new StringBuilder();

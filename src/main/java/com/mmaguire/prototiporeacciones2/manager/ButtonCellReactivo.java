@@ -2,7 +2,6 @@ package com.mmaguire.prototiporeacciones2.manager;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,17 +11,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class ButtonCell extends TableCell<Reactivo, Boolean> {
+public class ButtonCellReactivo extends TableCell<Reactivo, Boolean> {
     final Button cellButton = new Button();
 
-    public ButtonCell(final TableView tableView, ObservableList values) {
+    public ButtonCellReactivo(final TableView<Reactivo> tableView, ObservableList<Reactivo> values) {
         styleButton();
         cellButton.setOnAction(new EventHandler<ActionEvent>(){
 
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent t) {
                 int selectedIndex = getTableRow().getIndex();
-                Object toRemove = tableView.getItems().get(selectedIndex);
+                Reactivo toRemove = tableView.getItems().get(selectedIndex);
                 values.remove(toRemove);
                 tableView.refresh();
             }

@@ -17,9 +17,6 @@ public class Context {
     private ObservableList<Reaccion> reacciones;
     private ObservableList<Factor> factores;
 
-    private ObservableList<Reactivo> reactivosReaccion;
-    private ObservableList<Reactivo> productosReaccion;
-
     private ObservableList<Reactivo> reactivosPasoExperimento;
     private ObservableList<Factor> factoresPasoExperimento;
     private ObservableList<Paso> pasosExperimento;
@@ -32,8 +29,6 @@ public class Context {
         this.experimento = new Experimento();
         this.reactivos = FXCollections.observableList(new ArrayList<>());
         this.reacciones = FXCollections.observableList(new ArrayList<>());
-        this.reactivosReaccion = FXCollections.observableList(new ArrayList<>());
-        this.productosReaccion = FXCollections.observableList(new ArrayList<>());
         this.factores = FXCollections.observableList(new ArrayList<>());
         this.reactivosPasoExperimento = FXCollections.observableList(new ArrayList<>());
         this.factoresPasoExperimento = FXCollections.observableList(new ArrayList<>());
@@ -65,14 +60,6 @@ public class Context {
 
     public ObservableList<Factor> getFactores() {
         return factores;
-    }
-
-    public ObservableList<Reactivo> getReactivosReaccion() {
-        return reactivosReaccion;
-    }
-
-    public ObservableList<Reactivo> getProductosReaccion() {
-        return productosReaccion;
     }
 
     public ObservableList<Reactivo> getReactivosPasoExperimento() {

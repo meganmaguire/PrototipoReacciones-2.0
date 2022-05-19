@@ -1,13 +1,12 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
-import com.mmaguire.prototiporeacciones2.manager.ButtonCell;
+import com.mmaguire.prototiporeacciones2.manager.ButtonCellReactivo;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.model.Factor;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,7 +72,7 @@ public class ComponentesController {
                 new Callback<TableColumn<Reactivo, Boolean>, TableCell<Reactivo, Boolean>>() {
                     @Override
                     public TableCell<Reactivo, Boolean>call(TableColumn<Reactivo, Boolean> p) {
-                        return new ButtonCell(tablaComponentes, contexto.getReactivos());
+                        return new ButtonCellReactivo(tablaComponentes, contexto.getReactivos());
                     }
                 });
 

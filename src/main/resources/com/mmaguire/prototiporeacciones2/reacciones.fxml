@@ -47,9 +47,9 @@
                               </HBox>
                               <TableView fx:id="tablaReactivos" prefHeight="227.0" prefWidth="313.0">
                                 <columns>
-                                  <TableColumn fx:id="columnaNombreReactivos" prefWidth="163.0" text="Nombre" />
-                                  <TableColumn fx:id="columnaCantidadReactivos" prefWidth="86.0" text="Cantidad" />
-                                    <TableColumn fx:id="columnaEliminarReactivo" prefWidth="50.0" resizable="false" />
+                                  <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" sortable="false" text="Nombre" />
+                                  <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="86.0" sortable="false" text="Cantidad" />
+                                    <TableColumn fx:id="columnaEliminarReactivo" editable="false" prefWidth="50.0" resizable="false" sortable="false" />
                                 </columns>
                               </TableView>
                            </children>
@@ -103,11 +103,11 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <TableView prefHeight="227.0" prefWidth="313.0">
+                              <TableView fx:id="tablaProductos" prefHeight="227.0" prefWidth="313.0">
                                  <columns>
-                                    <TableColumn fx:id="columnaNombreProductos" prefWidth="163.0" text="Nombre" />
-                                    <TableColumn fx:id="columnaCantidadProductos" prefWidth="86.0" text="Cantidad" />
-                                    <TableColumn fx:id="columnaEliminarProducto" prefWidth="50.0" resizable="false" />
+                                    <TableColumn fx:id="columnaNombreProductos" editable="false" prefWidth="163.0" sortable="false" text="Nombre" />
+                                    <TableColumn fx:id="columnaCantidadProductos" editable="false" prefWidth="86.0" sortable="false" text="Cantidad" />
+                                    <TableColumn fx:id="columnaEliminarProducto" editable="false" prefWidth="50.0" resizable="false" sortable="false" />
                                  </columns>
                               </TableView>
                            </children>

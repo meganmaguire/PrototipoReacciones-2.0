@@ -93,9 +93,9 @@
                   </VBox>
                   <TableView fx:id="tablaComponentes" prefHeight="582.0" prefWidth="520.0">
                     <columns>
-                      <TableColumn fx:id="columnaNombre" editable="false" prefWidth="226.0" sortable="false" text="Nombre" />
-                      <TableColumn fx:id="columnaCantidad" editable="false" prefWidth="126.0" sortable="false" text="Cantidad" />
-                        <TableColumn fx:id="columnaActualizable" editable="false" prefWidth="116.0" sortable="false" text="Actualizable" />
+                      <TableColumn fx:id="columnaNombre" editable="false" prefWidth="226.0" text="Nombre" />
+                      <TableColumn fx:id="columnaCantidad" editable="false" prefWidth="126.0" text="Cantidad" />
+                        <TableColumn fx:id="columnaActualizable" editable="false" prefWidth="116.0" text="Actualizable" />
                         <TableColumn fx:id="columnaEliminar" editable="false" prefWidth="50.0" resizable="false" sortable="false" />
                     </columns>
                      <columnResizePolicy>

@@ -1,13 +1,11 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
-import com.mmaguire.prototiporeacciones2.manager.ButtonCellReactivo;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.model.Factor;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,9 +15,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class ComponentesController {
     @FXML
     private TableColumn<Reactivo, Boolean> columnaActualizable;
     @FXML
-    private TableColumn<Reactivo, Boolean> columnaEliminar;
+    private TableColumn<Reactivo, Reactivo> columnaEliminar;
 
     private Context contexto;
     private ObservableList<Factor> constantes;
@@ -56,25 +55,30 @@ public class ComponentesController {
     @FXML
     public void initialize(){
         contexto = Context.getContext();
-        this.tablaComponentes.setItems(contexto.getReactivos());
         this.columnaNombre.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
         this.columnaCantidad.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
         this.columnaActualizable.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isActualizable()));
-        this.columnaEliminar.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Reactivo, Boolean>,
-                                        ObservableValue<Boolean>>() {
-                    @Override
-                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Reactivo, Boolean> p) {
-                        return new SimpleBooleanProperty(p.getValue() != null);
-                    }
-                });
-        this.columnaEliminar.setCellFactory(
-                new Callback<TableColumn<Reactivo, Boolean>, TableCell<Reactivo, Boolean>>() {
-                    @Override
-                    public TableCell<Reactivo, Boolean>call(TableColumn<Reactivo, Boolean> p) {
-                        return new ButtonCellReactivo(tablaComponentes, contexto.getReactivos());
-                    }
-                });
+        this.columnaEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        this.columnaEliminar.setCellFactory(param -> new TableCell<>() {
+            private final Button deleteButton = new Button();
+
+            @Override
+            protected void updateItem(Reactivo reactivo, boolean empty) {
+                super.updateItem(reactivo, empty);
+
+                if (reactivo == null) {
+                    setGraphic(null);
+                    return;
+                }
+                styleButton(deleteButton);
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(
+                        event -> getTableView().getItems().remove(reactivo)
+                );
+            }
+        });
+
+        this.tablaComponentes.setItems(contexto.getReactivos());
 
         this.constantes = FXCollections.observableArrayList(new ArrayList<>());
         this.constanteAsociada.setItems(this.constantes);
@@ -149,5 +153,14 @@ public class ComponentesController {
                 return true;
         }
         return false;
+    }
+
+    private void styleButton(Button cellButton) {
+        Image image = new Image(MainApp.class.getResourceAsStream("icons/baseline_delete_black_24dp.png"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(18);
+        imageView.setFitWidth(18);
+        cellButton.setGraphic(imageView);
+        cellButton.getStyleClass().add("delete-button");
     }
 }

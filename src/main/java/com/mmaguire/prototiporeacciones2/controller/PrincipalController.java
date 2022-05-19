@@ -42,6 +42,7 @@ public class PrincipalController {
         }
         catch (IOException e){
             System.out.println("Hubo un problema al intentar cargar el archivo FXML correspondiente.");
+            e.printStackTrace();
         }
     }
 

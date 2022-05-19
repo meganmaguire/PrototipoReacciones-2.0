@@ -1,12 +1,11 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
-import com.mmaguire.prototiporeacciones2.manager.ButtonCellReaccion;
-import com.mmaguire.prototiporeacciones2.manager.ButtonCellReactivo;
+import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.model.Reaccion;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
 import com.mmaguire.prototiporeacciones2.model.TipoReaccion;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,7 +13,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.Callback;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class ReaccionesController {
     @FXML
     private TableColumn<Reactivo, Integer> columnaCantidadReactivos;
     @FXML
-    private TableColumn<Reactivo, Boolean> columnaEliminarReactivo;
+    private TableColumn<Reactivo, Reactivo> columnaEliminarReactivo;
 
     @FXML
     private ComboBox<TipoReaccion> comboBoxTipoReaccion;
@@ -51,7 +51,7 @@ public class ReaccionesController {
     @FXML
     private TableColumn<Reactivo, Integer> columnaCantidadProductos;
     @FXML
-    private TableColumn<Reactivo, Boolean> columnaEliminarProducto;
+    private TableColumn<Reactivo, Reactivo> columnaEliminarProducto;
     @FXML
     private Button botonAñadirProducto;
 
@@ -72,7 +72,7 @@ public class ReaccionesController {
     @FXML
     private TableColumn<Reaccion, String> columnaTasaReaccion;
     @FXML
-    private TableColumn<Reaccion, Boolean> columnaEliminarReaccion;
+    private TableColumn<Reaccion, Reaccion> columnaEliminarReaccion;
 
     private Context contexto;
 
@@ -126,76 +126,103 @@ public class ReaccionesController {
         });
 
         // Set tablas
+        // Tabla Reactivos
         this.tablaReactivos.setItems(this.reactivosReaccion);
         this.columnaNombreReactivos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
         this.columnaCantidadReactivos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
-        this.columnaEliminarReactivo.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Reactivo, Boolean>,
-                        ObservableValue<Boolean>>() {
-                    @Override
-                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Reactivo, Boolean> p) {
-                        return new SimpleBooleanProperty(p.getValue() != null);
-                    }
-                });
-        this.columnaEliminarReactivo.setCellFactory(
-                new Callback<TableColumn<Reactivo, Boolean>, TableCell<Reactivo, Boolean>>() {
-                    @Override
-                    public TableCell<Reactivo, Boolean>call(TableColumn<Reactivo, Boolean> p) {
-                        return new ButtonCellReactivo(tablaReactivos, contexto.getReactivos());
-                    }
-                });
+        this.columnaEliminarReactivo.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        this.columnaEliminarReactivo.setCellFactory(param -> new TableCell<>() {
+            private final Button deleteButton = new Button();
 
+            @Override
+            protected void updateItem(Reactivo reactivo, boolean empty) {
+                super.updateItem(reactivo, empty);
+
+                if (reactivo == null) {
+                    setGraphic(null);
+                    return;
+                }
+                styleButton(deleteButton);
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(
+                        event -> getTableView().getItems().remove(reactivo)
+                );
+            }
+        });
+
+        // Tabla Productos
         this.tablaProductos.setItems(this.productosReaccion);
         this.columnaNombreProductos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
         this.columnaCantidadProductos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
-        this.columnaEliminarProducto.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Reactivo, Boolean>,
-                        ObservableValue<Boolean>>() {
-                    @Override
-                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Reactivo, Boolean> p) {
-                        return new SimpleBooleanProperty(p.getValue() != null);
-                    }
-                });
-        this.columnaEliminarProducto.setCellFactory(
-                new Callback<TableColumn<Reactivo, Boolean>, TableCell<Reactivo, Boolean>>() {
-                    @Override
-                    public TableCell<Reactivo, Boolean>call(TableColumn<Reactivo, Boolean> p) {
-                        return new ButtonCellReactivo(tablaReactivos, contexto.getReactivos());
-                    }
-                });
+        this.columnaEliminarProducto.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        this.columnaEliminarProducto.setCellFactory(param -> new TableCell<>() {
+            private final Button deleteButton = new Button();
 
+            @Override
+            protected void updateItem(Reactivo reactivo, boolean empty) {
+                super.updateItem(reactivo, empty);
+
+                if (reactivo == null) {
+                    setGraphic(null);
+                    return;
+                }
+                styleButton(deleteButton);
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(
+                        event -> getTableView().getItems().remove(reactivo)
+                );
+            }
+        });
+
+        // Tabla Reacciones
         this.tablaReacciones.setItems(contexto.getReacciones());
         this.columnaNroReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNroReaccion()));
         this.columnaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
         this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().calculateTasaReaccion()));
-        this.columnaEliminarReaccion.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Reaccion, Boolean>,
-                        ObservableValue<Boolean>>() {
-                    @Override
-                    public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Reaccion, Boolean> p) {
-                        return new SimpleBooleanProperty(p.getValue() != null);
-                    }
-                });
-        this.columnaEliminarReaccion.setCellFactory(
-                new Callback<TableColumn<Reaccion, Boolean>, TableCell<Reaccion, Boolean>>() {
-                    @Override
-                    public TableCell<Reaccion, Boolean>call(TableColumn<Reaccion, Boolean> p) {
-                        return new ButtonCellReaccion(tablaReacciones, contexto.getReacciones());
-                    }
-                });
+        this.columnaEliminarReaccion.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        this.columnaEliminarReaccion.setCellFactory(param -> new TableCell<>() {
+            private final Button deleteButton = new Button();
+
+            @Override
+            protected void updateItem(Reaccion reaccion, boolean empty) {
+                super.updateItem(reaccion, empty);
+
+                if (reaccion == null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(
+                        event -> getTableView().getItems().remove(reaccion)
+                );
+            }
+        });
 
         // Set spinners
         this.cantidadReactivos.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 0, 1));
+        this.cantidadReactivos.setEditable(true);
         this.cantidadProductos.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 0, 1));
-
+        this.cantidadProductos.setEditable(true);
 
     }
 
     @FXML
-    public void añadirReactivo() {}
+    public void añadirReactivo() {
+        Reactivo reactivo = this.comboBoxReactivos.getValue().clone();
+        reactivo.setCantidadInicial(this.cantidadReactivos.getValue());
+        if(!existeReactivoConNombre(reactivo.getNombre(), this.reactivosReaccion))
+            this.reactivosReaccion.add(reactivo);
+        actualizarReaccion();
+    }
 
     @FXML
-    public void añadirProducto() {}
+    public void añadirProducto() {
+        Reactivo reactivo = this.comboBoxProductos.getValue().clone();
+        reactivo.setCantidadInicial(this.cantidadProductos.getValue());
+        this.productosReaccion.add(reactivo);
+        actualizarReaccion();
+    }
 
     @FXML
     public void añadirReaccion() {}
@@ -237,6 +264,13 @@ public class ReaccionesController {
         return false;
     }
 
-
+    private void styleButton(Button cellButton) {
+        Image image = new Image(MainApp.class.getResourceAsStream("icons/baseline_delete_black_24dp.png"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(18);
+        imageView.setFitWidth(18);
+        cellButton.setGraphic(imageView);
+        cellButton.getStyleClass().add("delete-button");
+    }
 
 }

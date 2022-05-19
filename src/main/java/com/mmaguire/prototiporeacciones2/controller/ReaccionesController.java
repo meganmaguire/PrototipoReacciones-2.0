@@ -151,7 +151,10 @@ public class ReaccionesController {
                 styleButton(deleteButton);
                 setGraphic(deleteButton);
                 deleteButton.setOnAction(
-                        event -> getTableView().getItems().remove(reactivo)
+                        event -> {
+                            getTableView().getItems().remove(reactivo);
+                            actualizarReaccion();
+                        }
                 );
             }
         });
@@ -175,7 +178,10 @@ public class ReaccionesController {
                 styleButton(deleteButton);
                 setGraphic(deleteButton);
                 deleteButton.setOnAction(
-                        event -> getTableView().getItems().remove(reactivo)
+                        event -> {
+                            getTableView().getItems().remove(reactivo);
+                            actualizarReaccion();
+                        }
                 );
             }
         });

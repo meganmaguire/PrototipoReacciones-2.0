@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.ExperimentosController">
    <children>
       <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0">
          <padding>
@@ -31,9 +30,9 @@
                               <Label styleClass="subtitle" text="Reactivos" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
-                                    <ComboBox prefWidth="150.0" />
-                                    <Spinner prefWidth="110.0" />
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0">
+                                    <ComboBox fx:id="comboBoxReactivos" prefWidth="150.0" />
+                                    <Spinner fx:id="cantidadReactivos" prefWidth="110.0" />
+                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirReactivo" prefHeight="25.0" prefWidth="26.0">
                                        <graphic>
                                           <ImageView fitHeight="17.0" fitWidth="18.0">
                                              <image>
@@ -44,11 +43,11 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <TableView prefHeight="217.0" prefWidth="372.0">
+                              <TableView fx:id="tablaReactivos" prefHeight="217.0" prefWidth="372.0">
                                  <columns>
-                                    <TableColumn prefWidth="163.0" text="Nombre" />
-                                    <TableColumn prefWidth="110.0" text="Cantidad" />
-                                    <TableColumn prefWidth="50.0" resizable="false" />
+                                    <TableColumn fx:id="columnaNombreReactivos" prefWidth="163.0" text="Nombre" />
+                                    <TableColumn fx:id="columnaCantidadReactivos" prefWidth="110.0" text="Cantidad" />
+                                    <TableColumn fx:id="columnaEliminarReactivo" prefWidth="50.0" resizable="false" />
                                  </columns>
                               </TableView>
                            </children>
@@ -58,9 +57,9 @@
                               <Label styleClass="subtitle" text="Factores de reacción" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
-                                    <ComboBox prefWidth="150.0" />
-                                    <Spinner prefWidth="110.0" />
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0">
+                                    <ComboBox fx:id="comboBoxFactores" prefWidth="150.0" />
+                                    <Spinner fx:id="valorFactores" prefWidth="110.0" />
+                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirFactor" prefHeight="25.0" prefWidth="26.0">
                                        <graphic>
                                           <ImageView fitHeight="17.0" fitWidth="18.0">
                                              <image>
@@ -71,11 +70,11 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <TableView prefHeight="217.0" prefWidth="372.0">
+                              <TableView fx:id="tablaFactores" prefHeight="217.0" prefWidth="372.0">
                                  <columns>
-                                    <TableColumn prefWidth="163.0" text="Factor" />
-                                    <TableColumn prefWidth="110.0" text="Valor" />
-                                    <TableColumn prefWidth="50.0" resizable="false" />
+                                    <TableColumn fx:id="columnaNombreFactor" prefWidth="163.0" text="Factor" />
+                                    <TableColumn fx:id="columnaValorFactor" prefWidth="110.0" text="Valor" />
+                                    <TableColumn fx:id="columnaEliminarFactor" prefWidth="50.0" resizable="false" />
                                  </columns>
                               </TableView>
                            </children>
@@ -85,7 +84,7 @@
                               <Label prefHeight="20.0" prefWidth="68.0" styleClass="subtitle" text="Tiempo" />
                               <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="258.0" spacing="16.0">
                                  <children>
-                                    <Spinner prefHeight="25.0" prefWidth="120.0" />
+                                    <Spinner fx:id="tiempoPaso" prefHeight="25.0" prefWidth="120.0" />
                                     <Label text="segundos" />
                                  </children>
                               </HBox>
@@ -93,16 +92,16 @@
                         </HBox>
                         <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="324.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="primary-button" text="AÑADIR PASO" />
+                              <Button mnemonicParsing="false" onAction="#añadirPasoExperimento" prefHeight="25.0" prefWidth="120.0" styleClass="primary-button" text="AÑADIR PASO" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <TableView prefHeight="200.0" prefWidth="576.0">
+                  <TableView fx:id="tablaExperimento" prefHeight="200.0" prefWidth="576.0">
                     <columns>
-                      <TableColumn prefWidth="100.0" text="Tiempo" />
-                      <TableColumn prefWidth="425.0" text="Modificaciones" />
-                        <TableColumn prefWidth="50.0" />
+                      <TableColumn fx:id="columnaTiempoPaso" prefWidth="100.0" text="Tiempo" />
+                      <TableColumn fx:id="columnaModificacionesPaso" prefWidth="425.0" text="Modificaciones" />
+                        <TableColumn fx:id="columnaEliminarPaso" prefWidth="50.0" />
                     </columns>
                   </TableView>
                </children>

@@ -1,6 +1,5 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
-import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.model.Experimento;
 import com.mmaguire.prototiporeacciones2.model.Factor;
@@ -10,25 +9,17 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
 
-public class ExperimentosController {
+public class EditarExperimentoController {
 
     @FXML
     private ComboBox<Reactivo> comboBoxReactivos;
@@ -59,31 +50,19 @@ public class ExperimentosController {
     @FXML
     private Spinner<Integer> tiempoPaso;
 
-    @FXML
-    private TableView<Paso> tablaExperimento;
-    @FXML
-    private TableColumn<Paso, Integer> columnaTiempoPaso;
-    @FXML
-    private TableColumn<Paso, String> columnaModificacionesPaso;
-    @FXML
-    private TableColumn<Paso, Paso> columnaEliminarPaso;
-
-
     private Context contexto;
-    private Experimento experimento;
+    private Paso paso;
 
     private ObservableList<Reactivo> reactivosPasoExperimento;
     private ObservableList<Factor> factoresPasoExperimento;
-    private ObservableList<Paso> pasosExperimento;
+
 
     @FXML
     public void initialize(){
         this.contexto = Context.getContext();
-        this.experimento = new Experimento();
 
         this.reactivosPasoExperimento = FXCollections.observableList(new ArrayList<>());
         this.factoresPasoExperimento = FXCollections.observableList(new ArrayList<>());
-        this.pasosExperimento = FXCollections.observableList(new ArrayList<>());
 
         // Set ComboBox
         this.comboBoxReactivos.setItems(contexto.getReactivos());
@@ -136,39 +115,7 @@ public class ExperimentosController {
                 );
             }
         });
-        // Tabla Experimento
-        this.tablaExperimento.setItems(this.pasosExperimento);
-        this.columnaTiempoPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiempo()));
-        this.columnaModificacionesPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
-        this.columnaEliminarPaso.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-        this.columnaEliminarPaso.setCellFactory(param -> new TableCell<>() {
-            private final Button deleteButton = new Button();
 
-            @Override
-            protected void updateItem(Paso paso, boolean empty) {
-                super.updateItem(paso, empty);
-
-                if (paso == null) {
-                    setGraphic(null);
-                    return;
-                }
-                styleButton(deleteButton);
-                setGraphic(deleteButton);
-                deleteButton.setOnAction(
-                        event -> getTableView().getItems().remove(paso)
-                );
-            }
-        });
-        this.tablaExperimento.setRowFactory(tv -> {
-            TableRow<Paso> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    Paso paso = row.getItem();
-                    editarExperimento(paso, event);
-                }
-            });
-            return row;
-        });
 
         // Set spinners
         this.cantidadReactivos.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 0, 1));
@@ -196,53 +143,25 @@ public class ExperimentosController {
     }
 
     @FXML
-    public void añadirPasoExperimento(){
-        int tiempo = this.tiempoPaso.getValue();
-        if(!existePasoConTiempo(tiempo, this.pasosExperimento)) {
-            Paso paso = new Paso(
-                    new ArrayList<>(this.reactivosPasoExperimento),
-                    new ArrayList<>(this.factoresPasoExperimento),
-                    tiempo);
-            this.pasosExperimento.add(paso);
-            this.pasosExperimento.sort(Comparator.comparingInt(Paso::getTiempo));
-            this.reactivosPasoExperimento.clear();
-            this.factoresPasoExperimento.clear();
-        }
+    public void receiveData(Paso paso) {
+        this.paso = paso;
+        this.reactivosPasoExperimento.addAll(this.paso.getReactivosActualizados());
+        this.factoresPasoExperimento.addAll(this.paso.getFactoresActualizados());
+        this.tiempoPaso.getValueFactory().setValue(this.paso.getTiempo());
     }
 
-    public void editarExperimento(Paso paso, Event event){
-        try {
-            // Generar pantalla de simulación y enviar datos
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("editar-experimento.fxml"));
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-
-            EditarExperimentoController controller = loader.getController();
-            controller.receiveData(paso);
-
-            Stage dialog = new Stage();
-            Node node = (Node) event.getSource();
-            Stage parentStage = (Stage) node.getScene().getWindow();
-            dialog.setScene(scene);
-            dialog.initOwner(parentStage);
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.showAndWait();
-            this.tablaExperimento.refresh();
-            this.pasosExperimento.sort(Comparator.comparingInt(Paso::getTiempo));
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+    @FXML
+    public void guardarCambios(ActionEvent event){
+        this.paso.setFactoresActualizados(this.factoresPasoExperimento);
+        this.paso.setReactivosActualizados(this.reactivosPasoExperimento);
+        this.paso.setTiempo(this.tiempoPaso.getValue());
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
-    private boolean existePasoConTiempo(int tiempo, ObservableList<Paso> pasosExperimento){
-        for(Paso paso: pasosExperimento){
-            if(tiempo == paso.getTiempo())
-                return true;
-        }
-        return false;
+    @FXML
+    public void descartarCambios(ActionEvent event){
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
-
 }

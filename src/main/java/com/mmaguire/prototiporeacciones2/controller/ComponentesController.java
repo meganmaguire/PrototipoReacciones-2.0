@@ -23,6 +23,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.mmaguire.prototiporeacciones2.manager.Helper.existeReactivoConNombre;
+import static com.mmaguire.prototiporeacciones2.manager.Helper.styleButton;
+
 public class ComponentesController {
 
     @FXML
@@ -146,21 +149,4 @@ public class ComponentesController {
         this.poseeConstante.setSelected(false);
     }
 
-    public boolean existeReactivoConNombre(String nombre, ObservableList<Reactivo> reactivos) {
-
-        for(Reactivo reactivo : reactivos) {
-            if(reactivo.getNombre().equals(nombre))
-                return true;
-        }
-        return false;
-    }
-
-    private void styleButton(Button cellButton) {
-        Image image = new Image(MainApp.class.getResourceAsStream("icons/baseline_delete_black_24dp.png"));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(18);
-        imageView.setFitWidth(18);
-        cellButton.setGraphic(imageView);
-        cellButton.getStyleClass().add("delete-button");
-    }
 }

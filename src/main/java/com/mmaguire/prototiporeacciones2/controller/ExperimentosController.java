@@ -18,6 +18,8 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
+
 public class ExperimentosController {
 
     @FXML
@@ -200,30 +202,4 @@ public class ExperimentosController {
         return false;
     }
 
-    private boolean existeReactivoConNombre(String nombre, ObservableList<Reactivo> reactivos) {
-
-        for(Reactivo reactivo : reactivos) {
-            if(reactivo.getNombre().equals(nombre))
-                return true;
-        }
-        return false;
-    }
-
-    private boolean existeFactorConNombre(String nombre, ObservableList<Factor> factores) {
-
-        for(Factor factor : factores) {
-            if(factor.getNombre().equals(nombre))
-                return true;
-        }
-        return false;
-    }
-
-    private void styleButton(Button cellButton) {
-        Image image = new Image(MainApp.class.getResourceAsStream("icons/baseline_delete_black_24dp.png"));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(18);
-        imageView.setFitWidth(18);
-        cellButton.setGraphic(imageView);
-        cellButton.getStyleClass().add("delete-button");
-    }
 }

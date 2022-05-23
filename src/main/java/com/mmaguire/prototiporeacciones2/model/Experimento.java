@@ -1,5 +1,6 @@
 package com.mmaguire.prototiporeacciones2.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Experimento {
@@ -11,6 +12,7 @@ public class Experimento {
     public Experimento() {
         this.nombre = "exp1";
         this.clock = "x";
+        this.pasos = new ArrayList<>();
     }
 
     public Experimento(String nombre, List<Paso> pasos, String clock) {

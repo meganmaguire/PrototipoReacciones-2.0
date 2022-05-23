@@ -1,5 +1,6 @@
 package com.mmaguire.prototiporeacciones2.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sistema {
@@ -10,6 +11,11 @@ public class Sistema {
     private Experimento experimento;
 
     public Sistema() {
+        this.reactivos = new ArrayList<>();
+        this.reacciones = new ArrayList<>();
+        this.factores = new ArrayList<>();
+        this.constantesReaccion = new ArrayList<>();
+        this.experimento = new Experimento();
     }
 
     public List<Reactivo> getReactivos() {

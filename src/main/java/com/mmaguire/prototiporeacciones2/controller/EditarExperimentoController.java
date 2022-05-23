@@ -125,6 +125,13 @@ public class EditarExperimentoController {
         this.tiempoPaso.setEditable(true);
     }
 
+    @FXML
+    public void receiveData(Paso paso) {
+        this.paso = paso;
+        this.reactivosPasoExperimento.addAll(this.paso.getReactivosActualizados());
+        this.factoresPasoExperimento.addAll(this.paso.getFactoresActualizados());
+        this.tiempoPaso.getValueFactory().setValue(this.paso.getTiempo());
+    }
 
     @FXML
     public void añadirReactivo() {
@@ -141,13 +148,6 @@ public class EditarExperimentoController {
             this.factoresPasoExperimento.add(factor);
     }
 
-    @FXML
-    public void receiveData(Paso paso) {
-        this.paso = paso;
-        this.reactivosPasoExperimento.addAll(this.paso.getReactivosActualizados());
-        this.factoresPasoExperimento.addAll(this.paso.getFactoresActualizados());
-        this.tiempoPaso.getValueFactory().setValue(this.paso.getTiempo());
-    }
 
     @FXML
     public void guardarCambios(ActionEvent event){

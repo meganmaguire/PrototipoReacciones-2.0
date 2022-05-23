@@ -12,30 +12,21 @@ public class Context {
     private static Context instance = null;
     // Context data
     private Sistema sistemaReacciones;
+    private Experimento experimento;
+    private ObservableList<Paso> pasosExperimento;
     private ObservableList<Reactivo> reactivos;
-    private ObservableList<TipoReaccion> tipoReacciones;
     private ObservableList<Reaccion> reacciones;
     private ObservableList<Factor> factores;
     private ObservableList<Factor> constantesReaccion;
 
-    private ObservableList<Reactivo> reactivosPasoExperimento;
-    private ObservableList<Factor> factoresPasoExperimento;
-    private ObservableList<Paso> pasosExperimento;
-
-    private Paso ultimoPaso;
-    private Experimento experimento;
-
     private Context(){
         this.sistemaReacciones = new Sistema();
-        this.experimento = new Experimento();
-        this.reactivos = FXCollections.observableList(new ArrayList<>());
-        this.reacciones = FXCollections.observableList(new ArrayList<>());
-        this.factores = FXCollections.observableList(new ArrayList<>());
-        this.constantesReaccion = FXCollections.observableList(new ArrayList<>());
-        this.reactivosPasoExperimento = FXCollections.observableList(new ArrayList<>());
-        this.factoresPasoExperimento = FXCollections.observableList(new ArrayList<>());
-        this.pasosExperimento = FXCollections.observableList(new ArrayList<>());
-        this.ultimoPaso = new Paso(null, null, 0);
+        this.experimento = this.sistemaReacciones.getExperimento();
+        this.pasosExperimento = FXCollections.observableList(this.experimento.getPasos());
+        this.reactivos = FXCollections.observableList(this.sistemaReacciones.getReactivos());
+        this.reacciones = FXCollections.observableList(this.sistemaReacciones.getReacciones());
+        this.factores = FXCollections.observableList(this.sistemaReacciones.getFactores());
+        this.constantesReaccion = FXCollections.observableList(this.sistemaReacciones.getConstantesReaccion());
     }
 
     public static Context getContext(){
@@ -48,12 +39,15 @@ public class Context {
         return sistemaReacciones;
     }
 
-    public ObservableList<Reactivo> getReactivos() {
-        return reactivos;
+    public Experimento getExperimento() {
+        return experimento;
     }
 
-    public ObservableList<TipoReaccion> getTipoReacciones() {
-        return tipoReacciones;
+    public ObservableList<Paso> getPasosExperimento() {
+        return pasosExperimento;
+    }
+    public ObservableList<Reactivo> getReactivos() {
+        return reactivos;
     }
 
     public ObservableList<Reaccion> getReacciones() {
@@ -68,37 +62,21 @@ public class Context {
         return constantesReaccion;
     }
 
-    public ObservableList<Reactivo> getReactivosPasoExperimento() {
-        return reactivosPasoExperimento;
-    }
-
-    public ObservableList<Factor> getFactoresPasoExperimento() {
-        return factoresPasoExperimento;
-    }
-
-    public ObservableList<Paso> getPasosExperimento() {
-        return pasosExperimento;
-    }
-
-    public Paso getUltimoPaso() {
-        return ultimoPaso;
-    }
-
-    public Experimento getExperimento() {
-        return experimento;
-    }
-
 
     public void setSistemaReacciones(Sistema sistemaReacciones) {
         this.sistemaReacciones = sistemaReacciones;
     }
 
-    public void setReactivos(ObservableList<Reactivo> reactivos) {
-        this.reactivos = reactivos;
+    public void setExperimento(Experimento experimento) {
+        this.experimento = experimento;
     }
 
-    public void setTipoReacciones(ObservableList<TipoReaccion> tipoReacciones) {
-        this.tipoReacciones = tipoReacciones;
+    public void setPasosExperimento(ObservableList<Paso> pasosExperimento) {
+        this.pasosExperimento = pasosExperimento;
+    }
+
+    public void setReactivos(ObservableList<Reactivo> reactivos) {
+        this.reactivos = reactivos;
     }
 
     public void setReacciones(ObservableList<Reaccion> reacciones) {
@@ -111,25 +89,5 @@ public class Context {
 
     public void setConstantesReaccion(ObservableList<Factor> constantesReaccion) {
         this.constantesReaccion = constantesReaccion;
-    }
-
-    public void setReactivosPasoExperimento(ObservableList<Reactivo> reactivosPasoExperimento) {
-        this.reactivosPasoExperimento = reactivosPasoExperimento;
-    }
-
-    public void setFactoresPasoExperimento(ObservableList<Factor> factoresPasoExperimento) {
-        this.factoresPasoExperimento = factoresPasoExperimento;
-    }
-
-    public void setPasosExperimento(ObservableList<Paso> pasosExperimento) {
-        this.pasosExperimento = pasosExperimento;
-    }
-
-    public void setUltimoPaso(Paso ultimoPaso) {
-        this.ultimoPaso = ultimoPaso;
-    }
-
-    public void setExperimento(Experimento experimento) {
-        this.experimento = experimento;
     }
 }

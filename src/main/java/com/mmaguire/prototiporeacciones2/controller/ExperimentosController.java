@@ -2,7 +2,6 @@ package com.mmaguire.prototiporeacciones2.controller;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
-import com.mmaguire.prototiporeacciones2.model.Experimento;
 import com.mmaguire.prototiporeacciones2.model.Factor;
 import com.mmaguire.prototiporeacciones2.model.Paso;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
@@ -17,8 +16,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -70,20 +67,16 @@ public class ExperimentosController {
 
 
     private Context contexto;
-    private Experimento experimento;
 
     private ObservableList<Reactivo> reactivosPasoExperimento;
     private ObservableList<Factor> factoresPasoExperimento;
-    private ObservableList<Paso> pasosExperimento;
 
     @FXML
     public void initialize(){
         this.contexto = Context.getContext();
-        this.experimento = new Experimento();
 
         this.reactivosPasoExperimento = FXCollections.observableList(new ArrayList<>());
         this.factoresPasoExperimento = FXCollections.observableList(new ArrayList<>());
-        this.pasosExperimento = FXCollections.observableList(new ArrayList<>());
 
         // Set ComboBox
         this.comboBoxReactivos.setItems(contexto.getReactivos());
@@ -137,7 +130,7 @@ public class ExperimentosController {
             }
         });
         // Tabla Experimento
-        this.tablaExperimento.setItems(this.pasosExperimento);
+        this.tablaExperimento.setItems(this.contexto.getPasosExperimento());
         this.columnaTiempoPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiempo()));
         this.columnaModificacionesPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
         this.columnaEliminarPaso.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
@@ -198,13 +191,13 @@ public class ExperimentosController {
     @FXML
     public void añadirPasoExperimento(){
         int tiempo = this.tiempoPaso.getValue();
-        if(!existePasoConTiempo(tiempo, this.pasosExperimento)) {
+        if(!existePasoConTiempo(tiempo, this.contexto.getPasosExperimento())) {
             Paso paso = new Paso(
                     new ArrayList<>(this.reactivosPasoExperimento),
                     new ArrayList<>(this.factoresPasoExperimento),
                     tiempo);
-            this.pasosExperimento.add(paso);
-            this.pasosExperimento.sort(Comparator.comparingInt(Paso::getTiempo));
+            this.contexto.getPasosExperimento().add(paso);
+            this.contexto.getPasosExperimento().sort(Comparator.comparingInt(Paso::getTiempo));
             this.reactivosPasoExperimento.clear();
             this.factoresPasoExperimento.clear();
         }
@@ -230,7 +223,7 @@ public class ExperimentosController {
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.showAndWait();
             this.tablaExperimento.refresh();
-            this.pasosExperimento.sort(Comparator.comparingInt(Paso::getTiempo));
+            this.contexto.getPasosExperimento().sort(Comparator.comparingInt(Paso::getTiempo));
         }
         catch (IOException e){
             e.printStackTrace();

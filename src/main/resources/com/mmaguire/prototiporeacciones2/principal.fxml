@@ -42,24 +42,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.PrincipalController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.PrincipalController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="Archivo">
           <items>
-            <MenuItem mnemonicParsing="false" text="Nuevo sistema" />
-            <MenuItem mnemonicParsing="false" text="Abrir..." />
+            <MenuItem mnemonicParsing="false" onAction="#newFile" text="Nuevo sistema" />
+            <MenuItem mnemonicParsing="false" onAction="#openFile" text="Abrir..." />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cerrar sistema" />
-            <MenuItem mnemonicParsing="false" text="Guardar" />
-            <MenuItem mnemonicParsing="false" text="Guardar como..." />
+            <MenuItem mnemonicParsing="false" onAction="#closeSystem" text="Cerrar sistema" />
+            <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Guardar" />
+            <MenuItem mnemonicParsing="false" onAction="#saveFileAs" text="Guardar como..." />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Exportar XML..." />
-                  <MenuItem mnemonicParsing="false" text="Guardar historial..." />
-                  <MenuItem mnemonicParsing="false" text="Cargar historial..." />
+            <MenuItem mnemonicParsing="false" onAction="#exportXML" text="Exportar XML..." />
+                  <MenuItem mnemonicParsing="false" onAction="#saveHistory" text="Guardar historial..." />
+                  <MenuItem mnemonicParsing="false" onAction="#loadHistory" text="Cargar historial..." />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Salir" />
+            <MenuItem mnemonicParsing="false" onAction="#quitApp" text="Salir" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Ayuda">

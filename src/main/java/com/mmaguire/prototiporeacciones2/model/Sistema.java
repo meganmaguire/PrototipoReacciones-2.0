@@ -5,6 +5,8 @@ import java.util.List;
 public class Sistema {
     private List<Reactivo> reactivos;
     private List<Reaccion> reacciones;
+    private List<Factor> factores;
+    private List<Factor> constantesReaccion;
     private Experimento experimento;
 
     public Sistema() {
@@ -24,6 +26,22 @@ public class Sistema {
 
     public void setReacciones(List<Reaccion> reacciones) {
         this.reacciones = reacciones;
+    }
+
+    public List<Factor> getFactores() {
+        return factores;
+    }
+
+    public void setFactores(List<Factor> factores) {
+        this.factores = factores;
+    }
+
+    public List<Factor> getConstantesReaccion() {
+        return constantesReaccion;
+    }
+
+    public void setConstantesReaccion(List<Factor> constantesReaccion) {
+        this.constantesReaccion = constantesReaccion;
     }
 
     public Experimento getExperimento() {

@@ -3,6 +3,7 @@ module com.example.prototiporeacciones2 {
     requires javafx.fxml;
     requires model;
     requires com.fasterxml.jackson.databind;
+    requires java.desktop;
 
     opens com.mmaguire.prototiporeacciones2 to javafx.fxml;
     exports com.mmaguire.prototiporeacciones2;

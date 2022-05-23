@@ -87,4 +87,49 @@ public class Context {
     public Experimento getExperimento() {
         return experimento;
     }
+
+
+    public void setSistemaReacciones(Sistema sistemaReacciones) {
+        this.sistemaReacciones = sistemaReacciones;
+    }
+
+    public void setReactivos(ObservableList<Reactivo> reactivos) {
+        this.reactivos = reactivos;
+    }
+
+    public void setTipoReacciones(ObservableList<TipoReaccion> tipoReacciones) {
+        this.tipoReacciones = tipoReacciones;
+    }
+
+    public void setReacciones(ObservableList<Reaccion> reacciones) {
+        this.reacciones = reacciones;
+    }
+
+    public void setFactores(ObservableList<Factor> factores) {
+        this.factores = factores;
+    }
+
+    public void setConstantesReaccion(ObservableList<Factor> constantesReaccion) {
+        this.constantesReaccion = constantesReaccion;
+    }
+
+    public void setReactivosPasoExperimento(ObservableList<Reactivo> reactivosPasoExperimento) {
+        this.reactivosPasoExperimento = reactivosPasoExperimento;
+    }
+
+    public void setFactoresPasoExperimento(ObservableList<Factor> factoresPasoExperimento) {
+        this.factoresPasoExperimento = factoresPasoExperimento;
+    }
+
+    public void setPasosExperimento(ObservableList<Paso> pasosExperimento) {
+        this.pasosExperimento = pasosExperimento;
+    }
+
+    public void setUltimoPaso(Paso ultimoPaso) {
+        this.ultimoPaso = ultimoPaso;
+    }
+
+    public void setExperimento(Experimento experimento) {
+        this.experimento = experimento;
+    }
 }

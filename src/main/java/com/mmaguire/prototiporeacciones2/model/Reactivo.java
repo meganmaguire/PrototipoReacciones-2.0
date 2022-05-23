@@ -40,6 +40,14 @@ public class Reactivo {
         this.actualizable = actualizable;
     }
 
+    public Factor getConstanteAsociada() {
+        return constanteAsociada;
+    }
+
+    public void setConstanteAsociada(Factor constanteAsociada) {
+        this.constanteAsociada = constanteAsociada;
+    }
+
     @Override
     public String toString() {
         return this.nombre;

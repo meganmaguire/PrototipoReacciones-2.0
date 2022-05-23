@@ -3,12 +3,14 @@ package com.mmaguire.prototiporeacciones2.controller;
 import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.model.Factor;
+import com.mmaguire.prototiporeacciones2.model.Reaccion;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -53,11 +55,11 @@ public class ComponentesController {
     private TableColumn<Reactivo, Reactivo> columnaEliminar;
 
     private Context contexto;
-    private ObservableList<Factor> constantes;
 
     @FXML
     public void initialize(){
         contexto = Context.getContext();
+        this.tablaComponentes.setItems(contexto.getReactivos());
         this.columnaNombre.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
         this.columnaCantidad.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
         this.columnaActualizable.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isActualizable()));
@@ -80,11 +82,18 @@ public class ComponentesController {
                 );
             }
         });
+        this.tablaComponentes.setRowFactory(tv -> {
+            TableRow<Reactivo> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Reactivo reactivo = row.getItem();
+                    editarReactivo(reactivo, event);
+                }
+            });
+            return row;
+        });
 
-        this.tablaComponentes.setItems(contexto.getReactivos());
-
-        this.constantes = FXCollections.observableArrayList(new ArrayList<>());
-        this.constanteAsociada.setItems(this.constantes);
+        this.constanteAsociada.setItems(this.contexto.getConstantesReaccion());
         this.cantidadComponente.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 0,1));
         this.cantidadComponente.setEditable(true);
 
@@ -135,11 +144,35 @@ public class ComponentesController {
 
             Factor constante = controller.getConstante();
             if (constante != null)
-                this.constantes.add(constante);
-
+                this.contexto.getConstantesReaccion().add(constante);
         }
         catch (IOException e) {
             System.out.println("Hubo un problema al leer el archivo FXML");
+        }
+    }
+
+    public void editarReactivo(Reactivo reactivo, Event event){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("editar-componente.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+
+            EditarComponenteController controller = loader.getController();
+            controller.receiveData(reactivo);
+
+            Stage dialog = new Stage();
+            Node node = (Node) event.getSource();
+            Stage parentStage = (Stage) node.getScene().getWindow();
+            dialog.setScene(scene);
+            dialog.initOwner(parentStage);
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.showAndWait();
+            this.tablaComponentes.refresh();
+        }
+        catch (IOException e){
+            e.printStackTrace();
         }
     }
 

@@ -35,6 +35,20 @@ public class Context {
         return instance;
     }
 
+    public static void reset(){
+        instance.resetInstance();
+    }
+
+    private void resetInstance(){
+        //this.sistemaReacciones = new Sistema();
+        //this.experimento = this.sistemaReacciones.getExperimento();
+        this.pasosExperimento.clear();
+        this.reactivos.clear();
+        this.reacciones.clear();
+        this.factores.clear();
+        this.constantesReaccion.clear();
+    }
+
     public Sistema getSistemaReacciones() {
         return sistemaReacciones;
     }
@@ -72,22 +86,27 @@ public class Context {
     }
 
     public void setPasosExperimento(ObservableList<Paso> pasosExperimento) {
-        this.pasosExperimento = pasosExperimento;
+        this.pasosExperimento.setAll(pasosExperimento);
+        this.sistemaReacciones.getExperimento().setPasos(this.pasosExperimento);
     }
 
     public void setReactivos(ObservableList<Reactivo> reactivos) {
-        this.reactivos = reactivos;
+        this.reactivos.setAll(reactivos);
+        this.sistemaReacciones.setReactivos(this.reactivos);
     }
 
     public void setReacciones(ObservableList<Reaccion> reacciones) {
-        this.reacciones = reacciones;
+        this.reacciones.setAll(reacciones);
+        this.sistemaReacciones.setReacciones(this.reacciones);
     }
 
     public void setFactores(ObservableList<Factor> factores) {
-        this.factores = factores;
+        this.factores.setAll(factores);
+        this.sistemaReacciones.setFactores(this.factores);
     }
 
     public void setConstantesReaccion(ObservableList<Factor> constantesReaccion) {
-        this.constantesReaccion = constantesReaccion;
+        this.constantesReaccion.setAll(constantesReaccion);
+        this.sistemaReacciones.setConstantesReaccion(this.constantesReaccion);
     }
 }

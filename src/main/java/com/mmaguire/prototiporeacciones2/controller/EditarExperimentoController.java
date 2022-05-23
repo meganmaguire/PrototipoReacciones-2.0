@@ -1,7 +1,6 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
 import com.mmaguire.prototiporeacciones2.manager.Context;
-import com.mmaguire.prototiporeacciones2.model.Experimento;
 import com.mmaguire.prototiporeacciones2.model.Factor;
 import com.mmaguire.prototiporeacciones2.model.Paso;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;

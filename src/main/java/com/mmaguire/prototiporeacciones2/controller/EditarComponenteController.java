@@ -3,12 +3,7 @@ package com.mmaguire.prototiporeacciones2.controller;
 import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.model.Factor;
-import com.mmaguire.prototiporeacciones2.model.Paso;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,9 +15,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import static com.mmaguire.prototiporeacciones2.manager.Helper.styleButton;
 
 public class EditarComponenteController {
 

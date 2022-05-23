@@ -3,12 +3,9 @@ package com.mmaguire.prototiporeacciones2.controller;
 import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.model.Factor;
-import com.mmaguire.prototiporeacciones2.model.Reaccion;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -17,13 +14,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static com.mmaguire.prototiporeacciones2.manager.Helper.existeReactivoConNombre;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.styleButton;

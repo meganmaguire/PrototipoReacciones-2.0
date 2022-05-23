@@ -174,14 +174,18 @@ public class PrincipalController {
 
     @FXML
     public void exportXML(){
-
+        // TODO pendiente
     }
 
     @FXML
-    public void saveHistory(){}
+    public void saveHistory(){
+        // TODO pendiente
+    }
 
     @FXML
-    public void loadHistory(){}
+    public void loadHistory(){
+        // TODO Pendiente
+    }
 
     @FXML
     public void quitApp(){

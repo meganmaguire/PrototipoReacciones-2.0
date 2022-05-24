@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="com.mmaguire.prototiporeacciones2.controller.GraficoSimulacionController">
    <children>
       <VBox alignment="CENTER" prefHeight="679.0" prefWidth="1115.0" spacing="30.0">
          <padding>
@@ -18,17 +19,17 @@
          </padding>
          <children>
             <Label styleClass="title" text="Simulación" />
-            <LineChart prefHeight="547.0" prefWidth="971.0">
+            <LineChart fx:id="graficoSimulacion" prefHeight="547.0" prefWidth="971.0">
               <xAxis>
-                <CategoryAxis side="BOTTOM" />
+                <NumberAxis label="Time units" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" />
+                <NumberAxis label="Reactant amount" side="LEFT" />
               </yAxis>
             </LineChart>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" styleClass="primary-button" text="CERRAR" />
+                  <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="25.0" prefWidth="75.0" styleClass="primary-button" text="CERRAR" />
                </children>
             </HBox>
          </children>

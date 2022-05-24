@@ -10,8 +10,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="com.mmaguire.prototiporeacciones2.controller.SimulacionesController">
    <children>
       <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0">
          <padding>
@@ -24,11 +24,11 @@
                   <VBox prefHeight="582.0" prefWidth="509.0" spacing="18.0">
                      <children>
                         <Label styleClass="subtitle" text="Reacciones" />
-                        <TableView prefHeight="582.0" prefWidth="141.0">
+                        <TableView fx:id="tablaReacciones" prefHeight="582.0" prefWidth="141.0">
                           <columns>
-                            <TableColumn prefWidth="54.0" text="Nro" />
-                            <TableColumn prefWidth="214.0" text="Reacción" />
-                              <TableColumn prefWidth="240.0" text="Tasa de reacción" />
+                            <TableColumn fx:id="columnaNroReaccion" prefWidth="54.0" text="Nro" />
+                            <TableColumn fx:id="columnaReaccion" prefWidth="214.0" text="Reacción" />
+                              <TableColumn fx:id="columnaTasaReaccion" prefWidth="240.0" text="Tasa de reacción" />
                           </columns>
                         </TableView>
                      </children>
@@ -36,10 +36,10 @@
                   <VBox prefHeight="582.0" prefWidth="419.0" spacing="18.0">
                      <children>
                         <Label styleClass="subtitle" text="Experimento" />
-                        <TableView prefHeight="592.0" prefWidth="418.0">
+                        <TableView fx:id="tablaExperimento" prefHeight="592.0" prefWidth="418.0">
                           <columns>
-                            <TableColumn prefWidth="100.0" text="Tiempo" />
-                            <TableColumn prefWidth="316.0" text="Modificaciones" />
+                            <TableColumn fx:id="columnaTiempoPaso" prefWidth="100.0" text="Tiempo" />
+                            <TableColumn fx:id="columnaModificacionesPaso" prefWidth="316.0" text="Modificaciones" />
                           </columns>
                         </TableView>
                      </children>
@@ -51,11 +51,11 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="298.0" spacing="12.0">
                      <children>
                         <Label text="Tiempo" />
-                        <Spinner prefHeight="25.0" prefWidth="100.0" />
+                        <Spinner fx:id="tiempoSimulacion" prefHeight="25.0" prefWidth="100.0" />
                         <Label text="segundos" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" styleClass="primary-button" text="SIMULAR" />
+                  <Button mnemonicParsing="false" onAction="#simularSistema" prefHeight="25.0" prefWidth="90.0" styleClass="primary-button" text="SIMULAR" />
                </children>
             </HBox>
          </children>

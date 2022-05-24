@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.ComponentesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.ComponentesController">
    <children>
       <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0">
          <padding>
@@ -63,7 +63,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </ComboBox>
-                              <Button fx:id="botonAñadirConstante" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirConstante" prefHeight="25.0" prefWidth="26.0">
+                              <Button fx:id="botonAñadirConstante" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirConstante" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
                                  <graphic>
                                     <ImageView fitHeight="17.0" fitWidth="18.0">
                                        <image>
@@ -93,9 +93,9 @@
                   </VBox>
                   <TableView fx:id="tablaComponentes" prefHeight="582.0" prefWidth="520.0">
                     <columns>
-                      <TableColumn fx:id="columnaNombre" editable="false" prefWidth="226.0" text="Nombre" />
-                      <TableColumn fx:id="columnaCantidad" editable="false" prefWidth="126.0" text="Cantidad" />
-                        <TableColumn fx:id="columnaActualizable" editable="false" prefWidth="116.0" text="Actualizable" />
+                      <TableColumn fx:id="columnaNombre" editable="false" prefWidth="175.0" resizable="false" sortable="false" text="Nombre" />
+                      <TableColumn fx:id="columnaCantidad" editable="false" prefWidth="170.0" resizable="false" sortable="false" text="Cantidad" />
+                        <TableColumn fx:id="columnaActualizable" editable="false" prefWidth="120.0" resizable="false" sortable="false" text="Actualizable" />
                         <TableColumn fx:id="columnaEliminar" editable="false" prefWidth="50.0" resizable="false" sortable="false" />
                     </columns>
                      <columnResizePolicy>

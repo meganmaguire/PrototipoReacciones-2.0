@@ -1,39 +1,157 @@
-.menu-label {
-    -fx-font-family: Inconsolata;
-    -fx-font-size: 20px;
+@font-face{
+    font-family: 'Inconsolata';
+    font-weight: 700;
+    src: url('fonts/Inconsolata-Bold.ttf') format('truetype');
 }
-.menu-label:hover {
-    -fx-background-color: lightgray;
+@font-face{
+    font-family: 'Inconsolata';
+    font-weight: 500;
+    src: url('fonts/Inconsolata-Regular.ttf') format('truetype');
 }
-.menu-label:pressed {
-    -fx-font-weight: bold;
+.root {
+    side-bar-bg: #EEF5F6;
+    side-bar-item-selected: #A9CED6 ;
+    title: #131E20;
+    subtitle: #28383C;
+    label: #3B4547;
+    primary-button: #9DDAE8;
+    add-button: #8DC0CB;
+    drop-shadow: #91ADB3;
+    hover-shine: #D7EEF2;
 }
 
+.side-menu {
+    -fx-background-color: side-bar-bg;
+}
+.menu-title {
+    -fx-font-family: Inconsolata;
+    -fx-font-weight: 500;
+    -fx-font-size: 20px;
+    -fx-text-fill: title;
+}
+.menu-label {
+    -fx-font-family: Inconsolata;
+    -fx-font-weight: 500;
+    -fx-font-size: 20px;
+    -fx-text-fill: title;
+    -fx-background-color: transparent;
+}
+.menu-label:hover {
+    -fx-background-color: side-bar-item-selected;
+    -fx-font-weight: 700;
+    -fx-text-fill: title;
+}
+.menu-label-selected {
+    -fx-background-color: side-bar-item-selected;
+    -fx-font-weight: 700;
+    -fx-text-fill: title;
+}
+.pane {
+    -fx-background-color: white;
+}
 .title {
     -fx-font-family: Inconsolata;
     -fx-font-size: 32px;
-    -fx-font-weight: bold;
+    -fx-font-weight: 700;
+    -fx-text-fill: title;
 }
 .subtitle {
-    -fx-font-family: "Source Code Pro";
-    -fx-font-size: 16px;
-    -fx-font-weight: 700;
-}
-
+    -fx-font-family: "Source Sans Pro";
+    -fx-font-size: 18px;
+    -fx-font-weight: 500;
+    -fx-text-fill: subtitle;
+}   
 .form-label {
-    -fx-font-family: "Source Code Pro";
+    -fx-font-family: "Source Sans Pro";
     -fx-font-size: 14px;
+    -fx-text-fill: label;
 }
 .primary-button {
     -fx-font-family: Inconsolata;
-    -fx-font-size: 14px;
+    -fx-font-size: 16px;
     -fx-background-radius: 0;
     -fx-border-style: none;
-    -fx-border-width: 0;
+    -fx-background-color: primary-button;
+    -fx-effect: dropshadow(gaussian, drop-shadow, 6, 0.2, 0, 2);
+
+}
+.secondary-button {
+    -fx-font-family: Inconsolata;
+    -fx-font-size: 16px;
+    -fx-background-radius: 0;
+    -fx-border-width: 1;
+    -fx-border-color: primary-button;
+    -fx-background-color: white;
+}
+.add-button {
+    -fx-background-radius: 0;
+    -fx-border-style: none;
+    -fx-background-color: add-button;
+
+    -fx-effect: dropshadow(gaussian, drop-shadow, 3, 0.2, 0, 2);
 }
 .delete-button {
     -fx-background-color: transparent;
     -fx-background-radius: 0;
+}
+.text-field, .combo-box, .check-box .box {
+    -fx-background-radius: 0;
+    -fx-background-color: side-bar-bg;
+    -fx-border-width: 1px;
+    -fx-border-color: side-bar-item-selected;
+}
+.text-field:hover, .combo-box:hover, .check-box .box:hover{
+    -fx-effect: dropshadow(gaussian, hover-shine, 6, 0.2, 0, 0);
+}
+.add-button:hover, .primary-button:hover{
+    -fx-effect: dropshadow(gaussian, drop-shadow, 3, 0, 0, 1);
+}
+.check-box .label {
+    -fx-font-style: italic;
+}
+.check-box:selected .mark {
+    -fx-background-color: subtitle;
+}
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: side-bar-item-selected;
+}
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: drop-shadow;
+}
+.spinner .increment-arrow-button .increment-arrow,
+.spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: subtitle;
+}
+.table-view {
+    -fx-border-color: side-bar-item-selected;
+}
+.table-view .column-header, .table-view .column-header-background .filler {
+    -fx-background-color: side-bar-bg;
+    -fx-table-cell-border-color: side-bar-item-selected;
+}
+.table-view .column-header .label{
+    -fx-text-fill: subtitle;
+    -fx-font-weight: bold;
+}
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+.table-row-cell {
+    -fx-table-cell-border-color: side-bar-item-selected;
+}
+.table-row-cell:selected .cell {
+    -fx-text-background-color: label;
+    -fx-background-color: side-bar-item-selected;
+    -fx-table-cell-border-color: drop-shadow;
+
+}
+.table-row-cell:even{
+    -fx-background-color: white;
+}
+.table-row-cell:odd{
+    -fx-background-color: #F9FCFC;
 }
 .table-column {
     -fx-alignment: CENTER-LEFT;

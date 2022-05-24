@@ -25,6 +25,18 @@ import static com.mmaguire.prototiporeacciones2.manager.FileManager.saveSystemTo
 
 public class PrincipalController {
 
+    @FXML
+    private Label menuComponentes;
+    @FXML
+    private Label menuReacciones;
+    @FXML
+    private Label menuExperimentos;
+    @FXML
+    private Label menuSimulaciones;
+    @FXML
+    private Label menuHistorial;
+
+
     private Context contexto;
     private String filePath;
     private AnchorPane componentesPane;
@@ -52,7 +64,6 @@ public class PrincipalController {
 
             fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.historial));
             historialPane = fxmlLoader.load();
-
         }
         catch (IOException e){
             System.out.println("Hubo un problema al intentar cargar el archivo FXML correspondiente.");
@@ -63,26 +74,52 @@ public class PrincipalController {
     @FXML
     public void onMouseClickedComponentes(MouseEvent event){
         selectPane(componentesPane, event);
+        menuComponentes.getStyleClass().add("menu-label-selected");
+        menuReacciones.getStyleClass().remove("menu-label-selected");
+        menuExperimentos.getStyleClass().remove("menu-label-selected");
+        menuSimulaciones.getStyleClass().remove("menu-label-selected");
+        menuHistorial.getStyleClass().remove("menu-label-selected");
     }
 
     @FXML
     public void onMouseClickedReacciones(MouseEvent event){
         selectPane(reaccionesPane, event);
+        menuReacciones.getStyleClass().add("menu-label-selected");
+        menuComponentes.getStyleClass().remove("menu-label-selected");
+        menuExperimentos.getStyleClass().remove("menu-label-selected");
+        menuSimulaciones.getStyleClass().remove("menu-label-selected");
+        menuHistorial.getStyleClass().remove("menu-label-selected");
+
     }
 
     @FXML
     public void onMouseClickedExperimentos(MouseEvent event){
         selectPane(experimentosPane, event);
+        menuExperimentos.getStyleClass().add("menu-label-selected");
+        menuReacciones.getStyleClass().remove("menu-label-selected");
+        menuComponentes.getStyleClass().remove("menu-label-selected");
+        menuSimulaciones.getStyleClass().remove("menu-label-selected");
+        menuHistorial.getStyleClass().remove("menu-label-selected");
     }
 
     @FXML
     public void onMouseClickedSimulaciones(MouseEvent event){
         selectPane(simulacionesPane, event);
+        menuSimulaciones.getStyleClass().add("menu-label-selected");
+        menuReacciones.getStyleClass().remove("menu-label-selected");
+        menuExperimentos.getStyleClass().remove("menu-label-selected");
+        menuComponentes.getStyleClass().remove("menu-label-selected");
+        menuHistorial.getStyleClass().remove("menu-label-selected");
     }
 
     @FXML
     public void onMouseClickedHistorial(MouseEvent event){
         selectPane(historialPane, event);
+        menuHistorial.getStyleClass().add("menu-label-selected");
+        menuReacciones.getStyleClass().remove("menu-label-selected");
+        menuExperimentos.getStyleClass().remove("menu-label-selected");
+        menuSimulaciones.getStyleClass().remove("menu-label-selected");
+        menuComponentes.getStyleClass().remove("menu-label-selected");
     }
 
     // Menu
@@ -215,5 +252,13 @@ public class PrincipalController {
 
         splitPane.getItems().remove(1);
         splitPane.getItems().add(pane);
+    }
+
+    public AnchorPane getComponentesPane() {
+        return componentesPane;
+    }
+
+    public Label getMenuComponentes() {
+        return menuComponentes;
     }
 }

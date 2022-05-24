@@ -1,8 +1,12 @@
 package com.mmaguire.prototiporeacciones2;
 
+import com.mmaguire.prototiporeacciones2.controller.EditarReaccionController;
+import com.mmaguire.prototiporeacciones2.controller.PrincipalController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -18,6 +22,12 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
 
+        PrincipalController controller = fxmlLoader.getController();
+
+        SplitPane splitPane = ((SplitPane) ((AnchorPane) content.getChildren().get(1)).getChildren().get(0));
+        splitPane.getItems().remove(1);
+        splitPane.getItems().add(controller.getComponentesPane());
+        controller.getMenuComponentes().getStyleClass().add("menu-label-selected");
     }
 
     public static void main(String[] args) {

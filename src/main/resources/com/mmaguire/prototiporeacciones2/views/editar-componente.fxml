@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarComponenteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarComponenteController">
    <children>
       <VBox spacing="46.0">
          <padding>
@@ -61,7 +61,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </ComboBox>
-                              <Button fx:id="botonAñadirConstante" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirConstante" prefHeight="25.0" prefWidth="26.0">
+                              <Button fx:id="botonAñadirConstante" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirConstante" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
                                  <graphic>
                                     <ImageView fitHeight="17.0" fitWidth="18.0">
                                        <image>
@@ -77,10 +77,13 @@
                         </HBox>
                         <HBox alignment="BOTTOM_RIGHT" spacing="16.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="25.0" prefWidth="156.0" styleClass="primary-button" text="DESCARTAR CAMBIOS">
+                              <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="28.0" prefWidth="181.0" styleClass="secondary-button" text="DESCARTAR CAMBIOS">
                                  <HBox.margin>
                                     <Insets top="38.0" />
                                  </HBox.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
                               </Button>
                               <Button mnemonicParsing="false" onAction="#guardarCambios" prefWidth="80.0" styleClass="primary-button" text="GUARDAR" />
                            </children>

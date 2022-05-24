@@ -74,11 +74,11 @@
          <children>
             <SplitPane dividerPositions="0.18335901386748846" minHeight="-Infinity" minWidth="-Infinity" prefHeight="774.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="176.0">
+                <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="176.0" styleClass="side-menu">
                      <children>
                         <VBox prefHeight="772.0" prefWidth="176.0">
                            <children>
-                              <Label fx:id="menuPrincipal" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="MENU">
+                              <Label fx:id="menuPrincipal" prefHeight="50.0" prefWidth="176.0" styleClass="menu-title" text="MENU">
                                  <padding>
                                     <Insets left="16.0" right="16.0" />
                                  </padding>

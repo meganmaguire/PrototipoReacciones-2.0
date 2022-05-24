@@ -27,8 +27,16 @@
             </LineChart>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="16.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#exportarDatos" prefHeight="25.0" prefWidth="134.0" styleClass="primary-button" text="EXPORTAR DATOS" />
-                  <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="25.0" prefWidth="75.0" styleClass="primary-button" text="CERRAR" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="764.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#exportarDatos" prefHeight="25.0" prefWidth="134.0" styleClass="primary-button" text="EXPORTAR DATOS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="25.0" prefWidth="75.0" styleClass="primary-button" text="CERRAR" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </children>

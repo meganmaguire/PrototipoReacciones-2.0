@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -10,8 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="com.mmaguire.prototiporeacciones2.controller.GraficoSimulacionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.GraficoSimulacionController">
    <children>
       <VBox alignment="CENTER" prefHeight="679.0" prefWidth="1115.0" spacing="30.0">
          <padding>
@@ -27,8 +25,9 @@ fx:controller="com.mmaguire.prototiporeacciones2.controller.GraficoSimulacionCon
                 <NumberAxis label="Reactant amount" side="LEFT" />
               </yAxis>
             </LineChart>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="16.0">
                <children>
+                  <Button mnemonicParsing="false" onAction="#exportarDatos" prefHeight="25.0" prefWidth="134.0" styleClass="primary-button" text="EXPORTAR DATOS" />
                   <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="25.0" prefWidth="75.0" styleClass="primary-button" text="CERRAR" />
                </children>
             </HBox>

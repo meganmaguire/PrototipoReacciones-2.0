@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarExperimentoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarExperimentoController">
    <children>
       <VBox prefHeight="772.0" prefWidth="469.0" spacing="46.0">
          <padding>
@@ -36,7 +36,7 @@
                                        <graphic>
                                           <ImageView fitHeight="17.0" fitWidth="18.0">
                                              <image>
-                                                <Image url="@icons/baseline_add_black_24dp.png" />
+                                                <Image url="@../icons/baseline_add_black_24dp.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -63,7 +63,7 @@
                                        <graphic>
                                           <ImageView fitHeight="17.0" fitWidth="18.0">
                                              <image>
-                                                <Image url="@icons/baseline_add_black_24dp.png" />
+                                                <Image url="@../icons/baseline_add_black_24dp.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>

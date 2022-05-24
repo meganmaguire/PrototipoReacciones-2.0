@@ -90,7 +90,7 @@ public class SimulacionesController {
 
                 // Generar pantalla de simulación y enviar datos
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(MainApp.class.getResource("grafico-simulacion.fxml"));
+                loader.setLocation(MainApp.class.getResource("views/grafico-simulacion.fxml"));
                 Parent root = loader.load();
 
                 Scene scene = new Scene(root);

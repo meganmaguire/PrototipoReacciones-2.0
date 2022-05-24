@@ -122,7 +122,7 @@ public class ComponentesController {
     public void añadirConstante(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("añadir-constante.fxml"));
+            loader.setLocation(MainApp.class.getResource("views/añadir-constante.fxml"));
             Parent root = loader.load();
             AddConstanteController controller = loader.getController();
 
@@ -148,7 +148,7 @@ public class ComponentesController {
     public void editarReactivo(Reactivo reactivo, Event event){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("editar-componente.fxml"));
+            loader.setLocation(MainApp.class.getResource("views/editar-componente.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

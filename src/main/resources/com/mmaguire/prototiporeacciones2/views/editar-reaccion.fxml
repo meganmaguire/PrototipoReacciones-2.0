@@ -15,15 +15,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.ReaccionesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1115.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarReaccionController">
    <children>
-      <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0">
+      <VBox prefWidth="1115.0" spacing="46.0">
          <padding>
             <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
          </padding>
          <children>
-            <Label styleClass="title" text="Reacciones" />
-            <VBox prefHeight="611.0" prefWidth="971.0" spacing="32.0">
+            <Label styleClass="title" text="Editar reacción" />
+            <VBox prefWidth="971.0" spacing="32.0">
                <children>
                   <HBox prefHeight="200.0" prefWidth="971.0" spacing="80.0">
                      <children>
@@ -38,7 +38,7 @@
                                        <graphic>
                                           <ImageView fitHeight="17.0" fitWidth="18.0">
                                              <image>
-                                                <Image url="@icons/baseline_add_black_24dp.png" />
+                                                <Image url="@../icons/baseline_add_black_24dp.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -59,7 +59,11 @@
                               <VBox prefWidth="100.0" spacing="20.0">
                                  <children>
                                     <Label styleClass="subtitle" text="Tipo de reacción" />
-                                    <ComboBox fx:id="comboBoxTipoReaccion" prefWidth="212.0" />
+                                    <Label fx:id="tipoReaccion">
+                                       <VBox.margin>
+                                          <Insets left="24.0" />
+                                       </VBox.margin>
+                                    </Label>
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0">
@@ -96,7 +100,7 @@
                                        <graphic>
                                           <ImageView fitHeight="17.0" fitWidth="18.0">
                                              <image>
-                                                <Image url="@icons/baseline_add_black_24dp.png" />
+                                                <Image url="@../icons/baseline_add_black_24dp.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -128,17 +132,14 @@
                               <Label fx:id="labelProductos" prefHeight="17.0" prefWidth="200.0" styleClass="subtitle" text="productos" />
                            </children>
                         </HBox>
-                        <Button mnemonicParsing="false" onAction="#añadirReaccion" styleClass="primary-button" text="AÑADIR REACCION" />
                      </children>
                   </HBox>
-                  <TableView fx:id="tablaReacciones" prefHeight="284.0" prefWidth="971.0">
-                    <columns>
-                      <TableColumn fx:id="columnaNroReaccion" prefWidth="75.0" text="Número" />
-                      <TableColumn fx:id="columnaReaccion" prefWidth="459.0" text="Reacción" />
-                        <TableColumn fx:id="columnaTasaReaccion" prefWidth="386.0" text="Tasa de reacción" />
-                        <TableColumn fx:id="columnaEliminarReaccion" prefWidth="50.0" />
-                    </columns>
-                  </TableView>
+                  <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="16.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#descartarCambios" styleClass="primary-button" text="DESCARTAR CAMBIOS" />
+                        <Button mnemonicParsing="false" onAction="#guardarCambios" styleClass="primary-button" text="GUARDAR" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

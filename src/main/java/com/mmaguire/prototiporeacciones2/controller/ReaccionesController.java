@@ -294,7 +294,7 @@ public class ReaccionesController {
     public void editarReaccion(Reaccion reaccion, Event event){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("editar-reaccion.fxml"));
+            loader.setLocation(MainApp.class.getResource("views/editar-reaccion.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

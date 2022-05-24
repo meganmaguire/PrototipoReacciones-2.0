@@ -207,7 +207,7 @@ public class ExperimentosController {
         try {
             // Generar pantalla de simulación y enviar datos
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("editar-experimento.fxml"));
+            loader.setLocation(MainApp.class.getResource("views/editar-experimento.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

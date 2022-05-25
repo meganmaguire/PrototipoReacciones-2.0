@@ -2,8 +2,13 @@ package com.mmaguire.prototiporeacciones2.controller;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
+import com.mmaguire.prototiporeacciones2.manager.ModelManager;
 import com.mmaguire.prototiporeacciones2.manager.Routes;
 import com.mmaguire.prototiporeacciones2.model.Sistema;
+import com.uppaal.engine.Engine;
+import com.uppaal.engine.EngineException;
+import com.uppaal.model.core2.Document;
+import com.uppaal.model.system.UppaalSystem;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -22,6 +27,7 @@ import java.util.Optional;
 
 import static com.mmaguire.prototiporeacciones2.manager.FileManager.loadSystemFromFile;
 import static com.mmaguire.prototiporeacciones2.manager.FileManager.saveSystemToFile;
+import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.createModel;
 
 public class PrincipalController {
 
@@ -210,8 +216,44 @@ public class PrincipalController {
     }
 
     @FXML
-    public void exportXML(){
-        // TODO pendiente
+    public void exportXML(ActionEvent event){
+        MenuItem menuItem = ((MenuItem) event.getTarget());
+        ContextMenu cm = menuItem.getParentPopup();
+        Window window = cm.getScene().getWindow();
+        FileChooser fileChooser =  new FileChooser();
+        fileChooser.setInitialFileName("model.xml");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("UPPAAL XML (*.xml)", "*.xml")
+        );
+        File selected = fileChooser.showSaveDialog(window);
+
+        if(selected != null) {
+            if (this.contexto.getSistemaReacciones().getReacciones().size() > 0) {
+                Document doc = createModel(this.contexto.getSistemaReacciones());
+                try {
+                    doc.save(selected.getAbsolutePath());
+                    // connect to the engine server:
+                    Engine engine = ModelManager.connectToEngine();
+
+                    // compile the document into system representation:
+                    UppaalSystem sys = ModelManager.compile(engine, doc);
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Éxito");
+                    alert.setHeaderText("Éxito");
+                    alert.setContentText("Se ha generado el modelo UPPAAL en xml correspondiente al sistema de reacciones ingresado");
+
+                    alert.showAndWait();
+
+                } catch (IOException e) {
+                    System.out.println("No se pudo escribir el archivo");
+                    e.printStackTrace();
+                } catch (EngineException e) {
+                    System.out.println("No se conectar con el engine");
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @FXML

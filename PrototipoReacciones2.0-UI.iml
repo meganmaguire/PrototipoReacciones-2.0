@@ -11,7 +11,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="model (2)" level="project" />
-    <orderEntry type="library" name="uppaal" level="application" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac-aarch64:18.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18.0.1" level="project" />
@@ -29,5 +28,7 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.13.2.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.13.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.13.2" level="project" />
+    <orderEntry type="library" name="uppaal" level="application" />
+    <orderEntry type="library" name="model" level="application" />
   </component>
 </module>

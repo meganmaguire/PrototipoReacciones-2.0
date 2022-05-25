@@ -88,22 +88,26 @@ public class ReaccionManager {
         template.setProperty("name", reaccion.getNombreReaccion());
         List<Reactivo> reactivos = reaccion.getReactantes();
         List<Reactivo> productos = reaccion.getProductos();
+
         doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString()
                 + "const double " + reaccion.getAlpha().getNombre() + " = " + reaccion.getAlpha().getValor() + ";\n");
         doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString()
                 + "double " + reaccion.getFactor().getNombre() + " = " + reaccion.getFactor().getValor() + ";\n");
+
         StringBuilder expRate = new StringBuilder(reaccion.getFactor().getNombre() + "*" + reaccion.getAlpha().getNombre());
         StringBuilder guard = new StringBuilder();
         StringBuilder update = new StringBuilder();
         for (int i = 0 ; i < reactivos.size() ; i++) {
-            expRate.append("*").append(reactivos.get(i).getNombre());
-            guard.append(reactivos.get(i).getNombre()).append(" > 0").append(i != reactivos.size() - 1 ? " && " : "");
-            update.append(reactivos.get(i).getNombre()).append(" -= ").append(reactivos.get(i).getCantidadInicial())
-                    .append(i != reactivos.size() - 1 ? ",\n" : "");
-
+            Reactivo reactivo = reactivos.get(i);
+            expRate.append("*").append(reactivo.getNombre());
+            guard.append(reactivo.getNombre()).append(" > 0").append(i != reactivos.size() - 1 ? " && " : "");
+            if(reactivo.isActualizable())
+                update.append(i != 0 ? ",\n" : "")
+                        .append(reactivo.getNombre()).append(" -= ").append(reactivo.getCantidadInicial());
         }
         for (Reactivo producto : reaccion.getProductos()) {
-            update.append(",\n").append(producto.getNombre()).append(" += ").append(producto.getCantidadInicial());
+            if(producto.isActualizable())
+                update.append(",\n").append(producto.getNombre()).append(" += ").append(producto.getCantidadInicial());
         }
 
         Location location = ModelManager.addLocation(template, reaccion.getNombreReaccion(),expRate.toString(), 0, 0);

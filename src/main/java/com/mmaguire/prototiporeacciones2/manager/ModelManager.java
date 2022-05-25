@@ -148,21 +148,6 @@ public class ModelManager {
         return sys;
     }
 
-    static public void print(QueryData data) {
-        for (String title: data.getDataTitles()) {
-            DataSet2D plot = data.getData(title);
-            System.out.println("Plot \""+plot.getTitle()+
-                    "\" showing \"" + plot.getYLabel() +
-                    "\" over \"" + plot.getXLabel()+"\"");
-            for (Data2D traj: plot) {
-                System.out.print("Trajectory " + traj.getTitle()+":");
-                for (Point2D.Double p: traj)
-                    System.out.print(" ("+p.x+","+p.y+")");
-                System.out.println();
-            }
-        }
-    }
-
     public static final String options = "--search-order 0 --diagnostic 0";
     // see "verifyta --help" for the description of options
     public static QueryFeedback qf =

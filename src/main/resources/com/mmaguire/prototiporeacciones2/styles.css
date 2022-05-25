@@ -9,8 +9,8 @@
     src: url('fonts/Inconsolata-Regular.ttf') format('truetype');
 }
 .root {
-    side-bar-bg: #EEF5F6;
-    side-bar-item-selected: #A9CED6 ;
+    side-bar-bg: #F1F7F8;
+    side-bar-item-selected: #C4E2E8;
     title: #131E20;
     subtitle: #28383C;
     label: #3B4547;
@@ -18,6 +18,8 @@
     add-button: #8DC0CB;
     drop-shadow: #91ADB3;
     hover-shine: #D7EEF2;
+    menu-bar-bg: #266A77;
+    menu-bar-selected: #18475B;
 }
 
 .side-menu {
@@ -40,11 +42,13 @@
     -fx-background-color: side-bar-item-selected;
     -fx-font-weight: 700;
     -fx-text-fill: title;
+    -fx-border-width: 0px 3px 0px 0px;
+    -fx-border-color: add-button;
 }
 .menu-label-selected {
     -fx-background-color: side-bar-item-selected;
     -fx-font-weight: 700;
-    -fx-text-fill: title;
+    -fx-text-fill: subtitle;
 }
 .pane {
     -fx-background-color: white;
@@ -156,8 +160,29 @@
 .table-column {
     -fx-alignment: CENTER-LEFT;
 }
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: side-bar-item-selected;
+    -fx-padding: 0 1px 0 1px;
+}
 
+.menu-bar {
+    -fx-background-color: menu-bar-bg;
+}
+.menu-bar .menu .label{
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+}
+.menu-bar .menu:hover, .menu-bar .menu:showing {
+    -fx-background-color: menu-bar-selected;
+}
 
+.menu-bar .menu-item .label {
+    -fx-text-fill: label;
+}
+.menu-bar .menu-item:hover, .menu-bar .menu-item:focused {
+    -fx-background-color: side-bar-bg;
+}
 .chart-series-line {
     -fx-stroke-width: 2px;
     -fx-effect: null;

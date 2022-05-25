@@ -154,7 +154,8 @@ public class PrincipalController {
         File selected = fileChooser.showOpenDialog(window);
 
         if (selected != null) {
-            Sistema sistemaReacciones = loadSystemFromFile(selected.getAbsolutePath());
+            this.filePath =  selected.getAbsolutePath();
+            Sistema sistemaReacciones = loadSystemFromFile(this.filePath);
 
             if (sistemaReacciones != null) {
                 this.contexto.setSistemaReacciones(sistemaReacciones);

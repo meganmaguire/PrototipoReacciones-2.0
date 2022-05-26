@@ -94,6 +94,12 @@
 
     -fx-effect: dropshadow(gaussian, drop-shadow, 3, 0.2, 0, 2);
 }
+.operator-button {
+    -fx-background-radius: 0;
+    -fx-border-style: none;
+    -fx-background-color: side-bar-item-selected;
+    -fx-effect: dropshadow(gaussian, drop-shadow, 3, 0.2, 0, 2);
+}
 .delete-button {
     -fx-background-color: transparent;
     -fx-background-radius: 0;

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarTasaReaccionController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="960.0" spacing="46.0">
+         <padding>
+            <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
+         </padding>
+         <children>
+            <HBox prefWidth="200.0">
+               <children>
+                  <Label styleClass="title" text="Editar tasa de reacción" />
+               </children>
+            </HBox>
+            <HBox spacing="72.0">
+               <children>
+                  <VBox prefWidth="509.0" spacing="18.0">
+                     <children>
+                        <Label styleClass="subtitle" text="Operadores" />
+                        <HBox alignment="CENTER" prefWidth="200.0" spacing="25.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#añadirMas" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="+">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirMenos" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="-">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirPor" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="x">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirDivision" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="/">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirParentesisAbre" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="(">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirParentesisCierra" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text=")">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirPotencia" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="^">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="244.0" spacing="18.0">
+                     <children>
+                        <Label styleClass="subtitle" text="Componentes" />
+                        <HBox prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <ComboBox fx:id="comboBoxComponentes" prefHeight="27.0" prefWidth="191.0" />
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirComponente" prefHeight="25.0" prefWidth="30.0" styleClass="add-button">
+                                 <graphic>
+                                    <ImageView fitHeight="17.0" fitWidth="18.0">
+                                       <image>
+                                          <Image url="@../icons/baseline_add_black_24dp.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0" spacing="24.0">
+               <children>
+                  <TextField fx:id="textFieldTasaReaccion" prefHeight="30.0" prefWidth="742.0" />
+                  <Button mnemonicParsing="false" onAction="#borrar" prefHeight="30.0" prefWidth="50.0" styleClass="add-button">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0">
+                           <image>
+                              <Image url="@../icons/baseline_backspace_black_24dp.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="227.0" prefWidth="817.0">
+               <children>
+                  <VBox prefHeight="206.0" prefWidth="822.0" spacing="18.0">
+                     <children>
+                        <Label styleClass="subtitle" text="Visualización" />
+                        <Canvas fx:id="canvasLatex" height="109.0" width="817.0" />
+
+                        <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="16.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="28.0" prefWidth="180.0" styleClass="secondary-button" text="DESCARTAR CAMBIOS" />
+                              <Button mnemonicParsing="false" onAction="#guardarCambios" prefHeight="28.0" prefWidth="85.0" styleClass="primary-button" text="GUARDAR" />
+                           </children>
+                           <padding>
+                              <Insets top="6.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -4,6 +4,8 @@ module com.example.prototiporeacciones2 {
     requires model;
     requires com.fasterxml.jackson.databind;
     requires java.desktop;
+    requires org.jfree.fxgraphics2d;
+    requires jlatexmath;
 
     opens com.mmaguire.prototiporeacciones2 to javafx.fxml;
     exports com.mmaguire.prototiporeacciones2;

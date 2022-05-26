@@ -1,12 +1,15 @@
 package com.mmaguire.prototiporeacciones2.manager;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
+import com.mmaguire.prototiporeacciones2.model.EquationItem;
 import com.mmaguire.prototiporeacciones2.model.Factor;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.util.ArrayList;
 
 public class Helper {
 
@@ -38,4 +41,20 @@ public class Helper {
         cellButton.setGraphic(imageView);
         cellButton.getStyleClass().add("delete-button");
     }
+
+
+    public static String tasaReaccion2LaTeX(ArrayList<EquationItem> tasaReaccion){
+        String result = "";
+        result = itemArray2String(tasaReaccion);
+        return result;
+    }
+
+    public static String itemArray2String(ArrayList<EquationItem> array){
+        StringBuilder result = new StringBuilder();
+        for(EquationItem element : array){
+            result.append(element.getItem());
+        }
+        return result.toString();
+    }
+
 }

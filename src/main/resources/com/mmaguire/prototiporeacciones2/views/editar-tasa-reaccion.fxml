@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarTasaReaccionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="960.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarTasaReaccionController">
    <children>
       <VBox prefHeight="600.0" prefWidth="960.0" spacing="46.0">
          <padding>
@@ -27,42 +27,46 @@
             </HBox>
             <HBox spacing="72.0">
                <children>
-                  <VBox prefWidth="509.0" spacing="18.0">
+                  <VBox prefHeight="158.0" spacing="24.0">
                      <children>
                         <Label styleClass="subtitle" text="Operadores" />
-                        <HBox alignment="CENTER" prefWidth="200.0" spacing="25.0">
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#añadirMas" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="+">
+                              <Button mnemonicParsing="false" onAction="#añadirMas" prefWidth="45.0" styleClass="operator-button" text="+">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#añadirMenos" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="-">
+                              <Button mnemonicParsing="false" onAction="#añadirMenos" prefHeight="36.0" prefWidth="45.0" styleClass="operator-button" text="-">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#añadirPor" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="x">
+                              <Button mnemonicParsing="false" onAction="#añadirPor" prefHeight="36.0" prefWidth="45.0" styleClass="operator-button" text="x">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#añadirDivision" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="/">
+                              <Button mnemonicParsing="false" onAction="#añadirDivision" prefHeight="36.0" prefWidth="45.0" styleClass="operator-button" text="/">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#añadirParentesisAbre" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="(">
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="39.0" spacing="12.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#añadirParentesisAbre" prefWidth="45.0" styleClass="operator-button" text="(">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#añadirParentesisCierra" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text=")">
+                              <Button mnemonicParsing="false" onAction="#añadirParentesisCierra" prefWidth="45.0" styleClass="operator-button" text=")">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#añadirPotencia" prefHeight="36.0" prefWidth="50.0" styleClass="operator-button" text="^">
+                              <Button mnemonicParsing="false" onAction="#añadirPotencia" prefWidth="45.0" styleClass="operator-button" text="^">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -71,13 +75,91 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox prefWidth="244.0" spacing="18.0">
+                  <VBox prefHeight="158.0" prefWidth="276.0" spacing="24.0">
+                     <children>
+                        <Label styleClass="subtitle" text="Dígitos" />
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#añadirUno" prefWidth="45.0" styleClass="operator-button" text="1">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirDos" prefWidth="45.0" styleClass="operator-button" text="2">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirTres" prefWidth="45.0" styleClass="operator-button" text="3">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirCuatro" prefWidth="45.0" styleClass="operator-button" text="4">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirCinco" prefWidth="45.0" styleClass="operator-button" text="5">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="39.0" spacing="12.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#añadirSeis" prefWidth="45.0" styleClass="operator-button" text="6">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirSiete" prefWidth="45.0" styleClass="operator-button" text="7">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirOcho" prefWidth="45.0" styleClass="operator-button" text="8">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirNueve" prefWidth="45.0" styleClass="operator-button" text="9">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirCero" prefWidth="45.0" styleClass="operator-button" text="0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox spacing="16.0">
                      <children>
                         <Label styleClass="subtitle" text="Componentes" />
-                        <HBox prefWidth="200.0" spacing="20.0">
+                        <HBox spacing="20.0">
                            <children>
-                              <ComboBox fx:id="comboBoxComponentes" prefHeight="27.0" prefWidth="191.0" />
+                              <ComboBox fx:id="comboBoxComponentes" prefHeight="28.0" prefWidth="130.0" />
                               <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirComponente" prefHeight="25.0" prefWidth="30.0" styleClass="add-button">
+                                 <graphic>
+                                    <ImageView fitHeight="17.0" fitWidth="18.0">
+                                       <image>
+                                          <Image url="@../icons/baseline_add_black_24dp.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Label styleClass="subtitle" text="Constantes" />
+                        <HBox spacing="20.0">
+                           <children>
+                              <ComboBox fx:id="comboBoxConstantes" prefHeight="27.0" prefWidth="130.0" />
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirConstante" prefHeight="25.0" prefWidth="30.0" styleClass="add-button">
                                  <graphic>
                                     <ImageView fitHeight="17.0" fitWidth="18.0">
                                        <image>

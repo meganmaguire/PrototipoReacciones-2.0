@@ -21,6 +21,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
+import static com.mmaguire.prototiporeacciones2.manager.Helper.itemArray2String;
+import static com.mmaguire.prototiporeacciones2.manager.Helper.tasaReaccion2LaTeX;
+
 public class EditarTasaReaccionController {
 
 
@@ -52,32 +55,6 @@ public class EditarTasaReaccionController {
         renderFormula(tasaReaccionLatex);
     }
 
-    private void draw() {
-        double width = this.canvasLatex.getWidth();
-        double height = this.canvasLatex.getHeight();
-        this.g2.setColor(Color.WHITE);
-        this.g2.fillRect(0,0, ((int) width), ((int) height));
-        BufferedImage image = new BufferedImage(icon.getIconWidth(),
-                icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D gg = image.createGraphics();
-        gg.setColor(Color.WHITE);
-        gg.fillRect(0, 0, icon.getIconWidth(), icon.getIconHeight());
-        JLabel jl = new JLabel();
-        jl.setForeground(Color.BLACK);
-        icon.paintIcon(jl, gg, 0, 0);
-        this.g2.drawImage(image,((int) (width/2)-(icon.getIconWidth()/2)), ((int) (height/2)-(icon.getIconHeight()/2)), null);
-    }
-
-    private void renderFormula(String latex){
-        TeXFormula formula = new TeXFormula(latex);
-        this.icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY,25);
-        this.draw();
-    }
-    private void updateTasa(){
-        this.textFieldTasaReaccion.setText(itemArray2String(this.tasaReaccion));
-        this.tasaReaccionLatex = this.tasaReaccion2LaTeX(this.tasaReaccion);
-        renderFormula(tasaReaccionLatex);
-    }
     @FXML
     public void recieveData(Reaccion reaccion) {
         this.reaccion = reaccion;
@@ -144,7 +121,7 @@ public class EditarTasaReaccionController {
         this.lastAdded = EquationItemType.operador;
     }
     @FXML
-    public void añadirComponente(ActionEvent event) {
+    public void añadirComponente() {
         if (this.comboBoxComponentes.getValue() != null) {
             if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
                 this.tasaReaccion.add(new EquationItem(
@@ -156,6 +133,32 @@ public class EditarTasaReaccionController {
             }
         }
     }
+
+    @FXML
+    public void añadirConstante(){
+
+    }
+
+    @FXML
+    public void añadirUno(){}
+    @FXML
+    public void añadirDos(){}
+    @FXML
+    public void añadirTres(){}
+    @FXML
+    public void añadirCuatro(){}
+    @FXML
+    public void añadirCinco(){}
+    @FXML
+    public void añadirSeis(){}
+    @FXML
+    public void añadirSiete(){}
+    @FXML
+    public void añadirOcho(){}
+    @FXML
+    public void añadirNueve(){}
+    @FXML
+    public void añadirCero(){}
 
     @FXML
     public void borrar(ActionEvent event) {
@@ -180,18 +183,30 @@ public class EditarTasaReaccionController {
     public void descartarCambios(ActionEvent event) {
     }
 
-    private String tasaReaccion2LaTeX(ArrayList<EquationItem> tasaReaccion){
-        String result = "";
-        result = itemArray2String(tasaReaccion);
-        return result;
+    private void draw() {
+        double width = this.canvasLatex.getWidth();
+        double height = this.canvasLatex.getHeight();
+        this.g2.setColor(Color.WHITE);
+        this.g2.fillRect(0,0, ((int) width), ((int) height));
+        BufferedImage image = new BufferedImage(icon.getIconWidth(),
+                icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D gg = image.createGraphics();
+        gg.setColor(Color.WHITE);
+        gg.fillRect(0, 0, icon.getIconWidth(), icon.getIconHeight());
+        JLabel jl = new JLabel();
+        jl.setForeground(Color.BLACK);
+        icon.paintIcon(jl, gg, 0, 0);
+        this.g2.drawImage(image,((int) (width/2)-(icon.getIconWidth()/2)), ((int) (height/2)-(icon.getIconHeight()/2)), null);
     }
 
-    private String itemArray2String(ArrayList<EquationItem> array){
-        StringBuilder result = new StringBuilder();
-        for(EquationItem element : array){
-            result.append(element.getItem());
-        }
-        return result.toString();
+    private void renderFormula(String latex){
+        TeXFormula formula = new TeXFormula(latex);
+        this.icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY,25);
+        this.draw();
     }
-
+    private void updateTasa(){
+        this.textFieldTasaReaccion.setText(itemArray2String(this.tasaReaccion));
+        this.tasaReaccionLatex = tasaReaccion2LaTeX(this.tasaReaccion);
+        renderFormula(tasaReaccionLatex);
+    }
 }

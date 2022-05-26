@@ -1,10 +1,10 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
-import com.mmaguire.prototiporeacciones2.manager.Context;
+import com.mmaguire.prototiporeacciones2.model.EquationItem;
+import com.mmaguire.prototiporeacciones2.model.EquationItemType;
 import com.mmaguire.prototiporeacciones2.model.Reaccion;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,16 +34,16 @@ public class EditarTasaReaccionController {
     private TeXIcon icon;
 
     private Reaccion reaccion;
-    private ArrayList<String> tasaReaccion;
+    private ArrayList<EquationItem> tasaReaccion;
     private String tasaReaccionLatex;
-    private String lastAdded;
+    private EquationItemType lastAdded;
     private ObservableSet<Reactivo> componentes;
     private Stack<String> parentesisCheck;
 
     @FXML
     public void initialize(){
         this.tasaReaccion = new ArrayList<>();
-        this.lastAdded = "";
+        this.lastAdded = EquationItemType.empty;
         this.tasaReaccionLatex = "";
         this.componentes = FXCollections.observableSet(new HashSet<>());
         this.parentesisCheck = new Stack<>();
@@ -74,7 +74,7 @@ public class EditarTasaReaccionController {
         this.draw();
     }
     private void updateTasa(){
-        this.textFieldTasaReaccion.setText(stringArray2String(this.tasaReaccion));
+        this.textFieldTasaReaccion.setText(itemArray2String(this.tasaReaccion));
         this.tasaReaccionLatex = this.tasaReaccion2LaTeX(this.tasaReaccion);
         renderFormula(tasaReaccionLatex);
     }
@@ -89,67 +89,70 @@ public class EditarTasaReaccionController {
 
     @FXML
     public void añadirMas(ActionEvent event) {
-        if (lastAdded.equalsIgnoreCase("componente") || lastAdded.equalsIgnoreCase("parentesisCierra")) {
-            this.tasaReaccion.add("+");
+        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
+            this.tasaReaccion.add(new EquationItem("+", EquationItemType.operador));
             updateTasa();
         }
-        this.lastAdded = "operador";
+        this.lastAdded = EquationItemType.operador;
     }
     @FXML
     public void añadirMenos(ActionEvent event) {
-        if (lastAdded.equalsIgnoreCase("componente") || lastAdded.equalsIgnoreCase("parentesisCierra")) {
-            this.tasaReaccion.add("-");
+        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
+            this.tasaReaccion.add(new EquationItem("-", EquationItemType.operador));
             updateTasa();
         }
-        this.lastAdded = "operador";
+        this.lastAdded = EquationItemType.operador;
     }
     @FXML
     public void añadirPor(ActionEvent event) {
-        if (lastAdded.equalsIgnoreCase("componente") || lastAdded.equalsIgnoreCase("parentesisCierra")) {
-            this.tasaReaccion.add("*");
+        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
+            this.tasaReaccion.add(new EquationItem("*", EquationItemType.operador));
             updateTasa();
         }
-        this.lastAdded = "operador";
+        this.lastAdded = EquationItemType.operador;
     }
     @FXML
     public void añadirDivision(ActionEvent event) {
-        if (lastAdded.equalsIgnoreCase("componente") || lastAdded.equalsIgnoreCase("parentesisCierra")) {
-            this.tasaReaccion.add("/");
+        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
+            this.tasaReaccion.add(new EquationItem("/", EquationItemType.operador));
             updateTasa();
         }
-        this.lastAdded = "operador";
+        this.lastAdded = EquationItemType.operador;
     }
     @FXML
     public void añadirParentesisAbre(ActionEvent event) {
         this.parentesisCheck.push("parentesis" + this.parentesisCheck.size()+1);
-        this.tasaReaccion.add("(");
+        this.tasaReaccion.add(new EquationItem("(", EquationItemType.parentesisAbre));
         updateTasa();
-        this.lastAdded = "parentesisAbre";
+        this.lastAdded = EquationItemType.parentesisAbre;
     }
     @FXML
     public void añadirParentesisCierra(ActionEvent event) {
         if(!this.parentesisCheck.isEmpty()) {
             this.parentesisCheck.pop();
-            this.tasaReaccion.add(")");
+            this.tasaReaccion.add(new EquationItem(")", EquationItemType.parentesisCierra));
             updateTasa();
-            this.lastAdded = "parentesisCierra";
+            this.lastAdded = EquationItemType.parentesisCierra;
         }
     }
     @FXML
     public void añadirPotencia(ActionEvent event) {
-        if (lastAdded.equalsIgnoreCase("componente") || lastAdded.equalsIgnoreCase("parentesisCierra")) {
-            this.tasaReaccion.add("^");
+        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
+            this.tasaReaccion.add(new EquationItem("^", EquationItemType.operador));
             updateTasa();
         }
-        this.lastAdded = "operador";
+        this.lastAdded = EquationItemType.operador;
     }
     @FXML
     public void añadirComponente(ActionEvent event) {
         if (this.comboBoxComponentes.getValue() != null) {
-            if (!lastAdded.equalsIgnoreCase("componente") && !lastAdded.equalsIgnoreCase("parentesisCierra")) {
-                this.tasaReaccion.add(this.comboBoxComponentes.getValue().getNombre());
+            if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
+                this.tasaReaccion.add(new EquationItem(
+                        this.comboBoxComponentes.getValue().getNombre(),
+                        EquationItemType.componente)
+                );
                 updateTasa();
-                this.lastAdded = "componente";
+                this.lastAdded = EquationItemType.componente;
             }
         }
     }
@@ -157,16 +160,15 @@ public class EditarTasaReaccionController {
     @FXML
     public void borrar(ActionEvent event) {
         if (!this.tasaReaccion.isEmpty()) {
-            if (lastAdded.equalsIgnoreCase("parentesisAbre")) {
-                this.parentesisCheck.pop();
-                if(lastAdded.equalsIgnoreCase("parentesisCierra"))
-                    this.parentesisCheck.push("parentesis" + this.parentesisCheck.size()+1);
+            switch (lastAdded) {
+                case parentesisAbre -> this.parentesisCheck.pop();
+                case parentesisCierra -> this.parentesisCheck.push("parentesis" + this.parentesisCheck.size() + 1);
             }
             this.tasaReaccion.remove(this.tasaReaccion.size() - 1);
             if (!this.tasaReaccion.isEmpty())
-                this.lastAdded = this.tasaReaccion.get(this.tasaReaccion.size() - 1);
+                this.lastAdded = this.tasaReaccion.get(this.tasaReaccion.size() - 1).getType();
             else
-                this.lastAdded = "";
+                this.lastAdded = EquationItemType.empty;
             updateTasa();
         }
     }
@@ -178,16 +180,16 @@ public class EditarTasaReaccionController {
     public void descartarCambios(ActionEvent event) {
     }
 
-    private String tasaReaccion2LaTeX(ArrayList<String> tasaReaccion){
+    private String tasaReaccion2LaTeX(ArrayList<EquationItem> tasaReaccion){
         String result = "";
-        result = stringArray2String(tasaReaccion);
+        result = itemArray2String(tasaReaccion);
         return result;
     }
 
-    private String stringArray2String(ArrayList<String> array){
+    private String itemArray2String(ArrayList<EquationItem> array){
         StringBuilder result = new StringBuilder();
-        for(String element : array){
-            result.append(element);
+        for(EquationItem element : array){
+            result.append(element.getItem());
         }
         return result.toString();
     }

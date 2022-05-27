@@ -1,16 +1,16 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
-import com.mmaguire.prototiporeacciones2.model.EquationItem;
-import com.mmaguire.prototiporeacciones2.model.EquationItemType;
-import com.mmaguire.prototiporeacciones2.model.Reaccion;
-import com.mmaguire.prototiporeacciones2.model.Reactivo;
+import com.mmaguire.prototiporeacciones2.model.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.jfree.fx.FXGraphics2D;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
@@ -30,6 +30,8 @@ public class EditarTasaReaccionController {
     @FXML
     private ComboBox<Reactivo> comboBoxComponentes;
     @FXML
+    private ComboBox<Factor> comboBoxConstantes;
+    @FXML
     private TextField textFieldTasaReaccion;
     @FXML
     private Canvas canvasLatex;
@@ -41,6 +43,7 @@ public class EditarTasaReaccionController {
     private String tasaReaccionLatex;
     private EquationItemType lastAdded;
     private ObservableSet<Reactivo> componentes;
+    private ObservableList<Factor> constantes;
     private Stack<String> parentesisCheck;
 
     @FXML
@@ -49,6 +52,7 @@ public class EditarTasaReaccionController {
         this.lastAdded = EquationItemType.empty;
         this.tasaReaccionLatex = "";
         this.componentes = FXCollections.observableSet(new HashSet<>());
+        this.constantes = FXCollections.observableList(new ArrayList<>());
         this.parentesisCheck = new Stack<>();
         this.textFieldTasaReaccion.setEditable(false);
         this.g2 = new FXGraphics2D(canvasLatex.getGraphicsContext2D());
@@ -61,40 +65,26 @@ public class EditarTasaReaccionController {
         renderFormula(tasaReaccionLatex);
         this.componentes.addAll(this.reaccion.getReactantes());
         this.componentes.addAll(this.reaccion.getProductos());
+        // Añadir constantes a la lista
         this.comboBoxComponentes.setItems(FXCollections.observableList(this.componentes.stream().toList()));
+        this.comboBoxConstantes.setItems(this.constantes);
     }
 
     @FXML
     public void añadirMas(ActionEvent event) {
-        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
-            this.tasaReaccion.add(new EquationItem("+", EquationItemType.operador));
-            updateTasa();
-        }
-        this.lastAdded = EquationItemType.operador;
+        añadirOperador("+");
     }
     @FXML
     public void añadirMenos(ActionEvent event) {
-        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
-            this.tasaReaccion.add(new EquationItem("-", EquationItemType.operador));
-            updateTasa();
-        }
-        this.lastAdded = EquationItemType.operador;
+        añadirOperador("-");
     }
     @FXML
     public void añadirPor(ActionEvent event) {
-        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
-            this.tasaReaccion.add(new EquationItem("*", EquationItemType.operador));
-            updateTasa();
-        }
-        this.lastAdded = EquationItemType.operador;
+        añadirOperador("*");
     }
     @FXML
     public void añadirDivision(ActionEvent event) {
-        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
-            this.tasaReaccion.add(new EquationItem("/", EquationItemType.operador));
-            updateTasa();
-        }
-        this.lastAdded = EquationItemType.operador;
+        añadirOperador("/");
     }
     @FXML
     public void añadirParentesisAbre(ActionEvent event) {
@@ -114,16 +104,12 @@ public class EditarTasaReaccionController {
     }
     @FXML
     public void añadirPotencia(ActionEvent event) {
-        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
-            this.tasaReaccion.add(new EquationItem("^", EquationItemType.operador));
-            updateTasa();
-        }
-        this.lastAdded = EquationItemType.operador;
+        añadirOperador("^");
     }
     @FXML
     public void añadirComponente() {
         if (this.comboBoxComponentes.getValue() != null) {
-            if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra) {
+            if (lastAdded != EquationItemType.componente && lastAdded != EquationItemType.parentesisCierra) {
                 this.tasaReaccion.add(new EquationItem(
                         this.comboBoxComponentes.getValue().getNombre(),
                         EquationItemType.componente)
@@ -136,30 +122,75 @@ public class EditarTasaReaccionController {
 
     @FXML
     public void añadirConstante(){
-
+        if (this.comboBoxConstantes.getValue() != null) {
+            if (lastAdded != EquationItemType.componente &&
+                    lastAdded != EquationItemType.parentesisCierra &&
+                    lastAdded != EquationItemType.digito) {
+                this.tasaReaccion.add(new EquationItem(
+                        this.comboBoxConstantes.getValue().getNombre(),
+                        EquationItemType.componente)
+                );
+                updateTasa();
+                this.lastAdded = EquationItemType.componente;
+            }
+        }
     }
 
     @FXML
-    public void añadirUno(){}
+    public void añadirUno(){
+        añadirDigito("1");
+    }
     @FXML
-    public void añadirDos(){}
+    public void añadirDos(){
+        añadirDigito("2");
+    }
     @FXML
-    public void añadirTres(){}
+    public void añadirTres(){
+        añadirDigito("3");
+    }
     @FXML
-    public void añadirCuatro(){}
+    public void añadirCuatro(){
+        añadirDigito("4");
+    }
     @FXML
-    public void añadirCinco(){}
+    public void añadirCinco(){
+        añadirDigito("5");
+    }
     @FXML
-    public void añadirSeis(){}
+    public void añadirSeis(){
+        añadirDigito("6");
+    }
     @FXML
-    public void añadirSiete(){}
+    public void añadirSiete(){
+        añadirDigito("7");
+    }
     @FXML
-    public void añadirOcho(){}
+    public void añadirOcho(){
+        añadirDigito("8");
+    }
     @FXML
-    public void añadirNueve(){}
+    public void añadirNueve(){
+        añadirDigito("9");
+    }
     @FXML
-    public void añadirCero(){}
+    public void añadirCero(){
+        añadirDigito("0");
+    }
 
+    private void añadirDigito(String digito){
+        if (lastAdded != EquationItemType.componente && lastAdded != EquationItemType.parentesisCierra) {
+            this.tasaReaccion.add(new EquationItem(digito, EquationItemType.digito));
+            updateTasa();
+        }
+        this.lastAdded = EquationItemType.digito;
+    }
+    private void añadirOperador(String operador){
+        if (lastAdded == EquationItemType.componente || lastAdded == EquationItemType.parentesisCierra || lastAdded == EquationItemType.digito) {
+            this.tasaReaccion.add(new EquationItem(operador, EquationItemType.operador));
+            updateTasa();
+        }
+        this.lastAdded = EquationItemType.operador;
+    }
     @FXML
     public void borrar(ActionEvent event) {
         if (!this.tasaReaccion.isEmpty()) {
@@ -179,8 +210,10 @@ public class EditarTasaReaccionController {
     @FXML
     public void guardarCambios(ActionEvent event) {
     }
-
+    @FXML
     public void descartarCambios(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     private void draw() {

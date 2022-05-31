@@ -5,11 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.jfree.fx.FXGraphics2D;
 import org.scilab.forge.jlatexmath.TeXConstants;
@@ -55,6 +57,7 @@ public class EditarTasaReaccionController {
         this.constantes = FXCollections.observableList(new ArrayList<>());
         this.parentesisCheck = new Stack<>();
         this.textFieldTasaReaccion.setEditable(false);
+        //this.textFieldTasaReaccion.setOnKeyPressed(keyEvent -> keyPressed(keyEvent.getCode(), keyEvent));
         this.g2 = new FXGraphics2D(canvasLatex.getGraphicsContext2D());
         renderFormula(tasaReaccionLatex);
     }
@@ -70,31 +73,48 @@ public class EditarTasaReaccionController {
         this.comboBoxConstantes.setItems(this.constantes);
     }
 
+//    public void keyPressed(KeyCode keyCode, Event event) {
+//        if(keyCode.isDigitKey()) {
+//            añadirDigito(keyCode.toString());
+//        }
+//        switch (keyCode){
+//            case ADD -> añadirOperador("+");
+//            case MINUS -> añadirOperador("-");
+//            case MULTIPLY -> añadirOperador("*");
+//            case DIVIDE -> añadirOperador("/");
+//            case CIRCUMFLEX -> añadirOperador("^");
+//            case LEFT_PARENTHESIS -> añadirParentesisAbre();
+//            case RIGHT_PARENTHESIS -> añadirParentesisCierra();
+//            default -> event.consume();
+//        }
+//
+//    }
+
     @FXML
-    public void añadirMas(ActionEvent event) {
+    public void añadirMas() {
         añadirOperador("+");
     }
     @FXML
-    public void añadirMenos(ActionEvent event) {
+    public void añadirMenos() {
         añadirOperador("-");
     }
     @FXML
-    public void añadirPor(ActionEvent event) {
+    public void añadirPor() {
         añadirOperador("*");
     }
     @FXML
-    public void añadirDivision(ActionEvent event) {
+    public void añadirDivision() {
         añadirOperador("/");
     }
     @FXML
-    public void añadirParentesisAbre(ActionEvent event) {
+    public void añadirParentesisAbre() {
         this.parentesisCheck.push("parentesis" + this.parentesisCheck.size()+1);
         this.tasaReaccion.add(new EquationItem("(", EquationItemType.parentesisAbre));
         updateTasa();
         this.lastAdded = EquationItemType.parentesisAbre;
     }
     @FXML
-    public void añadirParentesisCierra(ActionEvent event) {
+    public void añadirParentesisCierra() {
         if(!this.parentesisCheck.isEmpty()) {
             this.parentesisCheck.pop();
             this.tasaReaccion.add(new EquationItem(")", EquationItemType.parentesisCierra));
@@ -103,13 +123,13 @@ public class EditarTasaReaccionController {
         }
     }
     @FXML
-    public void añadirPotencia(ActionEvent event) {
+    public void añadirPotencia() {
         añadirOperador("^");
     }
     @FXML
     public void añadirComponente() {
         if (this.comboBoxComponentes.getValue() != null) {
-            if (lastAdded != EquationItemType.componente && lastAdded != EquationItemType.parentesisCierra) {
+            if (lastAdded != EquationItemType.componente && lastAdded != EquationItemType.parentesisCierra && lastAdded != EquationItemType.digito) {
                 this.tasaReaccion.add(new EquationItem(
                         this.comboBoxComponentes.getValue().getNombre(),
                         EquationItemType.componente)
@@ -192,7 +212,7 @@ public class EditarTasaReaccionController {
         this.lastAdded = EquationItemType.operador;
     }
     @FXML
-    public void borrar(ActionEvent event) {
+    public void borrar() {
         if (!this.tasaReaccion.isEmpty()) {
             switch (lastAdded) {
                 case parentesisAbre -> this.parentesisCheck.pop();

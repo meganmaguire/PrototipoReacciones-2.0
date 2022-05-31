@@ -45,6 +45,11 @@ public class Helper {
 
     public static String tasaReaccion2LaTeX(ArrayList<EquationItem> tasaReaccion){
         String result = "";
+//        for (EquationItem item :tasaReaccion){
+//            switch (item.getType()){
+//                case parentesisAbre -> result += "{" + item.getItem();
+//            }
+//        }
         result = itemArray2String(tasaReaccion);
         return result;
     }

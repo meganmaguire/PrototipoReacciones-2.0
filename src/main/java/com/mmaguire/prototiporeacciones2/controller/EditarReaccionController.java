@@ -20,8 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.mmaguire.prototiporeacciones2.manager.Helper.existeReactivoConNombre;
-import static com.mmaguire.prototiporeacciones2.manager.Helper.styleButton;
+import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
 
 public class EditarReaccionController {
 
@@ -166,7 +165,7 @@ public class EditarReaccionController {
             case reversible -> this.labelTipoReaccion.setText("⇌");
             case irreversible, degradacion -> this.labelTipoReaccion.setText("→");
         }
-        this.tasaReaccion.setText(this.reaccion.getTasaReaccion());
+        this.tasaReaccion.setText(itemArray2String(this.reaccion.getTasaReaccion()));
         actualizarReaccion();
     }
 

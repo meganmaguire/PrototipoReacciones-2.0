@@ -22,8 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.mmaguire.prototiporeacciones2.manager.Helper.existeReactivoConNombre;
-import static com.mmaguire.prototiporeacciones2.manager.Helper.styleButton;
+import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
 
 public class ReaccionesController {
 
@@ -191,7 +190,7 @@ public class ReaccionesController {
         this.tablaReacciones.setItems(contexto.getReacciones());
         this.columnaNroReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNroReaccion()));
         this.columnaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
-        this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTasaReaccion()));
+        this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(itemArray2String(cellData.getValue().getTasaReaccion())));
         this.columnaEliminarReaccion.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         this.columnaEliminarReaccion.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button();

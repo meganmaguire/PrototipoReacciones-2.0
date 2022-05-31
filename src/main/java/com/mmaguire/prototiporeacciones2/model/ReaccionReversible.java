@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeName("ReaccionReversible")
@@ -29,22 +30,26 @@ public class ReaccionReversible extends Reaccion{
 
     @JsonIgnore
     @Override
-    public String calculateTasaReaccion(){
-        StringBuilder result = new StringBuilder();
-        result.append(this.getFactor().getNombre()).append("*");
-        result.append(this.getAlpha().getNombre());
+    public ArrayList<EquationItem> calculateTasaReaccion(){
+        ArrayList<EquationItem> result = new ArrayList<>();
+        result.add(new EquationItem(this.getFactor().getNombre(), EquationItemType.componente));
+        result.add(new EquationItem("*", EquationItemType.operador));
+        result.add(new EquationItem(this.getAlpha().getNombre(), EquationItemType.componente));
         for (Reactivo reactivo : this.getReactantes()){
-            result.append("*")
-                    .append(reactivo.getNombre());
+            result.add(new EquationItem("*", EquationItemType.operador));
+            result.add(new EquationItem(reactivo.getNombre(), EquationItemType.componente));
         }
-        result.append("-");
-        result.append("f_").append(this.getNroReaccion()).append("*");
-        result.append(this.getBeta().getNombre());
+        result.add(new EquationItem("-", EquationItemType.operador));
+        result.add(new EquationItem("f_" + this.getNroReaccion(), EquationItemType.componente));
+        result.add(new EquationItem("*", EquationItemType.operador));
+
+        result.add(new EquationItem(this.getBeta().getNombre(), EquationItemType.componente));
+
         for (Reactivo reactivo : this.getProductos()){
-            result.append("*")
-                    .append(reactivo.getNombre());
+            result.add(new EquationItem("*", EquationItemType.operador));
+            result.add(new EquationItem(reactivo.getNombre(), EquationItemType.componente));
         }
-        return result.toString();
+        return result;
     }
 
     @JsonProperty("@ttype")

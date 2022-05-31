@@ -1,7 +1,9 @@
 package com.mmaguire.prototiporeacciones2.model;
 
 import com.fasterxml.jackson.annotation.*;
+import javafx.event.Event;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeInfo(
@@ -25,7 +27,7 @@ public class Reaccion {
     private TipoReaccion tipo;
     private Factor alpha;
     private Factor factor;
-    private String tasaReaccion;
+    private ArrayList<EquationItem> tasaReaccion;
 
     public Reaccion() {}
 
@@ -96,24 +98,25 @@ public class Reaccion {
         this.factor = factor;
     }
 
-    public String getTasaReaccion(){
+    public ArrayList<EquationItem> getTasaReaccion(){
         return tasaReaccion;
     }
 
-    public void setTasaReaccion(String tasaReaccion){
+    public void setTasaReaccion(ArrayList<EquationItem> tasaReaccion){
         this.tasaReaccion = tasaReaccion;
     }
 
     @JsonIgnore
-    public String calculateTasaReaccion(){
-        StringBuilder result = new StringBuilder();
-        result.append(this.factor.getNombre()).append("*");
-        result.append(this.alpha.getNombre());
+    public ArrayList<EquationItem> calculateTasaReaccion(){
+        ArrayList<EquationItem> result = new ArrayList<>();
+        result.add(new EquationItem(this.factor.getNombre(), EquationItemType.componente));
+        result.add(new EquationItem("*", EquationItemType.operador));
+        result.add(new EquationItem(this.alpha.getNombre(), EquationItemType.componente));
         for (Reactivo reactivo : this.reactantes){
-            result.append("*")
-                    .append(reactivo.getNombre());
+            result.add(new EquationItem("*", EquationItemType.operador));
+            result.add(new EquationItem(reactivo.getNombre(), EquationItemType.componente));
         }
-        return result.toString();
+        return result;
     }
 
     @Override

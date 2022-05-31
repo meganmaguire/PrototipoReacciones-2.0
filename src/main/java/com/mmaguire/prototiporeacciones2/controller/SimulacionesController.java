@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.mmaguire.prototiporeacciones2.manager.Helper.itemArray2String;
 import static com.mmaguire.prototiporeacciones2.manager.ModelManager.options;
 import static com.mmaguire.prototiporeacciones2.manager.ModelManager.qf;
 import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.createModel;
@@ -62,7 +63,7 @@ public class SimulacionesController {
         this.tablaReacciones.setItems(this.contexto.getReacciones());
         this.columnaNroReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNroReaccion()));
         this.columnaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
-        this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().calculateTasaReaccion()));
+        this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(itemArray2String(cellData.getValue().calculateTasaReaccion())));
 
         this.tablaExperimento.setItems(this.contexto.getPasosExperimento());
         this.columnaTiempoPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiempo()));

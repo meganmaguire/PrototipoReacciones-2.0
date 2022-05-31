@@ -191,7 +191,7 @@ public class ReaccionesController {
         this.tablaReacciones.setItems(contexto.getReacciones());
         this.columnaNroReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNroReaccion()));
         this.columnaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
-        this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().calculateTasaReaccion()));
+        this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTasaReaccion()));
         this.columnaEliminarReaccion.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         this.columnaEliminarReaccion.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button();
@@ -283,7 +283,7 @@ public class ReaccionesController {
                 );
                 contexto.getFactores().add(new Factor("f_" + Reaccion.getContador(), 1.0));
             }
-
+            reaccion.setTasaReaccion(reaccion.calculateTasaReaccion());
             contexto.getReacciones().add(reaccion);
             contexto.getFactores().add(reaccion.getFactor());
             Reaccion.forwardContador();

@@ -71,6 +71,7 @@ public class EditarTasaReaccionController {
         // Añadir constantes a la lista
         this.comboBoxComponentes.setItems(FXCollections.observableList(this.componentes.stream().toList()));
         this.comboBoxConstantes.setItems(this.constantes);
+        this.textFieldTasaReaccion.setText(this.reaccion.getTasaReaccion());
     }
 
 //    public void keyPressed(KeyCode keyCode, Event event) {

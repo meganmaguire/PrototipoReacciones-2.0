@@ -30,25 +30,19 @@ public class ReaccionReversible extends Reaccion{
     @JsonIgnore
     @Override
     public String calculateTasaReaccion(){
-        StringBuilder result = new StringBuilder("r = ");
+        StringBuilder result = new StringBuilder();
         result.append(this.getFactor().getNombre()).append("*");
-        result.append(this.getAlpha().getNombre()).append("*");
+        result.append(this.getAlpha().getNombre());
         for (Reactivo reactivo : this.getReactantes()){
-            result.append(" [")
-                    .append(reactivo.getNombre())
-                    .append("]^")
-                    .append(reactivo.getCantidadInicial())
-                    .append(" ");
+            result.append("*")
+                    .append(reactivo.getNombre());
         }
-        result.append(" - ");
+        result.append("-");
         result.append("f_").append(this.getNroReaccion()).append("*");
-        result.append(this.getBeta().getNombre()).append("*");
+        result.append(this.getBeta().getNombre());
         for (Reactivo reactivo : this.getProductos()){
-            result.append(" [")
-                    .append(reactivo.getNombre())
-                    .append("]^")
-                    .append(reactivo.getCantidadInicial())
-                    .append(" ");
+            result.append("*")
+                    .append(reactivo.getNombre());
         }
         return result.toString();
     }

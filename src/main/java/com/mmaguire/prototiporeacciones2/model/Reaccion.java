@@ -106,15 +106,12 @@ public class Reaccion {
 
     @JsonIgnore
     public String calculateTasaReaccion(){
-        StringBuilder result = new StringBuilder("r = ");
+        StringBuilder result = new StringBuilder();
         result.append(this.factor.getNombre()).append("*");
-        result.append(this.alpha.getNombre()).append("*");
+        result.append(this.alpha.getNombre());
         for (Reactivo reactivo : this.reactantes){
-            result.append(" [")
-                    .append(reactivo.getNombre())
-                    .append("]^")
-                    .append(reactivo.getCantidadInicial())
-                    .append(" ");
+            result.append("*")
+                    .append(reactivo.getNombre());
         }
         return result.toString();
     }

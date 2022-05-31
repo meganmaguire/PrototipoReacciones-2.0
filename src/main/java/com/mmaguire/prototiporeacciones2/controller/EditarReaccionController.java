@@ -149,6 +149,7 @@ public class EditarReaccionController {
         this.cantidadProductos.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 0, 1));
         this.cantidadProductos.setEditable(true);
 
+        this.tasaReaccion.setEditable(false);
     }
 
     @FXML
@@ -165,6 +166,7 @@ public class EditarReaccionController {
             case reversible -> this.labelTipoReaccion.setText("⇌");
             case irreversible, degradacion -> this.labelTipoReaccion.setText("→");
         }
+        this.tasaReaccion.setText(this.reaccion.getTasaReaccion());
         actualizarReaccion();
     }
 

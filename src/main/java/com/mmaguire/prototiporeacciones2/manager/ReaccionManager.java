@@ -231,9 +231,7 @@ public class ReaccionManager {
                 reaccionReversible.getReactantes(),
                 TipoReaccion.irreversible,
                 reaccionReversible.getBeta(),
-                new Factor(
-                        "f_" + reaccionReversible.getNroReaccion(),
-                        reaccionReversible.getFactor().getValor()),
+                reaccionReversible.getFactorVuelta(),
                 tasasReaccion.get(1)
         );
         result.add(reaccion);

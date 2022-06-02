@@ -278,9 +278,11 @@ public class ReaccionesController {
                                 1.0),
                         new Factor(
                                 "beta" + (Reaccion.getContador()),
-                                Double.parseDouble(this.constanteBeta.getText()))
+                                Double.parseDouble(this.constanteBeta.getText())),
+                        new Factor("f_" + (Reaccion.getContador()),
+                                1.0)
                 );
-                contexto.getFactores().add(new Factor("f_" + Reaccion.getContador(), 1.0));
+                contexto.getFactores().add(((ReaccionReversible) reaccion).getFactorVuelta());
             }
             reaccion.setTasaReaccion(reaccion.calculateTasaReaccion());
             contexto.getReacciones().add(reaccion);

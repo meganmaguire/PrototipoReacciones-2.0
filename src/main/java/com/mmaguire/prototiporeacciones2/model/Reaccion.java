@@ -42,6 +42,17 @@ public class Reaccion {
         this.factor = factor;
     }
 
+    public Reaccion(String nombreReaccion, List<Reactivo> reactantes, List<Reactivo> productos, TipoReaccion tipo, Factor alpha, Factor factor, ArrayList<EquationItem> tasaReaccion) {
+        this.nombreReaccion = nombreReaccion;
+        this.nroReaccion = contador;
+        this.reactantes = reactantes;
+        this.productos = productos;
+        this.tipo = tipo;
+        this.alpha = alpha;
+        this.factor = factor;
+        this.tasaReaccion = tasaReaccion;
+    }
+
     public String getNombreReaccion() {
         return nombreReaccion;
     }

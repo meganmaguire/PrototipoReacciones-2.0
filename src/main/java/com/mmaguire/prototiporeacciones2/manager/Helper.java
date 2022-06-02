@@ -62,4 +62,21 @@ public class Helper {
         return result.toString();
     }
 
+    public static ArrayList<ArrayList<EquationItem>> separateTasaReaccion(ArrayList<EquationItem> tasaReaccion){
+        ArrayList<ArrayList<EquationItem>> result = new ArrayList<>();
+        ArrayList<EquationItem> tasaIda = new ArrayList<>();
+        ArrayList<EquationItem> tasaVuelta = new ArrayList<>();
+        boolean mitadReaccion = false;
+        for (EquationItem item : tasaReaccion) {
+            if (mitadReaccion)
+                tasaVuelta.add(item);
+            if (!item.getItem().equals("-") && !mitadReaccion) {
+                tasaIda.add(item);
+            } else
+                mitadReaccion = true;
+        }
+        result.add(tasaIda);
+        result.add(tasaVuelta);
+        return result;
+    }
 }

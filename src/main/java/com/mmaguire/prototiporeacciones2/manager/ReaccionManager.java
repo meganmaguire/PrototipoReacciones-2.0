@@ -9,6 +9,8 @@ import com.uppaal.model.core2.Template;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mmaguire.prototiporeacciones2.manager.Helper.itemArray2String;
+import static com.mmaguire.prototiporeacciones2.manager.Helper.separateTasaReaccion;
 import static com.mmaguire.prototiporeacciones2.manager.ModelManager.addEdge;
 import static com.mmaguire.prototiporeacciones2.manager.ModelManager.setLabel;
 
@@ -94,12 +96,11 @@ public class ReaccionManager {
         doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString()
                 + "double " + reaccion.getFactor().getNombre() + " = " + reaccion.getFactor().getValor() + ";\n");
 
-        StringBuilder expRate = new StringBuilder(reaccion.getFactor().getNombre() + "*" + reaccion.getAlpha().getNombre());
+        String expRate = itemArray2String(reaccion.getTasaReaccion());
         StringBuilder guard = new StringBuilder();
         StringBuilder update = new StringBuilder();
         for (int i = 0 ; i < reactivos.size() ; i++) {
             Reactivo reactivo = reactivos.get(i);
-            expRate.append("*").append(reactivo.getNombre());
             guard.append(reactivo.getNombre()).append(" > 0").append(i != reactivos.size() - 1 ? " && " : "");
             if(reactivo.isActualizable())
                 update.append(i != 0 ? ",\n" : "")
@@ -212,13 +213,15 @@ public class ReaccionManager {
     private static List<Reaccion> separateReaccion(ReaccionReversible reaccionReversible) {
         List<Reaccion> result = new ArrayList<>();
         Reaccion reaccion;
+        ArrayList<ArrayList<EquationItem>> tasasReaccion = separateTasaReaccion(reaccionReversible.getTasaReaccion());
         reaccion = new Reaccion(
                 "r" + reaccionReversible.getNroReaccion(),
                 reaccionReversible.getReactantes(),
                 reaccionReversible.getProductos(),
                 TipoReaccion.irreversible,
                 reaccionReversible.getAlpha(),
-                reaccionReversible.getFactor()
+                reaccionReversible.getFactor(),
+                tasasReaccion.get(0)
         );
         result.add(reaccion);
 
@@ -230,7 +233,8 @@ public class ReaccionManager {
                 reaccionReversible.getBeta(),
                 new Factor(
                         "f_" + reaccionReversible.getNroReaccion(),
-                        reaccionReversible.getFactor().getValor())
+                        reaccionReversible.getFactor().getValor()),
+                tasasReaccion.get(1)
         );
         result.add(reaccion);
 

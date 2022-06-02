@@ -69,6 +69,16 @@ public class EditarTasaReaccionController {
         this.componentes.addAll(this.reaccion.getReactantes());
         this.componentes.addAll(this.reaccion.getProductos());
         // Añadir constantes a la lista
+        this.reaccion.getReactantes().forEach(reactivo -> {
+            if(reactivo.getConstanteAsociada() != null)
+                this.constantes.add(reactivo.getConstanteAsociada());
+        });
+        this.reaccion.getProductos().forEach(reactivo -> {
+            if(reactivo.getConstanteAsociada() != null)
+                this.constantes.add(reactivo.getConstanteAsociada());
+        });this.constantes.add(this.reaccion.getAlpha());
+        if (reaccion instanceof ReaccionReversible)
+            this.constantes.add(((ReaccionReversible) this.reaccion).getBeta());
         this.comboBoxComponentes.setItems(FXCollections.observableList(this.componentes.stream().toList()));
         this.comboBoxConstantes.setItems(this.constantes);
         this.tasaReaccion = this.reaccion.getTasaReaccion();

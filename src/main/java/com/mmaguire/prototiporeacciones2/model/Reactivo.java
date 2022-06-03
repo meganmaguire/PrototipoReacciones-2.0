@@ -1,5 +1,11 @@
 package com.mmaguire.prototiporeacciones2.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "nombre")
 public class Reactivo {
 
     private String nombre;

@@ -163,7 +163,9 @@ public class ComponentesController {
             dialog.initOwner(parentStage);
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.showAndWait();
-            this.tablaComponentes.refresh();
+            // Reset para notificar al ObservableList
+            int index = this.contexto.getReactivos().indexOf(reactivo);
+            this.contexto.getReactivos().set(index, reactivo);
         }
         catch (IOException e){
             e.printStackTrace();

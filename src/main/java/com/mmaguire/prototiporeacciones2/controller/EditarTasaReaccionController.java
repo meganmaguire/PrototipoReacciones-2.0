@@ -23,8 +23,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
-import static com.mmaguire.prototiporeacciones2.manager.Helper.itemArray2String;
-import static com.mmaguire.prototiporeacciones2.manager.Helper.tasaReaccion2LaTeX;
+import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
 
 public class EditarTasaReaccionController {
 
@@ -84,8 +83,12 @@ public class EditarTasaReaccionController {
         this.constantes.add(this.reaccion.getFactor());
         this.comboBoxComponentes.setItems(FXCollections.observableList(this.componentes.stream().toList()));
         this.comboBoxConstantes.setItems(this.constantes);
-        this.tasaReaccion = this.reaccion.getTasaReaccion();
+        this.tasaReaccion = cloneTasaReaccion(this.reaccion.getTasaReaccion());
         updateTasa();
+    }
+
+    public ArrayList<EquationItem> getTasaReaccion(){
+        return this.tasaReaccion;
     }
 
 //    public void keyPressed(KeyCode keyCode, Event event) {
@@ -244,9 +247,13 @@ public class EditarTasaReaccionController {
 
     @FXML
     public void guardarCambios(ActionEvent event) {
+        //this.reaccion.setTasaReaccion(this.tasaReaccion);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
     @FXML
     public void descartarCambios(ActionEvent event) {
+        this.tasaReaccion = null;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }

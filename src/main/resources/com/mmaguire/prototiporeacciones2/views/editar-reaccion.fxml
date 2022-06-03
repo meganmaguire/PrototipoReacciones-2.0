@@ -144,7 +144,7 @@
                      <children>
                         <Label prefHeight="24.0" prefWidth="133.0" styleClass="subtitle" text="Tasa de reacción:" />
 
-                        <TextField fx:id="tasaReaccion" alignment="TOP_LEFT" prefHeight="27.0" prefWidth="736.0" />
+                        <TextField fx:id="textFieldTasaReaccion" alignment="TOP_LEFT" prefHeight="27.0" prefWidth="736.0" />
                         <Button mnemonicParsing="false" onAction="#editarTasaReaccion" styleClass="primary-button" text="EDITAR" />
                      </children>
                   </HBox>

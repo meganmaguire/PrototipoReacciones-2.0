@@ -88,4 +88,10 @@ public class Helper {
         result.add(tasaVuelta);
         return result;
     }
+
+    public static ArrayList<EquationItem> cloneTasaReaccion(ArrayList<EquationItem> tasaReaccion) {
+        ArrayList<EquationItem> result = new ArrayList<>();
+        tasaReaccion.forEach(item -> result.add(item.clone()));
+        return result;
+    }
 }

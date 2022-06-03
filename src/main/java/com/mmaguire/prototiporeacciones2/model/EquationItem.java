@@ -27,4 +27,11 @@ public class EquationItem {
     public void setType(EquationItemType type) {
         this.type = type;
     }
+    @Override
+    public EquationItem clone() {
+        return new EquationItem(
+                this.item,
+                this.type
+        );
+    }
 }

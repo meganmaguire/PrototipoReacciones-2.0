@@ -68,12 +68,14 @@ public class EditarReaccionController {
     private Label labelProductos;
 
     @FXML
-    private TextField tasaReaccion;
+    private TextField textFieldTasaReaccion;
 
     private Context contexto;
     private Reaccion reaccion;
     private ObservableList<ReactivoReaccion> reactivosReaccion;
     private ObservableList<ReactivoReaccion> productosReaccion;
+
+    private ArrayList<EquationItem> tasaReaccion;
 
     @FXML
     public void initialize() {
@@ -148,7 +150,7 @@ public class EditarReaccionController {
         this.cantidadProductos.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 0, 1));
         this.cantidadProductos.setEditable(true);
 
-        this.tasaReaccion.setEditable(false);
+        this.textFieldTasaReaccion.setEditable(false);
     }
 
     @FXML
@@ -165,7 +167,8 @@ public class EditarReaccionController {
             case reversible -> this.labelTipoReaccion.setText("⇌");
             case irreversible, degradacion -> this.labelTipoReaccion.setText("→");
         }
-        this.tasaReaccion.setText(itemArray2String(this.reaccion.getTasaReaccion()));
+        this.tasaReaccion = this.reaccion.getTasaReaccion();
+        this.textFieldTasaReaccion.setText(itemArray2String(this.tasaReaccion));
         actualizarReaccion();
     }
 
@@ -210,6 +213,10 @@ public class EditarReaccionController {
             dialog.initOwner(parentStage);
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.showAndWait();
+            if(controller.getTasaReaccion() != null) {
+                this.tasaReaccion = controller.getTasaReaccion();
+                this.textFieldTasaReaccion.setText(itemArray2String(this.tasaReaccion));
+            }
         }
         catch (IOException e){
             e.printStackTrace();
@@ -220,6 +227,7 @@ public class EditarReaccionController {
     public void guardarCambios(ActionEvent event) {
         this.reaccion.setReactantes(this.reactivosReaccion);
         this.reaccion.setProductos(this.productosReaccion);
+        this.reaccion.setTasaReaccion(this.tasaReaccion);
         this.reaccion.setAlpha(new Factor(
                 this.reaccion.getAlpha().getNombre(),
                 Double.parseDouble(this.constanteAlpha.getText()))

@@ -22,8 +22,8 @@ public class Reaccion {
 
     private String nombreReaccion;
     private int nroReaccion;
-    private List<Reactivo> reactantes;
-    private List<Reactivo> productos;
+    private List<ReactivoReaccion> reactantes;
+    private List<ReactivoReaccion> productos;
     private TipoReaccion tipo;
     private Factor alpha;
     private Factor factor;
@@ -32,7 +32,7 @@ public class Reaccion {
     public Reaccion() {}
 
 
-    public Reaccion(String nombreReaccion, List<Reactivo> reactantes, List<Reactivo> productos, TipoReaccion tipo, Factor alpha, Factor factor) {
+    public Reaccion(String nombreReaccion, List<ReactivoReaccion> reactantes, List<ReactivoReaccion> productos, TipoReaccion tipo, Factor alpha, Factor factor) {
         this.nombreReaccion = nombreReaccion;
         this.nroReaccion = contador;
         this.reactantes = reactantes;
@@ -42,7 +42,7 @@ public class Reaccion {
         this.factor = factor;
     }
 
-    public Reaccion(String nombreReaccion, List<Reactivo> reactantes, List<Reactivo> productos, TipoReaccion tipo, Factor alpha, Factor factor, ArrayList<EquationItem> tasaReaccion) {
+    public Reaccion(String nombreReaccion, List<ReactivoReaccion> reactantes, List<ReactivoReaccion> productos, TipoReaccion tipo, Factor alpha, Factor factor, ArrayList<EquationItem> tasaReaccion) {
         this.nombreReaccion = nombreReaccion;
         this.nroReaccion = contador;
         this.reactantes = reactantes;
@@ -69,19 +69,19 @@ public class Reaccion {
         this.nroReaccion = nroReaccion;
     }
 
-    public List<Reactivo> getReactantes() {
+    public List<ReactivoReaccion> getReactantes() {
         return reactantes;
     }
 
-    public void setReactantes(List<Reactivo> reactantes) {
+    public void setReactantes(List<ReactivoReaccion> reactantes) {
         this.reactantes = reactantes;
     }
 
-    public List<Reactivo> getProductos() {
+    public List<ReactivoReaccion> getProductos() {
         return productos;
     }
 
-    public void setProductos(List<Reactivo> productos) {
+    public void setProductos(List<ReactivoReaccion> productos) {
         this.productos = productos;
     }
 
@@ -123,9 +123,9 @@ public class Reaccion {
         result.add(new EquationItem(this.factor.getNombre(), EquationItemType.componente));
         result.add(new EquationItem("*", EquationItemType.operador));
         result.add(new EquationItem(this.alpha.getNombre(), EquationItemType.componente));
-        for (Reactivo reactivo : this.reactantes){
+        for (ReactivoReaccion reactivo : this.reactantes){
             result.add(new EquationItem("*", EquationItemType.operador));
-            result.add(new EquationItem(reactivo.getNombre(), EquationItemType.componente));
+            result.add(new EquationItem(reactivo.getReactivoAsociado().getNombre(), EquationItemType.componente));
         }
         return result;
     }
@@ -136,13 +136,13 @@ public class Reaccion {
         for (int i=0; i < this.reactantes.size(); i++){
             if(i != 0)
                 reactivos += " + ";
-            reactivos += this.reactantes.get(i).getCantidadInicial() + this.reactantes.get(i).getNombre();
+            reactivos += this.reactantes.get(i).getCantidad() + this.reactantes.get(i).getReactivoAsociado().getNombre();
         }
         String productos = "";
         for (int i=0; i < this.productos.size(); i++){
             if(i != 0)
                 productos += " + ";
-            productos += this.productos.get(i).getCantidadInicial() + this.productos.get(i).getNombre();
+            productos += this.productos.get(i).getCantidad() + this.productos.get(i).getReactivoAsociado().getNombre();
         }
 
         String tipoReaccion = "";

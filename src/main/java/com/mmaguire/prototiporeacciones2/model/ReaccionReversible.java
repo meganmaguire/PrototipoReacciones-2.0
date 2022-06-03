@@ -16,12 +16,12 @@ public class ReaccionReversible extends Reaccion{
     public ReaccionReversible() {
     }
 
-    public ReaccionReversible(String nroReaccion, List<Reactivo> reactantes, List<Reactivo> productos, TipoReaccion tipo, Factor alpha, Factor factor, Factor beta) {
+    public ReaccionReversible(String nroReaccion, List<ReactivoReaccion> reactantes, List<ReactivoReaccion> productos, TipoReaccion tipo, Factor alpha, Factor factor, Factor beta) {
         super(nroReaccion, reactantes, productos, tipo, alpha, factor);
         this.beta = beta;
     }
 
-    public ReaccionReversible(String nombreReaccion, List<Reactivo> reactantes, List<Reactivo> productos, TipoReaccion tipo, Factor alpha, Factor factor, Factor beta, Factor factorVuelta) {
+    public ReaccionReversible(String nombreReaccion, List<ReactivoReaccion> reactantes, List<ReactivoReaccion> productos, TipoReaccion tipo, Factor alpha, Factor factor, Factor beta, Factor factorVuelta) {
         super(nombreReaccion, reactantes, productos, tipo, alpha, factor);
         this.beta = beta;
         this.factorVuelta = factorVuelta;
@@ -50,9 +50,9 @@ public class ReaccionReversible extends Reaccion{
         result.add(new EquationItem(this.getFactor().getNombre(), EquationItemType.componente));
         result.add(new EquationItem("*", EquationItemType.operador));
         result.add(new EquationItem(this.getAlpha().getNombre(), EquationItemType.componente));
-        for (Reactivo reactivo : this.getReactantes()){
+        for (ReactivoReaccion reactivo : this.getReactantes()){
             result.add(new EquationItem("*", EquationItemType.operador));
-            result.add(new EquationItem(reactivo.getNombre(), EquationItemType.componente));
+            result.add(new EquationItem(reactivo.getReactivoAsociado().getNombre(), EquationItemType.componente));
         }
         result.add(new EquationItem("-", EquationItemType.operador));
         result.add(new EquationItem(this.getFactorVuelta().getNombre(), EquationItemType.componente));
@@ -60,9 +60,9 @@ public class ReaccionReversible extends Reaccion{
 
         result.add(new EquationItem(this.getBeta().getNombre(), EquationItemType.componente));
 
-        for (Reactivo reactivo : this.getProductos()){
+        for (ReactivoReaccion reactivo : this.getProductos()){
             result.add(new EquationItem("*", EquationItemType.operador));
-            result.add(new EquationItem(reactivo.getNombre(), EquationItemType.componente));
+            result.add(new EquationItem(reactivo.getReactivoAsociado().getNombre(), EquationItemType.componente));
         }
         return result;
     }

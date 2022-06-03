@@ -88,8 +88,8 @@ public class ReaccionManager {
     private static Template createModelReaccion(Document doc, Reaccion reaccion) {
         Template template = doc.createTemplate();
         template.setProperty("name", reaccion.getNombreReaccion());
-        List<Reactivo> reactivos = reaccion.getReactantes();
-        List<Reactivo> productos = reaccion.getProductos();
+        List<ReactivoReaccion> reactivos = reaccion.getReactantes();
+        List<ReactivoReaccion> productos = reaccion.getProductos();
 
         doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString()
                 + "const double " + reaccion.getAlpha().getNombre() + " = " + reaccion.getAlpha().getValor() + ";\n");
@@ -100,15 +100,15 @@ public class ReaccionManager {
         StringBuilder guard = new StringBuilder();
         StringBuilder update = new StringBuilder();
         for (int i = 0 ; i < reactivos.size() ; i++) {
-            Reactivo reactivo = reactivos.get(i);
-            guard.append(reactivo.getNombre()).append(" > 0").append(i != reactivos.size() - 1 ? " && " : "");
-            if(reactivo.isActualizable())
+            ReactivoReaccion reactivo = reactivos.get(i);
+            guard.append(reactivo.getReactivoAsociado().getNombre()).append(" > 0").append(i != reactivos.size() - 1 ? " && " : "");
+            if(reactivo.getReactivoAsociado().isActualizable())
                 update.append(i != 0 ? ",\n" : "")
-                        .append(reactivo.getNombre()).append(" -= ").append(reactivo.getCantidadInicial());
+                        .append(reactivo.getReactivoAsociado().getNombre()).append(" -= ").append(reactivo.getCantidad());
         }
-        for (Reactivo producto : reaccion.getProductos()) {
-            if(producto.isActualizable())
-                update.append(",\n").append(producto.getNombre()).append(" += ").append(producto.getCantidadInicial());
+        for (ReactivoReaccion producto : reaccion.getProductos()) {
+            if(producto.getReactivoAsociado().isActualizable())
+                update.append(",\n").append(producto.getReactivoAsociado().getNombre()).append(" += ").append(producto.getCantidad());
         }
 
         Location location = ModelManager.addLocation(template, reaccion.getNombreReaccion(),expRate.toString(), 0, 0);
@@ -150,14 +150,14 @@ public class ReaccionManager {
      */
     public static String generateSimulationQuery(int timeUnits, Sistema sistema){
         StringBuilder query = new StringBuilder("simulate [<=" + timeUnits + "] {");
-        List<Reactivo> reactivos = new ArrayList<>();
+        List<ReactivoReaccion> reactivos = new ArrayList<>();
         // Toma los reactivos que se usaron en reacciones para armar la query
         for(Reaccion reaccion : sistema.getReacciones()) {
             reactivos.addAll(reaccion.getReactantes().stream().filter(r -> !reactivos.contains(r)).toList());
             reactivos.addAll(reaccion.getProductos().stream().filter(r -> !reactivos.contains(r)).toList());
         }
         for(int i = 0; i<reactivos.size(); i++){
-            query.append(reactivos.get(i).getNombre()).append(i != reactivos.size() - 1 ? ", " : "");
+            query.append(reactivos.get(i).getReactivoAsociado().getNombre()).append(i != reactivos.size() - 1 ? ", " : "");
         }
         query.append("}");
         return query.toString();

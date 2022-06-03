@@ -4,6 +4,7 @@ import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.model.EquationItem;
 import com.mmaguire.prototiporeacciones2.model.Factor;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
+import com.mmaguire.prototiporeacciones2.model.ReactivoReaccion;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -15,6 +16,15 @@ public class Helper {
 
 
 
+    public static boolean existeReactivoReaccionConNombre(String nombre, ObservableList<ReactivoReaccion> reactivos) {
+
+        for(ReactivoReaccion reactivo : reactivos) {
+            if(reactivo.getReactivoAsociado().getNombre().equals(nombre))
+                return true;
+        }
+        return false;
+    }
+
     public static boolean existeReactivoConNombre(String nombre, ObservableList<Reactivo> reactivos) {
 
         for(Reactivo reactivo : reactivos) {
@@ -23,7 +33,6 @@ public class Helper {
         }
         return false;
     }
-
     public static boolean existeFactorConNombre(String nombre, ObservableList<Factor> factores) {
 
         for(Factor factor : factores) {

@@ -30,7 +30,7 @@ public class EditarTasaReaccionController {
 
 
     @FXML
-    private ComboBox<Reactivo> comboBoxComponentes;
+    private ComboBox<ReactivoReaccion> comboBoxComponentes;
     @FXML
     private ComboBox<Factor> comboBoxConstantes;
     @FXML
@@ -44,7 +44,7 @@ public class EditarTasaReaccionController {
     private ArrayList<EquationItem> tasaReaccion;
     private String tasaReaccionLatex;
     private EquationItemType lastAdded;
-    private ObservableSet<Reactivo> componentes;
+    private ObservableSet<ReactivoReaccion> componentes;
     private ObservableList<Factor> constantes;
     private Stack<String> parentesisCheck;
 
@@ -70,12 +70,12 @@ public class EditarTasaReaccionController {
         this.componentes.addAll(this.reaccion.getProductos());
         // Añadir constantes a la lista
         this.reaccion.getReactantes().forEach(reactivo -> {
-            if(reactivo.getConstanteAsociada() != null)
-                this.constantes.add(reactivo.getConstanteAsociada());
+            if(reactivo.getReactivoAsociado().getConstanteAsociada() != null)
+                this.constantes.add(reactivo.getReactivoAsociado().getConstanteAsociada());
         });
         this.reaccion.getProductos().forEach(reactivo -> {
-            if(reactivo.getConstanteAsociada() != null)
-                this.constantes.add(reactivo.getConstanteAsociada());
+            if(reactivo.getReactivoAsociado().getConstanteAsociada() != null)
+                this.constantes.add(reactivo.getReactivoAsociado().getConstanteAsociada());
         });this.constantes.add(this.reaccion.getAlpha());
         if (reaccion instanceof ReaccionReversible) {
             this.constantes.add(((ReaccionReversible) this.reaccion).getBeta());
@@ -146,7 +146,7 @@ public class EditarTasaReaccionController {
         if (this.comboBoxComponentes.getValue() != null) {
             if (lastAdded != EquationItemType.componente && lastAdded != EquationItemType.parentesisCierra && lastAdded != EquationItemType.digito) {
                 this.tasaReaccion.add(new EquationItem(
-                        this.comboBoxComponentes.getValue().getNombre(),
+                        this.comboBoxComponentes.getValue().getReactivoAsociado().getNombre(),
                         EquationItemType.componente)
                 );
                 updateTasa();

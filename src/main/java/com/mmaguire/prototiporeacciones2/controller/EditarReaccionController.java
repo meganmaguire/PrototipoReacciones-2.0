@@ -29,13 +29,13 @@ public class EditarReaccionController {
     @FXML
     private Spinner<Integer> cantidadReactivos;
     @FXML
-    private TableView<Reactivo> tablaReactivos;
+    private TableView<ReactivoReaccion> tablaReactivos;
     @FXML
-    private TableColumn<Reactivo, String> columnaNombreReactivos;
+    private TableColumn<ReactivoReaccion, String> columnaNombreReactivos;
     @FXML
-    private TableColumn<Reactivo, Integer> columnaCantidadReactivos;
+    private TableColumn<ReactivoReaccion, Integer> columnaCantidadReactivos;
     @FXML
-    private TableColumn<Reactivo, Reactivo> columnaEliminarReactivo;
+    private TableColumn<ReactivoReaccion, ReactivoReaccion> columnaEliminarReactivo;
 
     @FXML
     private Label tipoReaccion;
@@ -49,13 +49,13 @@ public class EditarReaccionController {
     @FXML
     private Spinner<Integer> cantidadProductos;
     @FXML
-    private TableView<Reactivo> tablaProductos;
+    private TableView<ReactivoReaccion> tablaProductos;
     @FXML
-    private TableColumn<Reactivo, String> columnaNombreProductos;
+    private TableColumn<ReactivoReaccion, String> columnaNombreProductos;
     @FXML
-    private TableColumn<Reactivo, Integer> columnaCantidadProductos;
+    private TableColumn<ReactivoReaccion, Integer> columnaCantidadProductos;
     @FXML
-    private TableColumn<Reactivo, Reactivo> columnaEliminarProducto;
+    private TableColumn<ReactivoReaccion, ReactivoReaccion> columnaEliminarProducto;
     @FXML
     private Button botonAñadirProducto;
 
@@ -72,8 +72,8 @@ public class EditarReaccionController {
 
     private Context contexto;
     private Reaccion reaccion;
-    private ObservableList<Reactivo> reactivosReaccion;
-    private ObservableList<Reactivo> productosReaccion;
+    private ObservableList<ReactivoReaccion> reactivosReaccion;
+    private ObservableList<ReactivoReaccion> productosReaccion;
 
     @FXML
     public void initialize() {
@@ -90,14 +90,14 @@ public class EditarReaccionController {
         // Set tablas
         // Tabla Reactivos
         this.tablaReactivos.setItems(this.reactivosReaccion);
-        this.columnaNombreReactivos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
-        this.columnaCantidadReactivos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
+        this.columnaNombreReactivos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getReactivoAsociado().getNombre()));
+        this.columnaCantidadReactivos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidad()));
         this.columnaEliminarReactivo.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         this.columnaEliminarReactivo.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button();
 
             @Override
-            protected void updateItem(Reactivo reactivo, boolean empty) {
+            protected void updateItem(ReactivoReaccion reactivo, boolean empty) {
                 super.updateItem(reactivo, empty);
 
                 if (reactivo == null) {
@@ -117,14 +117,14 @@ public class EditarReaccionController {
 
         // Tabla Productos
         this.tablaProductos.setItems(this.productosReaccion);
-        this.columnaNombreProductos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
-        this.columnaCantidadProductos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
+        this.columnaNombreProductos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getReactivoAsociado().getNombre()));
+        this.columnaCantidadProductos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidad()));
         this.columnaEliminarProducto.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         this.columnaEliminarProducto.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button();
 
             @Override
-            protected void updateItem(Reactivo reactivo, boolean empty) {
+            protected void updateItem(ReactivoReaccion reactivo, boolean empty) {
                 super.updateItem(reactivo, empty);
 
                 if (reactivo == null) {
@@ -171,17 +171,22 @@ public class EditarReaccionController {
 
     @FXML
     public void añadirReactivo() {
-        Reactivo reactivo = this.comboBoxReactivos.getValue().clone();
-        reactivo.setCantidadInicial(this.cantidadReactivos.getValue());
-        if(!existeReactivoConNombre(reactivo.getNombre(), this.reactivosReaccion))
+        ReactivoReaccion reactivo = new ReactivoReaccion(
+                this.comboBoxReactivos.getValue(),
+                this.cantidadReactivos.getValue()
+        );
+
+        if(!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosReaccion))
             this.reactivosReaccion.add(reactivo);
         actualizarReaccion();
     }
 
     @FXML
     public void añadirProducto() {
-        Reactivo reactivo = this.comboBoxProductos.getValue().clone();
-        reactivo.setCantidadInicial(this.cantidadProductos.getValue());
+        ReactivoReaccion reactivo = new ReactivoReaccion(
+                this.comboBoxProductos.getValue(),
+                this.cantidadProductos.getValue()
+        );
         this.productosReaccion.add(reactivo);
         actualizarReaccion();
     }
@@ -239,23 +244,23 @@ public class EditarReaccionController {
     private void actualizarReaccion() {
         StringBuilder reactivos = new StringBuilder();
         StringBuilder productos = new StringBuilder();
-        Reactivo reactivo;
+        ReactivoReaccion reactivo;
 
         for (int i = 0; i < this.reactivosReaccion.size(); i++) {
             reactivo = this.reactivosReaccion.get(i);
             reactivos
-                    .append(reactivo.getCantidadInicial())
+                    .append(reactivo.getCantidad())
                     .append(" ")
-                    .append(reactivo.getNombre())
+                    .append(reactivo.getReactivoAsociado().getNombre())
                     .append((i != this.reactivosReaccion.size() - 1) ? " + " : "");
         }
 
         for (int i = 0; i < this.productosReaccion.size(); i++) {
             reactivo = this.productosReaccion.get(i);
             productos
-                    .append(reactivo.getCantidadInicial())
+                    .append(reactivo.getCantidad())
                     .append(" ")
-                    .append(reactivo.getNombre())
+                    .append(reactivo.getReactivoAsociado().getNombre())
                     .append((i != this.productosReaccion.size() - 1) ? " + " : "");
         }
 

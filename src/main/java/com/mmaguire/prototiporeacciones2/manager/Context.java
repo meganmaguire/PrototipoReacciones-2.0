@@ -1,8 +1,10 @@
 package com.mmaguire.prototiporeacciones2.manager;
 
 import com.mmaguire.prototiporeacciones2.model.*;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Callback;
 
 import java.util.ArrayList;
 
@@ -75,7 +77,6 @@ public class Context {
     public ObservableList<Factor> getConstantesReaccion() {
         return constantesReaccion;
     }
-
 
     public void setSistemaReacciones(Sistema sistemaReacciones) {
         this.sistemaReacciones = sistemaReacciones;

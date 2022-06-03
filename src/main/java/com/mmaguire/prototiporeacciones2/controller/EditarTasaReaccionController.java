@@ -67,20 +67,22 @@ public class EditarTasaReaccionController {
         renderFormula(tasaReaccionLatex);
         this.componentes.addAll(this.reaccion.getReactantes());
         this.componentes.addAll(this.reaccion.getProductos());
-        // Añadir constantes a la lista
-        this.reaccion.getReactantes().forEach(reactivo -> {
-            if(reactivo.getReactivoAsociado().getConstanteAsociada() != null)
-                this.constantes.add(reactivo.getReactivoAsociado().getConstanteAsociada());
-        });
+
         this.reaccion.getProductos().forEach(reactivo -> {
             if(reactivo.getReactivoAsociado().getConstanteAsociada() != null)
                 this.constantes.add(reactivo.getReactivoAsociado().getConstanteAsociada());
-        });this.constantes.add(this.reaccion.getAlpha());
+        });
+        this.constantes.add(this.reaccion.getAlpha());
         if (reaccion instanceof ReaccionReversible) {
             this.constantes.add(((ReaccionReversible) this.reaccion).getBeta());
             this.constantes.add(((ReaccionReversible) this.reaccion).getFactorVuelta());
         }
         this.constantes.add(this.reaccion.getFactor());
+        // Añadir constantes a la lista
+        this.reaccion.getReactantes().forEach(reactivo -> {
+            if(reactivo.getReactivoAsociado().getConstanteAsociada() != null)
+                this.constantes.add(reactivo.getReactivoAsociado().getConstanteAsociada());
+        });
         this.comboBoxComponentes.setItems(FXCollections.observableList(this.componentes.stream().toList()));
         this.comboBoxConstantes.setItems(this.constantes);
         this.tasaReaccion = cloneTasaReaccion(this.reaccion.getTasaReaccion());

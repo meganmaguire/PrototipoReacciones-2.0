@@ -26,10 +26,12 @@ public class ReaccionManager {
      */
     public static Document createModel(Sistema sistema){
         Document doc = new Document(new PrototypeDocument());
-        // Reactivos con valores iniciales
-        setReactivos(doc, sistema.getReactivos());
         // Cantidad de bombas de sodio-potasio
         setBombas(doc, sistema.getCantidadBombas());
+        // Reactivos con valores iniciales
+        setReactivos(doc, sistema.getReactivos());
+        // Constantes asociadas a reactivos
+        setConstantes(doc, sistema.getConstantesReaccion());
         // Template por cada reacción
         for (Reaccion reaccion : sistema.getReacciones()) {
             if (reaccion instanceof ReaccionReversible){
@@ -60,7 +62,7 @@ public class ReaccionManager {
      * @param experimento experimento modelado
      */
     private static void setClock(Document doc, Experimento experimento) {
-        String clock = "clock " + experimento.getClock() + ";\n";
+        String clock = "clock " + experimento.getClock() + ";\n\n";
         doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString() + clock);
 
     }
@@ -76,7 +78,21 @@ public class ReaccionManager {
         for (Reactivo reactivo : reactivos) {
             variables.append("int ").append(reactivo.getNombre()).append(" = ").append(reactivo.getCantidadInicial()).append(";\n");
         }
-        doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString() + variables);
+        doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString() + variables.append("\n"));
+    }
+
+    /**
+     * Añade las constantes de reactivos para tasas de reacción del sistema al NSTA de UPPAAL.
+     *
+     * @param doc documento de UPPAAL al cual añadir los reactivos iniciales
+     * @param constantes listado de constantes asociadas a componentes del sistema para tasas de reacción
+     */
+    private static void setConstantes(Document doc, List<Factor> constantes) {
+        StringBuilder variables = new StringBuilder();
+        for (Factor constante : constantes) {
+            variables.append("double ").append(constante.getNombre()).append(" = ").append(constante.getValor()).append(";\n");
+        }
+        doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString() + variables.append("\n"));
     }
 
     /**
@@ -87,7 +103,7 @@ public class ReaccionManager {
      * @param cantidadBombas cantidad de bombas de Sodio-Potasio que se desea modelar en la simulación
      */
     private static void setBombas(Document doc, int cantidadBombas) {
-        String variableBombas = "const int N = " + cantidadBombas + ";\n";
+        String variableBombas = "const int N = " + cantidadBombas + ";\n\n";
         doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString() + variableBombas);
     }
 
@@ -101,6 +117,7 @@ public class ReaccionManager {
      * @return template generado a partir de la reacción
      */
     private static Template createModelReaccion(Document doc, Reaccion reaccion) {
+        boolean primerElemento = true;
         Template template = doc.createTemplate();
         template.setProperty("name", reaccion.getNombreReaccion());
         List<ReactivoReaccion> reactivos = reaccion.getReactantes();
@@ -117,9 +134,11 @@ public class ReaccionManager {
         for (int i = 0 ; i < reactivos.size() ; i++) {
             ReactivoReaccion reactivo = reactivos.get(i);
             guard.append(reactivo.getReactivoAsociado().getNombre()).append(" > 0").append(i != reactivos.size() - 1 ? " && " : "");
-            if(reactivo.getReactivoAsociado().isActualizable())
-                update.append(i != 0 ? ",\n" : "")
+            if(reactivo.getReactivoAsociado().isActualizable()) {
+                update.append(!primerElemento ? ",\n" : "")
                         .append(reactivo.getReactivoAsociado().getNombre()).append(" -= ").append(reactivo.getCantidad());
+                primerElemento = false;
+            }
         }
         for (ReactivoReaccion producto : reaccion.getProductos()) {
             if(producto.getReactivoAsociado().isActualizable())

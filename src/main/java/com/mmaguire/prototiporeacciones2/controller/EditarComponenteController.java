@@ -25,6 +25,8 @@ public class EditarComponenteController {
     @FXML
     private CheckBox actualizableComponente;
     @FXML
+    private CheckBox subestadoComponente;
+    @FXML
     private CheckBox poseeConstante;
     @FXML
     private ComboBox<Factor> constanteAsociada;
@@ -68,6 +70,7 @@ public class EditarComponenteController {
         this.componente.setNombre(this.nombreComponente.getText());
         this.componente.setCantidadInicial(this.cantidadComponente.getValue());
         this.componente.setActualizable(this.actualizableComponente.isSelected());
+        this.componente.setSubestado(this.subestadoComponente.isSelected());
         if(this.poseeConstante.isSelected())
             this.componente.setConstanteAsociada(this.constanteAsociada.getValue());
         else

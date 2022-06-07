@@ -52,6 +52,16 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" spacing="24.0">
                            <children>
+                              <Label styleClass="form-label" text="Subestado" />
+                              <CheckBox fx:id="subestadoComponente" mnemonicParsing="false" prefHeight="18.0" prefWidth="230.0" text="Si es subestado de bomba S-P" textFill="#a19b9b">
+                                 <font>
+                                    <Font name="System Italic" size="13.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" spacing="24.0">
+                           <children>
                               <Label styleClass="form-label" text="Constante asociada" />
                               <CheckBox fx:id="poseeConstante" mnemonicParsing="false" prefWidth="230.0" text="Para cáculo en tasa de reacción" textFill="#9e9e9e" />
                            </children>
@@ -93,10 +103,12 @@
                   </VBox>
                   <TableView fx:id="tablaComponentes" prefHeight="582.0" prefWidth="520.0">
                     <columns>
-                      <TableColumn fx:id="columnaNombre" editable="false" prefWidth="175.0" resizable="false" sortable="false" text="Nombre" />
-                      <TableColumn fx:id="columnaCantidad" editable="false" prefWidth="170.0" resizable="false" sortable="false" text="Cantidad" />
-                        <TableColumn fx:id="columnaActualizable" editable="false" prefWidth="120.0" resizable="false" sortable="false" text="Actualizable" />
-                        <TableColumn fx:id="columnaEliminar" editable="false" prefWidth="50.0" resizable="false" sortable="false" />
+                      <TableColumn fx:id="columnaNombre" editable="false" prefWidth="143.0" resizable="false" sortable="false" text="Nombre" />
+                      <TableColumn fx:id="columnaCantidad" editable="false" prefWidth="102.0" resizable="false" sortable="false" text="Cantidad" />
+                        <TableColumn fx:id="columnaActualizable" editable="false" resizable="false" sortable="false" text="Actualizable" />
+                        <TableColumn fx:id="columnaSubestado" resizable="false" text="Subestado" />
+                        <TableColumn fx:id="columnaConstante" prefWidth="71.0" resizable="false" text="Constante" />
+                        <TableColumn fx:id="columnaEliminar" editable="false" prefWidth="41.0" resizable="false" sortable="false" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -28,6 +28,8 @@ public class ReaccionManager {
         Document doc = new Document(new PrototypeDocument());
         // Reactivos con valores iniciales
         setReactivos(doc, sistema.getReactivos());
+        // Cantidad de bombas de sodio-potasio
+        setBombas(doc, sistema.getCantidadBombas());
         // Template por cada reacción
         for (Reaccion reaccion : sistema.getReacciones()) {
             if (reaccion instanceof ReaccionReversible){
@@ -78,6 +80,19 @@ public class ReaccionManager {
     }
 
     /**
+     * Añade la cantidad de bombas de Sodio-Potasio con las que va a trabajar la simulación
+     * al sistema al NSTA de UPPAAL.
+     *
+     * @param doc documento de UPPAAL al cual añadir la constante de cantidad de bombas
+     * @param cantidadBombas cantidad de bombas de Sodio-Potasio que se desea modelar en la simulación
+     */
+    private static void setBombas(Document doc, int cantidadBombas) {
+        String variableBombas = "const int N = " + cantidadBombas + ";\n";
+        doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString() + variableBombas);
+    }
+
+
+    /**
      * Crea un Template de UPPAAL a partir de una reacción perteneciente al sistema, y lo añade
      * al documento.
      *
@@ -109,6 +124,9 @@ public class ReaccionManager {
         for (ReactivoReaccion producto : reaccion.getProductos()) {
             if(producto.getReactivoAsociado().isActualizable())
                 update.append(",\n").append(producto.getReactivoAsociado().getNombre()).append(" += ").append(producto.getCantidad());
+            if(producto.getReactivoAsociado().isSubestado())
+                guard.append(" && ").append(producto.getReactivoAsociado().getNombre()).append(" < N");
+
         }
 
         Location location = ModelManager.addLocation(template, reaccion.getNombreReaccion(),expRate.toString(), 0, 0);

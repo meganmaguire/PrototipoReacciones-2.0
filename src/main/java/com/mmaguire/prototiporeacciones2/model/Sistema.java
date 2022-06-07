@@ -9,6 +9,7 @@ public class Sistema {
     private List<Factor> factores;
     private List<Factor> constantesReaccion;
     private Experimento experimento;
+    private int cantidadBombas;
 
     public Sistema() {
         this.reactivos = new ArrayList<>();
@@ -16,6 +17,7 @@ public class Sistema {
         this.factores = new ArrayList<>();
         this.constantesReaccion = new ArrayList<>();
         this.experimento = new Experimento();
+        this.cantidadBombas = 210;
     }
 
     public List<Reactivo> getReactivos() {
@@ -58,4 +60,11 @@ public class Sistema {
         this.experimento = experimento;
     }
 
+    public int getCantidadBombas() {
+        return cantidadBombas;
+    }
+
+    public void setCantidadBombas(int cantidadBombas) {
+        this.cantidadBombas = cantidadBombas;
+    }
 }

@@ -50,6 +50,16 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" spacing="24.0">
                            <children>
+                              <Label styleClass="form-label" text="Subestado" />
+                              <CheckBox fx:id="subestadoComponente" mnemonicParsing="false" prefHeight="18.0" prefWidth="230.0" text="Si es subestado de bomba S-P" textFill="#a19b9b">
+                                 <font>
+                                    <Font name="System Italic" size="13.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" spacing="24.0">
+                           <children>
                               <Label styleClass="form-label" text="Constante asociada" />
                               <CheckBox fx:id="poseeConstante" mnemonicParsing="false" prefWidth="230.0" text="Para cáculo en tasa de reacción" textFill="#9e9e9e" />
                            </children>

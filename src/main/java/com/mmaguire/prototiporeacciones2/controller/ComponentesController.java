@@ -31,6 +31,8 @@ public class ComponentesController {
     @FXML
     private CheckBox actualizableComponente;
     @FXML
+    private CheckBox subestadoComponente;
+    @FXML
     private CheckBox poseeConstante;
     @FXML
     private ComboBox<Factor> constanteAsociada;
@@ -46,6 +48,10 @@ public class ComponentesController {
     @FXML
     private TableColumn<Reactivo, Boolean> columnaActualizable;
     @FXML
+    private TableColumn<Reactivo, Boolean> columnaSubestado;
+    @FXML
+    private TableColumn<Reactivo, String> columnaConstante;
+    @FXML
     private TableColumn<Reactivo, Reactivo> columnaEliminar;
 
     private Context contexto;
@@ -57,6 +63,11 @@ public class ComponentesController {
         this.columnaNombre.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
         this.columnaCantidad.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
         this.columnaActualizable.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isActualizable()));
+        this.columnaSubestado.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isSubestado()));
+        this.columnaConstante.setCellValueFactory(cellData -> new SimpleObjectProperty<>(
+                cellData.getValue().getConstanteAsociada() != null
+                        ? cellData.getValue().getConstanteAsociada().getNombre()
+                        : ""));
         this.columnaEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         this.columnaEliminar.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button();
@@ -105,11 +116,12 @@ public class ComponentesController {
         String nombre = this.nombreComponente.getText();
         int cantidad = this.cantidadComponente.getValue();
         boolean isActualizable = this.actualizableComponente.isSelected();
+        boolean isSubestado = this.subestadoComponente.isSelected();
         Factor constante = null;
         if(this.poseeConstante.isSelected())
             constante = this.constanteAsociada.getValue();
 
-        Reactivo componente = new Reactivo(nombre, cantidad, isActualizable, constante);
+        Reactivo componente = new Reactivo(nombre, cantidad, isActualizable, isSubestado, constante);
 
         if(!existeReactivoConNombre(nombre, contexto.getReactivos())) {
             contexto.getReactivos().add(componente);

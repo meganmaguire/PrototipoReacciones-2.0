@@ -12,6 +12,7 @@ public class Reactivo {
     private int cantidadInicial;
     private boolean actualizable;
     private Factor constanteAsociada;
+    private boolean subestado;
 
     public Reactivo() {}
 
@@ -19,6 +20,14 @@ public class Reactivo {
         this.nombre = nombre;
         this.cantidadInicial = cantidadInicial;
         this.actualizable = actualizable;
+        this.constanteAsociada = constanteAsociada;
+    }
+
+    public Reactivo(String nombre, int cantidadInicial, boolean actualizable, boolean subestado, Factor constanteAsociada) {
+        this.nombre = nombre;
+        this.cantidadInicial = cantidadInicial;
+        this.actualizable = actualizable;
+        this.subestado = subestado;
         this.constanteAsociada = constanteAsociada;
     }
 
@@ -52,6 +61,14 @@ public class Reactivo {
 
     public void setConstanteAsociada(Factor constanteAsociada) {
         this.constanteAsociada = constanteAsociada;
+    }
+
+    public boolean isSubestado() {
+        return subestado;
+    }
+
+    public void setSubestado(boolean subestado) {
+        this.subestado = subestado;
     }
 
     @Override

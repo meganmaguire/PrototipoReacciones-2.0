@@ -50,7 +50,8 @@ public class SimulacionesController {
     private TableColumn<Paso, Integer> columnaTiempoPaso;
     @FXML
     private TableColumn<Paso, String> columnaModificacionesPaso;
-
+    @FXML
+    private Spinner<Integer> cantidadBombas;
     @FXML
     private Spinner<Integer> tiempoSimulacion;
 
@@ -71,11 +72,13 @@ public class SimulacionesController {
 
         this.tiempoSimulacion.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 60, 1));
         this.tiempoSimulacion.setEditable(true);
-
+        this.cantidadBombas.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 210, 1));
+        this.cantidadBombas.setEditable(true);
     }
 
     @FXML
     public void simularSistema(ActionEvent event){
+        this.contexto.getSistemaReacciones().setCantidadBombas(this.cantidadBombas.getValue());
         if (this.contexto.getReacciones().size() > 0) {
             Document doc = createModel(this.contexto.getSistemaReacciones());
             try {

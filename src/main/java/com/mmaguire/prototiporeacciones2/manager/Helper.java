@@ -17,30 +17,22 @@ public class Helper {
 
 
     public static void actualizarReaccion(ObservableList<ReactivoReaccion> reactivosReaccion, ObservableList<ReactivoReaccion> productosReaccion, Label labelReactivos, Label labelProductos) {
-        StringBuilder reactivos = new StringBuilder();
-        StringBuilder productos = new StringBuilder();
+        labelReactivos.setText(generateLabel(reactivosReaccion));
+        labelProductos.setText(generateLabel(productosReaccion));
+    }
+
+    private static String generateLabel(ObservableList<ReactivoReaccion> reactivos){
+        StringBuilder label = new StringBuilder();
         ReactivoReaccion reactivo;
-
-        for (int i = 0; i < reactivosReaccion.size(); i++) {
-            reactivo = reactivosReaccion.get(i);
-            reactivos
-                    .append(reactivo.getCantidad())
+        for (int i = 0; i < reactivos.size(); i++) {
+            reactivo = reactivos.get(i);
+            label
+                    .append(reactivo.getCantidad() != 1 ? reactivo.getCantidad() : "")
                     .append(" ")
                     .append(reactivo.getReactivoAsociado().getNombre())
-                    .append((i != reactivosReaccion.size() - 1) ? " + " : "");
+                    .append((i != reactivos.size() - 1) ? " + " : "");
         }
-
-        for (int i = 0; i < productosReaccion.size(); i++) {
-            reactivo = productosReaccion.get(i);
-            productos
-                    .append(reactivo.getCantidad())
-                    .append(" ")
-                    .append(reactivo.getReactivoAsociado().getNombre())
-                    .append((i != productosReaccion.size() - 1) ? " + " : "");
-        }
-
-        labelReactivos.setText(reactivos.toString());
-        labelProductos.setText(productos.toString());
+        return label.toString();
     }
 
     public static boolean existeReactivoReaccionConNombre(String nombre, ObservableList<ReactivoReaccion> reactivos) {

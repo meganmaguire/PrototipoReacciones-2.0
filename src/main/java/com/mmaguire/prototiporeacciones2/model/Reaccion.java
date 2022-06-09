@@ -6,6 +6,8 @@ import javafx.event.Event;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mmaguire.prototiporeacciones2.manager.Helper.generateLabel;
+
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.EXISTING_PROPERTY,
@@ -132,24 +134,13 @@ public class Reaccion {
 
     @Override
     public String toString(){
-        String reactivos = "";
-        for (int i=0; i < this.reactantes.size(); i++){
-            if(i != 0)
-                reactivos += " + ";
-            reactivos += this.reactantes.get(i).getCantidad() + this.reactantes.get(i).getReactivoAsociado().getNombre();
-        }
-        String productos = "";
-        for (int i=0; i < this.productos.size(); i++){
-            if(i != 0)
-                productos += " + ";
-            productos += this.productos.get(i).getCantidad() + this.productos.get(i).getReactivoAsociado().getNombre();
-        }
-
+        String reactivos = generateLabel(getReactantes());
+        String productos = generateLabel(getProductos());
         String tipoReaccion = "";
         if (this.tipo == TipoReaccion.reversible)
-            tipoReaccion = " <--> ";
+            tipoReaccion = " ⇌ ";
         else
-            tipoReaccion = " --> ";
+            tipoReaccion = " → ";
 
         return reactivos + tipoReaccion + productos;
     }

@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Helper {
 
@@ -21,7 +22,7 @@ public class Helper {
         labelProductos.setText(generateLabel(productosReaccion));
     }
 
-    private static String generateLabel(ObservableList<ReactivoReaccion> reactivos){
+    public static String generateLabel(List<ReactivoReaccion> reactivos){
         StringBuilder label = new StringBuilder();
         ReactivoReaccion reactivo;
         for (int i = 0; i < reactivos.size(); i++) {

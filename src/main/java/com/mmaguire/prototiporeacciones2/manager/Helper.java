@@ -7,6 +7,7 @@ import com.mmaguire.prototiporeacciones2.model.Reactivo;
 import com.mmaguire.prototiporeacciones2.model.ReactivoReaccion;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -15,6 +16,32 @@ import java.util.ArrayList;
 public class Helper {
 
 
+    public static void actualizarReaccion(ObservableList<ReactivoReaccion> reactivosReaccion, ObservableList<ReactivoReaccion> productosReaccion, Label labelReactivos, Label labelProductos) {
+        StringBuilder reactivos = new StringBuilder();
+        StringBuilder productos = new StringBuilder();
+        ReactivoReaccion reactivo;
+
+        for (int i = 0; i < reactivosReaccion.size(); i++) {
+            reactivo = reactivosReaccion.get(i);
+            reactivos
+                    .append(reactivo.getCantidad())
+                    .append(" ")
+                    .append(reactivo.getReactivoAsociado().getNombre())
+                    .append((i != reactivosReaccion.size() - 1) ? " + " : "");
+        }
+
+        for (int i = 0; i < productosReaccion.size(); i++) {
+            reactivo = productosReaccion.get(i);
+            productos
+                    .append(reactivo.getCantidad())
+                    .append(" ")
+                    .append(reactivo.getReactivoAsociado().getNombre())
+                    .append((i != productosReaccion.size() - 1) ? " + " : "");
+        }
+
+        labelReactivos.setText(reactivos.toString());
+        labelProductos.setText(productos.toString());
+    }
 
     public static boolean existeReactivoReaccionConNombre(String nombre, ObservableList<ReactivoReaccion> reactivos) {
 

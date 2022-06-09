@@ -153,7 +153,7 @@ public class ReaccionesController {
                 deleteButton.setOnAction(
                         event -> {
                             getTableView().getItems().remove(reactivo);
-                            actualizarReaccion();
+                            actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
                         }
                 );
             }
@@ -180,7 +180,7 @@ public class ReaccionesController {
                 deleteButton.setOnAction(
                         event -> {
                             getTableView().getItems().remove(reactivo);
-                            actualizarReaccion();
+                            actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
                         }
                 );
             }
@@ -238,7 +238,7 @@ public class ReaccionesController {
 
         if(!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosReaccion))
             this.reactivosReaccion.add(reactivo);
-        actualizarReaccion();
+        actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
     }
 
     @FXML
@@ -248,7 +248,7 @@ public class ReaccionesController {
                 this.cantidadProductos.getValue()
         );
         this.productosReaccion.add(reactivo);
-        actualizarReaccion();
+        actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
     }
 
     @FXML
@@ -328,35 +328,10 @@ public class ReaccionesController {
 
         this.constanteAlpha.setText(null);
         this.constanteBeta.setText(null);
-        actualizarReaccion();
+        actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
     }
 
-    private void actualizarReaccion() {
-        StringBuilder reactivos = new StringBuilder();
-        StringBuilder productos = new StringBuilder();
-        ReactivoReaccion reactivo;
 
-        for (int i = 0; i < this.reactivosReaccion.size(); i++) {
-            reactivo = this.reactivosReaccion.get(i);
-            reactivos
-                    .append(reactivo.getCantidad())
-                    .append(" ")
-                    .append(reactivo.getReactivoAsociado().getNombre())
-                    .append((i != this.reactivosReaccion.size() - 1) ? " + " : "");
-        }
-
-        for (int i = 0; i < this.productosReaccion.size(); i++) {
-            reactivo = this.productosReaccion.get(i);
-            productos
-                    .append(reactivo.getCantidad())
-                    .append(" ")
-                    .append(reactivo.getReactivoAsociado().getNombre())
-                    .append((i != this.productosReaccion.size() - 1) ? " + " : "");
-        }
-
-        this.labelReactivos.setText(reactivos.toString());
-        this.labelProductos.setText(productos.toString());
-    }
 
 
 }

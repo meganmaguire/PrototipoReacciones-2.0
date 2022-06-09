@@ -145,9 +145,9 @@ public class EditarReaccionController {
         });
 
         // Set spinners
-        this.cantidadReactivos.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 0, 1));
+        this.cantidadReactivos.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 1, 1));
         this.cantidadReactivos.setEditable(true);
-        this.cantidadProductos.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 0, 1));
+        this.cantidadProductos.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 1, 1));
         this.cantidadProductos.setEditable(true);
 
         this.textFieldTasaReaccion.setEditable(false);

@@ -140,8 +140,8 @@
                   <TableView fx:id="tablaReacciones" prefHeight="284.0" prefWidth="971.0">
                     <columns>
                       <TableColumn fx:id="columnaNroReaccion" editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Número" />
-                      <TableColumn fx:id="columnaReaccion" editable="false" prefWidth="459.0" resizable="false" sortable="false" text="Reacción" />
-                        <TableColumn fx:id="columnaTasaReaccion" editable="false" prefWidth="386.0" resizable="false" sortable="false" text="Tasa de reacción" />
+                      <TableColumn fx:id="columnaReaccion" editable="false" prefWidth="308.0" resizable="false" sortable="false" text="Reacción" />
+                        <TableColumn fx:id="columnaTasaReaccion" editable="false" prefWidth="537.0" resizable="false" sortable="false" text="Tasa de reacción" />
                         <TableColumn fx:id="columnaEliminarReaccion" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
                     </columns>
                      <columnResizePolicy>

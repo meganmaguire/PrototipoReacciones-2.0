@@ -165,7 +165,7 @@ public class PrincipalController {
                 this.contexto.setConstantesReaccion(FXCollections.observableList(this.contexto.getSistemaReacciones().getConstantesReaccion()));
                 this.contexto.setExperimento(this.contexto.getSistemaReacciones().getExperimento());
                 this.contexto.setPasosExperimento(FXCollections.observableList(this.contexto.getExperimento().getPasos()));
-
+                this.contexto.setContadorReacciones();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");

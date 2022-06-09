@@ -39,6 +39,7 @@ public class Context {
 
     public static void reset(){
         instance.resetInstance();
+        instance.setContadorReacciones();
     }
 
     private void resetInstance(){
@@ -109,5 +110,14 @@ public class Context {
     public void setConstantesReaccion(ObservableList<Factor> constantesReaccion) {
         this.constantesReaccion.setAll(constantesReaccion);
         this.sistemaReacciones.setConstantesReaccion(this.constantesReaccion);
+    }
+
+    public void setContadorReacciones(){
+        int lastReaccion = 0;
+        for (Reaccion reaccion : reacciones) {
+            if (reaccion.getNroReaccion() > 0)
+                lastReaccion = reaccion.getNroReaccion();
+        }
+        Reaccion.setContador(lastReaccion+1);
     }
 }

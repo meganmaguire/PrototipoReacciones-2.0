@@ -206,12 +206,7 @@ public class EditarReaccionController {
             EditarTasaReaccionController controller = loader.getController();
             controller.recieveData(reaccion);
 
-            Stage dialog = new Stage();
-            Node node = (Node) event.getSource();
-            Stage parentStage = (Stage) node.getScene().getWindow();
-            dialog.setScene(scene);
-            dialog.initOwner(parentStage);
-            dialog.initModality(Modality.APPLICATION_MODAL);
+            Stage dialog = createModalWindow(scene, event);
             dialog.showAndWait();
             if(controller.getTasaReaccion() != null) {
                 this.tasaReaccion = controller.getTasaReaccion();

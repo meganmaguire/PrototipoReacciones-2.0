@@ -19,8 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static com.mmaguire.prototiporeacciones2.manager.Helper.existeReactivoConNombre;
-import static com.mmaguire.prototiporeacciones2.manager.Helper.styleButton;
+import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
 
 public class ComponentesController {
 
@@ -140,12 +139,7 @@ public class ComponentesController {
 
             Scene scene = new Scene(root);
 
-            Stage stage = new Stage();
-            Node node = (Node) event.getSource();
-            Stage parentStage = (Stage) node.getScene().getWindow();
-            stage.setScene(scene);
-            stage.initOwner(parentStage);
-            stage.initModality(Modality.APPLICATION_MODAL);
+            Stage stage = createModalWindow(scene, event);
             stage.showAndWait();
 
             Factor constante = controller.getConstante();
@@ -168,12 +162,7 @@ public class ComponentesController {
             EditarComponenteController controller = loader.getController();
             controller.receiveData(reactivo);
 
-            Stage dialog = new Stage();
-            Node node = (Node) event.getSource();
-            Stage parentStage = (Stage) node.getScene().getWindow();
-            dialog.setScene(scene);
-            dialog.initOwner(parentStage);
-            dialog.initModality(Modality.APPLICATION_MODAL);
+            Stage dialog = createModalWindow(scene, event);
             dialog.showAndWait();
             // Reset para notificar al ObservableList
             int index = this.contexto.getReactivos().indexOf(reactivo);

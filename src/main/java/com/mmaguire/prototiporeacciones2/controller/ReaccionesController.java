@@ -308,12 +308,7 @@ public class ReaccionesController {
             EditarReaccionController controller = loader.getController();
             controller.receiveData(reaccion);
 
-            Stage dialog = new Stage();
-            Node node = (Node) event.getSource();
-            Stage parentStage = (Stage) node.getScene().getWindow();
-            dialog.setScene(scene);
-            dialog.initOwner(parentStage);
-            dialog.initModality(Modality.APPLICATION_MODAL);
+            Stage dialog = createModalWindow(scene, event);
             dialog.showAndWait();
             this.tablaReacciones.refresh();
         }

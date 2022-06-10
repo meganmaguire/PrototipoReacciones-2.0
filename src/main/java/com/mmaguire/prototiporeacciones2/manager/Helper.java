@@ -6,10 +6,15 @@ import com.mmaguire.prototiporeacciones2.model.Factor;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
 import com.mmaguire.prototiporeacciones2.model.ReactivoReaccion;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,5 +118,15 @@ public class Helper {
         ArrayList<EquationItem> result = new ArrayList<>();
         tasaReaccion.forEach(item -> result.add(item.clone()));
         return result;
+    }
+
+    public static Stage createModalWindow(Scene scene, Event event) {
+        Stage stage = new Stage();
+        Node node = (Node) event.getSource();
+        Stage parentStage = (Stage) node.getScene().getWindow();
+        stage.setScene(scene);
+        stage.initOwner(parentStage);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        return stage;
     }
 }

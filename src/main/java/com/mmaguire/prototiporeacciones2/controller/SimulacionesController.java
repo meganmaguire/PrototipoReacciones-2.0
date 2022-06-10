@@ -11,22 +11,26 @@ import com.uppaal.engine.QueryResult;
 import com.uppaal.model.core2.Document;
 import com.uppaal.model.core2.Query;
 import com.uppaal.model.system.UppaalSystem;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.mmaguire.prototiporeacciones2.manager.Helper.createModalWindow;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.itemArray2String;
 import static com.mmaguire.prototiporeacciones2.manager.ModelManager.options;
 import static com.mmaguire.prototiporeacciones2.manager.ModelManager.qf;
@@ -35,6 +39,10 @@ import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.generate
 
 public class SimulacionesController {
 
+    @FXML
+    public Button button_simulate;
+    @FXML
+    public AnchorPane simulation_pane;
     @FXML
     private TableView<Reaccion> tablaReacciones;
     @FXML
@@ -79,7 +87,30 @@ public class SimulacionesController {
     @FXML
     public void simularSistema(ActionEvent event){
         this.contexto.getSistemaReacciones().setCantidadBombas(this.cantidadBombas.getValue());
+        Stage stage = new Stage();
+        // Tarea para el thread de simulación
+        Task<Void> simulationTask = new Task<>() {
+            @Override
+            public Void call() {
+                simulateSystem(event, stage);
+                return null;
+            }
+        };
+
+        // Muestra feedback de generación de simulación
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.progressProperty().bind(simulationTask.progressProperty());
+        generateCargandoStage(stage, progressBar, event);
+        // Ejecuta el thread
+        Thread getItemsThread = new Thread(simulationTask);
+        getItemsThread.setDaemon(true);
+        getItemsThread.start();
+
+    }
+
+    private void simulateSystem(ActionEvent event, Stage cargandoStage) {
         if (this.contexto.getReacciones().size() > 0) {
+
             Document doc = createModel(this.contexto.getSistemaReacciones());
             try {
                 doc.save("untitled.xml");
@@ -93,22 +124,10 @@ public class SimulacionesController {
                 QueryResult simulacion = engine.query(sys, options, query, qf);
 
                 // Generar pantalla de simulación y enviar datos
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(MainApp.class.getResource("views/grafico-simulacion.fxml"));
-                Parent root = loader.load();
-
-                Scene scene = new Scene(root);
-
-                GraficoSimulacionController controller = loader.getController();
-                controller.receiveData(simulacion);
-
-                Stage stage = new Stage();
-                Node node = (Node) event.getSource();
-                Stage parentStage = (Stage) node.getScene().getWindow();
-                stage.setScene(scene);
-                stage.initOwner(parentStage);
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.showAndWait();
+                Platform.runLater(()-> {
+                    cargandoStage.close();
+                    showData(event, simulacion);
+                });
 
             } catch (IOException e) {
                 System.out.println("No se pudo escribir el archivo");
@@ -120,4 +139,45 @@ public class SimulacionesController {
         }
     }
 
+    private void showData(ActionEvent event, QueryResult simulacion){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("views/grafico-simulacion.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            GraficoSimulacionController controller = loader.getController();
+            controller.receiveData(simulacion);
+
+            Stage stage = createModalWindow(scene, event);
+            stage.showAndWait();
+        }
+        catch (IOException e) {
+            System.out.println("Error al cargar archivo XML");
+        }
+    }
+
+    public void generateCargandoStage(Stage stage, ProgressBar progressBar, Event event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("views/cargando.fxml"));
+            AnchorPane root = loader.load();
+
+            Scene scene = new Scene(root);
+
+
+            Node node = (Node) event.getSource();
+            Stage parentStage = (Stage) node.getScene().getWindow();
+            stage.setScene(scene);
+
+            VBox contenedor = ((VBox) root.getChildren().get(0));
+            contenedor.getChildren().add(progressBar);
+
+            stage.initOwner(parentStage);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Error al cargar archivo XML");
+        }
+    }
 }

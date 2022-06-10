@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.SimulacionesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.SimulacionesController" fx:id="simulation_pane">
    <children>
       <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0">
          <padding>
@@ -66,7 +66,7 @@
                         <Label text="segundos" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#simularSistema" prefHeight="25.0" prefWidth="90.0" styleClass="primary-button" text="SIMULAR" />
+                  <Button mnemonicParsing="false" onAction="#simularSistema" prefHeight="25.0" prefWidth="90.0" styleClass="primary-button" text="SIMULAR" fx:id="button_simulate" />
                </children>
             </HBox>
          </children>

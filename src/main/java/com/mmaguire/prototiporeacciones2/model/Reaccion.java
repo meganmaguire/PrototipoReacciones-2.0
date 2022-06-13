@@ -127,9 +127,41 @@ public class Reaccion {
         result.add(new EquationItem(this.alpha.getNombre(), EquationItemType.componente));
         for (ReactivoReaccion reactivo : this.reactantes){
             result.add(new EquationItem("*", EquationItemType.operador));
-            result.add(new EquationItem(reactivo.getReactivoAsociado().getNombre(), EquationItemType.componente));
+            // Posee un componente tipo Ión con constante asociada para tasa de reacción
+            if (reactivo.getReactivoAsociado().getConstanteAsociada() != null) {
+                addComponenteConConstante(result, reactivo);
+            }
+            else {
+                result.add(new EquationItem(reactivo.getReactivoAsociado().getNombre(), EquationItemType.componente));
+            }
         }
         return result;
+    }
+
+    public void addComponenteConConstante(ArrayList<EquationItem> result, ReactivoReaccion reactivo) {
+        result.add(new EquationItem("(", EquationItemType.parentesisAbre));
+        // Añade el componente multiplicado n veces según la cantidad en la reacción
+        for (int i = 0; i < reactivo.getCantidad(); i++){
+            result.add(new EquationItem(reactivo.getReactivoAsociado().getNombre(), EquationItemType.componente));
+            // Producto salvo en el último componente
+            if( i != reactivo.getCantidad()-1)
+                result.add(new EquationItem("*", EquationItemType.operador));
+        }
+        result.add(new EquationItem("/", EquationItemType.operador));
+        result.add(new EquationItem("(", EquationItemType.parentesisAbre));
+        añadirDenominadorConstantes(result, reactivo);
+        result.add(new EquationItem("*", EquationItemType.operador));
+        añadirDenominadorConstantes(result, reactivo);
+        result.add(new EquationItem(")", EquationItemType.parentesisCierra));
+        result.add(new EquationItem(")", EquationItemType.parentesisCierra));
+    }
+
+    public void añadirDenominadorConstantes(ArrayList<EquationItem> result, ReactivoReaccion reactivo) {
+        result.add(new EquationItem("(", EquationItemType.parentesisAbre));
+        result.add(new EquationItem(reactivo.getReactivoAsociado().getNombre(), EquationItemType.componente));
+        result.add(new EquationItem("+", EquationItemType.operador));
+        result.add(new EquationItem(reactivo.getReactivoAsociado().getConstanteAsociada().getNombre(), EquationItemType.componente));
+        result.add(new EquationItem(")", EquationItemType.parentesisCierra));
     }
 
     @Override

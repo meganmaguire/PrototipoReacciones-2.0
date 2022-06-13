@@ -46,14 +46,8 @@ public class ReaccionReversible extends Reaccion{
     @JsonIgnore
     @Override
     public ArrayList<EquationItem> calculateTasaReaccion(){
-        ArrayList<EquationItem> result = new ArrayList<>();
-        result.add(new EquationItem(this.getFactor().getNombre(), EquationItemType.componente));
-        result.add(new EquationItem("*", EquationItemType.operador));
-        result.add(new EquationItem(this.getAlpha().getNombre(), EquationItemType.componente));
-        for (ReactivoReaccion reactivo : this.getReactantes()){
-            result.add(new EquationItem("*", EquationItemType.operador));
-            result.add(new EquationItem(reactivo.getReactivoAsociado().getNombre(), EquationItemType.componente));
-        }
+        ArrayList<EquationItem> result = super.calculateTasaReaccion();
+
         result.add(new EquationItem("-", EquationItemType.operador));
         result.add(new EquationItem(this.getFactorVuelta().getNombre(), EquationItemType.componente));
         result.add(new EquationItem("*", EquationItemType.operador));
@@ -62,7 +56,13 @@ public class ReaccionReversible extends Reaccion{
 
         for (ReactivoReaccion reactivo : this.getProductos()){
             result.add(new EquationItem("*", EquationItemType.operador));
-            result.add(new EquationItem(reactivo.getReactivoAsociado().getNombre(), EquationItemType.componente));
+            // Posee un componente tipo Ión con constante asociada para tasa de reacción
+            if (reactivo.getReactivoAsociado().getConstanteAsociada() != null) {
+                addComponenteConConstante(result, reactivo);
+            }
+            else {
+                result.add(new EquationItem(reactivo.getReactivoAsociado().getNombre(), EquationItemType.componente));
+            }
         }
         return result;
     }

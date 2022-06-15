@@ -66,7 +66,7 @@ public class ModelManager {
         if (name != null)
             setLabel(l, LocationKind.name, name, x, y+15);
         if (exprate != null)
-            setLabel(l, LocationKind.exponentialrate, exprate, x, y+35);
+            setLabel(l, LocationKind.exponentialrate, exprate, x-35, y+35);
         return l;
     }
 
@@ -90,13 +90,13 @@ public class ModelManager {
         int x = (source.getX()+target.getX())/2;
         int y = (source.getY()+target.getY())/2;
         if (guard != null) {
-            setLabel(e, EdgeKind.guard, guard, x, y-55);
+            setLabel(e, EdgeKind.guard, guard, x-100, y-55);
         }
         if (sync != null) {
             setLabel(e, EdgeKind.synchronisation, sync, x-15, y-14);
         }
         if (update != null) {
-            setLabel(e, EdgeKind.assignment, update, x-75, y-25);
+            setLabel(e, EdgeKind.assignment, update, x-150, y-25);
         }
         return e;
     }

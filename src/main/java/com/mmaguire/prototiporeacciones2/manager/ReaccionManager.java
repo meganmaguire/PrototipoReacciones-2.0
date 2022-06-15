@@ -136,13 +136,22 @@ public class ReaccionManager {
             guard.append(reactivo.getReactivoAsociado().getNombre()).append(" > 0").append(i != reactivos.size() - 1 ? " && " : "");
             if(reactivo.getReactivoAsociado().isActualizable()) {
                 update.append(!primerElemento ? ",\n" : "")
-                        .append(reactivo.getReactivoAsociado().getNombre()).append(" -= ").append(reactivo.getCantidad());
+                        .append(reactivo.getReactivoAsociado().getNombre());
+                if (reactivo.getCantidad()>1)
+                    update.append(" -= ").append(reactivo.getCantidad());
+                else
+                    update.append("-- ");
                 primerElemento = false;
             }
         }
         for (ReactivoReaccion producto : reaccion.getProductos()) {
-            if(producto.getReactivoAsociado().isActualizable())
-                update.append(",\n").append(producto.getReactivoAsociado().getNombre()).append(" += ").append(producto.getCantidad());
+            if(producto.getReactivoAsociado().isActualizable()) {
+                update.append(",\n").append(producto.getReactivoAsociado().getNombre());
+                if (producto.getCantidad() > 1)
+                    update.append(" += ").append(producto.getCantidad());
+                else
+                    update.append("++ ");
+            }
             if(producto.getReactivoAsociado().isSubestado())
                 guard.append(" && ").append(producto.getReactivoAsociado().getNombre()).append(" < N");
 
@@ -166,7 +175,7 @@ public class ReaccionManager {
      * @param experimento experimento modelado
      */
     private static void setSystems(Document doc, List<Reaccion> reacciones, Experimento experimento) {
-        StringBuilder systemProperties = new StringBuilder("system ");
+        StringBuilder systemProperties = new StringBuilder("system \n");
         Reaccion reaccion;
         if(experimento.getPasos().size() > 0)
             systemProperties.append(experimento.getNombre()).append(", ");
@@ -174,7 +183,7 @@ public class ReaccionManager {
             reaccion = reacciones.get(i);
             if(reaccion instanceof ReaccionReversible)
                 systemProperties.append("r_").append(reaccion.getNroReaccion()).append(", ");
-            systemProperties.append(reaccion.getNombreReaccion()).append(i != reacciones.size() - 1 ? ", " : ";");
+            systemProperties.append(reaccion.getNombreReaccion()).append(i != reacciones.size() - 1 ? ", \n" : ";");
         }
         doc.setProperty("system", systemProperties.toString());
     }

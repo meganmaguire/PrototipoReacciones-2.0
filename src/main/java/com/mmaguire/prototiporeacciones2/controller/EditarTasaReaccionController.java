@@ -127,6 +127,10 @@ public class EditarTasaReaccionController {
         añadirOperador("/");
     }
     @FXML
+    public void añadirPunto() {
+        añadirOperador(".");
+    }
+    @FXML
     public void añadirParentesisAbre() {
         this.parentesisCheck.push("parentesis" + this.parentesisCheck.size()+1);
         this.tasaReaccion.add(new EquationItem("(", EquationItemType.parentesisAbre));

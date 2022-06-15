@@ -71,6 +71,11 @@
                                     <Font size="20.0" />
                                  </font>
                               </Button>
+                              <Button mnemonicParsing="false" onAction="#añadirPunto" prefWidth="45.0" styleClass="operator-button" text=",">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </HBox>
                      </children>

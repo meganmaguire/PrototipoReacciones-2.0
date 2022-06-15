@@ -235,9 +235,9 @@ public class ReaccionManager {
             if(i == 0) locationActual.setProperty("init", true);
             // Añade transición
             else {
-                List<Reactivo> reactivosActualizados = pasos.get(i-1).getReactivosActualizados();
+                List<ReactivoReaccion> reactivosActualizados = pasos.get(i-1).getReactivosActualizados();
                 for (int j = 0; j < reactivosActualizados.size() ; j++) {
-                    update.append(reactivosActualizados.get(j).getNombre()).append(" = ").append(reactivosActualizados.get(j).getCantidadInicial()).append(j != reactivosActualizados.size() - 1 ? ", \n" : "");
+                    update.append(reactivosActualizados.get(j).getReactivoAsociado().getNombre()).append(" = ").append(reactivosActualizados.get(j).getCantidad()).append(j != reactivosActualizados.size() - 1 ? ", \n" : "");
                 }
                 List<Factor> factoresActualizados = pasos.get(i-1).getFactoresActualizados();
                 if(reactivosActualizados.size()>0 && factoresActualizados.size()>0) update.append(", \n");

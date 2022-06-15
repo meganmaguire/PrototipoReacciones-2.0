@@ -5,6 +5,7 @@ import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.model.Factor;
 import com.mmaguire.prototiporeacciones2.model.Paso;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
+import com.mmaguire.prototiporeacciones2.model.ReactivoReaccion;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -32,13 +33,13 @@ public class ExperimentosController {
     @FXML
     private Spinner<Integer> cantidadReactivos;
     @FXML
-    private TableView<Reactivo> tablaReactivos;
+    private TableView<ReactivoReaccion> tablaReactivos;
     @FXML
-    private TableColumn<Reactivo, String> columnaNombreReactivos;
+    private TableColumn<ReactivoReaccion, String> columnaNombreReactivos;
     @FXML
-    private TableColumn<Reactivo, Integer> columnaCantidadReactivos;
+    private TableColumn<ReactivoReaccion, Integer> columnaCantidadReactivos;
     @FXML
-    private TableColumn<Reactivo, Reactivo> columnaEliminarReactivo;
+    private TableColumn<ReactivoReaccion, ReactivoReaccion> columnaEliminarReactivo;
 
     @FXML
     private ComboBox<Factor> comboBoxFactores;
@@ -68,7 +69,7 @@ public class ExperimentosController {
 
     private Context contexto;
 
-    private ObservableList<Reactivo> reactivosPasoExperimento;
+    private ObservableList<ReactivoReaccion> reactivosPasoExperimento;
     private ObservableList<Factor> factoresPasoExperimento;
 
     @FXML
@@ -85,14 +86,14 @@ public class ExperimentosController {
         // Set tablas
         // Tabla Reactivos
         this.tablaReactivos.setItems(this.reactivosPasoExperimento);
-        this.columnaNombreReactivos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
-        this.columnaCantidadReactivos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
+        this.columnaNombreReactivos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getReactivoAsociado().getNombre()));
+        this.columnaCantidadReactivos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidad()));
         this.columnaEliminarReactivo.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         this.columnaEliminarReactivo.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button();
 
             @Override
-            protected void updateItem(Reactivo reactivo, boolean empty) {
+            protected void updateItem(ReactivoReaccion reactivo, boolean empty) {
                 super.updateItem(reactivo, empty);
 
                 if (reactivo == null) {
@@ -175,9 +176,11 @@ public class ExperimentosController {
 
     @FXML
     public void añadirReactivo() {
-        Reactivo reactivo = this.comboBoxReactivos.getValue().clone();
-        reactivo.setCantidadInicial(this.cantidadReactivos.getValue());
-        if(!existeReactivoConNombre(reactivo.getNombre(), this.reactivosPasoExperimento))
+        ReactivoReaccion reactivo = new ReactivoReaccion(
+                this.comboBoxReactivos.getValue(),
+                this.cantidadReactivos.getValue()
+        );
+        if(!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosPasoExperimento))
             this.reactivosPasoExperimento.add(reactivo);
     }
     @FXML

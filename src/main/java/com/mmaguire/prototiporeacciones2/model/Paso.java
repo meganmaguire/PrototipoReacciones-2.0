@@ -4,24 +4,24 @@ import java.util.List;
 
 public class Paso {
 
-    private List<Reactivo> reactivosActualizados;
+    private List<ReactivoReaccion> reactivosActualizados;
     private List<Factor> factoresActualizados;
     private int tiempo;
 
     public Paso() {
     }
 
-    public Paso(List<Reactivo> reactivosActualizados, List<Factor> factoresActualizados, int tiempo) {
+    public Paso(List<ReactivoReaccion> reactivosActualizados, List<Factor> factoresActualizados, int tiempo) {
         this.reactivosActualizados = reactivosActualizados;
         this.factoresActualizados = factoresActualizados;
         this.tiempo = tiempo;
     }
 
-    public List<Reactivo> getReactivosActualizados() {
+    public List<ReactivoReaccion> getReactivosActualizados() {
         return reactivosActualizados;
     }
 
-    public void setReactivosActualizados(List<Reactivo> reactivosActualizados) {
+    public void setReactivosActualizados(List<ReactivoReaccion> reactivosActualizados) {
         this.reactivosActualizados = reactivosActualizados;
     }
 
@@ -45,9 +45,9 @@ public class Paso {
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < this.reactivosActualizados.size(); i++){
-            result.append(this.reactivosActualizados.get(i).getNombre())
+            result.append(this.reactivosActualizados.get(i).getReactivoAsociado().getNombre())
                     .append(" = ")
-                    .append(this.reactivosActualizados.get(i).getCantidadInicial())
+                    .append(this.reactivosActualizados.get(i).getCantidad())
                     .append(i != this.reactivosActualizados.size() - 1 ? ", " : "");
         }
         if(reactivosActualizados.size() > 0 && factoresActualizados.size() > 0) result.append(", ");

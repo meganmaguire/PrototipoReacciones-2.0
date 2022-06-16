@@ -63,6 +63,14 @@
             <artifactId>jlatexmath</artifactId>
             <version>1.0.7</version>
         </dependency>
+        <dependency>
+            <groupId>com.uppaal</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/model.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>

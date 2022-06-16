@@ -8,7 +8,6 @@ import com.uppaal.model.system.UppaalSystem;
 import com.uppaal.model.system.concrete.ConcreteTrace;
 import com.uppaal.model.system.symbolic.SymbolicTrace;
 
-import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
 

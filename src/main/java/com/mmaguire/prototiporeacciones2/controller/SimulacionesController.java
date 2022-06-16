@@ -133,6 +133,7 @@ public class SimulacionesController {
                 System.out.println("No se pudo escribir el archivo");
                 e.printStackTrace();
             } catch (EngineException e) {
+                cargandoStage.close();
                 System.out.println("No se conectar con el engine");
                 e.printStackTrace();
             }

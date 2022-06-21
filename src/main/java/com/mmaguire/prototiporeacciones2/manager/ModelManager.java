@@ -107,11 +107,11 @@ public class ModelManager {
         String here = System.getProperty("user.dir");
         String path = null;
         if ("Linux".equals(os)) {
-            path = here+"/bin-Linux/server";
+            path = here+"/uppaal_servers/linux/server";
         } else if ("Mac OS X".equals(os)) {
-            path = here+"/bin-Darwin/server";
+            path = here+"/uppaal_servers/mac/server";
         } else if ("Windows".equals(os)) {
-            path = here+"\\bin-Windows\\server.exe";
+            path = here+"\\uppaal_servers\\win\\server.exe";
         } else {
             System.err.println("Unknown operating system.");
             System.exit(1);

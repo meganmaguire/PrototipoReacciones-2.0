@@ -1,5 +1,8 @@
 package com.mmaguire.prototiporeacciones2.model;
 
+import com.uppaal.engine.QueryResult;
+import com.uppaal.model.core2.DataSet2D;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +13,7 @@ public class Sistema {
     private List<Factor> constantesReaccion;
     private Experimento experimento;
     private int cantidadBombas;
+    private Simulacion simulacion;
 
     public Sistema() {
         this.reactivos = new ArrayList<>();
@@ -18,6 +22,15 @@ public class Sistema {
         this.constantesReaccion = new ArrayList<>();
         this.experimento = new Experimento();
         this.cantidadBombas = 210;
+    }
+
+    public Sistema(List<Reactivo> reactivos, List<Reaccion> reacciones, List<Factor> factores, List<Factor> constantesReaccion, Experimento experimento, int cantidadBombas) {
+        this.reactivos = reactivos;
+        this.reacciones = reacciones;
+        this.factores = factores;
+        this.constantesReaccion = constantesReaccion;
+        this.experimento = experimento;
+        this.cantidadBombas = cantidadBombas;
     }
 
     public List<Reactivo> getReactivos() {
@@ -66,5 +79,25 @@ public class Sistema {
 
     public void setCantidadBombas(int cantidadBombas) {
         this.cantidadBombas = cantidadBombas;
+    }
+
+    public Simulacion getSimulacion() {
+        return simulacion;
+    }
+
+    public void setSimulacion(Simulacion simulacion) {
+        this.simulacion = simulacion;
+    }
+
+    @Override
+    public Sistema clone(){
+        return new Sistema(
+            this.reactivos,
+            this.reacciones,
+            this.factores,
+            this.constantesReaccion,
+            this.experimento,
+            this.cantidadBombas
+        );
     }
 }

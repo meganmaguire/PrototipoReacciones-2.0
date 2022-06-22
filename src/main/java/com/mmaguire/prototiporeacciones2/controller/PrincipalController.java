@@ -23,6 +23,7 @@ import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static com.mmaguire.prototiporeacciones2.manager.FileManager.loadSystemFromFile;

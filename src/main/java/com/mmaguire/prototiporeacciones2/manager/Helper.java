@@ -1,13 +1,18 @@
 package com.mmaguire.prototiporeacciones2.manager;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
+import com.mmaguire.prototiporeacciones2.controller.GraficoSimulacionController;
 import com.mmaguire.prototiporeacciones2.model.EquationItem;
 import com.mmaguire.prototiporeacciones2.model.Factor;
 import com.mmaguire.prototiporeacciones2.model.Reactivo;
 import com.mmaguire.prototiporeacciones2.model.ReactivoReaccion;
+import com.uppaal.engine.QueryResult;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +73,7 @@ public class Helper {
         return false;
     }
 
-    public static void styleButton(Button cellButton) {
+    public static void styleDeleteButton(Button cellButton) {
         Image image = new Image(MainApp.class.getResourceAsStream("icons/baseline_delete_black_24dp.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(18);
@@ -75,6 +81,16 @@ public class Helper {
         cellButton.setGraphic(imageView);
         cellButton.getStyleClass().add("delete-button");
     }
+
+    public static void styleGraphicButton(Button cellButton) {
+        Image image = new Image(MainApp.class.getResourceAsStream("icons/baseline_query_stats_black_24dp.png"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(18);
+        imageView.setFitWidth(18);
+        cellButton.setGraphic(imageView);
+        cellButton.getStyleClass().add("delete-button");
+    }
+
 
 
     public static String tasaReaccion2LaTeX(ArrayList<EquationItem> tasaReaccion){
@@ -128,5 +144,22 @@ public class Helper {
         stage.initOwner(parentStage);
         stage.initModality(Modality.APPLICATION_MODAL);
         return stage;
+    }
+
+    public static void showData(ActionEvent event, QueryResult simulacion){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("views/grafico-simulacion.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            GraficoSimulacionController controller = loader.getController();
+            controller.receiveData(simulacion);
+            Stage stage = createModalWindow(scene, event);
+            stage.showAndWait();
+        }
+        catch (IOException e) {
+            System.out.println("Error al cargar archivo XML");
+        }
     }
 }

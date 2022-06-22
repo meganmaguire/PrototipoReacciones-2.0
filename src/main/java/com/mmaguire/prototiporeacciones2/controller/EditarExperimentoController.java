@@ -85,7 +85,7 @@ public class EditarExperimentoController {
                     setGraphic(null);
                     return;
                 }
-                styleButton(deleteButton);
+                styleDeleteButton(deleteButton);
                 setGraphic(deleteButton);
                 deleteButton.setOnAction(
                         event -> getTableView().getItems().remove(reactivo)
@@ -108,7 +108,7 @@ public class EditarExperimentoController {
                     setGraphic(null);
                     return;
                 }
-                styleButton(deleteButton);
+                styleDeleteButton(deleteButton);
                 setGraphic(deleteButton);
                 deleteButton.setOnAction(
                         event -> getTableView().getItems().remove(factor)

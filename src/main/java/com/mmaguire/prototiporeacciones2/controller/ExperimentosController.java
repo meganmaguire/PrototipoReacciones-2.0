@@ -13,11 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -100,7 +98,7 @@ public class ExperimentosController {
                     setGraphic(null);
                     return;
                 }
-                styleButton(deleteButton);
+                styleDeleteButton(deleteButton);
                 setGraphic(deleteButton);
                 deleteButton.setOnAction(
                         event -> getTableView().getItems().remove(reactivo)
@@ -123,7 +121,7 @@ public class ExperimentosController {
                     setGraphic(null);
                     return;
                 }
-                styleButton(deleteButton);
+                styleDeleteButton(deleteButton);
                 setGraphic(deleteButton);
                 deleteButton.setOnAction(
                         event -> getTableView().getItems().remove(factor)
@@ -146,7 +144,7 @@ public class ExperimentosController {
                     setGraphic(null);
                     return;
                 }
-                styleButton(deleteButton);
+                styleDeleteButton(deleteButton);
                 setGraphic(deleteButton);
                 deleteButton.setOnAction(
                         event -> getTableView().getItems().remove(paso)

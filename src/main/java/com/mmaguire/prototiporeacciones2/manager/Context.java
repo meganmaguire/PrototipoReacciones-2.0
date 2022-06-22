@@ -20,6 +20,7 @@ public class Context {
     private ObservableList<Reaccion> reacciones;
     private ObservableList<Factor> factores;
     private ObservableList<Factor> constantesReaccion;
+    private ObservableList<Sistema> historial;
 
     private Context(){
         this.sistemaReacciones = new Sistema();
@@ -29,6 +30,7 @@ public class Context {
         this.reacciones = FXCollections.observableList(this.sistemaReacciones.getReacciones());
         this.factores = FXCollections.observableList(this.sistemaReacciones.getFactores());
         this.constantesReaccion = FXCollections.observableList(this.sistemaReacciones.getConstantesReaccion());
+        this.historial = FXCollections.observableList(new ArrayList<>());
     }
 
     public static Context getContext(){
@@ -110,6 +112,14 @@ public class Context {
     public void setConstantesReaccion(ObservableList<Factor> constantesReaccion) {
         this.constantesReaccion.setAll(constantesReaccion);
         this.sistemaReacciones.setConstantesReaccion(this.constantesReaccion);
+    }
+
+    public ObservableList<Sistema> getHistorial() {
+        return historial;
+    }
+
+    public void setHistorial(ObservableList<Sistema> historial) {
+        this.historial = historial;
     }
 
     public void setContadorReacciones(){

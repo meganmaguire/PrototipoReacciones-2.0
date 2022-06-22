@@ -196,14 +196,9 @@ public class ReaccionManager {
      */
     public static String generateSimulationQuery(int timeUnits, Sistema sistema){
         StringBuilder query = new StringBuilder("simulate [<=" + timeUnits + "] {");
-        List<ReactivoReaccion> reactivos = new ArrayList<>();
-        // Toma los reactivos que se usaron en reacciones para armar la query
-        for(Reaccion reaccion : sistema.getReacciones()) {
-            reactivos.addAll(reaccion.getReactantes().stream().filter(r -> !reactivos.contains(r)).toList());
-            reactivos.addAll(reaccion.getProductos().stream().filter(r -> !reactivos.contains(r)).toList());
-        }
+        List<Reactivo> reactivos = sistema.getReactivos();
         for(int i = 0; i<reactivos.size(); i++){
-            query.append(reactivos.get(i).getReactivoAsociado().getNombre()).append(i != reactivos.size() - 1 ? ", " : "");
+            query.append(reactivos.get(i).getNombre()).append(i != reactivos.size() - 1 ? ", " : "");
         }
         query.append("}");
         return query.toString();

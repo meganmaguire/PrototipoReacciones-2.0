@@ -21,7 +21,7 @@ public class AddConstanteController {
     @FXML
     public void initialize() {
         this.valorConstante.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 1000, 0,0.01));
-
+        this.valorConstante.setEditable(true);
     }
 
     @FXML

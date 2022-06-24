@@ -24,10 +24,10 @@ import javafx.stage.Window;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-import static com.mmaguire.prototiporeacciones2.manager.FileManager.loadSystemFromFile;
-import static com.mmaguire.prototiporeacciones2.manager.FileManager.saveSystemToFile;
+import static com.mmaguire.prototiporeacciones2.manager.FileManager.*;
 import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.createModel;
 
 public class PrincipalController {
@@ -259,13 +259,50 @@ public class PrincipalController {
     }
 
     @FXML
-    public void saveHistory(){
-        // TODO pendiente
+    public void saveHistory(ActionEvent event){
+        MenuItem menuItem = ((MenuItem) event.getTarget());
+        ContextMenu cm = menuItem.getParentPopup();
+        Window window = cm.getScene().getWindow();
+        FileChooser fileChooser =  new FileChooser();
+        fileChooser.setInitialFileName("historial.rsh");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Historial de Sistema de Reacción (*.rsh)", "*.rsh")
+        );
+        File selected = fileChooser.showSaveDialog(window);
+        if(selected != null) {
+            this.filePath = selected.getAbsolutePath();
+            boolean result = saveHistoryToFile(this.contexto.getHistorial(), this.filePath);
+            showDialog(result);
+        }
     }
 
     @FXML
-    public void loadHistory(){
-        // TODO Pendiente
+    public void loadHistory(ActionEvent event) {
+        MenuItem menuItem = ((MenuItem) event.getTarget());
+        ContextMenu cm = menuItem.getParentPopup();
+        Window window = cm.getScene().getWindow();
+        FileChooser.ExtensionFilter filterRSH = new FileChooser.ExtensionFilter("Historial de Sistema de Reacción (*.rsh)", "*.rsh");
+        FileChooser.ExtensionFilter filterAll = new FileChooser.ExtensionFilter("Todos los archivos", "*.*");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(filterRSH);
+        fileChooser.getExtensionFilters().add(filterAll);
+        File selected = fileChooser.showOpenDialog(window);
+
+        if (selected != null) {
+            this.filePath = selected.getAbsolutePath();
+            List<Sistema> historial = loadHistoryFromFile(this.filePath);
+
+            if(historial != null) {
+                this.contexto.setHistorial(FXCollections.observableList(historial));
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error al cargar datos");
+                alert.setContentText("Ha ocurrido un error al intentar cargar los datos del sistema de reacciones.");
+                alert.showAndWait();
+            }
+        }
     }
 
     @FXML

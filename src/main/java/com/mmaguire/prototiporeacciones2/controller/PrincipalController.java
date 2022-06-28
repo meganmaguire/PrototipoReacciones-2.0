@@ -293,7 +293,8 @@ public class PrincipalController {
             List<Sistema> historial = loadHistoryFromFile(this.filePath);
 
             if(historial != null) {
-                this.contexto.setHistorial(FXCollections.observableList(historial));
+                this.contexto.getHistorial().clear();
+                this.contexto.getHistorial().addAll(historial);
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

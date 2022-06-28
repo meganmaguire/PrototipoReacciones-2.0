@@ -2,11 +2,10 @@ package com.mmaguire.prototiporeacciones2.manager;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.controller.GraficoSimulacionController;
-import com.mmaguire.prototiporeacciones2.model.EquationItem;
-import com.mmaguire.prototiporeacciones2.model.Factor;
-import com.mmaguire.prototiporeacciones2.model.Reactivo;
-import com.mmaguire.prototiporeacciones2.model.ReactivoReaccion;
+import com.mmaguire.prototiporeacciones2.model.*;
 import com.uppaal.engine.QueryResult;
+import com.uppaal.model.core2.Data2D;
+import com.uppaal.model.core2.DataSet2D;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -21,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +112,21 @@ public class Helper {
         return result.toString();
     }
 
+    public static Simulacion queryResult2Simulacion(QueryResult result){
+        List<DatosComponente> datos = new ArrayList<>();
+        List<Punto> datosComponente = new ArrayList<>();
+        String titulo = result.getData().getDataTitles().stream().findFirst().get();
+        DataSet2D data = result.getData().getData(titulo);
+        for (Data2D componentData : data) {
+            for (Point2D.Double punto : componentData) {
+                datosComponente.add(new Punto(punto.x, punto.y));
+            }
+            datos.add(new DatosComponente(datosComponente, componentData.getTitle()));
+            datosComponente = new ArrayList<>();
+        }
+        return new Simulacion(datos,titulo, null);
+    }
+
     public static ArrayList<ArrayList<EquationItem>> separateTasaReaccion(ArrayList<EquationItem> tasaReaccion){
         ArrayList<ArrayList<EquationItem>> result = new ArrayList<>();
         ArrayList<EquationItem> tasaIda = new ArrayList<>();
@@ -146,7 +161,7 @@ public class Helper {
         return stage;
     }
 
-    public static void showData(ActionEvent event, QueryResult simulacion){
+    public static void showData(ActionEvent event, Simulacion simulacion){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("views/grafico-simulacion.fxml"));

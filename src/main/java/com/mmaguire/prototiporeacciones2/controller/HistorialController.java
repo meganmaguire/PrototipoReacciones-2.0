@@ -67,7 +67,7 @@ public class HistorialController {
                 graphicButton.setOnAction(
                         event -> {
                             // Mostrar gráfico
-                            showData(event, sistema.getSimulacion().getDatos());
+                            showData(event, sistema.getSimulacion());
                         }
                 );
             }

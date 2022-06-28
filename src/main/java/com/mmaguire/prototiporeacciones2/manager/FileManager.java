@@ -2,12 +2,17 @@ package com.mmaguire.prototiporeacciones2.manager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.mmaguire.prototiporeacciones2.model.DatosComponente;
+import com.mmaguire.prototiporeacciones2.model.Punto;
+import com.mmaguire.prototiporeacciones2.model.Simulacion;
 import com.mmaguire.prototiporeacciones2.model.Sistema;
 import com.uppaal.model.core2.Data2D;
 import com.uppaal.model.core2.DataSet2D;
 
 import java.awt.geom.Point2D;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class FileManager {
@@ -47,12 +52,14 @@ public class FileManager {
     public static boolean saveHistoryToFile(List<Sistema> historial, String path) {
         try{
             File file = new File(path);
+            Iterator<Sistema> it = historial.iterator();
             BufferedWriter fileWriter = new BufferedWriter(new FileWriter(file));
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule());
-            for (Sistema sistema : historial) {
-                fileWriter.write(objectMapper.writeValueAsString(sistema));
-                fileWriter.newLine();
+            while (it.hasNext()) {
+                fileWriter.write(objectMapper.writeValueAsString(it.next()));
+                if(it.hasNext())
+                    fileWriter.newLine();
             }
             fileWriter.close();
             return true;
@@ -65,7 +72,7 @@ public class FileManager {
     }
 
     public static List<Sistema> loadHistoryFromFile(String path){
-        List<Sistema> result = null;
+        List<Sistema> result = new ArrayList<>();
         try {
             File file = new File(path);
             BufferedReader fileReader = new BufferedReader(new FileReader(file));
@@ -83,15 +90,15 @@ public class FileManager {
         return result;
     }
 
-    public static boolean exportSimulationData(DataSet2D data, String path) {
+    public static boolean exportSimulationData(Simulacion data, String path) {
         try {
             File file = new File(path);
             BufferedWriter fileWriter = new BufferedWriter(new FileWriter(file));
-            fileWriter.write("### " + data.getTitle()); fileWriter.newLine();
-            for(Data2D variableData : data) {
-                fileWriter.write("# " + variableData.getTitle() + " #1"); fileWriter.newLine();
-                for(Point2D.Double punto : variableData) {
-                    fileWriter.write(punto.x + " " + punto.y); fileWriter.newLine();
+            fileWriter.write("### " + data.getTitulo()); fileWriter.newLine();
+            for(DatosComponente variableData : data.getDatos()) {
+                fileWriter.write("# " + variableData.getTitulo() + " #1"); fileWriter.newLine();
+                for(Punto punto : variableData.getDatos()) {
+                    fileWriter.write(punto.getX() + " " + punto.getY()); fileWriter.newLine();
                 }
             }
             fileWriter.close();

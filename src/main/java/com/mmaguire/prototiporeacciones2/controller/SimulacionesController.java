@@ -21,18 +21,14 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import on.S;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
@@ -125,11 +121,14 @@ public class SimulacionesController {
                 UppaalSystem sys = ModelManager.compile(engine, doc);
 
                 Query query = new Query(generateSimulationQuery(tiempoSimulacion.getValue(), this.contexto.getSistemaReacciones()), "");
-                QueryResult simulacion = engine.query(sys, options, query, qf);
+                QueryResult result = engine.query(sys, options, query, qf);
 
                 // Guardar simulación
+                Simulacion simulacion = queryResult2Simulacion(result);
+                simulacion.setTiempo(LocalDateTime.now());
                 Sistema nuevaSimulacion = this.contexto.getSistemaReacciones().clone();
-                nuevaSimulacion.setSimulacion(new Simulacion(simulacion, LocalDateTime.now()));
+                nuevaSimulacion.setSimulacion(simulacion);
+
                 this.contexto.getHistorial().add(nuevaSimulacion);
                 // Generar pantalla de simulación y enviar datos
                 Platform.runLater(()-> {

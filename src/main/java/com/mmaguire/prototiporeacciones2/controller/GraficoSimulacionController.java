@@ -1,7 +1,6 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
-import com.uppaal.engine.QueryResult;
-import com.uppaal.model.core2.DataSet2D;
+import com.mmaguire.prototiporeacciones2.model.Simulacion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import on.S;
 
 import java.io.File;
 
@@ -21,17 +21,13 @@ public class GraficoSimulacionController {
     @FXML
     private LineChart<Number, Number> graficoSimulacion;
 
-    private QueryResult simulacion;
-    private DataSet2D data;
+    private Simulacion simulacion;
 
     @FXML
-    public void receiveData(QueryResult result) {
+    public void receiveData(Simulacion result) {
 
         this.simulacion = result;
-
-        String title = this.simulacion.getData().getDataTitles().stream().findFirst().get();
-        this.data = this.simulacion.getData().getData(title);
-        fillSimulationChart(this.graficoSimulacion, this.data);
+        fillSimulationChart(this.graficoSimulacion, this.simulacion);
     }
 
     @FXML
@@ -52,7 +48,7 @@ public class GraficoSimulacionController {
         );
         File selected = fileChooser.showSaveDialog(window);
         if(selected != null) {
-            boolean result = exportSimulationData(this.data, selected.getAbsolutePath());
+            boolean result = exportSimulationData(this.simulacion, selected.getAbsolutePath());
 
             if (result) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

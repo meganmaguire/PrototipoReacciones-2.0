@@ -1,28 +1,36 @@
 package com.mmaguire.prototiporeacciones2.model;
 
-import com.uppaal.engine.QueryResult;
-import com.uppaal.model.core2.DataSet2D;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Simulacion {
-    private QueryResult datos;
+    private List<DatosComponente> datos;
+    private String titulo;
     private LocalDateTime tiempo;
 
     public Simulacion() {
     }
 
-    public Simulacion(QueryResult datos, LocalDateTime tiempo) {
+    public Simulacion(List<DatosComponente> datos, String titulo, LocalDateTime tiempo) {
         this.datos = datos;
+        this.titulo = titulo;
         this.tiempo = tiempo;
     }
 
-    public QueryResult getDatos() {
+    public List<DatosComponente> getDatos() {
         return datos;
     }
 
-    public void setDatos(QueryResult datos) {
+    public void setDatos(List<DatosComponente> datos) {
         this.datos = datos;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public LocalDateTime getTiempo() {

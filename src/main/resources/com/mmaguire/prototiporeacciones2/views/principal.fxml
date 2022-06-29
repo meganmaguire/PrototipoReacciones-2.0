@@ -46,26 +46,32 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Archivo">
+        <Menu mnemonicParsing="false" text="%menu.archivo">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#newFile" text="Nuevo sistema" />
-            <MenuItem mnemonicParsing="false" onAction="#openFile" text="Abrir..." />
+            <MenuItem mnemonicParsing="false" onAction="#newFile" text="%menu.archivo.nuevo" />
+            <MenuItem mnemonicParsing="false" onAction="#openFile" text="%menu.archivo.abrir" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#closeSystem" text="Cerrar sistema" />
-            <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Guardar" />
-            <MenuItem mnemonicParsing="false" onAction="#saveFileAs" text="Guardar como..." />
+            <MenuItem mnemonicParsing="false" onAction="#closeSystem" text="%menu.archivo.cerrar" />
+            <MenuItem mnemonicParsing="false" onAction="#saveFile" text="%menu.archivo.guardar" />
+            <MenuItem mnemonicParsing="false" onAction="#saveFileAs" text="%menu.archivo.guardarComo" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#exportXML" text="Exportar XML..." />
-                  <MenuItem mnemonicParsing="false" onAction="#saveHistory" text="Guardar historial..." />
-                  <MenuItem mnemonicParsing="false" onAction="#loadHistory" text="Cargar historial..." />
+            <MenuItem mnemonicParsing="false" onAction="#exportXML" text="%menu.archivo.xml" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveHistory" text="%menu.archivo.guardarH" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadHistory" text="%menu.archivo.cargarH" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#quitApp" text="Salir" />
+            <MenuItem mnemonicParsing="false" onAction="#quitApp" text="%menu.archivo.salir" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Ayuda">
+        <Menu mnemonicParsing="false" text="%menu.ayuda">
           <items>
-                  <MenuItem mnemonicParsing="false" text="Manual de uso" />
-            <MenuItem mnemonicParsing="false" text="Sobre nosotros" />
+                  <Menu mnemonicParsing="false" text="%menu.ayuda.idioma">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="%menu.ayuda.idioma.español" />
+                        <MenuItem mnemonicParsing="false" text="%menu.ayuda.idioma.ingles" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="%menu.ayuda.manual" />
+            <MenuItem mnemonicParsing="false" text="%menu.ayuda.sobre" />
           </items>
         </Menu>
       </menus>
@@ -90,23 +96,23 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <children>
-                                    <Label fx:id="menuComponentes" contentDisplay="CENTER" onMouseClicked="#onMouseClickedComponentes" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="COMPONENTES">
+                                    <Label fx:id="menuComponentes" contentDisplay="CENTER" onMouseClicked="#onMouseClickedComponentes" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.componentes">
                                        <padding>
                                           <Insets left="16.0" right="16.0" />
                                        </padding></Label>
-                                    <Label fx:id="menuReacciones" onMouseClicked="#onMouseClickedReacciones" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="REACCIONES">
+                                    <Label fx:id="menuReacciones" onMouseClicked="#onMouseClickedReacciones" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.reacciones">
                                        <padding>
                                           <Insets left="16.0" right="16.0" />
                                        </padding></Label>
-                                    <Label fx:id="menuExperimentos" onMouseClicked="#onMouseClickedExperimentos" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="EXPERIMENTOS">
+                                    <Label fx:id="menuExperimentos" onMouseClicked="#onMouseClickedExperimentos" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.experimentos">
                                        <padding>
                                           <Insets left="16.0" right="16.0" />
                                        </padding></Label>
-                                    <Label fx:id="menuSimulaciones" onMouseClicked="#onMouseClickedSimulaciones" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="SIMULACIONES">
+                                    <Label fx:id="menuSimulaciones" onMouseClicked="#onMouseClickedSimulaciones" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.simulaciones">
                                        <padding>
                                           <Insets left="16.0" right="16.0" />
                                        </padding></Label>
-                                    <Label fx:id="menuHistorial" onMouseClicked="#onMouseClickedHistorial" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="HISTORIAL">
+                                    <Label fx:id="menuHistorial" onMouseClicked="#onMouseClickedHistorial" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.historial">
                                        <padding>
                                           <Insets left="16.0" right="16.0" />
                                        </padding></Label>

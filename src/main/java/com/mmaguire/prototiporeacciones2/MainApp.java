@@ -11,11 +11,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("views/principal.fxml"));
+        Locale locale = new Locale("en");
+        ResourceBundle bundle = ResourceBundle.getBundle("com/mmaguire/prototiporeacciones2/i18n/texts", locale);
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("views/principal.fxml"), bundle);
         VBox content = fxmlLoader.load();
         Scene scene = new Scene(content, 1300, 800);
         stage.setTitle("Hello!");

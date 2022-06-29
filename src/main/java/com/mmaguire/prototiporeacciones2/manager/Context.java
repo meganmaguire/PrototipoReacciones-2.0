@@ -45,13 +45,12 @@ public class Context {
     }
 
     private void resetInstance(){
-        //this.sistemaReacciones = new Sistema();
-        //this.experimento = this.sistemaReacciones.getExperimento();
         this.pasosExperimento.clear();
         this.reactivos.clear();
         this.reacciones.clear();
         this.factores.clear();
         this.constantesReaccion.clear();
+        this.historial.clear();
     }
 
     public Sistema getSistemaReacciones() {

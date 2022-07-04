@@ -1,12 +1,12 @@
 package com.mmaguire.prototiporeacciones2.manager;
 
 import com.mmaguire.prototiporeacciones2.model.*;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.util.Callback;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Context {
 
@@ -21,6 +21,9 @@ public class Context {
     private ObservableList<Factor> factores;
     private ObservableList<Factor> constantesReaccion;
     private ObservableList<Sistema> historial;
+
+    public static Locale locale = new Locale("en");
+    public static ResourceBundle bundle = ResourceBundle.getBundle("com/mmaguire/prototiporeacciones2/i18n/texts", locale);
 
     private Context(){
         this.sistemaReacciones = new Sistema();

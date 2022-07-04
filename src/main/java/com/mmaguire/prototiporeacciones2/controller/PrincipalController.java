@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.FileManager.*;
 import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.createModel;
 
@@ -57,19 +58,19 @@ public class PrincipalController {
         contexto = Context.getContext();
         FXMLLoader fxmlLoader;
         try {
-            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.componentes));
+            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.componentes), bundle);
             componentesPane = fxmlLoader.load();
 
-            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.reacciones));
+            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.reacciones), bundle);
             reaccionesPane = fxmlLoader.load();
 
-            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.experimentos));
+            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.experimentos), bundle);
             experimentosPane = fxmlLoader.load();
 
-            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.simulaciones));
+            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.simulaciones), bundle);
             simulacionesPane = fxmlLoader.load();
 
-            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.historial));
+            fxmlLoader = new FXMLLoader(MainApp.class.getResource(Routes.historial), bundle);
             historialPane = fxmlLoader.load();
         }
         catch (IOException e){

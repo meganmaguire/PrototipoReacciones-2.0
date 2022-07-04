@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
 
 public class ComponentesController {
@@ -151,8 +152,7 @@ public class ComponentesController {
 
     public void editarReactivo(Reactivo reactivo, Event event){
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("views/editar-componente.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/editar-componente.fxml"), bundle);
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

@@ -22,14 +22,14 @@
             <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
          </padding>
          <children>
-            <Label styleClass="title" text="Reacciones" />
+            <Label styleClass="title" text="%reac.titulo" />
             <VBox prefHeight="611.0" prefWidth="971.0" spacing="32.0">
                <children>
                   <HBox prefHeight="200.0" prefWidth="971.0" spacing="80.0">
                      <children>
                         <VBox prefHeight="141.0" prefWidth="300.0" spacing="18.0">
                            <children>
-                              <Label styleClass="subtitle" text="Reactivos" />
+                              <Label styleClass="subtitle" text="%reac.reactivos" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
                                     <ComboBox fx:id="comboBoxReactivos" prefWidth="134.0" />
@@ -47,8 +47,8 @@
                               </HBox>
                               <TableView fx:id="tablaReactivos" prefHeight="227.0" prefWidth="313.0">
                                 <columns>
-                                  <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="Nombre" />
-                                  <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="86.0" resizable="false" sortable="false" text="Cantidad" />
+                                  <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.nombre" />
+                                  <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="86.0" resizable="false" sortable="false" text="%tabla.cantidad" />
                                     <TableColumn fx:id="columnaEliminarReactivo" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
                                 </columns>
                                  <columnResizePolicy>
@@ -61,13 +61,13 @@
                            <children>
                               <VBox prefWidth="100.0" spacing="20.0">
                                  <children>
-                                    <Label styleClass="subtitle" text="Tipo de reacción" />
+                                    <Label styleClass="subtitle" text="%reac.tiporeac" />
                                     <ComboBox fx:id="comboBoxTipoReaccion" prefWidth="212.0" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0">
                                  <children>
-                                    <Label styleClass="subtitle" text="Constantes" />
+                                    <Label styleClass="subtitle" text="%reac.const" />
                                     <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0">
                                        <children>
                                           <HBox alignment="CENTER_RIGHT" spacing="16.0">
@@ -90,7 +90,7 @@
                         </VBox>
                         <VBox prefHeight="141.0" prefWidth="300.0" spacing="18.0">
                            <children>
-                              <Label styleClass="subtitle" text="Productos" />
+                              <Label styleClass="subtitle" text="%reac.productos" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
                                     <ComboBox fx:id="comboBoxProductos" prefWidth="134.0" />
@@ -108,8 +108,8 @@
                               </HBox>
                               <TableView fx:id="tablaProductos" prefHeight="227.0" prefWidth="313.0">
                                  <columns>
-                                    <TableColumn fx:id="columnaNombreProductos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="Nombre" />
-                                    <TableColumn fx:id="columnaCantidadProductos" editable="false" prefWidth="86.0" resizable="false" sortable="false" text="Cantidad" />
+                                    <TableColumn fx:id="columnaNombreProductos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.nombre" />
+                                    <TableColumn fx:id="columnaCantidadProductos" editable="false" prefWidth="86.0" resizable="false" sortable="false" text="%tabla.cantidad" />
                                     <TableColumn fx:id="columnaEliminarProducto" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
                                  </columns>
                                  <columnResizePolicy>
@@ -125,23 +125,23 @@
                         <Label prefHeight="24.0" prefWidth="149.0" styleClass="subtitle" text="Reacción:" />
                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="774.0" spacing="24.0">
                            <children>
-                              <Label fx:id="labelReactivos" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="200.0" styleClass="subtitle" text="reactivos" />
+                              <Label fx:id="labelReactivos" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="200.0" styleClass="subtitle" />
                               <Label fx:id="labelTipoReaccion" text="⇌">
                                  <font>
                                     <Font size="28.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelProductos" prefHeight="24.0" prefWidth="200.0" styleClass="subtitle" text="productos" />
+                              <Label fx:id="labelProductos" prefHeight="24.0" prefWidth="200.0" styleClass="subtitle" />
                            </children>
                         </HBox>
-                        <Button mnemonicParsing="false" onAction="#añadirReaccion" prefHeight="28.0" prefWidth="200.0" styleClass="primary-button" text="AÑADIR REACCION" />
+                        <Button mnemonicParsing="false" onAction="#añadirReaccion" prefHeight="28.0" prefWidth="200.0" styleClass="primary-button" text="%boton.añadirReac" />
                      </children>
                   </HBox>
                   <TableView fx:id="tablaReacciones" prefHeight="284.0" prefWidth="971.0">
                     <columns>
-                      <TableColumn fx:id="columnaNroReaccion" editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Número" />
-                      <TableColumn fx:id="columnaReaccion" editable="false" prefWidth="308.0" resizable="false" sortable="false" text="Reacción" />
-                        <TableColumn fx:id="columnaTasaReaccion" editable="false" prefWidth="537.0" resizable="false" sortable="false" text="Tasa de reacción" />
+                      <TableColumn fx:id="columnaNroReaccion" editable="false" prefWidth="75.0" resizable="false" sortable="false" text="%tabla.numero" />
+                      <TableColumn fx:id="columnaReaccion" editable="false" prefWidth="308.0" resizable="false" sortable="false" text="%tabla.reaccion" />
+                        <TableColumn fx:id="columnaTasaReaccion" editable="false" prefWidth="537.0" resizable="false" sortable="false" text="%tabla.tasa" />
                         <TableColumn fx:id="columnaEliminarReaccion" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
                     </columns>
                      <columnResizePolicy>

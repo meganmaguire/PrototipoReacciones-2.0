@@ -20,14 +20,14 @@
             <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
          </padding>
          <children>
-            <Label styleClass="title" text="Experimentos" />
+            <Label styleClass="title" text="%exp.titulo" />
             <HBox prefHeight="618.0" prefWidth="971.0" spacing="72.0">
                <children>
                   <VBox prefHeight="100.0" prefWidth="324.0" spacing="36.0">
                      <children>
                         <VBox prefHeight="210.0" prefWidth="324.0" spacing="18.0">
                            <children>
-                              <Label styleClass="subtitle" text="Reactivos" />
+                              <Label styleClass="subtitle" text="%exp.reactivos" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
                                     <ComboBox fx:id="comboBoxReactivos" prefWidth="150.0" />
@@ -45,8 +45,8 @@
                               </HBox>
                               <TableView fx:id="tablaReactivos" prefHeight="217.0" prefWidth="372.0">
                                  <columns>
-                                    <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="Nombre" />
-                                    <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="Cantidad" />
+                                    <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.nombre" />
+                                    <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="%tabla.cantidad" />
                                     <TableColumn fx:id="columnaEliminarReactivo" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
                                  </columns>
                                  <columnResizePolicy>
@@ -57,7 +57,7 @@
                         </VBox>
                         <VBox prefHeight="210.0" prefWidth="324.0" spacing="18.0">
                            <children>
-                              <Label styleClass="subtitle" text="Factores de reacción" />
+                              <Label styleClass="subtitle" text="%exp.factores" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
                                     <ComboBox fx:id="comboBoxFactores" prefWidth="150.0" />
@@ -75,8 +75,8 @@
                               </HBox>
                               <TableView fx:id="tablaFactores" prefHeight="217.0" prefWidth="372.0">
                                  <columns>
-                                    <TableColumn fx:id="columnaNombreFactor" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="Factor" />
-                                    <TableColumn fx:id="columnaValorFactor" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="Valor" />
+                                    <TableColumn fx:id="columnaNombreFactor" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.factor" />
+                                    <TableColumn fx:id="columnaValorFactor" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="%tabla.valores" />
                                     <TableColumn fx:id="columnaEliminarFactor" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
                                  </columns>
                                  <columnResizePolicy>
@@ -87,26 +87,26 @@
                         </VBox>
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="24.0">
                            <children>
-                              <Label prefHeight="24.0" prefWidth="81.0" styleClass="subtitle" text="Tiempo" />
+                              <Label prefHeight="24.0" prefWidth="81.0" styleClass="subtitle" text="%exp.tiempo" />
                               <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="258.0" spacing="16.0">
                                  <children>
                                     <Spinner fx:id="tiempoPaso" prefHeight="25.0" prefWidth="120.0" />
-                                    <Label text="segundos" />
+                                    <Label text="%exp.segundos" />
                                  </children>
                               </HBox>
                            </children>
                         </HBox>
                         <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="324.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#añadirPasoExperimento" prefHeight="25.0" prefWidth="120.0" styleClass="primary-button" text="AÑADIR PASO" />
+                              <Button mnemonicParsing="false" onAction="#añadirPasoExperimento" prefHeight="25.0" prefWidth="120.0" styleClass="primary-button" text="%boton.añadirPaso" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                   <TableView fx:id="tablaExperimento" prefHeight="200.0" prefWidth="576.0">
                     <columns>
-                      <TableColumn fx:id="columnaTiempoPaso" editable="false" prefWidth="100.0" resizable="false" sortable="false" text="Tiempo" />
-                      <TableColumn fx:id="columnaModificacionesPaso" editable="false" prefWidth="425.0" resizable="false" sortable="false" text="Modificaciones" />
+                      <TableColumn fx:id="columnaTiempoPaso" editable="false" prefWidth="100.0" resizable="false" sortable="false" text="%tabla.tiempo" />
+                      <TableColumn fx:id="columnaModificacionesPaso" editable="false" prefWidth="425.0" resizable="false" sortable="false" text="%tabla.modificaciones" />
                         <TableColumn fx:id="columnaEliminarPaso" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
                     </columns>
                      <columnResizePolicy>

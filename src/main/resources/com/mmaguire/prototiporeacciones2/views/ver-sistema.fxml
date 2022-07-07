@@ -20,12 +20,12 @@
                <children>
                   <VBox prefHeight="582.0" prefWidth="509.0" spacing="18.0">
                      <children>
-                        <Label styleClass="subtitle" text="Reacciones" />
+                        <Label styleClass="subtitle" text="%sim.reacciones" />
                         <TableView fx:id="tablaReacciones" prefHeight="582.0" prefWidth="141.0">
                           <columns>
-                            <TableColumn fx:id="columnaNroReaccion" editable="false" prefWidth="54.0" resizable="false" sortable="false" text="Nro" />
-                            <TableColumn fx:id="columnaReaccion" editable="false" prefWidth="178.0" resizable="false" sortable="false" text="Reacción" />
-                              <TableColumn fx:id="columnaTasaReaccion" editable="false" prefWidth="272.0" resizable="false" sortable="false" text="Tasa de reacción" />
+                            <TableColumn fx:id="columnaNroReaccion" editable="false" prefWidth="54.0" resizable="false" sortable="false" text="%tabla.numero" />
+                            <TableColumn fx:id="columnaReaccion" editable="false" prefWidth="178.0" resizable="false" sortable="false" text="%tabla.reaccion" />
+                              <TableColumn fx:id="columnaTasaReaccion" editable="false" prefWidth="272.0" resizable="false" sortable="false" text="%tabla.tasa" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -35,11 +35,11 @@
                   </VBox>
                   <VBox prefHeight="582.0" prefWidth="419.0" spacing="18.0">
                      <children>
-                        <Label styleClass="subtitle" text="Experimento" />
+                        <Label styleClass="subtitle" text="%sim.experimento" />
                         <TableView fx:id="tablaExperimento" prefHeight="592.0" prefWidth="418.0">
                           <columns>
-                            <TableColumn fx:id="columnaTiempoPaso" editable="false" prefWidth="100.0" resizable="false" sortable="false" text="Tiempo" />
-                            <TableColumn fx:id="columnaModificacionesPaso" editable="false" prefWidth="314.0" resizable="false" sortable="false" text="Modificaciones" />
+                            <TableColumn fx:id="columnaTiempoPaso" editable="false" prefWidth="100.0" resizable="false" sortable="false" text="%tabla.tiempo" />
+                            <TableColumn fx:id="columnaModificacionesPaso" editable="false" prefWidth="314.0" resizable="false" sortable="false" text="%tabla.modificaciones" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -51,7 +51,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="36.0">
                <children>
-                  <Button fx:id="botonCerrar" mnemonicParsing="false" onAction="#cerrar" prefHeight="25.0" prefWidth="90.0" styleClass="primary-button" text="CERRAR" />
+                  <Button fx:id="botonCerrar" mnemonicParsing="false" onAction="#cerrar" prefHeight="25.0" prefWidth="90.0" styleClass="primary-button" text="%boton.cerrar" />
                </children>
             </HBox>
          </children>

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
 
 public class HistorialController {
@@ -86,8 +87,7 @@ public class HistorialController {
 
     public void verSistema(Sistema sistema, Event event) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("views/ver-sistema.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/ver-sistema.fxml"), bundle);
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

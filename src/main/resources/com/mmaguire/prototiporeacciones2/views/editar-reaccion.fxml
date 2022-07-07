@@ -22,14 +22,14 @@
             <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
          </padding>
          <children>
-            <Label styleClass="title" text="Editar reacción" />
+            <Label styleClass="title" text="%edit.reac.titulo" />
             <VBox prefWidth="971.0" spacing="32.0">
                <children>
                   <HBox prefHeight="200.0" prefWidth="971.0" spacing="80.0">
                      <children>
                         <VBox prefHeight="141.0" prefWidth="300.0" spacing="18.0">
                            <children>
-                              <Label styleClass="subtitle" text="Reactivos" />
+                              <Label styleClass="subtitle" text="%reac.reactivos" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
                                     <ComboBox fx:id="comboBoxReactivos" prefWidth="134.0" />
@@ -61,7 +61,7 @@
                            <children>
                               <VBox prefWidth="100.0" spacing="20.0">
                                  <children>
-                                    <Label styleClass="subtitle" text="Tipo de reacción" />
+                                    <Label styleClass="subtitle" text="%reac.tiporeac" />
                                     <Label fx:id="tipoReaccion">
                                        <VBox.margin>
                                           <Insets left="24.0" />
@@ -71,7 +71,7 @@
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0">
                                  <children>
-                                    <Label styleClass="subtitle" text="Constantes" />
+                                    <Label styleClass="subtitle" text="%reac.const" />
                                     <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0">
                                        <children>
                                           <HBox alignment="CENTER_RIGHT" spacing="16.0">
@@ -94,7 +94,7 @@
                         </VBox>
                         <VBox prefHeight="141.0" prefWidth="300.0" spacing="18.0">
                            <children>
-                              <Label styleClass="subtitle" text="Productos" />
+                              <Label styleClass="subtitle" text="%reac.productos" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
                                     <ComboBox fx:id="comboBoxProductos" prefWidth="134.0" />
@@ -126,7 +126,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="971.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="76.0" styleClass="subtitle" text="Reacción:" />
+                        <Label prefHeight="20.0" prefWidth="76.0" styleClass="subtitle" text="%reac.reaccion" />
                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="774.0" spacing="24.0">
                            <children>
                               <Label fx:id="labelReactivos" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="200.0" styleClass="subtitle" text="reactivos" />
@@ -142,16 +142,16 @@
                   </HBox>
                   <HBox alignment="CENTER" prefWidth="200.0" spacing="16.0">
                      <children>
-                        <Label prefHeight="24.0" prefWidth="133.0" styleClass="subtitle" text="Tasa de reacción:" />
+                        <Label prefHeight="24.0" prefWidth="133.0" styleClass="subtitle" text="%edit.reac.tasa" />
 
                         <TextField fx:id="textFieldTasaReaccion" alignment="TOP_LEFT" prefHeight="27.0" prefWidth="736.0" />
-                        <Button mnemonicParsing="false" onAction="#editarTasaReaccion" styleClass="primary-button" text="EDITAR" />
+                        <Button mnemonicParsing="false" onAction="#editarTasaReaccion" styleClass="primary-button" text="%boton.editar" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="16.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#descartarCambios" styleClass="secondary-button" text="DESCARTAR CAMBIOS" />
-                        <Button mnemonicParsing="false" onAction="#guardarCambios" styleClass="primary-button" text="GUARDAR" />
+                        <Button mnemonicParsing="false" onAction="#descartarCambios" styleClass="secondary-button" text="%boton.descartar" />
+                        <Button mnemonicParsing="false" onAction="#guardarCambios" styleClass="primary-button" text="%boton.guardar" />
                      </children>
                   </HBox>
                </children>

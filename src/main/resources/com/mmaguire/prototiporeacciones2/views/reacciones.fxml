@@ -122,7 +122,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="971.0">
                      <children>
-                        <Label prefHeight="24.0" prefWidth="149.0" styleClass="subtitle" text="Reacción:" />
+                        <Label prefHeight="24.0" prefWidth="149.0" styleClass="subtitle" text="%reac.reaccion" />
                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="774.0" spacing="24.0">
                            <children>
                               <Label fx:id="labelReactivos" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="200.0" styleClass="subtitle" />

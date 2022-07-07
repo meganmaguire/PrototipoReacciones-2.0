@@ -22,14 +22,14 @@
          <children>
             <HBox prefWidth="200.0">
                <children>
-                  <Label styleClass="title" text="Editar tasa de reacción" />
+                  <Label styleClass="title" text="%edit.tasa.titulo" />
                </children>
             </HBox>
             <HBox spacing="72.0">
                <children>
                   <VBox prefHeight="158.0" spacing="24.0">
                      <children>
-                        <Label styleClass="subtitle" text="Operadores" />
+                        <Label styleClass="subtitle" text="%edit.tasa.operador" />
                         <HBox alignment="CENTER_LEFT" spacing="12.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#añadirMas" prefWidth="45.0" styleClass="operator-button" text="+">
@@ -82,7 +82,7 @@
                   </VBox>
                   <VBox prefHeight="158.0" prefWidth="276.0" spacing="24.0">
                      <children>
-                        <Label styleClass="subtitle" text="Dígitos" />
+                        <Label styleClass="subtitle" text="%edit.tasa.digitos" />
                         <HBox alignment="CENTER_LEFT" spacing="12.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#añadirUno" prefWidth="45.0" styleClass="operator-button" text="1">
@@ -145,7 +145,7 @@
                   </VBox>
                   <VBox spacing="16.0">
                      <children>
-                        <Label styleClass="subtitle" text="Componentes" />
+                        <Label styleClass="subtitle" text="%edit.tasa.comp" />
                         <HBox spacing="20.0">
                            <children>
                               <ComboBox fx:id="comboBoxComponentes" prefHeight="28.0" prefWidth="130.0" />
@@ -160,7 +160,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <Label styleClass="subtitle" text="Constantes" />
+                        <Label styleClass="subtitle" text="%edit.tasa.const" />
                         <HBox spacing="20.0">
                            <children>
                               <ComboBox fx:id="comboBoxConstantes" prefHeight="27.0" prefWidth="130.0" />
@@ -197,13 +197,13 @@
                <children>
                   <VBox prefHeight="206.0" prefWidth="822.0" spacing="18.0">
                      <children>
-                        <Label styleClass="subtitle" text="Visualización" />
+                        <Label styleClass="subtitle" text="%edit.tasa.visual" />
                         <Canvas fx:id="canvasLatex" height="109.0" width="817.0" />
 
                         <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="16.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="28.0" prefWidth="180.0" styleClass="secondary-button" text="DESCARTAR CAMBIOS" />
-                              <Button mnemonicParsing="false" onAction="#guardarCambios" prefHeight="28.0" prefWidth="85.0" styleClass="primary-button" text="GUARDAR" />
+                              <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="28.0" prefWidth="180.0" styleClass="secondary-button" text="%boton.descartar" />
+                              <Button mnemonicParsing="false" onAction="#guardarCambios" prefHeight="28.0" prefWidth="85.0" styleClass="primary-button" text="%boton.guardar" />
                            </children>
                            <padding>
                               <Insets top="6.0" />

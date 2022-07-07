@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
 
 public class EditarReaccionController {
@@ -196,8 +197,7 @@ public class EditarReaccionController {
     @FXML
     public void editarTasaReaccion(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("views/editar-tasa-reaccion.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/editar-tasa-reaccion.fxml"), bundle);
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

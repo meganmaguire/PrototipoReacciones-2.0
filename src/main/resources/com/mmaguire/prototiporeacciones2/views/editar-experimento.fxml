@@ -20,14 +20,14 @@
             <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
          </padding>
          <children>
-            <Label styleClass="title" text="Editar paso" />
+            <Label styleClass="title" text="%edit.exp.titulo" />
             <HBox prefHeight="618.0" prefWidth="424.0" spacing="72.0">
                <children>
                   <VBox prefHeight="100.0" spacing="36.0">
                      <children>
                         <VBox prefHeight="210.0" prefWidth="324.0" spacing="18.0">
                            <children>
-                              <Label styleClass="subtitle" text="Reactivos" />
+                              <Label styleClass="subtitle" text="%exp.reactivos" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
                                     <ComboBox fx:id="comboBoxReactivos" prefWidth="150.0" />
@@ -45,8 +45,8 @@
                               </HBox>
                               <TableView fx:id="tablaReactivos" prefHeight="217.0" prefWidth="372.0">
                                  <columns>
-                                    <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="Nombre" />
-                                    <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="Cantidad" />
+                                    <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.nombre" />
+                                    <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="%tabla.cantidad" />
                                     <TableColumn fx:id="columnaEliminarReactivo" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
                                  </columns>
                               </TableView>
@@ -54,7 +54,7 @@
                         </VBox>
                         <VBox prefHeight="210.0" prefWidth="324.0" spacing="18.0">
                            <children>
-                              <Label styleClass="subtitle" text="Factores de reacción" />
+                              <Label styleClass="subtitle" text="%exp.factores" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
                                     <ComboBox fx:id="comboBoxFactores" prefWidth="150.0" />
@@ -72,8 +72,8 @@
                               </HBox>
                               <TableView fx:id="tablaFactores" prefHeight="217.0" prefWidth="372.0">
                                  <columns>
-                                    <TableColumn fx:id="columnaNombreFactor" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="Factor" />
-                                    <TableColumn fx:id="columnaValorFactor" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="Valor" />
+                                    <TableColumn fx:id="columnaNombreFactor" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.factor" />
+                                    <TableColumn fx:id="columnaValorFactor" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="%tabla.valores" />
                                     <TableColumn fx:id="columnaEliminarFactor" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
                                  </columns>
                               </TableView>
@@ -81,19 +81,19 @@
                         </VBox>
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="24.0">
                            <children>
-                              <Label prefHeight="20.0" prefWidth="68.0" styleClass="subtitle" text="Tiempo" />
+                              <Label prefHeight="20.0" prefWidth="68.0" styleClass="subtitle" text="%exp.tiempo" />
                               <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="258.0" spacing="16.0">
                                  <children>
                                     <Spinner fx:id="tiempoPaso" prefHeight="25.0" prefWidth="120.0" />
-                                    <Label text="segundos" />
+                                    <Label text="%exp.segundos" />
                                  </children>
                               </HBox>
                            </children>
                         </HBox>
                         <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="324.0" spacing="16.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="25.0" prefWidth="160.0" styleClass="primary-button" text="DESCARTAR CAMBIOS" />
-                              <Button mnemonicParsing="false" onAction="#guardarCambios" prefHeight="25.0" prefWidth="100.0" styleClass="primary-button" text="GUARDAR" />
+                              <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="25.0" prefWidth="160.0" styleClass="primary-button" text="%boton.descartar" />
+                              <Button mnemonicParsing="false" onAction="#guardarCambios" prefHeight="25.0" prefWidth="100.0" styleClass="primary-button" text="%boton.guardar" />
                            </children>
                         </HBox>
                      </children>

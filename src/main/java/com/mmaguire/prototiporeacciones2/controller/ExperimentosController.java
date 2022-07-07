@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
 
 public class ExperimentosController {
@@ -207,8 +208,7 @@ public class ExperimentosController {
     public void editarExperimento(Paso paso, Event event){
         try {
             // Generar pantalla de simulación y enviar datos
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("views/editar-experimento.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/editar-experimento.fxml"), bundle);
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

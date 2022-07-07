@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
+
 public class Helper {
 
 
@@ -163,8 +165,7 @@ public class Helper {
 
     public static void showData(ActionEvent event, Simulacion simulacion){
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("views/grafico-simulacion.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/grafico-simulacion.fxml"), bundle);
             Parent root = loader.load();
             Scene scene = new Scene(root);
 

@@ -17,25 +17,25 @@
             <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
          </padding>
          <children>
-            <Label styleClass="title" text="Simulación" />
+            <Label styleClass="title" text="%sim.grafico.titulo" />
             <LineChart fx:id="graficoSimulacion" prefHeight="547.0" prefWidth="971.0">
               <xAxis>
-                <NumberAxis label="Time units" side="BOTTOM" />
+                <NumberAxis label="%sim.grafico.unidades" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis label="Reactant amount" side="LEFT" />
+                <NumberAxis label="%sim.grafico.cantidad" side="LEFT" />
               </yAxis>
             </LineChart>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="16.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="764.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#exportarDatos" prefHeight="25.0" prefWidth="134.0" styleClass="primary-button" text="EXPORTAR DATOS" />
+                        <Button mnemonicParsing="false" onAction="#exportarDatos" prefHeight="25.0" prefWidth="134.0" styleClass="primary-button" text="%boton.exportar" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="25.0" prefWidth="75.0" styleClass="primary-button" text="CERRAR" />
+                        <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="25.0" prefWidth="75.0" styleClass="primary-button" text="%boton.cerrar" />
                      </children>
                   </HBox>
                </children>

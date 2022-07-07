@@ -16,18 +16,18 @@
             <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
          </padding>
          <children>
-            <Label styleClass="subtitle" text="Constante de reacción" />
+            <Label styleClass="subtitle" text="%add.const.titulo" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="16.0">
                <children>
                   <HBox alignment="CENTER" prefWidth="200.0" spacing="16.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefWidth="60.0" styleClass="form-label" text="Nombre" />
+                        <Label alignment="CENTER_RIGHT" prefWidth="60.0" styleClass="form-label" text="%add.const.nombre" />
                         <TextField fx:id="nombreConstante" prefWidth="150.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefWidth="200.0" spacing="16.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefWidth="60.0" styleClass="form-label" text="Valor" />
+                        <Label alignment="CENTER_RIGHT" prefWidth="60.0" styleClass="form-label" text="%add.const.valor" />
                         <Spinner fx:id="valorConstante" prefWidth="150.0" />
                      </children>
                   </HBox>
@@ -35,7 +35,7 @@
             </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#añadirConstante" styleClass="primary-button" text="AÑADIR" />
+                  <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#añadirConstante" styleClass="primary-button" text="%boton.añadir" />
                </children>
             </HBox>
          </children>

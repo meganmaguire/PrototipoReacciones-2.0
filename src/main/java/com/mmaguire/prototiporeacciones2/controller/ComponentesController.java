@@ -131,8 +131,7 @@ public class ComponentesController {
     @FXML
     public void añadirConstante(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("views/añadir-constante.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/añadir-constante.fxml"), bundle);
             Parent root = loader.load();
             AddConstanteController controller = loader.getController();
 

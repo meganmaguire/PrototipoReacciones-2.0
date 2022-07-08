@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.createModalWindow;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.itemArray2String;
 
@@ -86,8 +87,7 @@ public class VerSistemaController {
 
     public void verReaccion(Reaccion reaccion, Event event) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("views/ver-reaccion.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/ver-reaccion.fxml"), bundle);
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

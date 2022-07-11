@@ -159,7 +159,7 @@ public class ReaccionManager {
 
         Location location = ModelManager.addLocation(template, reaccion.getNombreReaccion(),expRate.toString(), 0, 0);
         location.setProperty("init", true);
-
+        setLabel(location, LocationKind.comments, reaccion.toString(), -100, -125 );
         addEdge(template, location, location, guard.toString(), null, update.toString());
 
         return template;

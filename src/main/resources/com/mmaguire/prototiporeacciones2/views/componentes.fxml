@@ -31,7 +31,7 @@
                         <HBox alignment="CENTER_RIGHT" spacing="24.0">
                            <children>
                               <Label styleClass="form-label" text="%comp.nombre" />
-                              <TextField fx:id="nombreComponente" prefWidth="230.0" />
+                              <TextField fx:id="nombreComponente" prefWidth="230.0" onKeyPressed="#cleanErrorNombre" onMouseClicked="#cleanErrorNombre"/>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" spacing="24.0">
@@ -63,12 +63,12 @@
                         <HBox alignment="CENTER_RIGHT" spacing="24.0">
                            <children>
                               <Label styleClass="form-label" text="%comp.constante" />
-                              <CheckBox fx:id="poseeConstante" mnemonicParsing="false" prefWidth="230.0" text="%comp.constante.info" textFill="#9e9e9e" />
+                              <CheckBox fx:id="poseeConstante" mnemonicParsing="false" prefWidth="230.0" text="%comp.constante.info" textFill="#9e9e9e" onMouseClicked="#cleanErrorConstante"/>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" spacing="16.0">
                            <children>
-                              <ComboBox fx:id="constanteAsociada" prefHeight="25.0" prefWidth="150.0">
+                              <ComboBox fx:id="constanteAsociada" prefHeight="25.0" prefWidth="150.0" onAction="#cleanErrorConstante">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>

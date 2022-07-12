@@ -52,6 +52,9 @@ public class ComponentesController {
     @FXML
     private TableColumn<Reactivo, Reactivo> columnaEliminar;
 
+    @FXML
+    private Button botonAñadirComponente;
+
     private Context contexto;
 
     @FXML
@@ -111,21 +114,33 @@ public class ComponentesController {
 
     @FXML
     public void añadirComponente() {
-        String nombre = this.nombreComponente.getText();
-        int cantidad = this.cantidadComponente.getValue();
-        boolean isActualizable = this.actualizableComponente.isSelected();
-        boolean isSubestado = this.subestadoComponente.isSelected();
-        Factor constante = null;
-        if(this.poseeConstante.isSelected())
-            constante = this.constanteAsociada.getValue();
 
-        Reactivo componente = new Reactivo(nombre, cantidad, isActualizable, isSubestado, constante);
+        if(this.nombreComponente.getText().isEmpty()){
+            this.nombreComponente.getStyleClass().add("text-field-error");
+        }
+        if(this.poseeConstante.isSelected() && this.constanteAsociada.getValue() == null){
+            this.constanteAsociada.getStyleClass().add("combo-box-error");
+        }
+        if(!hayError()) {
+            String nombre = this.nombreComponente.getText();
+            int cantidad = this.cantidadComponente.getValue();
+            boolean isActualizable = this.actualizableComponente.isSelected();
+            boolean isSubestado = this.subestadoComponente.isSelected();
+            Factor constante = null;
+            if (this.poseeConstante.isSelected())
+                constante = this.constanteAsociada.getValue();
 
-        if(!existeReactivoConNombre(nombre, contexto.getReactivos())) {
-            contexto.getReactivos().add(componente);
+            Reactivo componente = new Reactivo(nombre, cantidad, isActualizable, isSubestado, constante);
+
+            if (!existeReactivoConNombre(nombre, contexto.getReactivos())) {
+                contexto.getReactivos().add(componente);
+            }
+
+            clearFields();
+            cleanErrorNombre();
         }
 
-        clearFields();
+
     }
 
     @FXML
@@ -176,4 +191,15 @@ public class ComponentesController {
         this.poseeConstante.setSelected(false);
     }
 
+    private boolean hayError(){
+        return this.nombreComponente.getText().isBlank() || (this.poseeConstante.isSelected() && this.constanteAsociada.getValue() == null);
+    }
+    @FXML
+    public void cleanErrorNombre(){
+        this.nombreComponente.getStyleClass().remove("text-field-error");
+    }
+    @FXML
+    public void cleanErrorConstante(){
+        this.constanteAsociada.getStyleClass().remove("combo-box-error");
+    }
 }

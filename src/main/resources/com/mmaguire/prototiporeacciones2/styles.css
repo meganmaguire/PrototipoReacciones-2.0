@@ -113,6 +113,12 @@
 .text-field:hover, .combo-box:hover, .check-box .box:hover{
     -fx-effect: dropshadow(gaussian, hover-shine, 6, 0.2, 0, 0);
 }
+
+.text-field-error, .combo-box-error {
+    -fx-border-color: #e64c72;
+    -fx-border-width: 1;
+}
+
 .add-button:hover, .primary-button:hover{
     -fx-effect: dropshadow(gaussian, drop-shadow, 3, 0, 0, 1);
 }

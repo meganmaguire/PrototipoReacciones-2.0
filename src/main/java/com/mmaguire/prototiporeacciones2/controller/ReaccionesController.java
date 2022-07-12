@@ -230,69 +230,98 @@ public class ReaccionesController {
 
     @FXML
     public void añadirReactivo() {
-        ReactivoReaccion reactivo = new ReactivoReaccion(
-                this.comboBoxReactivos.getValue(),
-                this.cantidadReactivos.getValue()
-        );
+        if(this.comboBoxReactivos.getValue() != null) {
+            ReactivoReaccion reactivo = new ReactivoReaccion(
+                    this.comboBoxReactivos.getValue(),
+                    this.cantidadReactivos.getValue()
+            );
 
-        if(!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosReaccion))
-            this.reactivosReaccion.add(reactivo);
-        actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
+            if (!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosReaccion))
+                this.reactivosReaccion.add(reactivo);
+            actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
+        }
     }
 
     @FXML
     public void añadirProducto() {
-        ReactivoReaccion reactivo = new ReactivoReaccion(
-                this.comboBoxProductos.getValue(),
-                this.cantidadProductos.getValue()
-        );
-        this.productosReaccion.add(reactivo);
-        actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
+        if(this.comboBoxProductos.getValue() != null) {
+            ReactivoReaccion reactivo = new ReactivoReaccion(
+                    this.comboBoxProductos.getValue(),
+                    this.cantidadProductos.getValue()
+            );
+            this.productosReaccion.add(reactivo);
+            actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
+        }
     }
 
     @FXML
     public void añadirReaccion() {
-        Reaccion reaccion;
+        Reaccion reaccion = null;
         TipoReaccion tipo = this.comboBoxTipoReaccion.getValue();
-        if (!this.reactivosReaccion.isEmpty() && this.constanteAlpha != null) {
-            if (tipo != TipoReaccion.reversible) {
-                reaccion = new Reaccion(
-                        "r" + Reaccion.getContador(),
-                        new ArrayList<>(this.reactivosReaccion),
-                        new ArrayList<>(this.productosReaccion),
-                        tipo,
-                        new Factor(
-                                "alpha" + (Reaccion.getContador()),
-                                Double.parseDouble(this.constanteAlpha.getText())),
-                        new Factor(
-                                "f" + (Reaccion.getContador()),
-                                1.0)
-                );
-            } else {
-                reaccion = new ReaccionReversible(
-                        "r" + Reaccion.getContador(),
-                        new ArrayList<>(this.reactivosReaccion),
-                        new ArrayList<>(this.productosReaccion),
-                        tipo,
-                        new Factor(
-                                "alpha" + (Reaccion.getContador()),
-                                Double.parseDouble(this.constanteAlpha.getText())),
-                        new Factor(
-                                "f" + (Reaccion.getContador()),
-                                1.0),
-                        new Factor(
-                                "beta" + (Reaccion.getContador()),
-                                Double.parseDouble(this.constanteBeta.getText())),
-                        new Factor("f_" + (Reaccion.getContador()),
-                                1.0)
-                );
-                contexto.getFactores().add(((ReaccionReversible) reaccion).getFactorVuelta());
+        if (!this.reactivosReaccion.isEmpty() && !this.constanteAlpha.getText().isEmpty()) {
+            switch (tipo) {
+                case reversible -> {
+                    if(!this.productosReaccion.isEmpty() && !this.constanteBeta.getText().isEmpty()) {
+                        reaccion = new ReaccionReversible(
+                                "r" + Reaccion.getContador(),
+                                new ArrayList<>(this.reactivosReaccion),
+                                new ArrayList<>(this.productosReaccion),
+                                tipo,
+                                new Factor(
+                                        "alpha" + (Reaccion.getContador()),
+                                        Double.parseDouble(this.constanteAlpha.getText())),
+                                new Factor(
+                                        "f" + (Reaccion.getContador()),
+                                        1.0),
+                                new Factor(
+                                        "beta" + (Reaccion.getContador()),
+                                        Double.parseDouble(this.constanteBeta.getText())),
+                                new Factor("f_" + (Reaccion.getContador()),
+                                        1.0)
+                        );
+                        contexto.getFactores().add(((ReaccionReversible) reaccion).getFactorVuelta());
+                    }
+                }
+                case irreversible -> {
+                    if(!this.productosReaccion.isEmpty()){
+                        reaccion = new Reaccion(
+                                "r" + Reaccion.getContador(),
+                                new ArrayList<>(this.reactivosReaccion),
+                                new ArrayList<>(this.productosReaccion),
+                                tipo,
+                                new Factor(
+                                        "alpha" + (Reaccion.getContador()),
+                                        Double.parseDouble(this.constanteAlpha.getText())),
+                                new Factor(
+                                        "f" + (Reaccion.getContador()),
+                                        1.0)
+                        );
+                    }
+                }
+                case degradacion -> {
+                    if(this.productosReaccion.isEmpty()){
+                        reaccion = new Reaccion(
+                                "r" + Reaccion.getContador(),
+                                new ArrayList<>(this.reactivosReaccion),
+                                new ArrayList<>(this.productosReaccion),
+                                tipo,
+                                new Factor(
+                                        "alpha" + (Reaccion.getContador()),
+                                        Double.parseDouble(this.constanteAlpha.getText())),
+                                new Factor(
+                                        "f" + (Reaccion.getContador()),
+                                        1.0)
+                        );
+                    }
+                }
             }
-            reaccion.setTasaReaccion(reaccion.calculateTasaReaccion());
-            contexto.getReacciones().add(reaccion);
-            contexto.getFactores().add(reaccion.getFactor());
-            Reaccion.forwardContador();
-            clearFieldsReacciones();
+            if(reaccion != null) {
+                reaccion.setTasaReaccion(reaccion.calculateTasaReaccion());
+                contexto.getReacciones().add(reaccion);
+                contexto.getFactores().add(reaccion.getFactor());
+                Reaccion.forwardContador();
+                clearFieldsReacciones();
+            }
         }
     }
 
@@ -319,8 +348,8 @@ public class ReaccionesController {
         this.reactivosReaccion.clear();
         this.productosReaccion.clear();
 
-        this.constanteAlpha.setText(null);
-        this.constanteBeta.setText(null);
+        this.constanteAlpha.clear();
+        this.constanteBeta.clear();
         actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
     }
 

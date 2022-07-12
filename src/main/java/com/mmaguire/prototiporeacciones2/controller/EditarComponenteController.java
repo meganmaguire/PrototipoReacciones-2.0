@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
+
 public class EditarComponenteController {
 
     @FXML
@@ -67,16 +69,26 @@ public class EditarComponenteController {
 
     @FXML
     public void guardarCambios(ActionEvent event){
-        this.componente.setNombre(this.nombreComponente.getText());
-        this.componente.setCantidadInicial(this.cantidadComponente.getValue());
-        this.componente.setActualizable(this.actualizableComponente.isSelected());
-        this.componente.setSubestado(this.subestadoComponente.isSelected());
-        if(this.poseeConstante.isSelected())
-            this.componente.setConstanteAsociada(this.constanteAsociada.getValue());
-        else
-            this.componente.setConstanteAsociada(null);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+
+        if(this.nombreComponente.getText().isEmpty()){
+            this.nombreComponente.getStyleClass().add("text-field-error");
+        }
+        if(this.poseeConstante.isSelected() && this.constanteAsociada.getValue() == null){
+            this.constanteAsociada.getStyleClass().add("combo-box-error");
+        }
+        if(!hayError()) {
+
+            this.componente.setNombre(this.nombreComponente.getText());
+            this.componente.setCantidadInicial(this.cantidadComponente.getValue());
+            this.componente.setActualizable(this.actualizableComponente.isSelected());
+            this.componente.setSubestado(this.subestadoComponente.isSelected());
+            if (this.poseeConstante.isSelected())
+                this.componente.setConstanteAsociada(this.constanteAsociada.getValue());
+            else
+                this.componente.setConstanteAsociada(null);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }
     }
 
     @FXML
@@ -88,8 +100,7 @@ public class EditarComponenteController {
     @FXML
     public void añadirConstante(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("views/añadir-constante.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/añadir-constante.fxml"), bundle);
             Parent root = loader.load();
             AddConstanteController controller = loader.getController();
 
@@ -113,4 +124,15 @@ public class EditarComponenteController {
         }
     }
 
+    private boolean hayError(){
+        return this.nombreComponente.getText().isBlank() || (this.poseeConstante.isSelected() && this.constanteAsociada.getValue() == null);
+    }
+    @FXML
+    public void cleanErrorNombre(){
+        this.nombreComponente.getStyleClass().remove("text-field-error");
+    }
+    @FXML
+    public void cleanErrorConstante(){
+        this.constanteAsociada.getStyleClass().remove("combo-box-error");
+    }
 }

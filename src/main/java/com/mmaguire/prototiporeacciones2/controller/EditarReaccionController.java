@@ -174,24 +174,28 @@ public class EditarReaccionController {
 
     @FXML
     public void añadirReactivo() {
-        ReactivoReaccion reactivo = new ReactivoReaccion(
-                this.comboBoxReactivos.getValue(),
-                this.cantidadReactivos.getValue()
-        );
+        if(this.comboBoxReactivos.getValue() != null) {
+            ReactivoReaccion reactivo = new ReactivoReaccion(
+                    this.comboBoxReactivos.getValue(),
+                    this.cantidadReactivos.getValue()
+            );
 
-        if(!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosReaccion))
-            this.reactivosReaccion.add(reactivo);
-        actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
+            if (!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosReaccion))
+                this.reactivosReaccion.add(reactivo);
+            actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
+        }
     }
 
     @FXML
     public void añadirProducto() {
-        ReactivoReaccion reactivo = new ReactivoReaccion(
-                this.comboBoxProductos.getValue(),
-                this.cantidadProductos.getValue()
-        );
-        this.productosReaccion.add(reactivo);
-        actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
+        if(this.comboBoxProductos.getValue() != null) {
+            ReactivoReaccion reactivo = new ReactivoReaccion(
+                    this.comboBoxProductos.getValue(),
+                    this.cantidadProductos.getValue()
+            );
+            this.productosReaccion.add(reactivo);
+            actualizarReaccion(reactivosReaccion, productosReaccion, labelReactivos, labelProductos);
+        }
     }
 
     @FXML
@@ -219,20 +223,39 @@ public class EditarReaccionController {
 
     @FXML
     public void guardarCambios(ActionEvent event) {
-        this.reaccion.setReactantes(this.reactivosReaccion);
-        this.reaccion.setProductos(this.productosReaccion);
-        this.reaccion.setTasaReaccion(this.tasaReaccion);
-        this.reaccion.setAlpha(new Factor(
-                this.reaccion.getAlpha().getNombre(),
-                Double.parseDouble(this.constanteAlpha.getText()))
-        );
-        if (this.reaccion instanceof ReaccionReversible)
-            ((ReaccionReversible) this.reaccion).setBeta(new Factor(
-                    ((ReaccionReversible) this.reaccion).getBeta().getNombre(),
-                    Double.parseDouble(this.constanteBeta.getText()))
-            );
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        TipoReaccion tipo = this.reaccion.getTipo();
+        boolean error = true;
+        if (!this.reactivosReaccion.isEmpty() && !this.constanteAlpha.getText().isEmpty()) {
+
+            switch (tipo){
+                case reversible -> {
+                    if(!this.productosReaccion.isEmpty() && !this.constanteBeta.getText().isEmpty()){
+                        setReaccionValues();
+                        ((ReaccionReversible) this.reaccion).setBeta(new Factor(
+                                ((ReaccionReversible) this.reaccion).getBeta().getNombre(),
+                                Double.parseDouble(this.constanteBeta.getText()))
+                        );
+                        error = false;
+                    }
+                }
+                case irreversible -> {
+                    if(!this.productosReaccion.isEmpty()){
+                        setReaccionValues();
+                        error = false;
+                    }
+                }
+                case degradacion -> {
+                    if(this.productosReaccion.isEmpty()){
+                        setReaccionValues();
+                        error = false;
+                    }
+                }
+            }
+            if(!error) {
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.close();
+            }
+        }
     }
 
     @FXML
@@ -240,5 +263,16 @@ public class EditarReaccionController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
+
+    public void setReaccionValues(){
+        this.reaccion.setReactantes(this.reactivosReaccion);
+        this.reaccion.setProductos(this.productosReaccion);
+        this.reaccion.setTasaReaccion(this.tasaReaccion);
+        this.reaccion.setAlpha(new Factor(
+                this.reaccion.getAlpha().getNombre(),
+                Double.parseDouble(this.constanteAlpha.getText()))
+        );
+    }
+
 
 }

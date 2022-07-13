@@ -78,9 +78,9 @@ public class SimulacionesController {
         this.columnaTiempoPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiempo()));
         this.columnaModificacionesPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
 
-        this.tiempoSimulacion.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 60, 1));
+        this.tiempoSimulacion.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 60, 1));
         this.tiempoSimulacion.setEditable(true);
-        this.cantidadBombas.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 210, 1));
+        this.cantidadBombas.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 210, 1));
         this.cantidadBombas.setEditable(true);
     }
 

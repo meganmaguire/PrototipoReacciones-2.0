@@ -20,19 +20,21 @@ public class AddConstanteController {
 
     @FXML
     public void initialize() {
-        this.valorConstante.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 1000, 0,0.01));
+        this.valorConstante.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(-1000000, 1000000, 0,0.01));
         this.valorConstante.setEditable(true);
     }
 
     @FXML
     public void añadirConstante(ActionEvent event) {
-        String nombre = this.nombreConstante.getText();
-        double valor = this.valorConstante.getValue();
+        if(!this.nombreConstante.getText().isEmpty()) {
+            String nombre = this.nombreConstante.getText();
+            double valor = this.valorConstante.getValue();
 
-        constante = new Factor(nombre,valor);
+            constante = new Factor(nombre, valor);
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }
     }
 
     public Factor getConstante(){

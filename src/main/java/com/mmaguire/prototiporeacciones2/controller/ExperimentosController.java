@@ -175,33 +175,39 @@ public class ExperimentosController {
 
     @FXML
     public void añadirReactivo() {
-        ReactivoReaccion reactivo = new ReactivoReaccion(
-                this.comboBoxReactivos.getValue(),
-                this.cantidadReactivos.getValue()
-        );
-        if(!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosPasoExperimento))
-            this.reactivosPasoExperimento.add(reactivo);
+        if(this.comboBoxReactivos.getValue() != null) {
+            ReactivoReaccion reactivo = new ReactivoReaccion(
+                    this.comboBoxReactivos.getValue(),
+                    this.cantidadReactivos.getValue()
+            );
+            if (!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosPasoExperimento))
+                this.reactivosPasoExperimento.add(reactivo);
+        }
     }
     @FXML
     public void añadirFactor(){
-        Factor factor = this.comboBoxFactores.getValue().clone();
-        factor.setValor(this.valorFactores.getValue());
-        if (!existeFactorConNombre(factor.getNombre(), factoresPasoExperimento))
-            this.factoresPasoExperimento.add(factor);
+        if(this.comboBoxFactores.getValue() != null) {
+            Factor factor = this.comboBoxFactores.getValue().clone();
+            factor.setValor(this.valorFactores.getValue());
+            if (!existeFactorConNombre(factor.getNombre(), factoresPasoExperimento))
+                this.factoresPasoExperimento.add(factor);
+        }
     }
 
     @FXML
     public void añadirPasoExperimento(){
         int tiempo = this.tiempoPaso.getValue();
-        if(!existePasoConTiempo(tiempo, this.contexto.getPasosExperimento())) {
-            Paso paso = new Paso(
-                    new ArrayList<>(this.reactivosPasoExperimento),
-                    new ArrayList<>(this.factoresPasoExperimento),
-                    tiempo);
-            this.contexto.getPasosExperimento().add(paso);
-            this.contexto.getPasosExperimento().sort(Comparator.comparingInt(Paso::getTiempo));
-            this.reactivosPasoExperimento.clear();
-            this.factoresPasoExperimento.clear();
+        if(!this.reactivosPasoExperimento.isEmpty() || !this.factoresPasoExperimento.isEmpty()) {
+            if (!existePasoConTiempo(tiempo, this.contexto.getPasosExperimento())) {
+                Paso paso = new Paso(
+                        new ArrayList<>(this.reactivosPasoExperimento),
+                        new ArrayList<>(this.factoresPasoExperimento),
+                        tiempo);
+                this.contexto.getPasosExperimento().add(paso);
+                this.contexto.getPasosExperimento().sort(Comparator.comparingInt(Paso::getTiempo));
+                this.reactivosPasoExperimento.clear();
+                this.factoresPasoExperimento.clear();
+            }
         }
     }
 

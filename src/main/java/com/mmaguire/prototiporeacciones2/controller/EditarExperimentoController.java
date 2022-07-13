@@ -136,29 +136,35 @@ public class EditarExperimentoController {
 
     @FXML
     public void añadirReactivo() {
-        ReactivoReaccion reactivo = new ReactivoReaccion(
-                this.comboBoxReactivos.getValue(),
-                this.cantidadReactivos.getValue()
-        );
-        if(!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosPasoExperimento))
-            this.reactivosPasoExperimento.add(reactivo);
+        if(this.comboBoxReactivos.getValue() != null) {
+            ReactivoReaccion reactivo = new ReactivoReaccion(
+                    this.comboBoxReactivos.getValue(),
+                    this.cantidadReactivos.getValue()
+            );
+            if (!existeReactivoReaccionConNombre(reactivo.getReactivoAsociado().getNombre(), this.reactivosPasoExperimento))
+                this.reactivosPasoExperimento.add(reactivo);
+        }
     }
     @FXML
     public void añadirFactor(){
-        Factor factor = this.comboBoxFactores.getValue().clone();
-        factor.setValor(this.valorFactores.getValue());
-        if (!existeFactorConNombre(factor.getNombre(), factoresPasoExperimento))
-            this.factoresPasoExperimento.add(factor);
+        if(this.comboBoxFactores.getValue() != null) {
+            Factor factor = this.comboBoxFactores.getValue().clone();
+            factor.setValor(this.valorFactores.getValue());
+            if (!existeFactorConNombre(factor.getNombre(), factoresPasoExperimento))
+                this.factoresPasoExperimento.add(factor);
+        }
     }
 
 
     @FXML
     public void guardarCambios(ActionEvent event){
-        this.paso.setFactoresActualizados(this.factoresPasoExperimento);
-        this.paso.setReactivosActualizados(this.reactivosPasoExperimento);
-        this.paso.setTiempo(this.tiempoPaso.getValue());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        if(!this.factoresPasoExperimento.isEmpty() || !this.reactivosPasoExperimento.isEmpty()) {
+            this.paso.setFactoresActualizados(this.factoresPasoExperimento);
+            this.paso.setReactivosActualizados(this.reactivosPasoExperimento);
+            this.paso.setTiempo(this.tiempoPaso.getValue());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }
     }
 
     @FXML

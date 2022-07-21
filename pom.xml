@@ -201,6 +201,21 @@
             <artifactId>jlatexmath</artifactId>
             <version>1.0.7</version>
         </dependency>
+        <!-- Local dependencies -->
+        <dependency>
+            <groupId>com.uppaal.model</groupId>
+            <artifactId>model</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/lib/uppaal64-4.1.26/lib/model.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.uppaal</groupId>
+            <artifactId>uppaal</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/lib/uppaal64-4.1.26/uppaal.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

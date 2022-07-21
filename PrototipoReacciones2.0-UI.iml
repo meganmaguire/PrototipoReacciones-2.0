@@ -37,5 +37,23 @@
     <orderEntry type="library" name="Maven: org.scilab.forge:jlatexmath:1.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.scilab.forge:jlatexmath-font-greek:1.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.scilab.forge:jlatexmath-font-cyrillic:1.0.7" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: com.uppaal.model:model:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/uppaal64-4.1.26/lib/model.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: com.uppaal:uppaal:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/uppaal64-4.1.26/uppaal.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

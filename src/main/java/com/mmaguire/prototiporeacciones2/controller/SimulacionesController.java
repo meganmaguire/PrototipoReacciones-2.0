@@ -3,24 +3,20 @@ package com.mmaguire.prototiporeacciones2.controller;
 import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.manager.ModelManager;
-import com.mmaguire.prototiporeacciones2.model.Paso;
-import com.mmaguire.prototiporeacciones2.model.Reaccion;
-import com.mmaguire.prototiporeacciones2.model.Simulacion;
-import com.mmaguire.prototiporeacciones2.model.Sistema;
+import com.mmaguire.prototiporeacciones2.manager.Parser;
+import com.mmaguire.prototiporeacciones2.manager.StreamGobbler;
+import com.mmaguire.prototiporeacciones2.model.*;
 import com.uppaal.engine.Engine;
 import com.uppaal.engine.EngineException;
-import com.uppaal.engine.QueryResult;
 import com.uppaal.model.core2.Document;
-import com.uppaal.model.core2.Query;
 import com.uppaal.model.system.UppaalSystem;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -28,12 +24,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
+import static com.mmaguire.prototiporeacciones2.manager.FileManager.saveQueryToFile;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
-import static com.mmaguire.prototiporeacciones2.manager.ModelManager.options;
-import static com.mmaguire.prototiporeacciones2.manager.ModelManager.qf;
 import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.createModel;
 import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.generateSimulationQuery;
 
@@ -121,21 +122,48 @@ public class SimulacionesController {
                 // compile the document into system representation:
                 UppaalSystem sys = ModelManager.compile(engine, doc);
 
-                Query query = new Query(generateSimulationQuery(tiempoSimulacion.getValue(), this.contexto.getSistemaReacciones()), "");
-                QueryResult result = engine.query(sys, options, query, qf);
+                saveQueryToFile(generateSimulationQuery(tiempoSimulacion.getValue(), this.contexto.getSistemaReacciones()),"query.q" );
 
-                // Guardar simulación
-                Simulacion simulacion = queryResult2Simulacion(result);
-                simulacion.setTiempo(LocalDateTime.now());
-                Sistema nuevaSimulacion = this.contexto.getSistemaReacciones().clone();
-                nuevaSimulacion.setSimulacion(simulacion);
+                // Ejecutar comando de simulación con el xml y la query
+                String currentDir = System.getProperty("user.dir");
+                ProcessBuilder builder = new ProcessBuilder();
+                Process procSimulacion;
+                String command = currentDir +"/uppaal_servers/mac/verifyta " + currentDir + "/untitled.xml " + currentDir + "/query.q";
+                builder.directory(new File(currentDir));
+                builder.command(new String[]{"bash", "-l", "-c", command});
+                procSimulacion = builder.start();
+                builder.redirectError(new File(currentDir + "/error.log"));
 
-                this.contexto.getHistorial().add(nuevaSimulacion);
-                // Generar pantalla de simulación y enviar datos
-                Platform.runLater(()-> {
-                    cargandoStage.close();
+                System.out.println(command);
+                // Leer el output de la consola
+                // Se debe leer ANTES del waitFor para evitar problemas con el buffer.
+                BufferedReader stdInput = new BufferedReader(new
+                        InputStreamReader(procSimulacion.getInputStream()));
+                String s = null;
+                ArrayList<String> out = new ArrayList<>();
+                while ((s = stdInput.readLine()) != null) {
+                    out.add(s);
+                }
+
+                int exitCode = procSimulacion.waitFor();
+
+                if(exitCode == 0) {
+                    System.out.println("Resultado: ");
+                    out = Parser.removeHeader(out);
+                    List<DatosComponente> datos = Parser.parse(out);
+
+                    Simulacion simulacion = new Simulacion(datos, "simulacion",LocalDateTime.now());
+
+                    Sistema nuevaSimulacion = this.contexto.getSistemaReacciones().clone();
+                    nuevaSimulacion.setSimulacion(simulacion);
+
+                    this.contexto.getHistorial().add(nuevaSimulacion);
                     showData(event, simulacion);
-                });
+                }
+                else{
+                    System.out.println("Algo pasó");
+                    System.out.println(exitCode);
+                }
 
             } catch (IOException e) {
                 System.out.println("No se pudo escribir el archivo");
@@ -144,26 +172,27 @@ public class SimulacionesController {
                 cargandoStage.close();
                 System.out.println("No se conectar con el engine");
                 e.printStackTrace();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }
 
-//    private void showData(ActionEvent event, QueryResult simulacion){
-//        try {
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(MainApp.class.getResource("views/grafico-simulacion.fxml"));
-//            Parent root = loader.load();
-//            Scene scene = new Scene(root);
-//
-//            GraficoSimulacionController controller = loader.getController();
-//            controller.receiveData(simulacion);
-//            Stage stage = createModalWindow(scene, event);
-//            stage.showAndWait();
-//        }
-//        catch (IOException e) {
-//            System.out.println("Error al cargar archivo XML");
-//        }
-//    }
+    private void showData(ActionEvent event, Simulacion simulacion){
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/grafico-simulacion.fxml"), bundle);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            GraficoSimulacionController controller = loader.getController();
+            controller.receiveData(simulacion);
+            Stage stage = createModalWindow(scene, event);
+            stage.showAndWait();
+        }
+        catch (IOException e) {
+            System.out.println("Error al cargar archivo XML");
+        }
+    }
 
     public void generateCargandoStage(Stage stage, ProgressBar progressBar, Event event) {
         try {

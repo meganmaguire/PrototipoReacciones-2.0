@@ -4,13 +4,14 @@ import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.manager.ModelManager;
 import com.mmaguire.prototiporeacciones2.manager.Parser;
-import com.mmaguire.prototiporeacciones2.manager.StreamGobbler;
 import com.mmaguire.prototiporeacciones2.model.*;
 import com.uppaal.engine.Engine;
 import com.uppaal.engine.EngineException;
 import com.uppaal.model.core2.Document;
 import com.uppaal.model.system.UppaalSystem;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -35,6 +36,7 @@ import java.util.List;
 import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.FileManager.saveQueryToFile;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
+import static com.mmaguire.prototiporeacciones2.manager.Helper.showData;
 import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.createModel;
 import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.generateSimulationQuery;
 
@@ -89,24 +91,24 @@ public class SimulacionesController {
     public void simularSistema(ActionEvent event){
         this.contexto.getSistemaReacciones().setCantidadBombas(this.cantidadBombas.getValue());
         Stage stage = new Stage();
-        simulateSystem(event, stage);
+        //simulateSystem(event, stage);
         // Tarea para el thread de simulación
-//        Task<Void> simulationTask = new Task<>() {
-//            @Override
-//            public Void call() {
-//                simulateSystem(event, stage);
-//                return null;
-//            }
-//        };
-//
-//        // Muestra feedback de generación de simulación
-//        ProgressBar progressBar = new ProgressBar();
-//        progressBar.progressProperty().bind(simulationTask.progressProperty());
-//        generateCargandoStage(stage, progressBar, event);
-//        // Ejecuta el thread
-//        Thread getItemsThread = new Thread(simulationTask);
-//        getItemsThread.setDaemon(true);
-//        getItemsThread.start();
+        Task<Void> simulationTask = new Task<>() {
+            @Override
+            public Void call() {
+                simulateSystem(event, stage);
+                return null;
+            }
+        };
+
+        // Muestra feedback de generación de simulación
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.progressProperty().bind(simulationTask.progressProperty());
+        generateCargandoStage(stage, progressBar, event);
+        // Ejecuta el thread
+        Thread getItemsThread = new Thread(simulationTask);
+        getItemsThread.setDaemon(true);
+        getItemsThread.start();
 
     }
 
@@ -148,7 +150,6 @@ public class SimulacionesController {
                 int exitCode = procSimulacion.waitFor();
 
                 if(exitCode == 0) {
-                    System.out.println("Resultado: ");
                     out = Parser.removeHeader(out);
                     List<DatosComponente> datos = Parser.parse(out);
 
@@ -158,10 +159,14 @@ public class SimulacionesController {
                     nuevaSimulacion.setSimulacion(simulacion);
 
                     this.contexto.getHistorial().add(nuevaSimulacion);
-                    showData(event, simulacion);
+                    // Generar pantalla de simulación y enviar datos
+                    Platform.runLater(()-> {
+                        cargandoStage.close();
+                        showData(event, simulacion);
+                    });
                 }
                 else{
-                    System.out.println("Algo pasó");
+                    System.out.println("Error al ejecutar comando de ");
                     System.out.println(exitCode);
                 }
 
@@ -196,8 +201,7 @@ public class SimulacionesController {
 
     public void generateCargandoStage(Stage stage, ProgressBar progressBar, Event event) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("views/cargando.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/cargando.fxml"), bundle);
             AnchorPane root = loader.load();
 
             Scene scene = new Scene(root);

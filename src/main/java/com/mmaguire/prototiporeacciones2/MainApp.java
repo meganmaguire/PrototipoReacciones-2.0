@@ -20,7 +20,7 @@ public class MainApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("views/principal.fxml"), bundle);
         VBox content = fxmlLoader.load();
         Scene scene = new Scene(content, 1300, 800);
-        stage.setTitle("Hello!");
+        stage.setTitle("HAESB-UPPAAL");
         stage.setScene(scene);
         stage.show();
 

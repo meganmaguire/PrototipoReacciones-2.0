@@ -158,8 +158,8 @@ public class PrincipalController {
         if (selected != null) {
             this.filePath =  selected.getAbsolutePath();
             Sistema sistemaReacciones = loadSystemFromFile(this.filePath);
-
             if (sistemaReacciones != null) {
+                Context.reset();
                 this.contexto.setSistemaReacciones(sistemaReacciones);
                 this.contexto.setReactivos(FXCollections.observableList(this.contexto.getSistemaReacciones().getReactivos()));
                 this.contexto.setReacciones(FXCollections.observableList(this.contexto.getSistemaReacciones().getReacciones()));

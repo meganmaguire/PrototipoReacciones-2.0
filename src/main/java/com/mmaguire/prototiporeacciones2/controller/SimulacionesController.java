@@ -130,13 +130,11 @@ public class SimulacionesController {
                 String currentDir = System.getProperty("user.dir");
                 ProcessBuilder builder = new ProcessBuilder();
                 Process procSimulacion;
-                String command = currentDir +"/uppaal_servers/mac/verifyta " + currentDir + "/untitled.xml " + currentDir + "/query.q";
                 builder.directory(new File(currentDir));
-                builder.command(new String[]{"bash", "-l", "-c", command});
+                builder.command(generateCommand(currentDir, System.getProperty("os.name")));
                 procSimulacion = builder.start();
                 builder.redirectError(new File(currentDir + "/error.log"));
 
-                System.out.println(command);
                 // Leer el output de la consola
                 // Se debe leer ANTES del waitFor para evitar problemas con el buffer.
                 BufferedReader stdInput = new BufferedReader(new
@@ -179,6 +177,8 @@ public class SimulacionesController {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
+            } catch (UnsupportedOperationException e){
+                System.out.println("Sistema operativo no reconcido. No se puede simular el sistema");
             }
         }
     }

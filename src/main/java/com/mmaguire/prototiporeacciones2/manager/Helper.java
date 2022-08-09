@@ -30,6 +30,26 @@ import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 public class Helper {
 
 
+    public static String[] generateCommand(String currentDir, String os) throws UnsupportedOperationException {
+        String command = null;
+        switch (os){
+            case "Windows" -> {
+                return new String[]{"cmd.exe", "/C", "start", command};
+            }
+            case "Linux" -> {
+                command = currentDir +"/uppaal_servers/linux/verifyta " + currentDir + "/untitled.xml " + currentDir + "/query.q";
+                return new String[]{"bash", "-l", "-c", command};
+            }
+            case "Mac OS X" -> {
+                command = currentDir +"/uppaal_servers/mac/verifyta " + currentDir + "/untitled.xml " + currentDir + "/query.q";
+                return new String[]{"bash", "-l", "-c", command};
+            }
+            default -> {
+                throw new UnsupportedOperationException();
+            }
+        }
+    }
+
     public static void actualizarReaccion(ObservableList<ReactivoReaccion> reactivosReaccion, ObservableList<ReactivoReaccion> productosReaccion, Label labelReactivos, Label labelProductos) {
         labelReactivos.setText(generateLabel(reactivosReaccion));
         labelProductos.setText(generateLabel(productosReaccion));

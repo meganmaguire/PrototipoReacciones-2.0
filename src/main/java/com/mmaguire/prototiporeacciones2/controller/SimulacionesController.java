@@ -164,8 +164,8 @@ public class SimulacionesController {
                     });
                 }
                 else{
-                    System.out.println("Error al ejecutar comando de ");
-                    System.out.println(exitCode);
+                    System.out.println("Error al ejecutar comando de simulación");
+                    System.out.println("Código de error: " + exitCode);
                 }
 
             } catch (IOException e) {

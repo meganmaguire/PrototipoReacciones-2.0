@@ -195,6 +195,8 @@
                         </manifest>
                         <manifestEntries>
                             <Created-By>Margarita Maguire</Created-By>
+                            <Main-Class>com.mmaguire.prototiporeacciones2.App</Main-Class>
+                            <Class-Path>uppaal.jar lib/</Class-Path>
                         </manifestEntries>
                     </archive>
                 </configuration>

@@ -17,7 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -47,11 +47,11 @@ public class PrincipalController {
 
     private Context contexto;
     private String filePath;
-    private AnchorPane componentesPane;
-    private AnchorPane reaccionesPane;
-    private AnchorPane experimentosPane;
-    private AnchorPane simulacionesPane;
-    private AnchorPane historialPane;
+    private Pane componentesPane;
+    private Pane reaccionesPane;
+    private Pane experimentosPane;
+    private Pane simulacionesPane;
+    private Pane historialPane;
 
     @FXML
     public void initialize() {
@@ -329,15 +329,15 @@ public class PrincipalController {
         alert.showAndWait();
     }
 
-    private void selectPane(AnchorPane pane, MouseEvent event){
+    private void selectPane(Pane pane, MouseEvent event){
         Node node = (Node) event.getSource();
-        SplitPane splitPane = (SplitPane) node.getParent().getParent().getParent().getParent().getParent();
+        SplitPane splitPane = (SplitPane) node.getParent().getParent().getParent().getParent();
 
         splitPane.getItems().remove(1);
         splitPane.getItems().add(pane);
     }
 
-    public AnchorPane getComponentesPane() {
+    public Pane getComponentesPane() {
         return componentesPane;
     }
 

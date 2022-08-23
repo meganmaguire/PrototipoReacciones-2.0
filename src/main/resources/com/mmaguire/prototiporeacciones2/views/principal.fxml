@@ -37,14 +37,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.PrincipalController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.PrincipalController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
+    <MenuBar VBox.vgrow="ALWAYS">
       <menus>
         <Menu mnemonicParsing="false" text="%menu.archivo">
           <items>
@@ -76,56 +76,54 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-         <children>
-            <SplitPane dividerPositions="0.18335901386748846" minHeight="-Infinity" minWidth="-Infinity" prefHeight="774.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <items>
-                <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="176.0" styleClass="side-menu">
+      <SplitPane dividerPositions="0.18335901386748846" VBox.vgrow="ALWAYS">
+        <items>
+            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="176.0" styleClass="side-menu">
+               <children>
+                  <Label fx:id="menuPrincipal" prefHeight="50.0" prefWidth="176.0" styleClass="menu-title" text="MENU">
+                     <padding>
+                        <Insets left="16.0" right="16.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Label>
+                  <VBox VBox.vgrow="ALWAYS">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                      <children>
-                        <VBox prefHeight="772.0" prefWidth="176.0">
-                           <children>
-                              <Label fx:id="menuPrincipal" prefHeight="50.0" prefWidth="176.0" styleClass="menu-title" text="MENU">
-                                 <padding>
-                                    <Insets left="16.0" right="16.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="16.0" top="16.0" />
-                                 </VBox.margin></Label>
-                              <VBox prefWidth="144.0">
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                                 <children>
-                                    <Label fx:id="menuComponentes" contentDisplay="CENTER" onMouseClicked="#onMouseClickedComponentes" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.componentes">
-                                       <padding>
-                                          <Insets left="16.0" right="16.0" />
-                                       </padding></Label>
-                                    <Label fx:id="menuReacciones" onMouseClicked="#onMouseClickedReacciones" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.reacciones">
-                                       <padding>
-                                          <Insets left="16.0" right="16.0" />
-                                       </padding></Label>
-                                    <Label fx:id="menuExperimentos" onMouseClicked="#onMouseClickedExperimentos" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.experimentos">
-                                       <padding>
-                                          <Insets left="16.0" right="16.0" />
-                                       </padding></Label>
-                                    <Label fx:id="menuSimulaciones" onMouseClicked="#onMouseClickedSimulaciones" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.simulaciones">
-                                       <padding>
-                                          <Insets left="16.0" right="16.0" />
-                                       </padding></Label>
-                                    <Label fx:id="menuHistorial" onMouseClicked="#onMouseClickedHistorial" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.historial">
-                                       <padding>
-                                          <Insets left="16.0" right="16.0" />
-                                       </padding></Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </VBox>
+                        <Label fx:id="menuComponentes" contentDisplay="CENTER" onMouseClicked="#onMouseClickedComponentes" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.componentes">
+                           <padding>
+                              <Insets left="16.0" right="16.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="menuReacciones" onMouseClicked="#onMouseClickedReacciones" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.reacciones">
+                           <padding>
+                              <Insets left="16.0" right="16.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="menuExperimentos" onMouseClicked="#onMouseClickedExperimentos" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.experimentos">
+                           <padding>
+                              <Insets left="16.0" right="16.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="menuSimulaciones" onMouseClicked="#onMouseClickedSimulaciones" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.simulaciones">
+                           <padding>
+                              <Insets left="16.0" right="16.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="menuHistorial" onMouseClicked="#onMouseClickedHistorial" prefHeight="50.0" prefWidth="176.0" styleClass="menu-label" text="%side.historial">
+                           <padding>
+                              <Insets left="16.0" right="16.0" />
+                           </padding>
+                        </Label>
                      </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="-Infinity" prefHeight="772.0" prefWidth="1115.0" />
-              </items>
-            </SplitPane>
-         </children>
-    </AnchorPane>
+                  </VBox>
+               </children>
+            </VBox>
+            <ScrollPane prefHeight="728.0" prefWidth="1050.0" />
+        </items>
+      </SplitPane>
   </children>
 </VBox>

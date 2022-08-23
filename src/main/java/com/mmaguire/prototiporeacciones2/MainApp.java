@@ -19,14 +19,14 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("views/principal.fxml"), bundle);
         VBox content = fxmlLoader.load();
-        Scene scene = new Scene(content, 1300, 800);
+        Scene scene = new Scene(content);
         stage.setTitle("HAESB-UPPAAL");
         stage.setScene(scene);
         stage.show();
 
         PrincipalController controller = fxmlLoader.getController();
 
-        SplitPane splitPane = ((SplitPane) ((AnchorPane) content.getChildren().get(1)).getChildren().get(0));
+        SplitPane splitPane = (SplitPane) content.getChildren().get(1);
         splitPane.getItems().remove(1);
         splitPane.getItems().add(controller.getComponentesPane());
         controller.getMenuComponentes().getStyleClass().add("menu-label-selected");

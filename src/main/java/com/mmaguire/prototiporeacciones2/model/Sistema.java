@@ -13,6 +13,7 @@ public class Sistema {
     private List<Factor> constantesReaccion;
     private Experimento experimento;
     private int cantidadBombas;
+    private List<String> relojes;
     private Simulacion simulacion;
 
     public Sistema() {
@@ -22,15 +23,18 @@ public class Sistema {
         this.constantesReaccion = new ArrayList<>();
         this.experimento = new Experimento();
         this.cantidadBombas = 210;
+        this.relojes = new ArrayList<>();
+        this.relojes.add("x");
     }
 
-    public Sistema(List<Reactivo> reactivos, List<Reaccion> reacciones, List<Factor> factores, List<Factor> constantesReaccion, Experimento experimento, int cantidadBombas) {
+    public Sistema(List<Reactivo> reactivos, List<Reaccion> reacciones, List<Factor> factores, List<Factor> constantesReaccion, Experimento experimento, int cantidadBombas, List<String> relojes) {
         this.reactivos = reactivos;
         this.reacciones = reacciones;
         this.factores = factores;
         this.constantesReaccion = constantesReaccion;
         this.experimento = experimento;
         this.cantidadBombas = cantidadBombas;
+        this.relojes = relojes;
     }
 
     public List<Reactivo> getReactivos() {
@@ -81,6 +85,14 @@ public class Sistema {
         this.cantidadBombas = cantidadBombas;
     }
 
+    public List<String> getRelojes() {
+        return relojes;
+    }
+
+    public void setRelojes(List<String> relojes) {
+        this.relojes = relojes;
+    }
+
     public Simulacion getSimulacion() {
         return simulacion;
     }
@@ -97,7 +109,8 @@ public class Sistema {
             this.factores,
             this.constantesReaccion,
             this.experimento,
-            this.cantidadBombas
+            this.cantidadBombas,
+            this.relojes
         );
     }
 }

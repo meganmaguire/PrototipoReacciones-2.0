@@ -58,7 +58,7 @@ public class SimulacionesController {
     @FXML
     private TableView<Paso> tablaExperimento;
     @FXML
-    private TableColumn<Paso, Integer> columnaTiempoPaso;
+    private TableColumn<Paso, String> columnaTiempoPaso;
     @FXML
     private TableColumn<Paso, String> columnaModificacionesPaso;
     @FXML
@@ -78,7 +78,7 @@ public class SimulacionesController {
         this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(itemArray2String(cellData.getValue().calculateTasaReaccion())));
 
         this.tablaExperimento.setItems(this.contexto.getPasosExperimento());
-        this.columnaTiempoPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiempo()));
+        this.columnaTiempoPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiempo().toString()));
         this.columnaModificacionesPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
 
         this.tiempoSimulacion.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 60, 1));

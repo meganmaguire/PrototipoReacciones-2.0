@@ -41,7 +41,7 @@ public class VerSistemaController {
     @FXML
     private TableView<Paso> tablaExperimento;
     @FXML
-    private TableColumn<Paso, Integer> columnaTiempoPaso;
+    private TableColumn<Paso, String> columnaTiempoPaso;
     @FXML
     private TableColumn<Paso, String> columnaModificacionesPaso;
 
@@ -54,7 +54,7 @@ public class VerSistemaController {
         this.columnaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
         this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(itemArray2String(cellData.getValue().calculateTasaReaccion())));
 
-        this.columnaTiempoPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiempo()));
+        this.columnaTiempoPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiempo().toString()));
         this.columnaModificacionesPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
 
         this.tablaReacciones.setRowFactory(tv -> {

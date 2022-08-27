@@ -244,7 +244,7 @@ public class ReaccionesController {
 
     @FXML
     public void añadirProducto() {
-        if(this.comboBoxProductos.getValue() != null) {
+            if(this.comboBoxProductos.getValue() != null) {
             ReactivoReaccion reactivo = new ReactivoReaccion(
                     this.comboBoxProductos.getValue(),
                     this.cantidadProductos.getValue()

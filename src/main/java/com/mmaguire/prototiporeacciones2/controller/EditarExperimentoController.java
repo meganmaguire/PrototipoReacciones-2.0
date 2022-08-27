@@ -131,7 +131,7 @@ public class EditarExperimentoController {
         this.paso = paso;
         this.reactivosPasoExperimento.addAll(this.paso.getReactivosActualizados());
         this.factoresPasoExperimento.addAll(this.paso.getFactoresActualizados());
-        this.tiempoPaso.getValueFactory().setValue(this.paso.getTiempo());
+        // this.tiempoPaso.getValueFactory().setValue(this.paso.getTiempo());
     }
 
     @FXML
@@ -161,7 +161,7 @@ public class EditarExperimentoController {
         if(!this.factoresPasoExperimento.isEmpty() || !this.reactivosPasoExperimento.isEmpty()) {
             this.paso.setFactoresActualizados(this.factoresPasoExperimento);
             this.paso.setReactivosActualizados(this.reactivosPasoExperimento);
-            this.paso.setTiempo(this.tiempoPaso.getValue());
+            //this.paso.setTiempo(this.tiempoPaso.getValue());
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         }

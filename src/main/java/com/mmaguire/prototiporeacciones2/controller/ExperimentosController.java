@@ -281,20 +281,6 @@ public class ExperimentosController {
         }
     }
 
-//        int tiempo = this.tiempoPaso.getValue();
-//        if(!this.reactivosPasoExperimento.isEmpty() || !this.factoresPasoExperimento.isEmpty()) {
-//            if (!existePasoConTiempo(tiempo, this.contexto.getPasosExperimento())) {
-//                Paso paso = new Paso(
-//                        new ArrayList<>(this.reactivosPasoExperimento),
-//                        new ArrayList<>(this.factoresPasoExperimento),
-//                        tiempo);
-//                this.contexto.getPasosExperimento().add(paso);
-//                this.contexto.getPasosExperimento().sort(Comparator.comparingInt(Paso::getTiempo));
-//                this.reactivosPasoExperimento.clear();
-//                this.factoresPasoExperimento.clear();
-//            }
-//        }
-
 
     @FXML
     public void añadirReloj(){}

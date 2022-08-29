@@ -1,5 +1,20 @@
 package com.mmaguire.prototiporeacciones2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "@ttype")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = RestriccionTiempo.class, name = "RestriccionTiempo"),
+        @JsonSubTypes.Type(value = RestriccionIntervalo.class, name = "RestriccionIntervalo")
+})
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RestriccionTiempo {
 
     private int limiteSup;
@@ -42,5 +57,10 @@ public class RestriccionTiempo {
     @Override
     public String toString(){
         return this.reloj + " " + this.restriccionSup + " " + this.limiteSup;
+    }
+
+    @JsonProperty("@ttype")
+    public String getChildType(){
+        return "RestriccionTiempo";
     }
 }

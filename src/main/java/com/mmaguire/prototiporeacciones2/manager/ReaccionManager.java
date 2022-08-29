@@ -48,7 +48,7 @@ public class ReaccionManager {
         setSystems(doc, sistema.getReacciones(), sistema.getExperimento());
         // Genera template de experimento y clock si se especifica
         if(sistema.getExperimento().getPasos().size() > 0) {
-            setClock(doc, sistema.getExperimento());
+            setClocks(doc, sistema.getRelojes());
             doc.insert(createModelExperimento(doc, sistema.getExperimento()), null);
         }
         return doc;
@@ -59,11 +59,15 @@ public class ReaccionManager {
      * indicado en el experimento modelado pasado por parámetro.
      *
      * @param doc documento de UPPAAL al cual añadir el reloj
-     * @param experimento experimento modelado
+     * @param clocks listado de relojes declarados para el modelo
      */
-    private static void setClock(Document doc, Experimento experimento) {
-        String clock = "clock " + experimento.getClock() + ";\n\n";
-        doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString() + clock);
+    private static void setClocks(Document doc, List<String> clocks) {
+        StringBuilder append = new StringBuilder();
+        for(String clock : clocks){
+            append.append("clock ").append(clock).append(";\n");
+        }
+        append.append("\n");
+        doc.setProperty("declaration", doc.getProperty("declaration").getValue().toString() + append);
 
     }
 
@@ -223,23 +227,35 @@ public class ReaccionManager {
         int x = 0;
         int y = 0;
         for (int i = 0; i < pasos.size()+1; i++) {
+
             // Añade locación
             locationActual = ModelManager.addLocation(template, "l" + (i+1),null , x, y);
-            if( i < pasos.size())
-                setLabel(locationActual, LocationKind.invariant, experimento.getClock() + "<=" + pasos.get(i).getTiempo(), x-7, y+20);
+            if( i < pasos.size()) {
+                Paso paso = pasos.get(i);
+                String restriccion;
+                if(paso.getTiempo().getRestriccionSup().equals("==")){
+                    restriccion = "<=";
+                } else
+                    restriccion = paso.getTiempo().getRestriccionSup();
+                setLabel(locationActual, LocationKind.invariant,
+                        paso.getTiempo().getReloj() + " " + restriccion + " " + paso.getTiempo().getLimiteSup(),
+                        x - 7, y + 20);
+            }
             if(i == 0) locationActual.setProperty("init", true);
             // Añade transición
             else {
-                List<ReactivoReaccion> reactivosActualizados = pasos.get(i-1).getReactivosActualizados();
+                Paso pasoAnterior = pasos.get(i-1);
+                List<ReactivoReaccion> reactivosActualizados = pasoAnterior.getReactivosActualizados();
                 for (int j = 0; j < reactivosActualizados.size() ; j++) {
                     update.append(reactivosActualizados.get(j).getReactivoAsociado().getNombre()).append(" = ").append(reactivosActualizados.get(j).getCantidad()).append(j != reactivosActualizados.size() - 1 ? ", \n" : "");
                 }
-                List<Factor> factoresActualizados = pasos.get(i-1).getFactoresActualizados();
+                List<Factor> factoresActualizados = pasoAnterior.getFactoresActualizados();
                 if(reactivosActualizados.size()>0 && factoresActualizados.size()>0) update.append(", \n");
                 for (int j = 0; j < factoresActualizados.size() ; j++) {
                     update.append(factoresActualizados.get(j).getNombre()).append(" = ").append(factoresActualizados.get(j).getValor()).append(j != factoresActualizados.size() - 1 ? ", \n" : "\n");
                 }
-                addEdge(template, locationAnterior, locationActual, experimento.getClock() + "==" + pasos.get(i-1).getTiempo(), null, update.toString());
+
+                addEdge(template, locationAnterior, locationActual, pasoAnterior.getTiempo().toString(), null, update.toString());
             }
             locationAnterior = locationActual;
             update = new StringBuilder();

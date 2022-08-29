@@ -35,7 +35,7 @@ public class RestriccionIntervalo extends RestriccionTiempo {
     }
     @Override
     public String toString() {
-        return this.limiteInf + " " + this.restriccionInf + " " + super.toString();
+        return this.limiteInf + " " + this.restriccionInf + " " + this.getReloj() + " && " + super.toString();
     }
 
     @JsonProperty("@ttype")

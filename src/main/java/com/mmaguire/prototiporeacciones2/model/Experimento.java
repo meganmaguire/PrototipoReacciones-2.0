@@ -7,18 +7,15 @@ public class Experimento {
 
     private String nombre;
     private List<Paso> pasos;
-    private String clock;
 
     public Experimento() {
         this.nombre = "exp1";
-        this.clock = "x";
         this.pasos = new ArrayList<>();
     }
 
-    public Experimento(String nombre, List<Paso> pasos, String clock) {
+    public Experimento(String nombre, List<Paso> pasos) {
         this.nombre = nombre;
         this.pasos = pasos;
-        this.clock = clock;
     }
 
     public String getNombre() {
@@ -37,11 +34,4 @@ public class Experimento {
         this.pasos = pasos;
     }
 
-    public String getClock() {
-        return clock;
-    }
-
-    public void setClock(String clock) {
-        this.clock = clock;
-    }
 }

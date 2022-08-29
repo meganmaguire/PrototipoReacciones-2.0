@@ -9,6 +9,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import on.S;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -133,6 +135,13 @@ public class ExperimentosController {
                     restriccionSup.setItems(restriccionesTiempoFijo);
                     restriccionSup.getSelectionModel().selectFirst();
                 }
+            }});
+
+        this.comboBoxReloj.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue ov, String valAnterior, String valActual) {
+                relojLimiteInf.setText(valActual);
+                relojLimiteSup.setText(valActual);
             }});
 
         // Set tablas
@@ -283,7 +292,28 @@ public class ExperimentosController {
 
 
     @FXML
-    public void añadirReloj(){}
+    public void añadirReloj(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/añadir-reloj.fxml"), bundle);
+            Parent root = loader.load();
+            AddRelojController controller = loader.getController();
+
+            Scene scene = new Scene(root);
+
+            Stage stage = createModalWindow(scene, event);
+            stage.showAndWait();
+
+            String reloj = controller.getReloj();
+            if (reloj != null)
+                this.contexto.getSistemaReacciones().getRelojes().add(reloj);
+
+            this.comboBoxReloj.setItems(FXCollections.observableList(contexto.getSistemaReacciones().getRelojes()));
+        }
+        catch (IOException e) {
+            System.out.println("Hubo un problema al leer el archivo FXML");
+            e.printStackTrace();
+        }
+    }
 
     public void editarExperimento(Paso paso, Event event){
         try {

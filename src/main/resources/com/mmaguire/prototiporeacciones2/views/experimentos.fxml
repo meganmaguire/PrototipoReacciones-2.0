@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -39,6 +40,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Añadir reloj" />
+                                 </tooltip>
                               </Button>
                            </children>
                         </HBox>
@@ -151,9 +155,9 @@
       </HBox>
       <TableView fx:id="tablaExperimento">
         <columns>
-          <TableColumn fx:id="columnaTiempoPaso" editable="false" prefWidth="177.0" sortable="false" text="%tabla.tiempo" />
-          <TableColumn fx:id="columnaModificacionesPaso" editable="false" prefWidth="719.0" sortable="false" text="%tabla.modificaciones" />
-            <TableColumn fx:id="columnaEliminarPaso" editable="false" prefWidth="73.0" sortable="false" />
+          <TableColumn fx:id="columnaTiempoPaso" editable="false" minWidth="150.0" prefWidth="-1.0" sortable="false" text="%tabla.tiempo" />
+          <TableColumn fx:id="columnaModificacionesPaso" editable="false" minWidth="400.0" prefWidth="-1.0" sortable="false" text="%tabla.modificaciones" />
+            <TableColumn fx:id="columnaEliminarPaso" editable="false" minWidth="70.0" prefWidth="-1.0" sortable="false" />
         </columns>
       </TableView>
    </children>

@@ -17,11 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import javax.annotation.processing.Generated;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
@@ -253,12 +250,36 @@ public class ExperimentosController {
     }
 
     @FXML
-    public void añadirPasoExperimento(){
-        if (this.checkBoxIntervalo.isSelected()){
-            if (this.limiteSup.getValue() > this.limiteInf.getValue()){
-
+    public void añadirPasoExperimento() {
+        RestriccionTiempo tiempo;
+        if(!this.reactivosPasoExperimento.isEmpty() || !this.factoresPasoExperimento.isEmpty()) {
+            if (this.checkBoxIntervalo.isSelected()) {
+                if (this.limiteSup.getValue() > this.limiteInf.getValue()) {
+                    tiempo = new RestriccionIntervalo(
+                            this.limiteSup.getValue(),
+                            this.restriccionSup.getValue(),
+                            this.comboBoxReloj.getValue(),
+                            this.limiteInf.getValue(),
+                            this.restriccionInf.getValue());
+                } else return;
+            } else {
+                tiempo = new RestriccionTiempo(
+                        this.limiteSup.getValue(),
+                        this.restriccionSup.getValue(),
+                        this.comboBoxReloj.getValue());
             }
+
+            Paso paso = new Paso(
+                        new ArrayList<>(this.reactivosPasoExperimento),
+                        new ArrayList<>(this.factoresPasoExperimento),
+                        tiempo);
+            this.contexto.getPasosExperimento().add(paso);
+            this.reactivosPasoExperimento.clear();
+            this.factoresPasoExperimento.clear();
+            this.limiteInf.getValueFactory().setValue(0);
+            this.limiteSup.getValueFactory().setValue(0);
         }
+    }
 
 //        int tiempo = this.tiempoPaso.getValue();
 //        if(!this.reactivosPasoExperimento.isEmpty() || !this.factoresPasoExperimento.isEmpty()) {
@@ -273,7 +294,7 @@ public class ExperimentosController {
 //                this.factoresPasoExperimento.clear();
 //            }
 //        }
-    }
+
 
     @FXML
     public void añadirReloj(){}

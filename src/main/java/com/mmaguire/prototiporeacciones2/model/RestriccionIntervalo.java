@@ -1,6 +1,6 @@
 package com.mmaguire.prototiporeacciones2.model;
 
-public class RestriccionIntervalo extends RestriccionTiempoFijo {
+public class RestriccionIntervalo extends RestriccionTiempo {
 
     private int limiteInf;
     private String restriccionInf;

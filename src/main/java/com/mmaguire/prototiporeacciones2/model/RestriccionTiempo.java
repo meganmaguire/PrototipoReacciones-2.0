@@ -1,15 +1,15 @@
 package com.mmaguire.prototiporeacciones2.model;
 
-public class RestriccionTiempoFijo {
+public class RestriccionTiempo {
 
     private int limiteSup;
     private String restriccionSup;
     private String reloj;
 
-    public RestriccionTiempoFijo() {
+    public RestriccionTiempo() {
     }
 
-    public RestriccionTiempoFijo(int limiteSup, String restriccionSup, String reloj) {
+    public RestriccionTiempo(int limiteSup, String restriccionSup, String reloj) {
         this.limiteSup = limiteSup;
         this.restriccionSup = restriccionSup;
         this.reloj = reloj;

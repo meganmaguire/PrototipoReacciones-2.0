@@ -6,12 +6,12 @@ public class Paso {
 
     private List<ReactivoReaccion> reactivosActualizados;
     private List<Factor> factoresActualizados;
-    private RestriccionTiempoFijo tiempo;
+    private RestriccionTiempo tiempo;
 
     public Paso() {
     }
 
-    public Paso(List<ReactivoReaccion> reactivosActualizados, List<Factor> factoresActualizados, RestriccionTiempoFijo tiempo) {
+    public Paso(List<ReactivoReaccion> reactivosActualizados, List<Factor> factoresActualizados, RestriccionTiempo tiempo) {
         this.reactivosActualizados = reactivosActualizados;
         this.factoresActualizados = factoresActualizados;
         this.tiempo = tiempo;
@@ -33,11 +33,11 @@ public class Paso {
         this.factoresActualizados = factoresActualizados;
     }
 
-    public RestriccionTiempoFijo getTiempo() {
+    public RestriccionTiempo getTiempo() {
         return tiempo;
     }
 
-    public void setTiempo(RestriccionTiempoFijo tiempo) {
+    public void setTiempo(RestriccionTiempo tiempo) {
         this.tiempo = tiempo;
     }
 

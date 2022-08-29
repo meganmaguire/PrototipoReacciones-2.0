@@ -2,105 +2,151 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarExperimentoController">
+<VBox spacing="46.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarExperimentoController">
+   <padding>
+      <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
+   </padding>
    <children>
-      <VBox prefHeight="772.0" prefWidth="469.0" spacing="46.0">
-         <padding>
-            <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
-         </padding>
+      <Label styleClass="title" text="%edit.exp.titulo" />
+      <HBox spacing="72.0">
          <children>
-            <Label styleClass="title" text="%edit.exp.titulo" />
-            <HBox prefHeight="618.0" prefWidth="424.0" spacing="72.0">
+            <VBox spacing="18.0">
                <children>
-                  <VBox prefHeight="100.0" spacing="36.0">
+                  <Label minWidth="60.0" prefHeight="24.0" prefWidth="111.0" styleClass="subtitle" text="%exp.tiempo" />
+                  <HBox alignment="CENTER_LEFT" spacing="30.0">
                      <children>
-                        <VBox prefHeight="210.0" prefWidth="324.0" spacing="18.0">
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
                            <children>
-                              <Label styleClass="subtitle" text="%exp.reactivos" />
-                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                                 <children>
-                                    <ComboBox fx:id="comboBoxReactivos" prefWidth="150.0" />
-                                    <Spinner fx:id="cantidadReactivos" prefWidth="110.0" />
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirReactivo" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
-                                       <graphic>
-                                          <ImageView fitHeight="17.0" fitWidth="18.0">
-                                             <image>
-                                                <Image url="@../icons/baseline_add_black_24dp.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <TableView fx:id="tablaReactivos" prefHeight="217.0" prefWidth="372.0">
-                                 <columns>
-                                    <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.nombre" />
-                                    <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="%tabla.cantidad" />
-                                    <TableColumn fx:id="columnaEliminarReactivo" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="210.0" prefWidth="324.0" spacing="18.0">
-                           <children>
-                              <Label styleClass="subtitle" text="%exp.factores" />
-                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                                 <children>
-                                    <ComboBox fx:id="comboBoxFactores" prefWidth="150.0" />
-                                    <Spinner fx:id="valorFactores" prefWidth="110.0" />
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirFactor" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
-                                       <graphic>
-                                          <ImageView fitHeight="17.0" fitWidth="18.0">
-                                             <image>
-                                                <Image url="@../icons/baseline_add_black_24dp.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <TableView fx:id="tablaFactores" prefHeight="217.0" prefWidth="372.0">
-                                 <columns>
-                                    <TableColumn fx:id="columnaNombreFactor" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.factor" />
-                                    <TableColumn fx:id="columnaValorFactor" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="%tabla.valores" />
-                                    <TableColumn fx:id="columnaEliminarFactor" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </VBox>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="24.0">
-                           <children>
-                              <Label prefHeight="24.0" prefWidth="79.0" styleClass="subtitle" text="%exp.tiempo" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="258.0" spacing="16.0">
-                                 <children>
-                                    <Spinner fx:id="tiempoPaso" prefHeight="25.0" prefWidth="120.0" />
-                                    <Label text="%exp.segundos" />
-                                 </children>
-                              </HBox>
+                              <Label minWidth="30.0" prefHeight="17.0" text="%exp.reloj" />
+                              <ComboBox fx:id="comboBoxReloj" minWidth="70.0" prefWidth="70.0" />
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirReloj" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
+                                 <graphic>
+                                    <ImageView fitHeight="17.0" fitWidth="18.0">
+                                       <image>
+                                          <Image url="@../icons/baseline_add_black_24dp.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="%add.reloj.titulo" />
+                                 </tooltip>
+                              </Button>
                            </children>
                         </HBox>
-                        <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="324.0" spacing="16.0">
+                        <HBox alignment="CENTER_RIGHT" spacing="16.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="25.0" prefWidth="160.0" styleClass="secondary-button" text="%boton.descartar" />
-                              <Button mnemonicParsing="false" onAction="#guardarCambios" prefHeight="25.0" prefWidth="100.0" styleClass="primary-button" text="%boton.guardar" />
+                              <Label minWidth="46.0" text="%exp.intervalo" />
+                              <CheckBox fx:id="checkBoxIntervalo" mnemonicParsing="false" />
                            </children>
                         </HBox>
                      </children>
-                  </VBox>
+                  </HBox>
+                  <Separator />
+                  <HBox>
+                     <children>
+                        <Label text="%exp.tiempo" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="24.0">
+                     <children>
+                        <Label fx:id="relojLimiteSup" alignment="CENTER_RIGHT" minWidth="25.0" text="x" />
+                        <ComboBox fx:id="restriccionSup" minWidth="70.0" prefWidth="70.0" />
+                        <HBox alignment="CENTER" spacing="8.0">
+                           <children>
+                              <Spinner fx:id="limiteSup" minWidth="90.0" prefWidth="100.0" />
+                              <Label minWidth="20.0" text="%exp.segundos" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="24.0">
+                     <children>
+                        <HBox alignment="CENTER" spacing="8.0">
+                           <children>
+                              <Spinner fx:id="limiteInf" minWidth="100.0" prefWidth="100.0" />
+                              <Label minWidth="20.0" text="%exp.segundos" />
+                           </children>
+                        </HBox>
+                        <ComboBox fx:id="restriccionInf" minWidth="70.0" prefWidth="70.0" />
+                        <Label fx:id="relojLimiteInf" minWidth="25.0" text="x" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
+            <VBox prefWidth="324.0" spacing="18.0">
+               <children>
+                  <Label styleClass="subtitle" text="%exp.reactivos" />
+                  <HBox prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <ComboBox fx:id="comboBoxReactivos" prefWidth="150.0" />
+                        <Spinner fx:id="cantidadReactivos" prefWidth="110.0" />
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirReactivo" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="18.0">
+                                 <image>
+                                    <Image url="@../icons/baseline_add_black_24dp.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tablaReactivos" prefHeight="217.0" prefWidth="372.0">
+                     <columns>
+                        <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.nombre" />
+                        <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="%tabla.cantidad" />
+                        <TableColumn fx:id="columnaEliminarReactivo" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <VBox prefWidth="324.0" spacing="18.0">
+               <children>
+                  <Label styleClass="subtitle" text="%exp.factores" />
+                  <HBox prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <ComboBox fx:id="comboBoxFactores" prefWidth="150.0" />
+                        <Spinner fx:id="valorFactores" prefWidth="110.0" />
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirFactor" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="18.0">
+                                 <image>
+                                    <Image url="@../icons/baseline_add_black_24dp.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tablaFactores" prefHeight="217.0" prefWidth="372.0">
+                     <columns>
+                        <TableColumn fx:id="columnaNombreFactor" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.factor" />
+                        <TableColumn fx:id="columnaValorFactor" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="%tabla.valores" />
+                        <TableColumn fx:id="columnaEliminarFactor" editable="false" prefWidth="47.0" resizable="false" sortable="false" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
+      <HBox alignment="BOTTOM_RIGHT" prefWidth="324.0" spacing="16.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="25.0" prefWidth="160.0" styleClass="secondary-button" text="%boton.descartar" />
+            <Button mnemonicParsing="false" onAction="#guardarCambios" prefHeight="25.0" prefWidth="100.0" styleClass="primary-button" text="%boton.guardar" />
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>

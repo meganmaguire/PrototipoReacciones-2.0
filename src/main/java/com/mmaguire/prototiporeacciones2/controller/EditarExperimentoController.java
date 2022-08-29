@@ -1,25 +1,47 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
+import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
-import com.mmaguire.prototiporeacciones2.model.Factor;
-import com.mmaguire.prototiporeacciones2.model.Paso;
-import com.mmaguire.prototiporeacciones2.model.Reactivo;
-import com.mmaguire.prototiporeacciones2.model.ReactivoReaccion;
+import com.mmaguire.prototiporeacciones2.model.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
 
 public class EditarExperimentoController {
+
+    @FXML
+    private ComboBox<String> comboBoxReloj;
+    @FXML
+    private CheckBox checkBoxIntervalo;
+    @FXML
+    private Label relojLimiteSup;
+    @FXML
+    private Label relojLimiteInf;
+    @FXML
+    private ComboBox<String> restriccionSup;
+    @FXML
+    private Spinner<Integer> limiteSup;
+    @FXML
+    private ComboBox<String> restriccionInf;
+    @FXML
+    private Spinner<Integer> limiteInf;
 
     @FXML
     private ComboBox<Reactivo> comboBoxReactivos;
@@ -47,15 +69,14 @@ public class EditarExperimentoController {
     @FXML
     private TableColumn<Factor, Factor> columnaEliminarFactor;
 
-    @FXML
-    private Spinner<Integer> tiempoPaso;
-
     private Context contexto;
     private Paso paso;
 
     private ObservableList<ReactivoReaccion> reactivosPasoExperimento;
     private ObservableList<Factor> factoresPasoExperimento;
 
+    private ObservableList<String> restriccionesIntervalo;
+    private ObservableList<String> restriccionesTiempoFijo;
 
     @FXML
     public void initialize(){
@@ -64,9 +85,53 @@ public class EditarExperimentoController {
         this.reactivosPasoExperimento = FXCollections.observableList(new ArrayList<>());
         this.factoresPasoExperimento = FXCollections.observableList(new ArrayList<>());
 
+        this.restriccionesIntervalo = FXCollections.observableList(new ArrayList<>());
+        this.restriccionesIntervalo.add("<=");
+        this.restriccionesIntervalo.add("<");
+
+        this.restriccionesTiempoFijo = FXCollections.observableList(new ArrayList<>());
+        this.restriccionesTiempoFijo.add("==");
+        this.restriccionesTiempoFijo.add("<=");
+        this.restriccionesTiempoFijo.add("<");
+
+        this.limiteInf.setDisable(true);
+        this.restriccionInf.setDisable(true);
+        this.relojLimiteInf.setDisable(true);
+
         // Set ComboBox
         this.comboBoxReactivos.setItems(contexto.getReactivos());
         this.comboBoxFactores.setItems(contexto.getFactores());
+        this.comboBoxReloj.setItems(FXCollections.observableList(contexto.getSistemaReacciones().getRelojes()));
+        this.comboBoxReloj.getSelectionModel().selectFirst();
+
+        this.restriccionSup.setItems(this.restriccionesTiempoFijo);
+        this.restriccionSup.getSelectionModel().selectFirst();
+
+        this.restriccionInf.setItems(this.restriccionesIntervalo);
+        this.restriccionInf.getSelectionModel().selectFirst();
+
+        // Set listener de CheckBox
+        this.checkBoxIntervalo.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue ov, Boolean valAnterior, Boolean valActual) {
+                limiteInf.setDisable(!valActual);
+                restriccionInf.setDisable(!valActual);
+                relojLimiteInf.setDisable(!valActual);
+                if(valActual){
+                    restriccionSup.setItems(restriccionesIntervalo);
+                    restriccionSup.getSelectionModel().selectFirst();
+                } else {
+                    restriccionSup.setItems(restriccionesTiempoFijo);
+                    restriccionSup.getSelectionModel().selectFirst();
+                }
+            }});
+
+        this.comboBoxReloj.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue ov, String valAnterior, String valActual) {
+                relojLimiteInf.setText(valActual);
+                relojLimiteSup.setText(valActual);
+            }});
 
         // Set tablas
         // Tabla Reactivos
@@ -122,8 +187,10 @@ public class EditarExperimentoController {
         this.cantidadReactivos.setEditable(true);
         this.valorFactores.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0,10000,0,0.01));
         this.valorFactores.setEditable(true);
-        this.tiempoPaso.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,1000000, 0));
-        this.tiempoPaso.setEditable(true);
+        this.limiteInf.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,1000000, 0));
+        this.limiteInf.setEditable(true);
+        this.limiteSup.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,1000000, 0));
+        this.limiteSup.setEditable(true);
     }
 
     @FXML
@@ -131,7 +198,17 @@ public class EditarExperimentoController {
         this.paso = paso;
         this.reactivosPasoExperimento.addAll(this.paso.getReactivosActualizados());
         this.factoresPasoExperimento.addAll(this.paso.getFactoresActualizados());
-        // this.tiempoPaso.getValueFactory().setValue(this.paso.getTiempo());
+        RestriccionTiempo tiempo = paso.getTiempo();
+        this.limiteSup.getValueFactory().setValue(tiempo.getLimiteSup());
+        this.restriccionSup.getSelectionModel().select(tiempo.getRestriccionSup());
+        this.comboBoxReloj.getSelectionModel().select(tiempo.getReloj());
+        if (tiempo instanceof RestriccionIntervalo){
+            this.checkBoxIntervalo.setSelected(true);
+            this.limiteInf.getValueFactory().setValue(((RestriccionIntervalo) tiempo).getLimiteInf());
+            this.restriccionInf.getSelectionModel().select(((RestriccionIntervalo) tiempo).getRestriccionInf());
+
+
+        }
     }
 
     @FXML
@@ -161,9 +238,40 @@ public class EditarExperimentoController {
         if(!this.factoresPasoExperimento.isEmpty() || !this.reactivosPasoExperimento.isEmpty()) {
             this.paso.setFactoresActualizados(this.factoresPasoExperimento);
             this.paso.setReactivosActualizados(this.reactivosPasoExperimento);
-            //this.paso.setTiempo(this.tiempoPaso.getValue());
+
+            this.paso.getTiempo().setLimiteSup(this.limiteSup.getValue());
+            this.paso.getTiempo().setRestriccionSup(this.restriccionSup.getValue());
+            this.paso.getTiempo().setReloj(this.comboBoxReloj.getValue());
+            if (this.paso.getTiempo() instanceof RestriccionIntervalo){
+                ((RestriccionIntervalo) this.paso.getTiempo()).setLimiteInf(this.limiteInf.getValue());
+                ((RestriccionIntervalo) this.paso.getTiempo()).setRestriccionInf(this.restriccionInf.getValue());
+            }
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
+        }
+    }
+
+    @FXML
+    public void añadirReloj(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/añadir-reloj.fxml"), bundle);
+            Parent root = loader.load();
+            AddRelojController controller = loader.getController();
+
+            Scene scene = new Scene(root);
+
+            Stage stage = createModalWindow(scene, event);
+            stage.showAndWait();
+
+            String reloj = controller.getReloj();
+            if (reloj != null)
+                this.contexto.getSistemaReacciones().getRelojes().add(reloj);
+
+            this.comboBoxReloj.setItems(FXCollections.observableList(contexto.getSistemaReacciones().getRelojes()));
+        }
+        catch (IOException e) {
+            System.out.println("Hubo un problema al leer el archivo FXML");
+            e.printStackTrace();
         }
     }
 

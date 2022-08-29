@@ -41,7 +41,7 @@
                                     </ImageView>
                                  </graphic>
                                  <tooltip>
-                                    <Tooltip text="Añadir reloj" />
+                                    <Tooltip text="%add.reloj.titulo" />
                                  </tooltip>
                               </Button>
                            </children>
@@ -57,9 +57,8 @@
                   <Separator />
                   <HBox>
                      <children>
-                        <Label text="Tiempo" />
-                     </children>
-                  </HBox>
+                        <Label text="%exp.tiempo" />
+                     </children></HBox>
                   <HBox alignment="CENTER" spacing="24.0">
                      <children>
                         <Label fx:id="relojLimiteSup" alignment="CENTER_RIGHT" minWidth="25.0" text="x" />
@@ -67,7 +66,7 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
                            <children>
                               <Spinner fx:id="limiteSup" minWidth="90.0" prefWidth="100.0" />
-                              <Label minWidth="20.0" text="seg" />
+                              <Label minWidth="20.0" text="%exp.segundos" />
                            </children>
                         </HBox>
                      </children>
@@ -77,7 +76,7 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
                            <children>
                               <Spinner fx:id="limiteInf" minWidth="100.0" prefWidth="100.0" />
-                              <Label minWidth="20.0" text="seg" />
+                              <Label minWidth="20.0" text="%exp.segundos" />
                            </children>
                         </HBox>
                         <ComboBox fx:id="restriccionInf" minWidth="70.0" prefWidth="70.0" />
@@ -156,7 +155,7 @@
       <TableView fx:id="tablaExperimento">
         <columns>
           <TableColumn fx:id="columnaTiempoPaso" editable="false" minWidth="150.0" prefWidth="-1.0" sortable="false" text="%tabla.tiempo" />
-          <TableColumn fx:id="columnaModificacionesPaso" editable="false" minWidth="400.0" prefWidth="-1.0" sortable="false" text="%tabla.modificaciones" />
+          <TableColumn fx:id="columnaModificacionesPaso" editable="false" minWidth="400.0" prefWidth="685.0" sortable="false" text="%tabla.modificaciones" />
             <TableColumn fx:id="columnaEliminarPaso" editable="false" minWidth="70.0" prefWidth="-1.0" sortable="false" />
         </columns>
       </TableView>

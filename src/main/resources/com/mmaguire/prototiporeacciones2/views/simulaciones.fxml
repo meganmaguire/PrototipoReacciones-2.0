@@ -9,23 +9,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.SimulacionesController">
    <padding>
       <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
    </padding>
    <children>
       <Label styleClass="title" text="%sim.titulo" />
-      <HBox prefHeight="618.0" prefWidth="971.0" spacing="46.0">
+      <HBox spacing="46.0">
          <children>
-            <VBox prefHeight="582.0" prefWidth="509.0" spacing="18.0">
+            <VBox prefHeight="582.0" spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="subtitle" text="%sim.reacciones" />
-                  <TableView fx:id="tablaReacciones" prefHeight="582.0" prefWidth="141.0">
+                  <TableView fx:id="tablaReacciones" prefHeight="582.0">
                     <columns>
-                      <TableColumn fx:id="columnaNroReaccion" editable="false" prefWidth="54.0" sortable="false" text="%tabla.numero" />
-                      <TableColumn fx:id="columnaReaccion" editable="false" prefWidth="178.0" sortable="false" text="%tabla.reaccion" />
-                        <TableColumn fx:id="columnaTasaReaccion" editable="false" prefWidth="272.0" sortable="false" text="%tabla.tasa" />
+                      <TableColumn fx:id="columnaNroReaccion" editable="false" minWidth="50.0" prefWidth="-1.0" sortable="false" text="%tabla.numero" />
+                      <TableColumn fx:id="columnaReaccion" editable="false" minWidth="150.0" prefWidth="-1.0" sortable="false" text="%tabla.reaccion" />
+                        <TableColumn fx:id="columnaTasaReaccion" editable="false" minWidth="250.0" prefWidth="-1.0" sortable="false" text="%tabla.tasa" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -33,13 +32,13 @@
                   </TableView>
                </children>
             </VBox>
-            <VBox prefHeight="582.0" prefWidth="419.0" spacing="18.0">
+            <VBox prefHeight="582.0" spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="subtitle" text="%sim.experimento" />
-                  <TableView fx:id="tablaExperimento" prefHeight="592.0" prefWidth="418.0">
+                  <TableView fx:id="tablaExperimento" prefHeight="592.0">
                     <columns>
-                      <TableColumn fx:id="columnaTiempoPaso" editable="false" prefWidth="100.0" sortable="false" text="%tabla.tiempo" />
-                      <TableColumn fx:id="columnaModificacionesPaso" editable="false" prefWidth="314.0" sortable="false" text="%tabla.modificaciones" />
+                      <TableColumn fx:id="columnaTiempoPaso" editable="false" minWidth="100.0" prefWidth="-1.0" sortable="false" text="%tabla.tiempo" />
+                      <TableColumn fx:id="columnaModificacionesPaso" editable="false" minWidth="250.0" prefWidth="-1.0" sortable="false" text="%tabla.modificaciones" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -49,15 +48,15 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="36.0">
+      <HBox alignment="CENTER_RIGHT" spacing="36.0">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="298.0" spacing="12.0">
+            <HBox alignment="CENTER_RIGHT" spacing="12.0">
                <children>
                   <Label text="%sim.cantidadBombas" />
                   <Spinner fx:id="cantidadBombas" prefHeight="27.0" prefWidth="100.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="298.0" spacing="12.0">
+            <HBox alignment="CENTER_RIGHT" spacing="12.0">
                <children>
                   <Label text="%sim.tiempo" />
                   <Spinner fx:id="tiempoSimulacion" prefHeight="25.0" prefWidth="100.0" />

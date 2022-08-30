@@ -23,9 +23,9 @@
       <Label styleClass="title" text="%edit.exp.titulo" />
       <HBox spacing="72.0">
          <children>
-            <VBox prefHeight="304.0" prefWidth="286.0" spacing="18.0">
+            <VBox prefHeight="304.0" prefWidth="286.0" spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox spacing="24.0">
+                  <HBox alignment="BOTTOM_LEFT" spacing="24.0">
                      <children>
                         <Label minWidth="60.0" prefHeight="24.0" prefWidth="111.0" styleClass="subtitle" text="%exp.restriccion" />
                         <ComboBox fx:id="comboBoxRestriccion" prefWidth="150.0" />
@@ -98,7 +98,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox prefWidth="324.0" spacing="18.0">
+            <VBox prefWidth="324.0" spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="subtitle" text="%exp.reactivos" />
                   <HBox prefWidth="200.0" spacing="20.0">
@@ -116,7 +116,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <TableView fx:id="tablaReactivos" prefHeight="217.0" prefWidth="372.0">
+                  <TableView fx:id="tablaReactivos" prefHeight="217.0" prefWidth="372.0" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="columnaNombreReactivos" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.nombre" />
                         <TableColumn fx:id="columnaCantidadReactivos" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="%tabla.cantidad" />
@@ -125,7 +125,7 @@
                   </TableView>
                </children>
             </VBox>
-            <VBox prefWidth="324.0" spacing="18.0">
+            <VBox prefWidth="324.0" spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="subtitle" text="%exp.factores" />
                   <HBox prefWidth="200.0" spacing="20.0">
@@ -143,7 +143,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <TableView fx:id="tablaFactores" prefHeight="217.0" prefWidth="372.0">
+                  <TableView fx:id="tablaFactores" prefHeight="217.0" prefWidth="372.0" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="columnaNombreFactor" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="%tabla.factor" />
                         <TableColumn fx:id="columnaValorFactor" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="%tabla.valores" />
@@ -154,7 +154,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_RIGHT" prefWidth="324.0" spacing="16.0">
+      <HBox alignment="BOTTOM_RIGHT" prefWidth="324.0" spacing="16.0" VBox.vgrow="ALWAYS">
          <children>
             <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="25.0" prefWidth="160.0" styleClass="secondary-button" text="%boton.descartar" />
             <Button mnemonicParsing="false" onAction="#guardarCambios" prefHeight="25.0" prefWidth="100.0" styleClass="primary-button" text="%boton.guardar" />

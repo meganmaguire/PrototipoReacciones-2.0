@@ -5,40 +5,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="500.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.AddConstanteController">
+
+<VBox prefHeight="248.0" prefWidth="500.0" spacing="28.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.AddConstanteController">
+   <padding>
+      <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
+   </padding>
    <children>
-      <VBox prefHeight="248.0" prefWidth="500.0" spacing="28.0">
-         <padding>
-            <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
-         </padding>
+      <Label styleClass="subtitle" text="%add.const.titulo" />
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="16.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label styleClass="subtitle" text="%add.const.titulo" />
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="16.0">
+            <HBox alignment="CENTER" prefWidth="200.0" spacing="16.0">
                <children>
-                  <HBox alignment="CENTER" prefWidth="200.0" spacing="16.0">
-                     <children>
-                        <Label alignment="CENTER_RIGHT" prefWidth="60.0" styleClass="form-label" text="%add.const.nombre" />
-                        <TextField fx:id="nombreConstante" prefWidth="150.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefWidth="200.0" spacing="16.0">
-                     <children>
-                        <Label alignment="CENTER_RIGHT" prefWidth="60.0" styleClass="form-label" text="%add.const.valor" />
-                        <Spinner fx:id="valorConstante" prefWidth="150.0" />
-                     </children>
-                  </HBox>
+                  <Label alignment="CENTER_RIGHT" prefWidth="60.0" styleClass="form-label" text="%add.const.nombre" />
+                  <TextField fx:id="nombreConstante" minWidth="150.0" prefWidth="150.0" />
                </children>
-            </VBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+            </HBox>
+            <HBox alignment="CENTER" prefWidth="200.0" spacing="16.0">
                <children>
-                  <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#añadirConstante" styleClass="primary-button" text="%boton.añadir" />
+                  <Label alignment="CENTER_RIGHT" prefWidth="60.0" styleClass="form-label" text="%add.const.valor" />
+                  <Spinner fx:id="valorConstante" prefWidth="150.0" />
                </children>
             </HBox>
          </children>
       </VBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#añadirConstante" styleClass="primary-button" text="%boton.añadir" />
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>

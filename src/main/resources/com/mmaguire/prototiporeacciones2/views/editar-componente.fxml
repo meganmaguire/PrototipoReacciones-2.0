@@ -9,103 +9,99 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarComponenteController">
+
+<VBox spacing="46.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarComponenteController">
+   <padding>
+      <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
+   </padding>
    <children>
-      <VBox spacing="46.0">
-         <padding>
-            <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
-         </padding>
+      <Label styleClass="title" text="%edit.comp.titulo" />
+      <HBox spacing="72.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label styleClass="title" text="%edit.comp.titulo" />
-            <HBox spacing="72.0">
+            <VBox spacing="24.0" HBox.hgrow="ALWAYS">
                <children>
-                  <VBox spacing="24.0">
+                  <HBox alignment="CENTER_LEFT" spacing="24.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" spacing="24.0">
-                           <children>
-                              <Label styleClass="form-label" text="%comp.nombre" />
-                              <TextField fx:id="nombreComponente" prefWidth="230.0"  onKeyPressed="#cleanErrorNombre" onMouseClicked="#cleanErrorNombre"/>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" spacing="24.0">
-                           <children>
-                              <Label styleClass="form-label" text="%comp.cantidad" />
-                              <Spinner fx:id="cantidadComponente" prefWidth="230.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" spacing="24.0">
-                           <children>
-                              <Label styleClass="form-label" text="%comp.actualizable" />
-                              <CheckBox fx:id="actualizableComponente" mnemonicParsing="false" prefHeight="18.0" prefWidth="230.0" text="%comp.actualizable.info" textFill="#a19b9b">
-                                 <font>
-                                    <Font name="System Italic" size="13.0" />
-                                 </font>
-                              </CheckBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" spacing="24.0">
-                           <children>
-                              <Label styleClass="form-label" text="%comp.subestado" />
-                              <CheckBox fx:id="subestadoComponente" mnemonicParsing="false" prefHeight="18.0" prefWidth="230.0" text="%comp.subestado.info" textFill="#a19b9b">
-                                 <font>
-                                    <Font name="System Italic" size="13.0" />
-                                 </font>
-                              </CheckBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" spacing="24.0">
-                           <children>
-                              <Label styleClass="form-label" text="%comp.constante" />
-                              <CheckBox fx:id="poseeConstante" mnemonicParsing="false" prefWidth="230.0" text="%comp.constante.info" textFill="#9e9e9e" onMouseClicked="#cleanErrorConstante"/>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" spacing="16.0">
-                           <children>
-                              <ComboBox fx:id="constanteAsociada" prefHeight="25.0" prefWidth="150.0" onAction="#cleanErrorConstante">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ComboBox>
-                              <Button fx:id="botonAñadirConstante" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirConstante" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
-                                 <graphic>
-                                    <ImageView fitHeight="17.0" fitWidth="18.0">
-                                       <image>
-                                          <Image url="@../icons/baseline_add_black_24dp.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets right="38.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox alignment="BOTTOM_RIGHT" spacing="16.0">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="28.0" prefWidth="181.0" styleClass="secondary-button" text="%boton.descartar">
-                                 <HBox.margin>
-                                    <Insets top="38.0" />
-                                 </HBox.margin>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </Button>
-                              <Button mnemonicParsing="false" onAction="#guardarCambios" prefWidth="80.0" styleClass="primary-button" text="%boton.guardar" />
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
+                        <Label alignment="CENTER_RIGHT" minWidth="120.0" styleClass="form-label" text="%comp.nombre" />
+                        <TextField fx:id="nombreComponente" onKeyPressed="#cleanErrorNombre" onMouseClicked="#cleanErrorNombre" prefWidth="230.0" HBox.hgrow="ALWAYS" />
                      </children>
-                  </VBox>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="24.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" minWidth="120.0" styleClass="form-label" text="%comp.cantidad" />
+                        <Spinner fx:id="cantidadComponente" prefWidth="230.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="24.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" minWidth="120.0" styleClass="form-label" text="%comp.actualizable" />
+                        <CheckBox fx:id="actualizableComponente" mnemonicParsing="false" prefHeight="18.0" prefWidth="230.0" text="%comp.actualizable.info" textFill="#a19b9b">
+                           <font>
+                              <Font name="System Italic" size="13.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="24.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" minWidth="120.0" styleClass="form-label" text="%comp.subestado" />
+                        <CheckBox fx:id="subestadoComponente" mnemonicParsing="false" prefHeight="18.0" prefWidth="230.0" text="%comp.subestado.info" textFill="#a19b9b">
+                           <font>
+                              <Font name="System Italic" size="13.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="24.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" minWidth="120.0" styleClass="form-label" text="%comp.constante" />
+                        <CheckBox fx:id="poseeConstante" mnemonicParsing="false" onMouseClicked="#cleanErrorConstante" prefWidth="230.0" text="%comp.constante.info" textFill="#9e9e9e" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="16.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ComboBox fx:id="constanteAsociada" onAction="#cleanErrorConstante" prefHeight="25.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ComboBox>
+                        <Button fx:id="botonAñadirConstante" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirConstante" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="18.0">
+                                 <image>
+                                    <Image url="@../icons/baseline_add_black_24dp.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="144.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="BOTTOM_RIGHT" spacing="16.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#descartarCambios" prefHeight="28.0" prefWidth="181.0" styleClass="secondary-button" text="%boton.descartar">
+                           <HBox.margin>
+                              <Insets top="38.0" />
+                           </HBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#guardarCambios" prefWidth="80.0" styleClass="primary-button" text="%boton.guardar" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>

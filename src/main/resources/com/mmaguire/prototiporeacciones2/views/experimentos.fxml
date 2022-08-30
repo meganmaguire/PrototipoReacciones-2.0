@@ -21,11 +21,11 @@
    </padding>
    <children>
       <Label styleClass="title" text="%exp.titulo" />
-      <HBox spacing="72.0">
+      <HBox spacing="72.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox spacing="18.0">
+            <VBox spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox alignment="BOTTOM_CENTER" spacing="24.0">
+                  <HBox alignment="BOTTOM_LEFT" spacing="24.0">
                      <children>
                         <Label minWidth="60.0" prefHeight="24.0" prefWidth="111.0" styleClass="subtitle" text="%exp.restriccion" />
                         <ComboBox fx:id="comboBoxRestriccion" prefWidth="150.0" />
@@ -97,7 +97,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="210.0" spacing="18.0">
+            <VBox prefHeight="210.0" spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="subtitle" text="%exp.reactivos" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
@@ -127,7 +127,7 @@
                   </TableView>
                </children>
             </VBox>
-            <VBox prefHeight="210.0" spacing="18.0">
+            <VBox prefHeight="210.0" spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="subtitle" text="%exp.factores" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
@@ -159,12 +159,12 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0">
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" VBox.vgrow="ALWAYS">
          <children>
             <Button mnemonicParsing="false" onAction="#añadirPasoExperimento" prefHeight="25.0" prefWidth="120.0" styleClass="primary-button" text="%boton.añadirPaso" />
          </children>
       </HBox>
-      <TableView fx:id="tablaExperimento">
+      <TableView fx:id="tablaExperimento" VBox.vgrow="ALWAYS">
         <columns>
           <TableColumn fx:id="columnaTiempoPaso" editable="false" minWidth="150.0" prefWidth="-1.0" sortable="false" text="%tabla.tiempo" />
           <TableColumn fx:id="columnaModificacionesPaso" editable="false" minWidth="400.0" prefWidth="685.0" sortable="false" text="%tabla.modificaciones" />

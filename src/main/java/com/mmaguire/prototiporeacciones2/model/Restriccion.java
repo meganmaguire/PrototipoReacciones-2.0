@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         include = JsonTypeInfo.As.EXISTING_PROPERTY,
         property = "@ttype")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Restriccion.class, name = "RestriccionTiempo"),
+        @JsonSubTypes.Type(value = Restriccion.class, name = "Restriccion"),
         @JsonSubTypes.Type(value = RestriccionIntervalo.class, name = "RestriccionIntervalo")
 })
 
@@ -20,14 +20,16 @@ public class Restriccion {
     private int limiteSup;
     private String restriccionSup;
     private String componente;
+    private String tipo;
 
     public Restriccion() {
     }
 
-    public Restriccion(int limiteSup, String restriccionSup, String componente) {
+    public Restriccion(int limiteSup, String restriccionSup, String componente, String tipo) {
         this.limiteSup = limiteSup;
         this.restriccionSup = restriccionSup;
         this.componente = componente;
+        this.tipo = tipo;
     }
 
     public int getLimiteSup() {
@@ -54,6 +56,14 @@ public class Restriccion {
         this.componente = componente;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public String toString(){
         return this.componente + " " + this.restriccionSup + " " + this.limiteSup;
@@ -61,6 +71,6 @@ public class Restriccion {
 
     @JsonProperty("@ttype")
     public String getChildType(){
-        return "RestriccionTiempo";
+        return "Restriccion";
     }
 }

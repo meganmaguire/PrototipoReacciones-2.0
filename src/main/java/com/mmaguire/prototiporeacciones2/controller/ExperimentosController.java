@@ -313,7 +313,8 @@ public class ExperimentosController {
                 tiempo = new Restriccion(
                         this.limiteSup.getValue(),
                         this.restriccionSup.getValue(),
-                        this.comboBoxComponente.getValue());
+                        this.comboBoxComponente.getValue(),
+                        this.comboBoxRestriccion.getValue());
             }
 
             Paso paso = new Paso(

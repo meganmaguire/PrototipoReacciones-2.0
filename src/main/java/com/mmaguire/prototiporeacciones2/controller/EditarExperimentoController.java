@@ -198,10 +198,10 @@ public class EditarExperimentoController {
         this.paso = paso;
         this.reactivosPasoExperimento.addAll(this.paso.getReactivosActualizados());
         this.factoresPasoExperimento.addAll(this.paso.getFactoresActualizados());
-        RestriccionTiempo tiempo = paso.getTiempo();
+        Restriccion tiempo = paso.getTiempo();
         this.limiteSup.getValueFactory().setValue(tiempo.getLimiteSup());
         this.restriccionSup.getSelectionModel().select(tiempo.getRestriccionSup());
-        this.comboBoxReloj.getSelectionModel().select(tiempo.getReloj());
+        this.comboBoxReloj.getSelectionModel().select(tiempo.getComponente());
         if (tiempo instanceof RestriccionIntervalo){
             this.checkBoxIntervalo.setSelected(true);
             this.limiteInf.getValueFactory().setValue(((RestriccionIntervalo) tiempo).getLimiteInf());
@@ -241,7 +241,7 @@ public class EditarExperimentoController {
 
             this.paso.getTiempo().setLimiteSup(this.limiteSup.getValue());
             this.paso.getTiempo().setRestriccionSup(this.restriccionSup.getValue());
-            this.paso.getTiempo().setReloj(this.comboBoxReloj.getValue());
+            this.paso.getTiempo().setComponente(this.comboBoxReloj.getValue());
             if (this.paso.getTiempo() instanceof RestriccionIntervalo){
                 ((RestriccionIntervalo) this.paso.getTiempo()).setLimiteInf(this.limiteInf.getValue());
                 ((RestriccionIntervalo) this.paso.getTiempo()).setRestriccionInf(this.restriccionInf.getValue());

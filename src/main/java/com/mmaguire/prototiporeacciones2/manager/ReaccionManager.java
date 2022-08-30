@@ -238,7 +238,7 @@ public class ReaccionManager {
                 } else
                     restriccion = paso.getTiempo().getRestriccionSup();
                 setLabel(locationActual, LocationKind.invariant,
-                        paso.getTiempo().getReloj() + " " + restriccion + " " + paso.getTiempo().getLimiteSup(),
+                        paso.getTiempo().getComponente() + " " + restriccion + " " + paso.getTiempo().getLimiteSup(),
                         x - 7, y + 20);
             }
             if(i == 0) locationActual.setProperty("init", true);

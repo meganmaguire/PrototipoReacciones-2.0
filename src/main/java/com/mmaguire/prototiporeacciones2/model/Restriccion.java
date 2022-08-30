@@ -10,24 +10,24 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         include = JsonTypeInfo.As.EXISTING_PROPERTY,
         property = "@ttype")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = RestriccionTiempo.class, name = "RestriccionTiempo"),
+        @JsonSubTypes.Type(value = Restriccion.class, name = "RestriccionTiempo"),
         @JsonSubTypes.Type(value = RestriccionIntervalo.class, name = "RestriccionIntervalo")
 })
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RestriccionTiempo {
+public class Restriccion {
 
     private int limiteSup;
     private String restriccionSup;
-    private String reloj;
+    private String componente;
 
-    public RestriccionTiempo() {
+    public Restriccion() {
     }
 
-    public RestriccionTiempo(int limiteSup, String restriccionSup, String reloj) {
+    public Restriccion(int limiteSup, String restriccionSup, String componente) {
         this.limiteSup = limiteSup;
         this.restriccionSup = restriccionSup;
-        this.reloj = reloj;
+        this.componente = componente;
     }
 
     public int getLimiteSup() {
@@ -46,17 +46,17 @@ public class RestriccionTiempo {
         this.restriccionSup = restriccionSup;
     }
 
-    public String getReloj() {
-        return reloj;
+    public String getComponente() {
+        return componente;
     }
 
-    public void setReloj(String reloj) {
-        this.reloj = reloj;
+    public void setComponente(String componente) {
+        this.componente = componente;
     }
 
     @Override
     public String toString(){
-        return this.reloj + " " + this.restriccionSup + " " + this.limiteSup;
+        return this.componente + " " + this.restriccionSup + " " + this.limiteSup;
     }
 
     @JsonProperty("@ttype")

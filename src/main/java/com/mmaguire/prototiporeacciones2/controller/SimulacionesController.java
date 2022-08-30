@@ -148,24 +148,43 @@ public class SimulacionesController {
                 int exitCode = procSimulacion.waitFor();
 
                 if(exitCode == 0) {
-                    out = Parser.removeHeader(out);
-                    List<DatosComponente> datos = Parser.parse(out);
+                    try {
+                        out = Parser.removeHeader(out);
+                        List<DatosComponente> datos = Parser.parse(out);
 
-                    Simulacion simulacion = new Simulacion(datos, "simulacion",LocalDateTime.now());
+                        Simulacion simulacion = new Simulacion(datos, "simulacion", LocalDateTime.now());
 
-                    Sistema nuevaSimulacion = this.contexto.getSistemaReacciones().clone();
-                    nuevaSimulacion.setSimulacion(simulacion);
+                        Sistema nuevaSimulacion = this.contexto.getSistemaReacciones().clone();
+                        nuevaSimulacion.setSimulacion(simulacion);
 
-                    this.contexto.getHistorial().add(nuevaSimulacion);
-                    // Generar pantalla de simulación y enviar datos
-                    Platform.runLater(()-> {
-                        cargandoStage.close();
-                        showData(event, simulacion);
-                    });
+                        this.contexto.getHistorial().add(nuevaSimulacion);
+                        // Generar pantalla de simulación y enviar datos
+                        Platform.runLater(() -> {
+                            cargandoStage.close();
+                            showData(event, simulacion);
+                        });
+                    }
+                    catch (IndexOutOfBoundsException e){
+                        Platform.runLater(()-> {
+                            cargandoStage.close();
+                            Alert alert;
+                            alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("Error al simular el modelo");
+                            alert.setContentText("Ha ocurrido un error al ejecutar el comando de simulación. Revise el modelo en UPPAAL para mayor detalle.");
+                            alert.showAndWait();
+                        });}
                 }
                 else{
-                    System.out.println("Error al ejecutar comando de simulación");
-                    System.out.println("Código de error: " + exitCode);
+                    Platform.runLater(()-> {
+                        cargandoStage.close();
+                        Alert alert;
+                        alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Error al simular el modelo");
+                        alert.setContentText("Ha ocurrido un error al ejecutar el comando de simulación. Código de error: " + exitCode);
+                        alert.showAndWait();
+                    });
                 }
 
             } catch (IOException e) {

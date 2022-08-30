@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Parser {
 
-    public static ArrayList<String> removeHeader(ArrayList<String> out){
+    public static ArrayList<String> removeHeader(ArrayList<String> out) throws IndexOutOfBoundsException{
         ArrayList<String> result = new ArrayList<>(out
                 .stream().dropWhile(s -> !s.contains("Formula is satisfied"))
                 .toList());

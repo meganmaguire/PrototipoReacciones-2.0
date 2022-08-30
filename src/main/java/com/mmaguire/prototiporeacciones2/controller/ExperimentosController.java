@@ -306,6 +306,7 @@ public class ExperimentosController {
                             this.limiteSup.getValue(),
                             this.restriccionSup.getValue(),
                             this.comboBoxComponente.getValue(),
+                            this.comboBoxRestriccion.getValue(),
                             this.limiteInf.getValue(),
                             this.restriccionInf.getValue());
                 } else return;

@@ -23,16 +23,28 @@
       <Label styleClass="title" text="%edit.exp.titulo" />
       <HBox spacing="72.0">
          <children>
-            <VBox spacing="18.0">
+            <VBox prefHeight="304.0" prefWidth="286.0" spacing="18.0">
                <children>
-                  <Label minWidth="60.0" prefHeight="24.0" prefWidth="111.0" styleClass="subtitle" text="%exp.tiempo" />
+                  <HBox spacing="24.0">
+                     <children>
+                        <Label minWidth="60.0" prefHeight="24.0" prefWidth="111.0" styleClass="subtitle" text="%exp.restriccion" />
+                        <ComboBox fx:id="comboBoxRestriccion" prefWidth="150.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="12.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="30.0" prefHeight="17.0" text="%exp.elemento" />
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="30.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" spacing="16.0">
                            <children>
-                              <Label minWidth="30.0" prefHeight="17.0" text="%exp.reloj" />
-                              <ComboBox fx:id="comboBoxReloj" minWidth="70.0" prefWidth="70.0" />
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirReloj" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
+                              <ComboBox fx:id="comboBoxComponente" minWidth="70.0" prefWidth="100.0" />
+                              <Button fx:id="botonAñadirReloj" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirReloj" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
                                  <graphic>
                                     <ImageView fitHeight="17.0" fitWidth="18.0">
                                        <image>
@@ -57,17 +69,17 @@
                   <Separator />
                   <HBox>
                      <children>
-                        <Label text="%exp.tiempo" />
+                        <Label text="%exp.valor" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" spacing="24.0">
                      <children>
-                        <Label fx:id="relojLimiteSup" alignment="CENTER_RIGHT" minWidth="25.0" text="x" />
+                        <Label fx:id="labelLimiteSup" alignment="CENTER_RIGHT" minWidth="25.0" text="x" />
                         <ComboBox fx:id="restriccionSup" minWidth="70.0" prefWidth="70.0" />
                         <HBox alignment="CENTER" spacing="8.0">
                            <children>
                               <Spinner fx:id="limiteSup" minWidth="90.0" prefWidth="100.0" />
-                              <Label minWidth="20.0" text="%exp.segundos" />
+                              <Label fx:id="labelSegSup" minWidth="20.0" text="%exp.segundos" />
                            </children>
                         </HBox>
                      </children>
@@ -77,11 +89,11 @@
                         <HBox alignment="CENTER" spacing="8.0">
                            <children>
                               <Spinner fx:id="limiteInf" minWidth="100.0" prefWidth="100.0" />
-                              <Label minWidth="20.0" text="%exp.segundos" />
+                              <Label fx:id="labelSegInf" minWidth="20.0" text="%exp.segundos" />
                            </children>
                         </HBox>
                         <ComboBox fx:id="restriccionInf" minWidth="70.0" prefWidth="70.0" />
-                        <Label fx:id="relojLimiteInf" minWidth="25.0" text="x" />
+                        <Label fx:id="labelLimiteInf" minWidth="25.0" text="x" />
                      </children>
                   </HBox>
                </children>

@@ -12,8 +12,8 @@ public class RestriccionIntervalo extends Restriccion {
     public RestriccionIntervalo() {
     }
 
-    public RestriccionIntervalo(int limiteSup, String restriccionSup, String reloj, int limiteInf, String restriccionInf) {
-        super(limiteSup, restriccionSup, reloj);
+    public RestriccionIntervalo(int limiteSup, String restriccionSup, String componente, String tipo, int limiteInf, String restriccionInf) {
+        super(limiteSup, restriccionSup, componente, tipo);
         this.limiteInf = limiteInf;
         this.restriccionInf = restriccionInf;
     }

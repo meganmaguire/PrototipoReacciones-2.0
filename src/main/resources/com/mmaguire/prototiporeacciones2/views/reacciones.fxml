@@ -139,8 +139,8 @@
                 <TableColumn fx:id="columnaNroReaccion" editable="false" minWidth="75.0" prefWidth="-1.0" sortable="false" text="%tabla.numero" />
                 <TableColumn fx:id="columnaReaccion" editable="false" minWidth="250.0" prefWidth="-1.0" sortable="false" text="%tabla.reaccion" />
                   <TableColumn fx:id="columnaTasaReaccion" editable="false" minWidth="450.0" prefWidth="-1.0" sortable="false" text="%tabla.tasa" />
-                  <TableColumn minWidth="20.0" prefWidth="75.0" text="Alpha" />
-                  <TableColumn minWidth="20.0" prefWidth="75.0" text="Beta" />
+                  <TableColumn fx:id="columnaAlpha" minWidth="40.0" prefWidth="75.0" text="Alpha" />
+                  <TableColumn fx:id="columnaBeta" minWidth="40.0" prefWidth="75.0" text="Beta" />
                   <TableColumn fx:id="columnaEliminarReaccion" editable="false" minWidth="40.0" prefWidth="-1.0" sortable="false" />
               </columns>
                <columnResizePolicy>

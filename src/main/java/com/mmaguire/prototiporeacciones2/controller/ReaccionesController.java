@@ -77,6 +77,10 @@ public class ReaccionesController {
     @FXML
     private TableColumn<Reaccion, String> columnaTasaReaccion;
     @FXML
+    private TableColumn<Reaccion, String> columnaAlpha;
+    @FXML
+    private TableColumn<Reaccion, String> columnaBeta;
+    @FXML
     private TableColumn<Reaccion, Reaccion> columnaEliminarReaccion;
 
     private Context contexto;
@@ -190,6 +194,9 @@ public class ReaccionesController {
         this.columnaNroReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNroReaccion()));
         this.columnaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
         this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(itemArray2String(cellData.getValue().getTasaReaccion())));
+        this.columnaAlpha.setCellValueFactory(cellData -> new SimpleObjectProperty<>(String.valueOf(cellData.getValue().getAlpha().getValor())));
+        this.columnaBeta.setCellValueFactory(cellData -> new SimpleObjectProperty<>(
+                cellData.getValue() instanceof ReaccionReversible ? (String.valueOf(( (ReaccionReversible) cellData.getValue()).getBeta().getValor())) : ""));
         this.columnaEliminarReaccion.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         this.columnaEliminarReaccion.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button();

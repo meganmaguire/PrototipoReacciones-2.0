@@ -16,7 +16,7 @@
 
 <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.ReaccionesController">
    <padding>
-      <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
+      <Insets bottom="40.0" left="54.0" right="54.0" top="40.0" />
    </padding>
    <children>
       <Label styleClass="title" text="%reac.titulo" />
@@ -69,13 +69,13 @@
                                  <children>
                                     <HBox alignment="CENTER_RIGHT" spacing="16.0">
                                        <children>
-                                          <Label contentDisplay="RIGHT" minWidth="30.0" text="alpha" />
+                                          <Label contentDisplay="RIGHT" minWidth="30.0" text="Alpha" />
                                           <TextField fx:id="constanteAlpha" alignment="TOP_LEFT" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_RIGHT" spacing="16.0">
                                        <children>
-                                          <Label alignment="CENTER_RIGHT" minWidth="30.0" text="beta" />
+                                          <Label alignment="CENTER_RIGHT" minWidth="30.0" text="Beta" />
                                           <TextField fx:id="constanteBeta" alignment="TOP_LEFT" />
                                        </children>
                                     </HBox>
@@ -139,6 +139,8 @@
                 <TableColumn fx:id="columnaNroReaccion" editable="false" minWidth="75.0" prefWidth="-1.0" sortable="false" text="%tabla.numero" />
                 <TableColumn fx:id="columnaReaccion" editable="false" minWidth="250.0" prefWidth="-1.0" sortable="false" text="%tabla.reaccion" />
                   <TableColumn fx:id="columnaTasaReaccion" editable="false" minWidth="450.0" prefWidth="-1.0" sortable="false" text="%tabla.tasa" />
+                  <TableColumn minWidth="20.0" prefWidth="75.0" text="Alpha" />
+                  <TableColumn minWidth="20.0" prefWidth="75.0" text="Beta" />
                   <TableColumn fx:id="columnaEliminarReaccion" editable="false" minWidth="40.0" prefWidth="-1.0" sortable="false" />
               </columns>
                <columnResizePolicy>

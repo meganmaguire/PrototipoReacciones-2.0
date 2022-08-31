@@ -11,7 +11,7 @@
 
 <VBox prefHeight="772.0" prefWidth="1115.0" spacing="46.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.SimulacionesController">
    <padding>
-      <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
+      <Insets bottom="40.0" left="54.0" right="54.0" top="40.0" />
    </padding>
    <children>
       <Label styleClass="title" text="%sim.titulo" />

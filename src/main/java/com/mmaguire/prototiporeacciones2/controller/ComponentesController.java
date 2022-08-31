@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import on.D;
 
 import java.io.IOException;
 
@@ -53,6 +54,15 @@ public class ComponentesController {
     private TableColumn<Reactivo, Reactivo> columnaEliminar;
 
     @FXML
+    private TableView<Factor> tablaConstantes;
+    @FXML
+    private TableColumn<Factor, String> columnaNombreConst;
+    @FXML
+    private TableColumn<Factor, Double> columnaValorConst;
+    @FXML
+    private TableColumn<Factor, Factor> columnaEliminarConst;
+
+    @FXML
     private Button botonAñadirComponente;
 
     private Context contexto;
@@ -60,6 +70,8 @@ public class ComponentesController {
     @FXML
     public void initialize(){
         contexto = Context.getContext();
+
+        // Tabla Componentes
         this.tablaComponentes.setItems(contexto.getReactivos());
         this.columnaNombre.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
         this.columnaCantidad.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
@@ -98,6 +110,31 @@ public class ComponentesController {
             });
             return row;
         });
+
+        // Tabla constantes
+        this.tablaConstantes.setItems(contexto.getConstantesReaccion());
+        this.columnaNombreConst.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
+        this.columnaValorConst.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValor()));
+        this.columnaEliminarConst.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        this.columnaEliminarConst.setCellFactory(param -> new TableCell<>() {
+            private final Button deleteButton = new Button();
+
+            @Override
+            protected void updateItem(Factor factor, boolean empty) {
+                super.updateItem(factor, empty);
+
+                if (factor == null) {
+                    setGraphic(null);
+                    return;
+                }
+                styleDeleteButton(deleteButton);
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(
+                        event -> getTableView().getItems().remove(factor)
+                );
+            }
+        });
+
 
         this.constanteAsociada.setItems(this.contexto.getConstantesReaccion());
         this.cantidadComponente.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 0,1));

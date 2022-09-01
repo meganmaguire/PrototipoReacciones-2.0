@@ -70,7 +70,7 @@
                         <MenuItem mnemonicParsing="false" text="%menu.ayuda.idioma.ingles" />
                     </items>
                   </Menu>
-                  <MenuItem mnemonicParsing="false" text="%menu.ayuda.manual" />
+                  <MenuItem mnemonicParsing="false" onAction="#openManual" text="%menu.ayuda.manual" />
             <MenuItem mnemonicParsing="false" text="%menu.ayuda.sobre" />
           </items>
         </Menu>

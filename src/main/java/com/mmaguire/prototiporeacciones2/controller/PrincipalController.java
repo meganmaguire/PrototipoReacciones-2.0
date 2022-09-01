@@ -16,11 +16,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -310,6 +313,23 @@ public class PrincipalController {
     @FXML
     public void quitApp(){
         Platform.exit();
+    }
+
+    @FXML
+    public void openManual() {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File("Manual_de_Uso.pdf");
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+                Alert alert;
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error al abrir el manuak");
+                alert.setContentText("Ha ocurrido un error al intentar abrir el manual de usuario. Revise el archivo manualmente en la carpeta del programa.");
+                alert.showAndWait();
+            }
+        }
     }
 
     private void showDialog(boolean result) {

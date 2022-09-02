@@ -33,8 +33,9 @@ public class Helper {
     public static String[] generateCommand(String currentDir, String os) throws UnsupportedOperationException {
         String command = null;
         switch (os){
-            case "Windows" -> {
-                return new String[]{"cmd.exe", "/C", "start", command};
+            case "Windows 10", "Windows 7", "Windows" -> {
+                command = currentDir +"/uppaal_servers/win/verifyta " + currentDir + "/untitled.xml " + currentDir + "/query.q";
+                return new String[]{"cmd.exe", "/C", command};
             }
             case "Linux" -> {
                 command = currentDir +"/uppaal_servers/linux/verifyta " + currentDir + "/untitled.xml " + currentDir + "/query.q";

@@ -110,7 +110,7 @@ public class ModelManager {
             path = here+"/uppaal_servers/linux/server";
         } else if ("Mac OS X".equals(os)) {
             path = here+"/uppaal_servers/mac/server";
-        } else if ("Windows".equals(os)) {
+        } else if (os.contains("Windows")) {
             path = here+"\\uppaal_servers\\win\\server.exe";
         } else {
             System.err.println("Unknown operating system.");

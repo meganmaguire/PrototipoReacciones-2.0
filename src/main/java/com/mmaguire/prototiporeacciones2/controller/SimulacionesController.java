@@ -110,7 +110,6 @@ public class SimulacionesController {
         Thread getItemsThread = new Thread(simulationTask);
         getItemsThread.setDaemon(true);
         getItemsThread.start();
-
     }
 
     private void simulateSystem(ActionEvent event, Stage cargandoStage) {

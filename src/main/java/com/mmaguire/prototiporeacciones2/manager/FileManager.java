@@ -93,6 +93,20 @@ public class FileManager {
     public static boolean saveQueryToFile(String query, String path) {
         try{
             File file = new File(path);
+            OutputStream fileWriter = new FileOutputStream(file);
+            fileWriter.write(query.getBytes());
+            fileWriter.close();
+            return true;
+        }
+        catch (IOException ex){
+            System.out.println("No se pudo guardar la query de simulación.");
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    public static boolean saveQueryToFile2(String query, String path) {
+        try{
+            File file = new File(path);
             BufferedWriter fileWriter = new BufferedWriter(new FileWriter(file));
             fileWriter.write(query);
             fileWriter.close();

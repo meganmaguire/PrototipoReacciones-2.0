@@ -34,15 +34,15 @@ public class Helper {
         String command = null;
         switch (os){
             case "Windows 10", "Windows 7", "Windows" -> {
-                command = currentDir +"/uppaal_servers/win/verifyta " + tempDir + "/untitled.xml " + tempDir + "/query.q";
+                command = currentDir +"/uppaal_servers/win/verifyta " + tempDir + "untitled.xml " + tempDir + "query.q";
                 return new String[]{"cmd.exe", "/C", command};
             }
             case "Linux" -> {
-                command = currentDir +"/uppaal_servers/linux/verifyta " + tempDir + "/untitled.xml " + tempDir + "/query.q";
+                command = currentDir +"/uppaal_servers/linux/verifyta " + tempDir + "untitled.xml " + tempDir + "query.q";
                 return new String[]{"bash", "-l", "-c", command};
             }
             case "Mac OS X" -> {
-                command = currentDir +"/uppaal_servers/mac/verifyta " + tempDir + "/untitled.xml " + tempDir + "/query.q";
+                command = currentDir +"/uppaal_servers/mac/verifyta " + tempDir + "untitled.xml " + tempDir + "query.q";
                 return new String[]{"bash", "-l", "-c", command};
             }
             default -> {

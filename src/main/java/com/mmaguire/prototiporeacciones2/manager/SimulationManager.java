@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.mmaguire.prototiporeacciones2.manager.Helper.generateCommand;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.getTempDirectory;
@@ -24,7 +25,9 @@ public class SimulationManager {
         ProcessBuilder builder = new ProcessBuilder();
         Process procSimulacion;
         builder.directory(new File(currentDir));
-        builder.command(generateCommand(currentDir, tempDir, os));
+        String[] commando = generateCommand(currentDir, tempDir, os);
+        System.out.println(Arrays.toString(commando));
+        builder.command(commando);
         procSimulacion = builder.start();
         builder.redirectError(new File(tempDir + "error.log"));
 

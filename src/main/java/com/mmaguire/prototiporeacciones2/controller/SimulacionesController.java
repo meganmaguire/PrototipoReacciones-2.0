@@ -94,22 +94,18 @@ public class SimulacionesController {
         Stage stage = new Stage();
         //simulateSystem(event, stage);
         // Tarea para el thread de simulación
-        Task<Void> simulationTask = new Task<>() {
-            @Override
-            public Void call() {
-                simulateSystem(event, stage);
-                return null;
-            }
-        };
 
-        // Muestra feedback de generación de simulación
-        ProgressBar progressBar = new ProgressBar();
-        progressBar.progressProperty().bind(simulationTask.progressProperty());
-        generateCargandoStage(stage, progressBar, event);
-        // Ejecuta el thread
-        Thread getItemsThread = new Thread(simulationTask);
-        getItemsThread.setDaemon(true);
-        getItemsThread.start();
+        simulateSystem(event, stage);
+
+//
+//        // Muestra feedback de generación de simulación
+//        ProgressBar progressBar = new ProgressBar();
+//        progressBar.progressProperty().bind(simulationTask.progressProperty());
+//        generateCargandoStage(stage, progressBar, event);
+//        // Ejecuta el thread
+//        Thread getItemsThread = new Thread(simulationTask);
+//        getItemsThread.setDaemon(true);
+//        getItemsThread.start();
     }
 
     private void simulateSystem(ActionEvent event, Stage cargandoStage) {

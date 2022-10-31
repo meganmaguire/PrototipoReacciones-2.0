@@ -26,7 +26,7 @@ public class SimulationManager {
         builder.directory(new File(currentDir));
         builder.command(generateCommand(currentDir, tempDir, os));
         procSimulacion = builder.start();
-        builder.redirectError(new File(currentDir + "/error.log"));
+        builder.redirectError(new File(tempDir + "error.log"));
 
         // Leer el output de la consola
         // Se debe leer ANTES del waitFor para evitar problemas con el buffer.

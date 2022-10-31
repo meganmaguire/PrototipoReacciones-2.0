@@ -4,6 +4,7 @@ import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.manager.ModelManager;
 import com.mmaguire.prototiporeacciones2.manager.Parser;
+import com.mmaguire.prototiporeacciones2.manager.SimulationManager;
 import com.mmaguire.prototiporeacciones2.model.*;
 import com.uppaal.engine.Engine;
 import com.uppaal.engine.EngineException;
@@ -117,47 +118,30 @@ public class SimulacionesController {
 
             Document doc = createModel(this.contexto.getSistemaReacciones());
             try {
-                doc.save("untitled.xml");
+                String tempDir = getTempDirectory(System.getProperty("os.name"));
+                ArrayList<String> out = new ArrayList<>();
+
+                doc.save(tempDir + "untitled.xml");
                 // connect to the engine server:
                 Engine engine = ModelManager.connectToEngine();
-
                 // compile the document into system representation:
                 UppaalSystem sys = ModelManager.compile(engine, doc);
 
-                saveQueryToFile(generateSimulationQuery(tiempoSimulacion.getValue(), this.contexto.getSistemaReacciones()),"query.q" );
-
-                // Ejecutar comando de simulación con el xml y la query
-                String currentDir = System.getProperty("user.dir");
-                ProcessBuilder builder = new ProcessBuilder();
-                Process procSimulacion;
-                builder.directory(new File(currentDir));
-                builder.command(generateCommand(currentDir, System.getProperty("os.name")));
-                procSimulacion = builder.start();
-                builder.redirectError(new File(currentDir + "/error.log"));
-
-                // Leer el output de la consola
-                // Se debe leer ANTES del waitFor para evitar problemas con el buffer.
-                BufferedReader stdInput = new BufferedReader(new
-                        InputStreamReader(procSimulacion.getInputStream()));
-                String s = null;
-                ArrayList<String> out = new ArrayList<>();
-                while ((s = stdInput.readLine()) != null) {
-                    out.add(s);
-                }
-
-                int exitCode = procSimulacion.waitFor();
+                saveQueryToFile(generateSimulationQuery(
+                        tiempoSimulacion.getValue(),
+                        this.contexto.getSistemaReacciones()),
+                        tempDir + "query.q" );
+                int exitCode = SimulationManager.executeSimulation(tempDir, out);
 
                 if(exitCode == 0) {
                     try {
                         out = Parser.removeHeader(out);
                         List<DatosComponente> datos = Parser.parse(out);
-
                         Simulacion simulacion = new Simulacion(datos, "simulacion", LocalDateTime.now());
+                        Sistema nuevoSistema = this.contexto.getSistemaReacciones().clone();
+                        nuevoSistema.setSimulacion(simulacion);
 
-                        Sistema nuevaSimulacion = this.contexto.getSistemaReacciones().clone();
-                        nuevaSimulacion.setSimulacion(simulacion);
-
-                        this.contexto.getHistorial().add(nuevaSimulacion);
+                        this.contexto.getHistorial().add(nuevoSistema);
                         // Generar pantalla de simulación y enviar datos
                         Platform.runLater(() -> {
                             cargandoStage.close();

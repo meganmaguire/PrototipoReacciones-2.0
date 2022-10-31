@@ -30,19 +30,19 @@ import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 public class Helper {
 
 
-    public static String[] generateCommand(String currentDir, String os) throws UnsupportedOperationException {
+    public static String[] generateCommand(String currentDir, String tempDir, String os) throws UnsupportedOperationException {
         String command = null;
         switch (os){
             case "Windows 10", "Windows 7", "Windows" -> {
-                command = currentDir +"/uppaal_servers/win/verifyta " + currentDir + "/untitled.xml " + currentDir + "/query.q";
+                command = currentDir +"/uppaal_servers/win/verifyta " + tempDir + "/untitled.xml " + tempDir + "/query.q";
                 return new String[]{"cmd.exe", "/C", command};
             }
             case "Linux" -> {
-                command = currentDir +"/uppaal_servers/linux/verifyta " + currentDir + "/untitled.xml " + currentDir + "/query.q";
+                command = currentDir +"/uppaal_servers/linux/verifyta " + tempDir + "/untitled.xml " + tempDir + "/query.q";
                 return new String[]{"bash", "-l", "-c", command};
             }
             case "Mac OS X" -> {
-                command = currentDir +"/uppaal_servers/mac/verifyta " + currentDir + "/untitled.xml " + currentDir + "/query.q";
+                command = currentDir +"/uppaal_servers/mac/verifyta " + tempDir + "/untitled.xml " + tempDir + "/query.q";
                 return new String[]{"bash", "-l", "-c", command};
             }
             default -> {
@@ -50,6 +50,22 @@ public class Helper {
             }
         }
     }
+
+    public static String getTempDirectory(String os) throws UnsupportedOperationException {
+        switch (os){
+            case "Windows 10", "Windows 7", "Windows" -> {
+                return Directories.winDirectory;
+            }
+            case "Linux" -> {
+                return Directories.linuxDirectory;
+            }
+            case "Mac OS X" -> {
+                return Directories.macDirectory;
+            }
+            default -> throw new UnsupportedOperationException();
+        }
+    }
+
 
     public static void actualizarReaccion(ObservableList<ReactivoReaccion> reactivosReaccion, ObservableList<ReactivoReaccion> productosReaccion, Label labelReactivos, Label labelProductos) {
         labelReactivos.setText(generateLabel(reactivosReaccion));

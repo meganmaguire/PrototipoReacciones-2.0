@@ -75,7 +75,8 @@ public class VerSistemaController {
         this.sistema = sistema;
 
         this.tablaReacciones.setItems(FXCollections.observableList(this.sistema.getReacciones()));
-        this.tablaExperimento.setItems(FXCollections.observableList(this.sistema.getExperimento().getPasos()));
+        // TODO Modificar tabla de pasoa a tabla de experimentos
+        //this.tablaExperimento.setItems(FXCollections.observableList(this.sistema.getExperimentos()));
 
     }
 

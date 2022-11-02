@@ -49,7 +49,7 @@ public class HistorialController {
         this.columnaTiempo.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getSimulacion().getTiempo().format(formatter)));
         this.columnaComponentes.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getReactivos().toString()));
         this.columnaCantReacciones.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getReacciones().size()));
-        this.columnaPasos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getExperimento().getPasos().size()));
+        this.columnaPasos.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getExperimentos().size()));
 
         this.columnaGrafico.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         this.columnaGrafico.setCellFactory(param -> new TableCell<>() {

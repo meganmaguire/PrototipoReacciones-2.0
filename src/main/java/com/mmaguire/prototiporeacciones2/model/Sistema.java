@@ -1,8 +1,5 @@
 package com.mmaguire.prototiporeacciones2.model;
 
-import com.uppaal.engine.QueryResult;
-import com.uppaal.model.core2.DataSet2D;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +8,7 @@ public class Sistema {
     private List<Reaccion> reacciones;
     private List<Factor> factores;
     private List<Factor> constantesReaccion;
-    private Experimento experimento;
+    private List<Experimento> experimentos;
     private int cantidadBombas;
     private List<String> relojes;
     private Simulacion simulacion;
@@ -21,18 +18,18 @@ public class Sistema {
         this.reacciones = new ArrayList<>();
         this.factores = new ArrayList<>();
         this.constantesReaccion = new ArrayList<>();
-        this.experimento = new Experimento();
+        this.experimentos = new ArrayList<>();
         this.cantidadBombas = 210;
         this.relojes = new ArrayList<>();
         this.relojes.add("x");
     }
 
-    public Sistema(List<Reactivo> reactivos, List<Reaccion> reacciones, List<Factor> factores, List<Factor> constantesReaccion, Experimento experimento, int cantidadBombas, List<String> relojes) {
+    public Sistema(List<Reactivo> reactivos, List<Reaccion> reacciones, List<Factor> factores, List<Factor> constantesReaccion, List<Experimento> experimentos, int cantidadBombas, List<String> relojes) {
         this.reactivos = reactivos;
         this.reacciones = reacciones;
         this.factores = factores;
         this.constantesReaccion = constantesReaccion;
-        this.experimento = experimento;
+        this.experimentos = experimentos;
         this.cantidadBombas = cantidadBombas;
         this.relojes = relojes;
     }
@@ -69,12 +66,12 @@ public class Sistema {
         this.constantesReaccion = constantesReaccion;
     }
 
-    public Experimento getExperimento() {
-        return experimento;
+    public List<Experimento> getExperimentos() {
+        return experimentos;
     }
 
-    public void setExperimento(Experimento experimento) {
-        this.experimento = experimento;
+    public void setExperimentos(List<Experimento> experimentos) {
+        this.experimentos = experimentos;
     }
 
     public int getCantidadBombas() {
@@ -108,7 +105,7 @@ public class Sistema {
             this.reacciones,
             this.factores,
             this.constantesReaccion,
-            this.experimento,
+            this.experimentos,
             this.cantidadBombas,
             this.relojes
         );

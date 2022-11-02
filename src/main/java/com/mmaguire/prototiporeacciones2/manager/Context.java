@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -14,8 +15,7 @@ public class Context {
     private static Context instance = null;
     // Context data
     private Sistema sistemaReacciones;
-    private Experimento experimento;
-    private ObservableList<Paso> pasosExperimento;
+    private ObservableList<Experimento> experimentos;
     private ObservableList<Reactivo> reactivos;
     private ObservableList<Reaccion> reacciones;
     private ObservableList<Factor> factores;
@@ -27,8 +27,7 @@ public class Context {
 
     private Context(){
         this.sistemaReacciones = new Sistema();
-        this.experimento = this.sistemaReacciones.getExperimento();
-        this.pasosExperimento = FXCollections.observableList(this.experimento.getPasos());
+        this.experimentos = FXCollections.observableList(this.sistemaReacciones.getExperimentos());
         this.reactivos = FXCollections.observableList(this.sistemaReacciones.getReactivos());
         this.reacciones = FXCollections.observableList(this.sistemaReacciones.getReacciones());
         this.factores = FXCollections.observableList(this.sistemaReacciones.getFactores());
@@ -48,7 +47,7 @@ public class Context {
     }
 
     private void resetInstance(){
-        this.pasosExperimento.clear();
+        this.experimentos.clear();
         this.reactivos.clear();
         this.reacciones.clear();
         this.factores.clear();
@@ -60,13 +59,10 @@ public class Context {
         return sistemaReacciones;
     }
 
-    public Experimento getExperimento() {
-        return experimento;
+    public ObservableList<Experimento> getExperimentos() {
+        return experimentos;
     }
 
-    public ObservableList<Paso> getPasosExperimento() {
-        return pasosExperimento;
-    }
     public ObservableList<Reactivo> getReactivos() {
         return reactivos;
     }
@@ -87,13 +83,9 @@ public class Context {
         this.sistemaReacciones = sistemaReacciones;
     }
 
-    public void setExperimento(Experimento experimento) {
-        this.experimento = experimento;
-    }
-
-    public void setPasosExperimento(ObservableList<Paso> pasosExperimento) {
-        this.pasosExperimento.setAll(pasosExperimento);
-        this.sistemaReacciones.getExperimento().setPasos(this.pasosExperimento);
+    public void setExperimentos(ObservableList<Experimento> experimentos) {
+        this.experimentos = experimentos;
+        this.sistemaReacciones.setExperimentos(experimentos);
     }
 
     public void setReactivos(ObservableList<Reactivo> reactivos) {

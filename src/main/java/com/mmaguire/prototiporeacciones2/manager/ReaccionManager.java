@@ -45,11 +45,11 @@ public class ReaccionManager {
                 doc.insert(createModelReaccion(doc, reaccion), null);
         }
         // Nombre de templates para generar en el sistema
-        setSystems(doc, sistema.getReacciones(), sistema.getExperimento());
+        setSystems(doc, sistema.getReacciones(), sistema.getExperimentos());
         // Genera template de experimento y clock si se especifica
-        if(sistema.getExperimento().getPasos().size() > 0) {
-            setClocks(doc, sistema.getRelojes());
-            doc.insert(createModelExperimento(doc, sistema.getExperimento()), null);
+        setClocks(doc, sistema.getRelojes());
+        for(Experimento experimento : sistema.getExperimentos()) {
+            doc.insert(createModelExperimento(doc,experimento), null);
         }
         return doc;
     }
@@ -176,19 +176,23 @@ public class ReaccionManager {
      *
      * @param doc documento de UPPAAL al cual añadir la información de templates
      * @param reacciones lista de reacciones
-     * @param experimento experimento modelado
+     * @param experimentos experimentos modelados
      */
-    private static void setSystems(Document doc, List<Reaccion> reacciones, Experimento experimento) {
+    private static void setSystems(Document doc, List<Reaccion> reacciones, List<Experimento> experimentos) {
         StringBuilder systemProperties = new StringBuilder("system \n");
         Reaccion reaccion;
-        if(experimento.getPasos().size() > 0)
-            systemProperties.append(experimento.getNombre()).append(", ");
         for (int i = 0; i < reacciones.size() ; i++) {
             reaccion = reacciones.get(i);
             if(reaccion instanceof ReaccionReversible)
                 systemProperties.append("r_").append(reaccion.getNroReaccion()).append(", ");
             systemProperties.append(reaccion.getNombreReaccion()).append(i != reacciones.size() - 1 ? ", \n" : ";");
         }
+        for(Experimento experimento : experimentos){
+            if(!experimento.isActivo())
+                systemProperties.append("// ");
+            systemProperties.append(experimento.getNombre()).append(";\n ");
+        }
+
         doc.setProperty("system", systemProperties.toString());
     }
 

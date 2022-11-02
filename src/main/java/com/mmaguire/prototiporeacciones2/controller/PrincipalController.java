@@ -26,7 +26,6 @@ import javafx.stage.Window;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -168,8 +167,7 @@ public class PrincipalController {
                 this.contexto.setReacciones(FXCollections.observableList(this.contexto.getSistemaReacciones().getReacciones()));
                 this.contexto.setFactores(FXCollections.observableList(this.contexto.getSistemaReacciones().getFactores()));
                 this.contexto.setConstantesReaccion(FXCollections.observableList(this.contexto.getSistemaReacciones().getConstantesReaccion()));
-                this.contexto.setExperimento(this.contexto.getSistemaReacciones().getExperimento());
-                this.contexto.setPasosExperimento(FXCollections.observableList(this.contexto.getExperimento().getPasos()));
+                this.contexto.setExperimentos(FXCollections.observableList(this.contexto.getSistemaReacciones().getExperimentos()));
                 this.contexto.setContadorReacciones();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

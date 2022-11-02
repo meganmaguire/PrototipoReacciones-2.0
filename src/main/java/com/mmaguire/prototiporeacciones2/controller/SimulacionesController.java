@@ -26,10 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +34,6 @@ import java.util.List;
 import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.FileManager.saveQueryToFile;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.*;
-import static com.mmaguire.prototiporeacciones2.manager.Helper.showData;
 import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.createModel;
 import static com.mmaguire.prototiporeacciones2.manager.ReaccionManager.generateSimulationQuery;
 
@@ -57,11 +53,13 @@ public class SimulacionesController {
     private TableColumn<Reaccion, String> columnaTasaReaccion;
 
     @FXML
-    private TableView<Paso> tablaExperimento;
+    private TableView<Experimento> tablaExperimentos;
     @FXML
-    private TableColumn<Paso, String> columnaTiempoPaso;
+    private TableColumn<Experimento, Integer> columnaNroExperimento;
     @FXML
-    private TableColumn<Paso, String> columnaModificacionesPaso;
+    private TableColumn<Experimento, String> columnaPasosExperimento;
+    @FXML
+    private TableColumn<Experimento, Experimento> columnaActivoExperimento;
     @FXML
     private Spinner<Integer> cantidadBombas;
     @FXML
@@ -78,10 +76,26 @@ public class SimulacionesController {
         this.columnaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
         this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(itemArray2String(cellData.getValue().calculateTasaReaccion())));
 
-        // TODO Modificar tabla de pasoa a tabla de experimentos y añadir checkbox
-//        this.tablaExperimento.setItems(this.contexto.getPasosExperimento());
-//        this.columnaTiempoPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiempo().toString()));
-//        this.columnaModificacionesPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
+        this.tablaExperimentos.setItems(this.contexto.getExperimentos());
+        this.columnaNroExperimento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNumero()));
+        this.columnaPasosExperimento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().pasosToString()));
+        this.columnaActivoExperimento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue()));
+        this.columnaActivoExperimento.setCellFactory( param -> new TableCell<>() {
+            private final CheckBox checkBox = new CheckBox();
+
+            @Override
+            protected void updateItem(Experimento experimento, boolean empty) {
+                super.updateItem(experimento, empty);
+                if (experimento == null) {
+                    setGraphic(null);
+                    return;
+                }
+                checkBox.setSelected(experimento.isActivo());
+                setGraphic(checkBox);
+                checkBox.setOnAction(event -> experimento.setActivo(checkBox.isSelected()));
+            }
+        });
+        columnaActivoExperimento.setEditable(true);
 
         this.tiempoSimulacion.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 60, 1));
         this.tiempoSimulacion.setEditable(true);

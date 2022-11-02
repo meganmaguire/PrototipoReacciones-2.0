@@ -1,7 +1,7 @@
 package com.mmaguire.prototiporeacciones2.controller;
 
 import com.mmaguire.prototiporeacciones2.MainApp;
-import com.mmaguire.prototiporeacciones2.model.Paso;
+import com.mmaguire.prototiporeacciones2.model.Experimento;
 import com.mmaguire.prototiporeacciones2.model.Reaccion;
 import com.mmaguire.prototiporeacciones2.model.Sistema;
 import javafx.beans.property.SimpleObjectProperty;
@@ -39,11 +39,11 @@ public class VerSistemaController {
     private TableColumn<Reaccion, String> columnaTasaReaccion;
 
     @FXML
-    private TableView<Paso> tablaExperimento;
+    private TableView<Experimento> tablaExperimentos;
     @FXML
-    private TableColumn<Paso, String> columnaTiempoPaso;
+    private TableColumn<Experimento, Integer> columnaNroExperimento;
     @FXML
-    private TableColumn<Paso, String> columnaModificacionesPaso;
+    private TableColumn<Experimento, String> columnaPasosExperimento;
 
     private Sistema sistema;
 
@@ -54,8 +54,8 @@ public class VerSistemaController {
         this.columnaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
         this.columnaTasaReaccion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(itemArray2String(cellData.getValue().calculateTasaReaccion())));
 
-        this.columnaTiempoPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiempo().toString()));
-        this.columnaModificacionesPaso.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().toString()));
+        this.columnaNroExperimento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNumero()));
+        this.columnaPasosExperimento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().pasosToString()));
 
         this.tablaReacciones.setRowFactory(tv -> {
             TableRow<Reaccion> row = new TableRow<>();
@@ -75,8 +75,7 @@ public class VerSistemaController {
         this.sistema = sistema;
 
         this.tablaReacciones.setItems(FXCollections.observableList(this.sistema.getReacciones()));
-        // TODO Modificar tabla de pasoa a tabla de experimentos
-        //this.tablaExperimento.setItems(FXCollections.observableList(this.sistema.getExperimentos()));
+        this.tablaExperimentos.setItems(FXCollections.observableList(this.sistema.getExperimentos()));
 
     }
 

@@ -16,14 +16,14 @@
       <Label styleClass="title" text="%exp.titulo" />
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#añadirExperimento" prefHeight="25.0" prefWidth="120.0" styleClass="primary-button" text="%boton.añadirExperimento" />
+            <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#añadirExperimento" prefHeight="25.0" styleClass="primary-button" text="%boton.añadirExperimento" />
          </children>
       </HBox>
       <TableView fx:id="tablaExperimentos" VBox.vgrow="ALWAYS">
         <columns>
-          <TableColumn fx:id="columnaNroExperimento" editable="false" maxWidth="150.0" minWidth="150.0" prefWidth="-1.0" sortable="false" text="%tabla.numero" />
+          <TableColumn fx:id="columnaNroExperimento" editable="false" maxWidth="150.0" minWidth="100.0" prefWidth="-1.0" sortable="false" text="%tabla.numero" />
           <TableColumn fx:id="columnaPasosExperimento" editable="false" minWidth="300.0" prefWidth="-1.0" sortable="false" text="%tabla.pasos" />
-            <TableColumn fx:id="columnaEliminarExperimento" editable="false" maxWidth="100.0" minWidth="70.0" prefWidth="-1.0" sortable="false" />
+            <TableColumn fx:id="columnaEliminarExperimento" editable="false" maxWidth="60.0" minWidth="40.0" prefWidth="-1.0" sortable="false" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

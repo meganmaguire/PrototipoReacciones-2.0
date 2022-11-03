@@ -348,7 +348,7 @@ public class ExperimentoController {
                 this.experimento.setPasos(this.pasosExperimento);
             } else {
                 this.experimento = new Experimento(
-                        "exp" + Experimento.getContador(),
+                        "exp_" + Experimento.getContador(),
                         this.pasosExperimento,
                         Experimento.getContador(),
                         false

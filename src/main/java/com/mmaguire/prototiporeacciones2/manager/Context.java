@@ -44,6 +44,7 @@ public class Context {
     public static void reset(){
         instance.resetInstance();
         instance.setContadorReacciones();
+        instance.setContadorExperimentos();
     }
 
     private void resetInstance(){
@@ -84,8 +85,8 @@ public class Context {
     }
 
     public void setExperimentos(ObservableList<Experimento> experimentos) {
-        this.experimentos = experimentos;
-        this.sistemaReacciones.setExperimentos(experimentos);
+        this.experimentos.setAll(experimentos);
+        this.sistemaReacciones.setExperimentos(this.experimentos);
     }
 
     public void setReactivos(ObservableList<Reactivo> reactivos) {
@@ -123,6 +124,15 @@ public class Context {
                 lastReaccion = reaccion.getNroReaccion();
         }
         Reaccion.setContador(lastReaccion+1);
+    }
+
+    public void setContadorExperimentos(){
+        int lastExperimento = 0;
+        for (Experimento experimento : experimentos) {
+            if (experimento.getNumero() > 0)
+                lastExperimento = experimento.getNumero();
+        }
+        Experimento.setContador(lastExperimento+1);
     }
 
     public static void setLocale(Locale locale) {

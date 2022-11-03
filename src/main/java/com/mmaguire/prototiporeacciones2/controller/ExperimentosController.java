@@ -3,7 +3,6 @@ package com.mmaguire.prototiporeacciones2.controller;
 import com.mmaguire.prototiporeacciones2.MainApp;
 import com.mmaguire.prototiporeacciones2.manager.Context;
 import com.mmaguire.prototiporeacciones2.model.Experimento;
-import com.mmaguire.prototiporeacciones2.model.Paso;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.Event;
@@ -15,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.Helper.createModalWindow;
@@ -38,7 +36,6 @@ public class ExperimentosController {
     public void initialize(){
 
         this.contexto = Context.getContext();
-
         this.tablaExperimentos.setItems(this.contexto.getExperimentos());
         this.columnaNroExperimento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNumero()));
         this.columnaPasosExperimento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().pasosToString()));

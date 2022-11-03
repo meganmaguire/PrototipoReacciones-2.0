@@ -181,16 +181,19 @@ public class ReaccionManager {
     private static void setSystems(Document doc, List<Reaccion> reacciones, List<Experimento> experimentos) {
         StringBuilder systemProperties = new StringBuilder("system \n");
         Reaccion reaccion;
+        Experimento experimento;
+
+        for (int i = 0; i < experimentos.size() ; i++) {
+            experimento = experimentos.get(i);
+            if(!experimento.isActivo())
+                systemProperties.append("//");
+            systemProperties.append(experimento.getNombre()).append(",\n");
+        }
         for (int i = 0; i < reacciones.size() ; i++) {
             reaccion = reacciones.get(i);
             if(reaccion instanceof ReaccionReversible)
                 systemProperties.append("r_").append(reaccion.getNroReaccion()).append(", ");
             systemProperties.append(reaccion.getNombreReaccion()).append(i != reacciones.size() - 1 ? ", \n" : ";");
-        }
-        for(Experimento experimento : experimentos){
-            if(!experimento.isActivo())
-                systemProperties.append("// ");
-            systemProperties.append(experimento.getNombre()).append(";\n ");
         }
 
         doc.setProperty("system", systemProperties.toString());
@@ -297,6 +300,15 @@ public class ReaccionManager {
         );
         result.add(reaccion);
 
+        return result;
+    }
+
+    private static List<Experimento> experimentosActivos(List<Experimento> experimentos) {
+        List<Experimento> result = new ArrayList<>();
+        for(Experimento experimento : experimentos) {
+            if(experimento.isActivo())
+                result.add(experimento);
+        }
         return result;
     }
 }

@@ -13,7 +13,7 @@ public class Experimento {
     private boolean activo;
 
     public Experimento() {
-        this.nombre = "exp" + contador;
+        this.nombre = "exp_" + contador;
         this.pasos = new ArrayList<>();
         this.numero = contador;
         this.activo = false;
@@ -59,7 +59,6 @@ public class Experimento {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-
     public String pasosToString() {
         StringBuilder result = new StringBuilder();
         for(Paso paso : pasos) {

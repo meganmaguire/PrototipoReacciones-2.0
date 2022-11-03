@@ -130,6 +130,12 @@ public class Helper {
         cellButton.getStyleClass().add("delete-button");
     }
 
+    public static void styleCheckImage(ImageView imageView){
+        Image image = new Image(MainApp.class.getResourceAsStream("icons/baseline_done_black_24dp.png"));
+        imageView.setImage(image);
+        imageView.setFitHeight(18);
+        imageView.setFitWidth(18);
+    }
 
 
     public static String tasaReaccion2LaTeX(ArrayList<EquationItem> tasaReaccion){

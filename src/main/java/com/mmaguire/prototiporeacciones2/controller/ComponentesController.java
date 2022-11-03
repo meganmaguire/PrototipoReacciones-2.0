@@ -13,8 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import on.D;
 
 import java.io.IOException;
 
@@ -45,9 +45,9 @@ public class ComponentesController {
     @FXML
     private TableColumn<Reactivo, Integer> columnaCantidad;
     @FXML
-    private TableColumn<Reactivo, Boolean> columnaActualizable;
+    private TableColumn<Reactivo, Reactivo> columnaActualizable;
     @FXML
-    private TableColumn<Reactivo, Boolean> columnaSubestado;
+    private TableColumn<Reactivo, Reactivo> columnaSubestado;
     @FXML
     private TableColumn<Reactivo, String> columnaConstante;
     @FXML
@@ -75,8 +75,42 @@ public class ComponentesController {
         this.tablaComponentes.setItems(contexto.getReactivos());
         this.columnaNombre.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombre()));
         this.columnaCantidad.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCantidadInicial()));
-        this.columnaActualizable.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isActualizable()));
-        this.columnaSubestado.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isSubestado()));
+        this.columnaActualizable.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue()));
+        this.columnaActualizable.setCellFactory( param -> new TableCell<>() {
+            private final ImageView image = new ImageView();
+
+            @Override
+            protected void updateItem(Reactivo reactivo, boolean empty) {
+                super.updateItem(reactivo, empty);
+                if (reactivo == null) {
+                    setGraphic(null);
+                    return;
+                }
+                styleCheckImage(image);
+                if(reactivo.isActualizable())
+                    setGraphic(image);
+                else setGraphic(null);
+
+            }
+        });
+        this.columnaSubestado.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue()));
+        this.columnaSubestado.setCellFactory( param -> new TableCell<>() {
+            private final ImageView image = new ImageView();
+
+            @Override
+            protected void updateItem(Reactivo reactivo, boolean empty) {
+                super.updateItem(reactivo, empty);
+                if (reactivo == null) {
+                    setGraphic(null);
+                    return;
+                }
+                styleCheckImage(image);
+                if(reactivo.isSubestado())
+                    setGraphic(image);
+                else setGraphic(null);
+
+            }
+        });
         this.columnaConstante.setCellValueFactory(cellData -> new SimpleObjectProperty<>(
                 cellData.getValue().getConstanteAsociada() != null
                         ? cellData.getValue().getConstanteAsociada().getNombre()

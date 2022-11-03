@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox prefHeight="600.0" prefWidth="960.0" spacing="46.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarTasaReaccionController">
    <padding>
       <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
@@ -146,7 +145,7 @@
                   <Label styleClass="subtitle" text="%edit.tasa.comp" />
                   <HBox spacing="20.0">
                      <children>
-                        <ComboBox fx:id="comboBoxComponentes" prefHeight="28.0" prefWidth="130.0" />
+                        <ComboBox fx:id="comboBoxComponentes" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="130.0" HBox.hgrow="ALWAYS" />
                         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirComponente" prefHeight="25.0" prefWidth="30.0" styleClass="add-button">
                            <graphic>
                               <ImageView fitHeight="17.0" fitWidth="18.0">
@@ -161,7 +160,7 @@
                   <Label styleClass="subtitle" text="%edit.tasa.const" />
                   <HBox spacing="20.0">
                      <children>
-                        <ComboBox fx:id="comboBoxConstantes" prefHeight="27.0" prefWidth="130.0" />
+                        <ComboBox fx:id="comboBoxConstantes" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="130.0" HBox.hgrow="ALWAYS" />
                         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirConstante" prefHeight="25.0" prefWidth="30.0" styleClass="add-button">
                            <graphic>
                               <ImageView fitHeight="17.0" fitWidth="18.0">
@@ -193,7 +192,7 @@
       </HBox>
       <HBox>
          <children>
-            <VBox spacing="18.0">
+            <VBox spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="subtitle" text="%edit.tasa.visual" />
                   <Canvas fx:id="canvasLatex" height="109.0" width="817.0" VBox.vgrow="ALWAYS" />

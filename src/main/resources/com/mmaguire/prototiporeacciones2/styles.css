@@ -149,7 +149,7 @@
 }
 .table-view .column-header .label{
     -fx-text-fill: subtitle;
-    -fx-font-weight: bold;
+    -fx-font-family: Inconsolata;
 }
 .table-view .corner {
     -fx-background-color: transparent;

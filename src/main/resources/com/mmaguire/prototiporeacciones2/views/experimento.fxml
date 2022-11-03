@@ -28,7 +28,7 @@
                   <HBox alignment="BOTTOM_LEFT" spacing="24.0">
                      <children>
                         <Label minWidth="60.0" prefHeight="24.0" prefWidth="111.0" styleClass="subtitle" text="%exp.restriccion" />
-                        <ComboBox fx:id="comboBoxRestriccion" prefWidth="150.0" />
+                        <ComboBox fx:id="comboBoxRestriccion" maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="12.0" />
@@ -41,9 +41,9 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                        <HBox alignment="CENTER_LEFT" spacing="16.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <ComboBox fx:id="comboBoxComponente" minWidth="70.0" prefWidth="100.0" />
+                              <ComboBox fx:id="comboBoxComponente" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                               <Button fx:id="botonAñadirReloj" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirReloj" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
                                  <graphic>
                                     <ImageView fitHeight="17.0" fitWidth="18.0">
@@ -74,10 +74,10 @@
                   <HBox alignment="CENTER" spacing="24.0">
                      <children>
                         <Label fx:id="labelLimiteSup" alignment="CENTER_RIGHT" minWidth="25.0" text="x" />
-                        <ComboBox fx:id="restriccionSup" minWidth="70.0" prefWidth="70.0" />
+                        <ComboBox fx:id="restriccionSup" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
                            <children>
-                              <Spinner fx:id="limiteSup" minWidth="90.0" prefWidth="100.0" />
+                              <Spinner fx:id="limiteSup" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                               <Label fx:id="labelSegSup" minWidth="20.0" text="%exp.segundos" />
                            </children>
                         </HBox>
@@ -87,11 +87,11 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
                            <children>
-                              <Spinner fx:id="limiteInf" minWidth="100.0" prefWidth="100.0" />
+                              <Spinner fx:id="limiteInf" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                               <Label fx:id="labelSegInf" minWidth="20.0" text="%exp.segundos" />
                            </children>
                         </HBox>
-                        <ComboBox fx:id="restriccionInf" minWidth="70.0" prefWidth="70.0" />
+                        <ComboBox fx:id="restriccionInf" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
                         <Label fx:id="labelLimiteInf" minWidth="25.0" text="x" />
                      </children>
                   </HBox>
@@ -100,10 +100,10 @@
             <VBox prefHeight="210.0" spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="subtitle" text="%exp.reactivos" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                  <HBox spacing="20.0">
                      <children>
-                        <ComboBox fx:id="comboBoxReactivos" prefWidth="150.0" />
-                        <Spinner fx:id="cantidadReactivos" prefWidth="110.0" />
+                        <ComboBox fx:id="comboBoxReactivos" maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS" />
+                        <Spinner fx:id="cantidadReactivos" maxWidth="1.7976931348623157E308" prefWidth="110.0" HBox.hgrow="ALWAYS" />
                         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirReactivo" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
                            <graphic>
                               <ImageView fitHeight="17.0" fitWidth="18.0">
@@ -130,10 +130,10 @@
             <VBox prefHeight="210.0" spacing="18.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="subtitle" text="%exp.factores" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                  <HBox spacing="20.0">
                      <children>
-                        <ComboBox fx:id="comboBoxFactores" prefWidth="150.0" />
-                        <Spinner fx:id="valorFactores" prefWidth="110.0" />
+                        <ComboBox fx:id="comboBoxFactores" maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS" />
+                        <Spinner fx:id="valorFactores" maxWidth="1.7976931348623157E308" prefWidth="110.0" HBox.hgrow="ALWAYS" />
                         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirFactor" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
                            <graphic>
                               <ImageView fitHeight="17.0" fitWidth="18.0">

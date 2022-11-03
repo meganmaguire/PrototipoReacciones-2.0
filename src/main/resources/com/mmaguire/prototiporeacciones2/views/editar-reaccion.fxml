@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox prefWidth="1115.0" spacing="46.0" styleClass="pane" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmaguire.prototiporeacciones2.controller.EditarReaccionController">
    <padding>
       <Insets bottom="54.0" left="72.0" right="72.0" top="54.0" />
@@ -30,8 +29,8 @@
                         <Label styleClass="subtitle" text="%reac.reactivos" />
                         <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <ComboBox fx:id="comboBoxReactivos" prefWidth="134.0" HBox.hgrow="ALWAYS" />
-                              <Spinner fx:id="cantidadReactivos" prefWidth="96.0" HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="comboBoxReactivos" maxWidth="1.7976931348623157E308" prefWidth="134.0" HBox.hgrow="ALWAYS" />
+                              <Spinner fx:id="cantidadReactivos" maxWidth="1.7976931348623157E308" prefWidth="96.0" HBox.hgrow="ALWAYS" />
                               <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirReactivo" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
                                  <graphic>
                                     <ImageView fitHeight="17.0" fitWidth="18.0">
@@ -75,13 +74,13 @@
                                     <HBox alignment="CENTER_LEFT" spacing="16.0">
                                        <children>
                                           <Label minWidth="30.0" text="alpha" />
-                                          <TextField fx:id="constanteAlpha" alignment="TOP_LEFT" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="constanteAlpha" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" spacing="16.0">
                                        <children>
                                           <Label minWidth="30.0" text="beta" />
-                                          <TextField fx:id="constanteBeta" alignment="TOP_LEFT" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="constanteBeta" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -95,8 +94,8 @@
                         <Label styleClass="subtitle" text="%reac.productos" />
                         <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <ComboBox fx:id="comboBoxProductos" prefWidth="134.0" HBox.hgrow="ALWAYS" />
-                              <Spinner fx:id="cantidadProductos" prefWidth="96.0" HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="comboBoxProductos" maxWidth="1.7976931348623157E308" prefWidth="134.0" HBox.hgrow="ALWAYS" />
+                              <Spinner fx:id="cantidadProductos" maxWidth="1.7976931348623157E308" prefWidth="96.0" HBox.hgrow="ALWAYS" />
                               <Button fx:id="botonAñadirProducto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#añadirProducto" prefHeight="25.0" prefWidth="26.0" styleClass="add-button">
                                  <graphic>
                                     <ImageView fitHeight="17.0" fitWidth="18.0">

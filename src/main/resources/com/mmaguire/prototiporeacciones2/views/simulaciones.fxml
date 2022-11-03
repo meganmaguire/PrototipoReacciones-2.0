@@ -37,7 +37,7 @@
                   <Label styleClass="subtitle" text="%sim.experimento" />
                   <TableView fx:id="tablaExperimentos" prefHeight="592.0">
                     <columns>
-                        <TableColumn fx:id="columnaActivoExperimento" minWidth="30.0" prefWidth="-1.0" text="Activo" />
+                        <TableColumn fx:id="columnaActivoExperimento" minWidth="40.0" prefWidth="-1.0" text="%tabla.activo" />
                       <TableColumn fx:id="columnaNroExperimento" editable="false" minWidth="100.0" prefWidth="-1.0" sortable="false" text="%tabla.tiempo" />
                       <TableColumn fx:id="columnaPasosExperimento" editable="false" minWidth="250.0" prefWidth="-1.0" sortable="false" text="%tabla.modificaciones" />
                     </columns>

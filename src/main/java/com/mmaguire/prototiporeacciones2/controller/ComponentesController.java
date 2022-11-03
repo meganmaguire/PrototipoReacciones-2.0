@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -30,9 +31,15 @@ public class ComponentesController {
     @FXML
     private CheckBox actualizableComponente;
     @FXML
+    private Tooltip tooltipActualizable;
+    @FXML
     private CheckBox subestadoComponente;
     @FXML
+    private Tooltip tooltipSubestado;
+    @FXML
     private CheckBox poseeConstante;
+    @FXML
+    private Tooltip tooltipConstante;
     @FXML
     private ComboBox<Factor> constanteAsociada;
     @FXML
@@ -93,6 +100,7 @@ public class ComponentesController {
 
             }
         });
+        this.columnaActualizable.setStyle("-fx-alignment: CENTER");
         this.columnaSubestado.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue()));
         this.columnaSubestado.setCellFactory( param -> new TableCell<>() {
             private final ImageView image = new ImageView();
@@ -111,6 +119,7 @@ public class ComponentesController {
 
             }
         });
+        this.columnaSubestado.setStyle("-fx-alignment: CENTER");
         this.columnaConstante.setCellValueFactory(cellData -> new SimpleObjectProperty<>(
                 cellData.getValue().getConstanteAsociada() != null
                         ? cellData.getValue().getConstanteAsociada().getNombre()
@@ -181,6 +190,11 @@ public class ComponentesController {
             constanteAsociada.setDisable(!seleccionActual);
             botonAñadirConstante.setDisable(!seleccionActual);
         });
+
+        this.tooltipActualizable.setShowDelay(Duration.millis(200));
+        this.tooltipSubestado.setShowDelay(Duration.millis(200));
+        this.tooltipConstante.setShowDelay(Duration.millis(200));
+
     }
 
     @FXML

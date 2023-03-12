@@ -99,6 +99,10 @@ public class ExperimentosController {
             Stage dialog = createModalWindow(scene, event);
             dialog.showAndWait();
             this.tablaExperimentos.refresh();
+
+            // Reset para notificar al ObservableList
+            int index = this.contexto.getExperimentos().indexOf(experimento);
+            this.contexto.getExperimentos().set(index, experimento);
         }
         catch (IOException e){
             e.printStackTrace();

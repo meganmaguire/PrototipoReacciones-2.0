@@ -276,13 +276,13 @@ public class ReaccionesController {
                                 tipo,
                                 new Factor(
                                         "alpha" + (Reaccion.getContador()),
-                                        Double.parseDouble(this.constanteAlpha.getText())),
+                                        Double.parseDouble(this.constanteAlpha.getText().replace(',', '.'))),
                                 new Factor(
                                         "f" + (Reaccion.getContador()),
                                         1.0),
                                 new Factor(
                                         "beta" + (Reaccion.getContador()),
-                                        Double.parseDouble(this.constanteBeta.getText())),
+                                        Double.parseDouble(this.constanteBeta.getText().replace(',', '.'))),
                                 new Factor("f_" + (Reaccion.getContador()),
                                         1.0)
                         );
@@ -298,7 +298,7 @@ public class ReaccionesController {
                                 tipo,
                                 new Factor(
                                         "alpha" + (Reaccion.getContador()),
-                                        Double.parseDouble(this.constanteAlpha.getText())),
+                                        Double.parseDouble(this.constanteAlpha.getText().replace(',', '.'))),
                                 new Factor(
                                         "f" + (Reaccion.getContador()),
                                         1.0)
@@ -314,7 +314,7 @@ public class ReaccionesController {
                                 tipo,
                                 new Factor(
                                         "alpha" + (Reaccion.getContador()),
-                                        Double.parseDouble(this.constanteAlpha.getText())),
+                                        Double.parseDouble(this.constanteAlpha.getText().replace(',', '.'))),
                                 new Factor(
                                         "f" + (Reaccion.getContador()),
                                         1.0)

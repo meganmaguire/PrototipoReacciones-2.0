@@ -233,7 +233,7 @@ public class EditarReaccionController {
                         setReaccionValues();
                         ((ReaccionReversible) this.reaccion).setBeta(new Factor(
                                 ((ReaccionReversible) this.reaccion).getBeta().getNombre(),
-                                Double.parseDouble(this.constanteBeta.getText()))
+                                Double.parseDouble(this.constanteBeta.getText().replace(',', '.')))
                         );
                         error = false;
                     }
@@ -270,7 +270,7 @@ public class EditarReaccionController {
         this.reaccion.setTasaReaccion(this.tasaReaccion);
         this.reaccion.setAlpha(new Factor(
                 this.reaccion.getAlpha().getNombre(),
-                Double.parseDouble(this.constanteAlpha.getText()))
+                Double.parseDouble(this.constanteAlpha.getText().replace(',', '.')))
         );
     }
 

@@ -13,7 +13,7 @@
       <Insets bottom="40.0" left="54.0" right="54.0" top="40.0" />
    </padding>
    <children>
-      <Label styleClass="title" text="%exp.titulo" />
+      <Label styleClass="title" text="%exps.titulo" />
       <HBox alignment="CENTER_RIGHT">
          <children>
             <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#añadirExperimento" prefHeight="25.0" styleClass="primary-button" text="%boton.añadirExperimento" />

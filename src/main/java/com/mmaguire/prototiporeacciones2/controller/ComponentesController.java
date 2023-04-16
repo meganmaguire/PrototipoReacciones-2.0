@@ -177,7 +177,16 @@ public class ComponentesController {
                 );
             }
         });
-
+        this.tablaConstantes.setRowFactory(tv -> {
+            TableRow<Factor> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Factor factor = row.getItem();
+                    editarConstante(factor, event);
+                }
+            });
+            return row;
+        });
 
         this.constanteAsociada.setItems(this.contexto.getConstantesReaccion());
         this.cantidadComponente.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 0,1));
@@ -269,7 +278,26 @@ public class ComponentesController {
             e.printStackTrace();
         }
     }
+    public void editarConstante(Factor factor, Event event){
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("views/editar-constante.fxml"), bundle);
+            Parent root = loader.load();
 
+            Scene scene = new Scene(root);
+
+            EditarConstanteController controller = loader.getController();
+            controller.receiveData(factor);
+
+            Stage dialog = createModalWindow(scene, event);
+            dialog.showAndWait();
+            // Reset para notificar al ObservableList
+            int index = this.contexto.getConstantesReaccion().indexOf(factor);
+            this.contexto.getConstantesReaccion().set(index, factor);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     public void clearFields(){
         this.nombreComponente.setText(null);
         this.actualizableComponente.setSelected(true);

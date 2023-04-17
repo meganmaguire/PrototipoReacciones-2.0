@@ -38,7 +38,7 @@
                   <TableView fx:id="tablaExperimentos" prefHeight="592.0">
                     <columns>
                         <TableColumn fx:id="columnaActivoExperimento" minWidth="40.0" prefWidth="-1.0" text="%tabla.activo" />
-                      <TableColumn fx:id="columnaNroExperimento" editable="false" minWidth="100.0" prefWidth="-1.0" sortable="false" text="%tabla.tiempo" />
+                      <TableColumn fx:id="columnaNroExperimento" editable="false" minWidth="60.0" prefWidth="-1.0" sortable="false" text="%tabla.numero" />
                       <TableColumn fx:id="columnaPasosExperimento" editable="false" minWidth="250.0" prefWidth="-1.0" sortable="false" text="%tabla.modificaciones" />
                     </columns>
                      <columnResizePolicy>

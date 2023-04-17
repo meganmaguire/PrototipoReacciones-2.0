@@ -80,6 +80,7 @@ public class SimulacionesController {
         this.columnaNroExperimento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNumero()));
         this.columnaPasosExperimento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().pasosToString()));
         this.columnaActivoExperimento.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue()));
+        this.columnaActivoExperimento.setStyle("-fx-alignment: CENTER");
         this.columnaActivoExperimento.setCellFactory( param -> new TableCell<>() {
             private final CheckBox checkBox = new CheckBox();
 

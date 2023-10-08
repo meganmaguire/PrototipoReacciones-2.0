@@ -169,9 +169,9 @@ public class SimulacionesController {
                             cargandoStage.close();
                             Alert alert;
                             alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setTitle("Error");
-                            alert.setHeaderText("Error al simular el modelo");
-                            alert.setContentText("Ha ocurrido un error al ejecutar el comando de simulación. Revise el modelo en UPPAAL para mayor detalle.");
+                            alert.setTitle(bundle.getString("alert.error"));
+                            alert.setHeaderText(bundle.getString("alert.simulacion"));
+                            alert.setContentText(bundle.getString("alert.simulacion.parse_error"));
                             alert.showAndWait();
                         });}
                 }
@@ -180,9 +180,9 @@ public class SimulacionesController {
                         cargandoStage.close();
                         Alert alert;
                         alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error");
-                        alert.setHeaderText("Error al simular el modelo");
-                        alert.setContentText("Ha ocurrido un error al ejecutar el comando de simulación. Código de error: " + exitCode);
+                        alert.setTitle(bundle.getString("alert.error"));
+                        alert.setHeaderText(bundle.getString("alert.simulacion"));
+                        alert.setContentText(bundle.getString("alert.simulacion.execute_error") + exitCode);
                         alert.showAndWait();
                     });
                 }

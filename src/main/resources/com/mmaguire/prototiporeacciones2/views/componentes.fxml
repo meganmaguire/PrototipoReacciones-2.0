@@ -110,7 +110,7 @@
             </VBox>
             <VBox spacing="24.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label styleClass="subtitle" stylesheets="@../styles.css" text="Componentes" />
+                  <Label styleClass="subtitle" stylesheets="@../styles.css" text="%comp.titulo" />
                   <TableView fx:id="tablaComponentes" prefHeight="582.0" prefWidth="450.0" VBox.vgrow="ALWAYS">
                     <columns>
                       <TableColumn fx:id="columnaNombre" editable="false" minWidth="60.0" prefWidth="-1.0" sortable="false" text="%comp.nombre" />
@@ -128,11 +128,11 @@
             </VBox>
             <VBox spacing="24.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label styleClass="subtitle" text="Constantes" />
+                  <Label styleClass="subtitle" text="%reac.const" />
                   <TableView fx:id="tablaConstantes" minWidth="170.0" prefWidth="170.0" VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn fx:id="columnaNombreConst" minWidth="60.0" prefWidth="-1.0" text="Nombre" />
-                      <TableColumn fx:id="columnaValorConst" minWidth="60.0" prefWidth="-1.0" text="Valor" />
+                      <TableColumn fx:id="columnaNombreConst" minWidth="60.0" prefWidth="-1.0" text="%tabla.nombre" />
+                      <TableColumn fx:id="columnaValorConst" minWidth="60.0" prefWidth="-1.0" text="%tabla.valores" />
                         <TableColumn fx:id="columnaEliminarConst" minWidth="40.0" prefWidth="-1.0" />
                     </columns>
                      <columnResizePolicy>

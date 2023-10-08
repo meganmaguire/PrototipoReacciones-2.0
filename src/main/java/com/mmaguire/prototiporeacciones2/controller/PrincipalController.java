@@ -137,9 +137,9 @@ public class PrincipalController {
     public void newFile(){
         // Si se han realizado cambios
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Aviso");
-        alert.setHeaderText("¿Desea abrir un nuevo sistema?");
-        alert.setContentText("Se perderán los datos no guardados.");
+        alert.setTitle(bundle.getString("alert.warning"));
+        alert.setHeaderText(bundle.getString("alert.close"));
+        alert.setContentText(bundle.getString("alert.open.detail"));
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get().equals(ButtonType.OK))
             Context.reset();
@@ -172,9 +172,9 @@ public class PrincipalController {
                 this.contexto.setContadorExperimentos();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error al cargar datos");
-                alert.setContentText("Ha ocurrido un error al intentar cargar los datos del sistema de reacciones.");
+                alert.setTitle(bundle.getString("alert.error"));
+                alert.setHeaderText(bundle.getString("alert.open"));
+                alert.setContentText(bundle.getString("alert.open.detail"));
                 alert.showAndWait();
             }
         }
@@ -183,9 +183,9 @@ public class PrincipalController {
     @FXML
     public void closeSystem(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Aviso");
-        alert.setHeaderText("¿Desea cerrar el sistema cargado?");
-        alert.setContentText("Se perderán los datos no guardados.");
+        alert.setTitle(bundle.getString("alert.aviso"));
+        alert.setHeaderText(bundle.getString("alert.close"));
+        alert.setContentText(bundle.getString("alert.close.detail"));
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get().equals(ButtonType.OK))
             Context.reset();
@@ -244,9 +244,9 @@ public class PrincipalController {
                     UppaalSystem sys = ModelManager.compile(engine, doc);
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Éxito");
-                    alert.setHeaderText("Éxito");
-                    alert.setContentText("Se ha generado el modelo UPPAAL en xml correspondiente al sistema de reacciones ingresado");
+                    alert.setTitle(bundle.getString("alert.exito"));
+                    alert.setHeaderText(bundle.getString("alert.exito"));
+                    alert.setContentText(bundle.getString("alert.generation"));
 
                     alert.showAndWait();
 
@@ -301,9 +301,9 @@ public class PrincipalController {
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error al cargar datos");
-                alert.setContentText("Ha ocurrido un error al intentar cargar los datos del sistema de reacciones.");
+                alert.setTitle(bundle.getString("alert.error"));
+                alert.setHeaderText(bundle.getString("alert.open"));
+                alert.setContentText(bundle.getString("alert.open.detail"));
                 alert.showAndWait();
             }
         }
@@ -323,9 +323,9 @@ public class PrincipalController {
             } catch (IOException ex) {
                 Alert alert;
                 alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error al abrir el manuak");
-                alert.setContentText("Ha ocurrido un error al intentar abrir el manual de usuario. Revise el archivo manualmente en la carpeta del programa.");
+                alert.setTitle(bundle.getString("alert.error"));
+                alert.setHeaderText(bundle.getString("alert.manual"));
+                alert.setContentText(bundle.getString("alert.manual.detail"));
                 alert.showAndWait();
             }
         }
@@ -335,15 +335,15 @@ public class PrincipalController {
         Alert alert;
         if (result) {
             alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Éxito");
-            alert.setHeaderText("Éxito");
-            alert.setContentText("Se han guardado correctamente los datos del sistema de reacciones.");
+            alert.setTitle(bundle.getString("alert.exito"));
+            alert.setHeaderText(bundle.getString("alert.exito"));
+            alert.setContentText(bundle.getString("alert.save"));
         }
         else{
             alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error al guardar datos");
-            alert.setContentText("Ha ocurrido un error al intentar guardar los datos del sistema de reacciones.");
+            alert.setTitle(bundle.getString("alert.error"));
+            alert.setHeaderText(bundle.getString("alert.save.error"));
+            alert.setContentText(bundle.getString("alert.save.error.detail"));
         }
         alert.showAndWait();
     }

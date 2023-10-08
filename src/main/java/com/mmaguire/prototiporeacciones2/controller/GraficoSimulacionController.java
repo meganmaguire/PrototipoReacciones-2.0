@@ -13,6 +13,7 @@ import on.S;
 
 import java.io.File;
 
+import static com.mmaguire.prototiporeacciones2.manager.Context.bundle;
 import static com.mmaguire.prototiporeacciones2.manager.FileManager.exportSimulationData;
 import static com.mmaguire.prototiporeacciones2.manager.SimulationManager.fillSimulationChart;
 
@@ -52,15 +53,15 @@ public class GraficoSimulacionController {
 
             if (result) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Éxito");
-                alert.setHeaderText("Éxito");
-                alert.setContentText("Se han exportado correctamente los datos de la simulación");
+                alert.setTitle(bundle.getString("alert.exito"));
+                alert.setHeaderText(bundle.getString("alert.exito"));
+                alert.setContentText(bundle.getString("alert.export.success"));
                 alert.showAndWait();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error al exportar datos");
-                alert.setContentText("Ha ocurrido un error al intentar exportar los datos de la simulación.");
+                alert.setTitle(bundle.getString("alert.error"));
+                alert.setHeaderText(bundle.getString("alert.export"));
+                alert.setContentText(bundle.getString("alert.export.detail"));
                 alert.showAndWait();
             }
         }

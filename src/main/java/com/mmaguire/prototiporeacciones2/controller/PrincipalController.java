@@ -318,7 +318,7 @@ public class PrincipalController {
     public void openManual() {
         if (Desktop.isDesktopSupported()) {
             try {
-                File myFile = new File("Manual_de_Uso.pdf");
+                File myFile = new File(bundle.getString("user_guide"));
                 Desktop.getDesktop().open(myFile);
             } catch (IOException ex) {
                 Alert alert;

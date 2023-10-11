@@ -22,7 +22,7 @@ public class Context {
     private ObservableList<Factor> constantesReaccion;
     private ObservableList<Sistema> historial;
 
-    public static Locale locale = new Locale("en");
+    public static Locale locale = new Locale("es");
     public static ResourceBundle bundle = ResourceBundle.getBundle("com/mmaguire/prototiporeacciones2/i18n/texts", locale);
 
     private Context(){

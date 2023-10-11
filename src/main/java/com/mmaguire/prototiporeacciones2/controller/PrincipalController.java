@@ -318,6 +318,7 @@ public class PrincipalController {
     public void openManual() {
         if (Desktop.isDesktopSupported()) {
             try {
+                System.out.println(System.getProperty("user.dir"));
                 File myFile = new File(bundle.getString("user_guide"));
                 Desktop.getDesktop().open(myFile);
             } catch (IOException|IllegalArgumentException ex) {

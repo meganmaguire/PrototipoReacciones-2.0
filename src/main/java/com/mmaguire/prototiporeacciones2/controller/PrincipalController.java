@@ -320,7 +320,7 @@ public class PrincipalController {
             try {
                 File myFile = new File(bundle.getString("user_guide"));
                 Desktop.getDesktop().open(myFile);
-            } catch (IOException ex) {
+            } catch (IOException|IllegalArgumentException ex) {
                 Alert alert;
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle(bundle.getString("alert.error"));
